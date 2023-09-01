@@ -4,6 +4,11 @@ function App() {
   return (
     <div className="App">
     
+    craer un proyecto de react
+
+    
+
+
     </div>
   );
 }

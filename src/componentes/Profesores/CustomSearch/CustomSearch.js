@@ -6,7 +6,7 @@ export const CustomFormGroup = () => {
     <div className="custom-form-group">
       <div className="input-group">
         <div className="form-control-input">
-          <div className="search">Buscar</div>
+          <input className="search"></input>
         </div>
         <div className="input-group-append">
           <div className="dropdown">

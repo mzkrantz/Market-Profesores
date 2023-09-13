@@ -1,0 +1,126 @@
+.landing {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.landing .overlap-group-wrapper {
+  background-color: #ffffff;
+  height: 1024px;
+  width: 1440px;
+}
+
+.landing .overlap-group {
+  height: 868px;
+  left: 119px;
+  position: relative;
+  top: 10px;
+  width: 1196px;
+}
+
+.landing .text-wrapper-2 {
+  color: black;
+  text-bold: true;
+  font-family: "Inter-Bold", Helvetica; 
+  font-size: 60px;
+  left: 260px;
+  top: 200px;
+  letter-spacing: var(--display-xl-bold-letter-spacing);
+  line-height: var(--display-xl-bold-line-height);
+  position: absolute;  
+  width: 648px;
+}
+
+.landing .deco {
+  height: 868px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 1196px;
+}
+
+.landing .ellipse {
+  background-color: #d9d9d9;
+  border-radius: 376.5px/354.5px;
+  height: 709px;
+  left: 443px;
+  position: absolute;
+  top: 159px;
+  width: 753px;
+}
+
+.landing .div {
+  background-color: #d9d9d9;
+  border-radius: 70.5px;
+  height: 141px;
+  left: 952px;
+  position: absolute;
+  top: 0;
+  width: 141px;
+}
+
+.landing .ellipse-2 {
+  background-color: #d9d9d9;
+  border-radius: 36px;
+  height: 72px;
+  left: 676px;
+  position: absolute;
+  top: 12px;
+  width: 72px;
+}
+
+.landing .ellipse-3 {
+  background-color: #d9d9d9;
+  border-radius: 142px;
+  height: 284px;
+  left: 0;
+  position: absolute;
+  top: 501px;
+  width: 284px;
+}
+.lading .text-wrapper-2 {
+  color: #111827;
+  font-family: "Inter-Bold", Helvetica;
+  font-size: 60px;
+  font-weight: 700;
+  left: 0;
+  letter-spacing: -1.5px;
+  line-height: 72px;
+  position: fixed;
+  top: 0;
+  width: 648px;
+}
+
+.landing .text-wrapper {
+  color: var(--neutral-700);
+  font-family: var(--body-lg-regular-font-family);
+  font-size: var(--body-lg-regular-font-size);
+  font-style: var(--body-lg-regular-font-style);
+  font-weight: var(--body-lg-regular-font-weight);
+  left: 21px;
+  letter-spacing: var(--body-lg-regular-letter-spacing);
+  line-height: var(--body-lg-regular-line-height);
+  position: absolute;
+  top: 306px;
+  width: 648px;
+}
+
+.landing .p {
+  color: var(--neutral-900);
+  font-family: "Inter-Bold", Helvetica;
+  font-size: 32px;
+  font-weight: 700;
+  left: 21px;
+  letter-spacing: -0.8px;
+  line-height: 72px;
+  position: absolute;
+  top: 220px;
+  white-space: nowrap;
+  width: 790px;
+}
+
+
+ 
+

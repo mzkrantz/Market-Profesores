@@ -1,16 +1,23 @@
+import React from 'react';
 import './App.css';
-import ResponsiveAppBar from './componentes/Barra';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
+import Main from './componentes/Main';
+import Profesores from './componentes/Profesores/Profesores';
 
 function App() {
   return (
-    <div className="App">
-    
-    <ResponsiveAppBar/>  
-
-    algunos cambios  
-
-
-    </div>
+    <BrowserRouter>
+      <Routes>
+      <Route path="/" element={<Main/>} />
+      <Route path="/Profesores" element={<Profesores/>} />
+      
+      </Routes>
+    </BrowserRouter>
+ 
   );
 }
 

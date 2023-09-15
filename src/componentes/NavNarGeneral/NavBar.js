@@ -99,8 +99,10 @@ export default function PrimarySearchAppBar() {
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
-    >
+    > 
+      <Link color="inherit" underline="none" to="/Login" >
       <MenuItem onClick={handleMenuClose}>Ingresá</MenuItem>
+      </Link>
       <MenuItem onClick={handleMenuClose}>Registrate</MenuItem>
     </Menu>
   );

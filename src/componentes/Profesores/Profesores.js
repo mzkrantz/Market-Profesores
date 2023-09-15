@@ -1,5 +1,5 @@
-import PrimarySearchAppBar from "../NavBar";
-import ActionAreaCard from "./Card";
+import PrimarySearchAppBar from "../NavNarGeneral/NavBar";
+import ActionAreaCard from "./CardProfesores/Card";
 import { CustomFormGroup } from "./CustomSearch/CustomSearch";
 import "./style.css";
 

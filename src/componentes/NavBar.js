@@ -164,11 +164,12 @@ export default function PrimarySearchAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Link color="inherit" underline="hover" to="/" >
+          <Link color="inherit" underline="none" to="/" >
           <Typography
             variant="h6"
             noWrap
             component="div"
+            underline="none"
             sx={{ display: { xs: "none", sm: "block" } }}
           >
             Eduwizard
@@ -194,14 +195,19 @@ export default function PrimarySearchAppBar() {
           </Button>
         </Link>
 
+          <Link color="inherit" underline="hover" to="/Cursos" >
           <Button color="inherit">
             Cursos
           </Button>
+          </Link>
           
 
           <Box sx={{ flexGrow: 1 }} />
-
+          
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
+
+            {/* Si no está logueado */}
+            {/*}
             <IconButton
               size="large"
               aria-label="show 5 new mails"
@@ -221,6 +227,9 @@ export default function PrimarySearchAppBar() {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
+            
+            */}
+
 
             <IconButton
               size="large"
@@ -234,6 +243,7 @@ export default function PrimarySearchAppBar() {
               <Avatar onClick={handleProfileMenuOpen}>U</Avatar>
             </IconButton>
           </Box>
+          
 
           {/* Mobile version */}
           <Box sx={{ display: { xs: "flex", md: "none" } }}>

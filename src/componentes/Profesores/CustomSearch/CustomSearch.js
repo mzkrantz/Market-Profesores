@@ -24,7 +24,7 @@ export const CustomFormGroup = () => {
             </div>
           </div>
         </div>
-        <img className="img" alt="Input group append" src="input-group-append.svg" />
+        
       </div>
     </div>
   );

@@ -95,7 +95,7 @@ export default function Login() {
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
-                  Forgot password?
+                  ¿Olvidaste tu contraseña?
                 </Link>
               </Grid>
               <Grid item>

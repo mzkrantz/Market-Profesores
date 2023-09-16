@@ -1,11 +1,11 @@
 import { CartelCursos } from "../../componentes/Cursos/TituloCursos/CartelCursos";
-import { TituloCursos } from "../../componentes/Cursos/TituloCursos/TituloCursos";
 import PrimarySearchAppBar from "../../componentes/NavNarGeneral/NavBar";
+import CustomSeparator from "../../componentes/Breadcrumb/Breadcrumb";
 export default function Cursos() {
   return (
     <>
     <PrimarySearchAppBar />
-    <TituloCursos />
+    <CustomSeparator> Cursos </CustomSeparator>  
     <CartelCursos />
 
     </>

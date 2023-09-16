@@ -5,7 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 
-export default function ActionAreaCard() {
+export default function CardProfesores() {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>

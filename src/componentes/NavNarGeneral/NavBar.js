@@ -16,7 +16,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { Avatar } from "@mui/material";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -99,15 +99,18 @@ export default function PrimarySearchAppBar() {
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
-    > 
-      <Link color="inherit" underline="none" to="/Login" >
-      <MenuItem onClick={handleMenuClose}>Ingresá</MenuItem>
-      </Link>
-      
-      <Link color="inherit" underline="none" to="/Registrate" >
-      <MenuItem onClick={handleMenuClose}>Registrate</MenuItem>
-      </Link>
+    >
+      <NavLink 
+      to="/Login"
+      style={{textDecoration: "none", color:"blue" }}>
+        <MenuItem onClick={handleMenuClose}>Ingresá</MenuItem>
+      </NavLink>
 
+      <NavLink 
+      to="/Registrate"
+      style={{textDecoration: "none", color:"blue" }}>
+        <MenuItem onClick={handleMenuClose}>Registrate</MenuItem>
+      </NavLink>
     </Menu>
   );
 
@@ -170,17 +173,19 @@ export default function PrimarySearchAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Link color="inherit" underline="none" to="/" >
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            underline="none"
-            sx={{ display: { xs: "none", sm: "block" } }}
-          >
-            Eduwizard
-          </Typography>
-          </Link>
+          <NavLink c
+          to="/"
+          style={{textDecoration: "none", color:"white" }}>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              underline="none"
+              sx={{ display: { xs: "none", sm: "block" } }}
+            >
+              Eduwizard
+            </Typography>
+          </NavLink>
 
           <Search>
             <SearchIconWrapper>
@@ -192,26 +197,24 @@ export default function PrimarySearchAppBar() {
             />
           </Search>
 
+          {/* Links No funciona para editarle el estilo */}
+          <NavLink 
+          to="/Profesores" 
+          style={{textDecoration: "none", color:"white" }}>
+            <Button color="inherit">Profesores</Button>
+          </NavLink>
 
-        {/* Links No funciona para editarle el estilo */}
-        <Link color="inherit" underline="hover" to="/Profesores" >
-        
-          <Button color="inherit">
-            Profesores
-          </Button>
-        </Link>
-
-          <Link color="inherit" underline="hover" to="/Cursos" >
-          <Button color="inherit">
-            Cursos
-          </Button>
-          </Link>
           
+
+          <NavLink 
+          to="/Cursos"
+          style={{textDecoration: "none", color:"white" }} >
+            <Button color="inherit">Cursos</Button>
+          </NavLink>
 
           <Box sx={{ flexGrow: 1 }} />
-          
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
 
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
             {/* Si no está logueado */}
             {/*}
             <IconButton
@@ -236,7 +239,6 @@ export default function PrimarySearchAppBar() {
             
             */}
 
-
             <IconButton
               size="large"
               edge="end"
@@ -249,7 +251,6 @@ export default function PrimarySearchAppBar() {
               <Avatar onClick={handleProfileMenuOpen}>U</Avatar>
             </IconButton>
           </Box>
-          
 
           {/* Mobile version */}
           <Box sx={{ display: { xs: "flex", md: "none" } }}>

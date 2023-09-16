@@ -9,3 +9,27 @@
     top: 100px;
     left: 20px;
 }
+
+.cardProfesores {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding:120px 0;
+    max-width: 1200px; /* Cambié 'width' por 'max-width' para que sea responsive */
+    margin: 0 auto; /* Centrar las tarjetas horizontalmente */
+    justify-content: space-between; /* Espacio entre las tarjetas */
+}
+
+/* Establece el ancho de las tarjetas para que haya 4 por línea */
+.cardProfesores .tarjeta {
+    flex: 1;
+    max-width: calc(25% - 30px); /* El 30px de gap se resta del ancho */
+}
+
+/* Ajusta los estilos de cada tarjeta según tus necesidades */
+.cardProfesores .tarjeta {
+    /* Estilos de tus tarjetas individuales */
+    border: 1px solid #ccc;
+    padding: 20px;
+    /* Agrega otros estilos según sea necesario */
+}

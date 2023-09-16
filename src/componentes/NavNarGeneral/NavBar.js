@@ -216,7 +216,7 @@ export default function PrimarySearchAppBar() {
 
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             {/* Si no está logueado */}
-            {/*}
+            
             <IconButton
               size="large"
               aria-label="show 5 new mails"
@@ -237,7 +237,7 @@ export default function PrimarySearchAppBar() {
               </Badge>
             </IconButton>
             
-            */}
+            
 
             <IconButton
               size="large"

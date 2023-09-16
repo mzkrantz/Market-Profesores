@@ -1,6 +1,5 @@
 import PrimarySearchAppBar from "../../componentes/NavNarGeneral/NavBar";
 import CustomSearch from "../../componentes/Profesores/CustomSearch/CustomSearch";
-import { Cartel } from "../../componentes/Profesores/Titulo/CartelProfesores";
 import "./ProfesoresStyle.css";
 import CardProfesores from "../../componentes/Profesores/CardProfesores/Card";
 import Pagination from "@mui/material/Pagination";
@@ -12,7 +11,6 @@ export default function Profesores() {
       <PrimarySearchAppBar />
       <CustomSeparator> Profesores </CustomSeparator>  
       
-      <Cartel />
       <div className="customSearch">
         <CustomSearch />
       </div>

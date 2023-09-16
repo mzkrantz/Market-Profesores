@@ -103,7 +103,11 @@ export default function PrimarySearchAppBar() {
       <Link color="inherit" underline="none" to="/Login" >
       <MenuItem onClick={handleMenuClose}>Ingresá</MenuItem>
       </Link>
+      
+      <Link color="inherit" underline="none" to="/Registrate" >
       <MenuItem onClick={handleMenuClose}>Registrate</MenuItem>
+      </Link>
+
     </Menu>
   );
 

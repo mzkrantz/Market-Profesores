@@ -5,10 +5,11 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import Main from './componentes/Main';
-import Profesores from './componentes/Profesores/Profesores';
-import Cursos from './componentes/Cursos/Cursos';
-import Login from './componentes/Login/Login';
+import Main from './views/Principal/Main';
+import Profesores from './views/Profesores/Profesores';
+import Cursos from './views/Cursos/Cursos';
+import Login from './views/Login/Login';
+import Registrate from './views/Registrate/Registrate';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route path="/Profesores" element={<Profesores/>} />
       <Route path="/Cursos" element={<Cursos/>} />
       <Route path="/Login" element={<Login/>}/>
+      <Route path="/Registrate" element={<Registrate/>  } />
       
       </Routes>
     </BrowserRouter>

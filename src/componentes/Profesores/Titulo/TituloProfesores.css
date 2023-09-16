@@ -1,0 +1,90 @@
+.breadcrumb {
+    align-items: center;
+    display: inline-flex;
+    gap: 15px;
+    position: relative;
+    padding-top: 20px;
+    padding-left: 10px;
+    /* For mobile view */
+    @media (max-width: 768px) {
+      display: block;
+      padding: 0px;
+    }
+  }
+  
+  .breadcrumb .link {
+    color: var(--text-color);
+    font-family: var(--link-font-family);
+    font-size: var(--link-font-size);
+    font-style: var(--link-font-style);
+    font-weight: var(--link-font-weight);
+    letter-spacing: var(--link-letter-spacing);
+    line-height: var(--link-line-height);
+    margin-top: -1px;
+    position: relative;
+    text-align: center;
+    white-space: nowrap;
+    width: fit-content;
+    /* For mobile view */
+    @media (max-width: 768px) {
+      display: flex;
+    }
+  }
+  
+  .breadcrumb .topcoat-next-light {
+    height: 12px;
+    position: relative;
+    width: 7px;
+    /* For mobile view */
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+  
+  .breadcrumb .h {
+    color: var(--second-text-color);
+    font-family: var(--h-6-font-family);
+    font-size: var(--h-6-font-size);
+    font-style: var(--h-6-font-style);
+    font-weight: var(--h-6-font-weight);
+    letter-spacing: var(--h-6-letter-spacing);
+    line-height: var(--h-6-line-height);
+    margin-top: -1px;
+    position: relative;
+    text-align: center;
+    white-space: nowrap;
+    width: fit-content;
+    /* For mobile view */
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+  
+  .label {
+    height: auto;
+    width: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    transition: all 0.3s ease-in-out;
+    /* For mobile view */
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+  
+
+.label .text-wrapper {
+    color: #111827;
+    font-family: "Inter-Bold", Helvetica;
+    font-size: 60px;
+    font-weight: 700;
+    left: 20px;
+    letter-spacing: -1.5px;
+    line-height: 72px;
+    position: fixed;
+    top: 120px;
+    width: 648px;
+}
+

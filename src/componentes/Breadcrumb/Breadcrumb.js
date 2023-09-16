@@ -11,7 +11,8 @@ export default function CustomSeparator(props) {
   return (
     <Stack spacing={2}>
       <Breadcrumbs separator="›" aria-label="breadcrumb">
-        <Link underline="hover" key="1" color="inherit" to="/">
+        <Link to="/"
+        style={{textDecoration: "none" }}>
           EDUWIZARD
         </Link>
         <Typography key="2" color="text.primary">

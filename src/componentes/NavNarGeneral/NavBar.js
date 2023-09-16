@@ -100,15 +100,14 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <NavLink 
-      to="/Login"
-      style={{textDecoration: "none", color:"blue" }}>
+      <NavLink to="/Login" style={{ textDecoration: "none", color: "blue" }}>
         <MenuItem onClick={handleMenuClose}>Ingresá</MenuItem>
       </NavLink>
 
-      <NavLink 
-      to="/Registrate"
-      style={{textDecoration: "none", color:"blue" }}>
+      <NavLink
+        to="/Registrate"
+        style={{ textDecoration: "none", color: "blue" }}
+      >
         <MenuItem onClick={handleMenuClose}>Registrate</MenuItem>
       </NavLink>
     </Menu>
@@ -173,9 +172,7 @@ export default function PrimarySearchAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <NavLink c
-          to="/"
-          style={{textDecoration: "none", color:"white" }}>
+          <NavLink c to="/" style={{ textDecoration: "none", color: "white" }}>
             <Typography
               variant="h6"
               noWrap
@@ -197,18 +194,17 @@ export default function PrimarySearchAppBar() {
             />
           </Search>
 
-          {/* Links No funciona para editarle el estilo */}
-          <NavLink 
-          to="/Profesores" 
-          style={{textDecoration: "none", color:"white" }}>
+          <NavLink
+            to="/Profesores"
+            style={{ textDecoration: "none", color: "white" }}
+          >
             <Button color="inherit">Profesores</Button>
           </NavLink>
 
-          
-
-          <NavLink 
-          to="/Cursos"
-          style={{textDecoration: "none", color:"white" }} >
+          <NavLink
+            to="/Cursos"
+            style={{ textDecoration: "none", color: "white" }}
+          >
             <Button color="inherit">Cursos</Button>
           </NavLink>
 
@@ -216,7 +212,7 @@ export default function PrimarySearchAppBar() {
 
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             {/* Si no está logueado */}
-            
+
             <IconButton
               size="large"
               aria-label="show 5 new mails"
@@ -236,8 +232,6 @@ export default function PrimarySearchAppBar() {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-            
-            
 
             <IconButton
               size="large"

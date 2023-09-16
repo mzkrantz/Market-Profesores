@@ -5,7 +5,7 @@ export default function Cursos() {
   return (
     <>
     <PrimarySearchAppBar />
-    <CustomSeparator> Cursos </CustomSeparator>  
+    <CustomSeparator > Cursos </CustomSeparator>  
 
     </>
   );

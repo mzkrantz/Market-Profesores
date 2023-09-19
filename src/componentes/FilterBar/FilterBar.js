@@ -28,7 +28,7 @@ export default function FilterBar() {
   };
 
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center', gap: '16px', justifyContent: 'center'}}>
+    <Box sx={{ display: 'flex', alignItems: 'center', gap: '16px', justifyContent: 'center', padding:'70px'}}>
       <FormControl sx={{ minWidth: 200 }}>
         <InputLabel id="simple-select-label">Categoria</InputLabel>
         <Select

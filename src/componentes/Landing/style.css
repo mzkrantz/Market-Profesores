@@ -1,47 +1,18 @@
-.landing {
-  background-color: #ffffff;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 100%;
-}
-
-.landing .overlap-group-wrapper {
-  background-color: #ffffff;
-  height: 1024px;
-  width: 1440px;
-}
-
-.landing .overlap-group {
+.box {
   height: 868px;
-  left: 119px;
-  position: relative;
-  top: 10px;
+  position: fixed;
   width: 1196px;
 }
 
-.landing .text-wrapper-2 {
-  color: black;
-  text-bold: true;
-  font-family: "Inter-Bold", Helvetica; 
-  font-size: 60px;
-  left: 260px;
-  top: 200px;
-  letter-spacing: var(--display-xl-bold-letter-spacing);
-  line-height: var(--display-xl-bold-line-height);
-  position: absolute;  
-  width: 648px;
-}
-
-.landing .deco {
+.box .deco {
   height: 868px;
   left: 0;
-  position: absolute;
-  top: 0;
+  position: fixed;
+  top: 80px;
   width: 1196px;
 }
 
-.landing .ellipse {
+.box .ellipse {
   background-color: #d9d9d9;
   border-radius: 376.5px/354.5px;
   height: 709px;
@@ -51,7 +22,7 @@
   width: 753px;
 }
 
-.landing .div {
+.box .div {
   background-color: #d9d9d9;
   border-radius: 70.5px;
   height: 141px;
@@ -61,7 +32,7 @@
   width: 141px;
 }
 
-.landing .ellipse-2 {
+.box .ellipse-2 {
   background-color: #d9d9d9;
   border-radius: 36px;
   height: 72px;
@@ -71,7 +42,7 @@
   width: 72px;
 }
 
-.landing .ellipse-3 {
+.box .ellipse-3 {
   background-color: #d9d9d9;
   border-radius: 142px;
   height: 284px;
@@ -80,47 +51,61 @@
   top: 501px;
   width: 284px;
 }
-.lading .text-wrapper-2 {
+
+.text-wrapper-2 {
   color: #111827;
   font-family: "Inter-Bold", Helvetica;
   font-size: 60px;
   font-weight: 700;
-  left: 0;
+  left: 248px;
   letter-spacing: -1.5px;
   line-height: 72px;
   position: fixed;
-  top: 0;
+  top: 160px;
   width: 648px;
+
+  @media screen and (max-width: 768px) {
+    font-size: 2rem; /* Reducimos el tamaño de fuente para pantallas más pequeñas */
+    letter-spacing: -0.025rem; /* Reducimos el espaciado entre letras para pantallas más pequeñas */
+    line-height: 3rem; /* Reducimos la altura de línea para pantallas más pequeñas */
+    left: 0; /* Ajustamos el espaciado lateral para pantallas más pequeñas */
+    margin-top: 0.5rem; /* Ajustamos el margen superior para pantallas más pequeñas */
+    width: 100%; /* Ancho del 100% en pantallas pequeñas */
+    max-width: none; /* Eliminamos el ancho máximo en pantallas pequeñas */
+  }
 }
 
-.landing .text-wrapper {
+
+ .text-wrapper {
   color: var(--neutral-700);
   font-family: var(--body-lg-regular-font-family);
   font-size: var(--body-lg-regular-font-size);
   font-style: var(--body-lg-regular-font-style);
   font-weight: var(--body-lg-regular-font-weight);
-  left: 21px;
+  left: 70px;
   letter-spacing: var(--body-lg-regular-letter-spacing);
   line-height: var(--body-lg-regular-line-height);
   position: absolute;
-  top: 306px;
+  top: 240px;
   width: 648px;
+  
+  
 }
 
-.landing .p {
+ .p {
   color: var(--neutral-900);
   font-family: "Inter-Bold", Helvetica;
   font-size: 32px;
   font-weight: 700;
-  left: 21px;
+  left: 70px;
   letter-spacing: -0.8px;
   line-height: 72px;
   position: absolute;
-  top: 220px;
+  top: 160px;
   white-space: nowrap;
   width: 790px;
 }
 
 
- 
+
 

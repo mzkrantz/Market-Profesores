@@ -10,7 +10,9 @@ export default function CustomSeparator(props) {
   const children = props.children;
   return (
     <Stack spacing={2}>
-      <Breadcrumbs separator="›" aria-label="breadcrumb">
+      <Breadcrumbs separator="›" aria-label="breadcrumb" 
+      style={{top: "80px", left: "20px", position: "absolute"}}
+      >
         <Link to="/"
         style={{textDecoration: "none" }}>
           EDUWIZARD

@@ -1,9 +1,8 @@
 import PrimarySearchAppBar from "../../componentes/NavNarGeneral/NavBar";
-import CustomSearch from "../../componentes/Profesores/CustomSearch/CustomSearch";
 import "./ProfesoresStyle.css";
-import CardProfesores from "../../componentes/Profesores/CardProfesores/Card";
 import Pagination from "@mui/material/Pagination";
 import CustomSeparator from "../../componentes/Breadcrumb/Breadcrumb";
+import CardProfesor from "../../componentes/Cards/CardProfesor";
 
 export default function Profesores() {
   return (
@@ -11,16 +10,15 @@ export default function Profesores() {
       <PrimarySearchAppBar />
       <CustomSeparator> Profesores </CustomSeparator>  
       
-      <div className="customSearch">
-        <CustomSearch />
-      </div>
+   
       <div className="cardProfesores">
-        <CardProfesores className="tarjeta" />
-        <CardProfesores className="tarjeta" />
-        <CardProfesores className="tarjeta" />
-        <CardProfesores className="tarjeta" />
-        <CardProfesores className="tarjeta" />
-        <CardProfesores className="tarjeta" />
+        <CardProfesor />
+        <CardProfesor />
+        <CardProfesor />
+        <CardProfesor />
+        <CardProfesor />
+        <CardProfesor />
+
       </div>
       <div>
         <Pagination count={2} shape="rounded" />

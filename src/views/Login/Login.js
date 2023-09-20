@@ -13,6 +13,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import PrimarySearchAppBar from '../../componentes/NavNarGeneral/NavBar';
+import NavBar from '../../componentes/NavNarGeneral/NavBar';
+import { render } from '@testing-library/react';
 
 function Copyright(props) {
   return (
@@ -30,13 +32,22 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function Login() {
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    const email = data.get('email');
+    const password = data.get('password');
+
+    // Verifica si el usuario y contraseña son "admin" y "admin"
+    if (email === 'admin' && password === 'admin') {
+      // Acceso concedido, puedes redirigir al usuario o hacer lo que necesites aquí
+      alert('Entraste papaa sos un capo');
+      
+    } else {
+      // Acceso denegado, muestra un mensaje de error o toma otra acción apropiada
+      alert('Anda pa lla bobo');
+    }
   };
 
   return (

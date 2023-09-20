@@ -17,6 +17,8 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { Avatar } from "@mui/material";
 import { NavLink } from "react-router-dom";
+import { PropaneSharp } from "@mui/icons-material";
+import { render } from "@testing-library/react";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -58,7 +60,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
+export default function NavBar() {
+
+ 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -103,6 +107,8 @@ export default function PrimarySearchAppBar() {
       <NavLink to="/Login" style={{ textDecoration: "none", color: "blue" }}>
         <MenuItem onClick={handleMenuClose}>Ingresá</MenuItem>
       </NavLink>
+
+      
 
       <NavLink
         to="/Registrate"
@@ -183,6 +189,7 @@ export default function PrimarySearchAppBar() {
               Eduwizard
             </Typography>
           </NavLink>
+          
 
           <Search>
             <SearchIconWrapper>

@@ -3,6 +3,7 @@ import "./ProfesoresStyle.css";
 import Pagination from "@mui/material/Pagination";
 import CustomSeparator from "../../componentes/Breadcrumb/Breadcrumb";
 import CardProfesor from "../../componentes/Cards/CardProfesor";
+import {profesores} from "../../data/profesores.json"
 
 export default function Profesores() {
   return (
@@ -12,11 +13,6 @@ export default function Profesores() {
       
    
       <div className="cardProfesores">
-        <CardProfesor />
-        <CardProfesor />
-        <CardProfesor />
-        <CardProfesor />
-        <CardProfesor />
         <CardProfesor />
 
       </div>

@@ -13,8 +13,10 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import PrimarySearchAppBar from '../../componentes/NavNarGeneral/NavBar';
-import NavBar from '../../componentes/NavNarGeneral/NavBar';
-import { render } from '@testing-library/react';
+import { useContext, useState } from 'react';
+import {  UserContext } from '../../context/userProvider';
+import { Navigate } from 'react-router-dom';
+
 
 function Copyright(props) {
   return (
@@ -33,6 +35,11 @@ const defaultTheme = createTheme();
 
 export default function Login() {
 
+  const { setUser } = useContext(UserContext);
+  const [loggedIn, setLoggedIn] = useState(false);
+
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -41,14 +48,19 @@ export default function Login() {
 
     // Verifica si el usuario y contraseña son "admin" y "admin"
     if (email === 'admin' && password === 'admin') {
-      // Acceso concedido, puedes redirigir al usuario o hacer lo que necesites aquí
-      alert('Entraste papaa sos un capo');
+      // Acceso concedido, puedes redirigir al usuario o hacer lo que necesites aquí    
+      setUser(true);
+      setLoggedIn(true);
       
     } else {
       // Acceso denegado, muestra un mensaje de error o toma otra acción apropiada
-      alert('Anda pa lla bobo');
+      alert("Usuario o contraseña incorrectos");
     }
   };
+
+  if (loggedIn) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <>

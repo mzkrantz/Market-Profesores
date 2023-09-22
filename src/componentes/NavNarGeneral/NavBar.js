@@ -17,8 +17,8 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { Avatar } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import { PropaneSharp } from "@mui/icons-material";
-import { render } from "@testing-library/react";
+import { useContext } from "react";
+import { UserContext } from "../../context/userProvider";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -61,8 +61,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function NavBar() {
+  const { user, setUser } = useContext(UserContext);
 
- 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -85,6 +85,9 @@ export default function NavBar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+  const handleLogout = () => {
+    setUser(null);
+  };
 
   const menuId = "primary-search-account-menu";
 
@@ -104,18 +107,48 @@ export default function NavBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <NavLink to="/Login" style={{ textDecoration: "none", color: "blue" }}>
-        <MenuItem onClick={handleMenuClose}>Ingresá</MenuItem>
-      </NavLink>
+      {user ? (        
+        <>
+        <MenuItem
+          style={{ textDecoration: "none", color: "none" }}
+        >
+          Carga tus clases
+        </MenuItem>
+        <MenuItem
+          style={{ textDecoration: "none", color: "none" }}
+        >
+          Mira tus mensajes
+        </MenuItem>
+        <MenuItem
+          style={{ textDecoration: "none", color: "none" }}
+        >
+          Configura tu perfil
+        </MenuItem>
+        <MenuItem
+          onClick={handleLogout}
+          style={{ textDecoration: "none", color: "none" }}
+        >
+          Cerra Sesion
+        </MenuItem>
 
-      
-
-      <NavLink
-        to="/Registrate"
-        style={{ textDecoration: "none", color: "blue" }}
-      >
-        <MenuItem onClick={handleMenuClose}>Registrate</MenuItem>
-      </NavLink>
+        </>
+        
+      ) : (
+        <>
+          <NavLink
+            to="/Login"
+            style={{ textDecoration: "none", color: "blue" }}
+          >
+            <MenuItem onClick={handleMenuClose}>Ingresá</MenuItem>
+          </NavLink>
+          <NavLink
+            to="/Registrate"
+            style={{ textDecoration: "none", color: "blue" }}
+          >
+            <MenuItem onClick={handleMenuClose}>Registrate</MenuItem>
+          </NavLink>
+        </>
+      )}
     </Menu>
   );
 
@@ -137,7 +170,7 @@ export default function NavBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
+      {/*<MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={0} color="error">
             <MailIcon />
@@ -158,6 +191,7 @@ export default function NavBar() {
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
+    */}
 
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -189,9 +223,8 @@ export default function NavBar() {
               Eduwizard
             </Typography>
           </NavLink>
-          
 
-          <Search>
+          {/*<Search>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -199,7 +232,9 @@ export default function NavBar() {
               placeholder="Busque aqui..."
               inputProps={{ "aria-label": "search" }}
             />
-          </Search>
+            </Search>*/}
+
+            <Button></Button>
 
           <NavLink
             to="/Profesores"
@@ -218,9 +253,9 @@ export default function NavBar() {
           <Box sx={{ flexGrow: 1 }} />
 
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            {/* Si no está logueado */}
+            
 
-            <IconButton
+            {/*<IconButton
               size="large"
               aria-label="show 5 new mails"
               color="inherit"
@@ -239,6 +274,7 @@ export default function NavBar() {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
+          */}
 
             <IconButton
               size="large"

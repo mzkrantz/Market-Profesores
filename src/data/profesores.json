@@ -1,0 +1,80 @@
+{
+    "profesores": [
+      {
+        "nombre": "Juan Pérez",
+        "materia": "Matemáticas",
+        "edad": 40,
+        "email": "juan.perez@example.com",
+        "imagen": "https://ejemplo.com/imagenes/juan_perez.jpg"
+      },
+      {
+        "nombre": "María Rodríguez",
+        "materia": "Ciencias",
+        "edad": 35,
+        "email": "maria.rodriguez@example.com",
+        "imagen": "https://ejemplo.com/imagenes/maria_rodriguez.jpg"
+      },
+      {
+        "nombre": "Carlos Sánchez",
+        "materia": "Historia",
+        "edad": 45,
+        "email": "carlos.sanchez@example.com",
+        "imagen": "https://ejemplo.com/imagenes/carlos_sanchez.jpg"
+      },
+      {
+        "nombre": "Ana López",
+        "materia": "Literatura",
+        "edad": 38,
+        "email": "ana.lopez@example.com",
+        "experiencia": "15 años de enseñanza",
+        "ubicación": "Ciudad Universitaria",
+        "imagen": "https://ejemplo.com/imagenes/ana_lopez.jpg"
+      },
+      {
+        "nombre": "Pedro García",
+        "materia": "Física",
+        "edad": 42,
+        "email": "pedro.garcia@example.com",
+        "experiencia": "20 años de enseñanza",
+        "ubicación": "Colegio San José",
+        "imagen": "https://ejemplo.com/imagenes/pedro_garcia.jpg"
+      },
+      {
+        "nombre": "Laura Martínez",
+        "materias": ["Biología", "Química"],
+        "edad": 35,
+        "email": "laura.martinez@example.com",
+        "imagen": "https://ejemplo.com/imagenes/laura_martinez.jpg"
+      },
+      {
+        "nombre": "Manuel Torres",
+        "materias": ["Matemáticas", "Física"],
+        "edad": 40,
+        "email": "manuel.torres@example.com",
+        "imagen": "https://ejemplo.com/imagenes/manuel_torres.jpg"
+      },
+      {
+        "nombre": "Sofía Ramírez",
+        "materia": "Historia",
+        "edad": 45,
+        "contacto": {
+          "email": "sofia.ramirez@example.com",
+          "teléfono": "+123456789",
+          "ubicación": "Edificio A, Aula 101",
+          "imagen": "https://ejemplo.com/imagenes/sofia_ramirez.jpg"
+        }
+      },
+      {
+        "nombre": "Javier Torres",
+        "materia": "Inglés",
+        "edad": 34,
+        "contacto": {
+          "email": "javier.torres@example.com",
+          "teléfono": "+987654321",
+          "ubicación": "Sala de Idiomas",
+          "imagen": "https://ejemplo.com/imagenes/javier_torres.jpg"
+        }
+      }
+    ]
+  }
+  

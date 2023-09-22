@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import TextField from '@mui/material/TextField';
-import Switch from '@mui/material/Switch';
+import React, { useState } from "react";
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import TextField from "@mui/material/TextField";
+import Switch from "@mui/material/Switch";
+import Button from "@mui/material/Button";
 
 export default function FilterBar() {
-  const [category, setCategory] = useState('');
-  const [text, setText] = useState('');
+  const [category, setCategory] = useState("");
+  const [text, setText] = useState("");
   const [isSwitchOn, setIsSwitchOn] = useState(true);
 
   const handleAgeChange = (event) => {
@@ -28,7 +29,15 @@ export default function FilterBar() {
   };
 
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center', gap: '16px', justifyContent: 'center', padding:'70px'}}>
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        gap: "16px",
+        justifyContent: "center",
+        padding: "70px",
+      }}
+    >
       <FormControl sx={{ minWidth: 200 }}>
         <InputLabel id="simple-select-label">Categoria</InputLabel>
         <Select
@@ -38,9 +47,15 @@ export default function FilterBar() {
           label="Categoria"
           onChange={handleAgeChange}
         >
-          <MenuItem value={'Categoria 1'}>Categoria 1</MenuItem>
-          <MenuItem value={'Categoria 2'}>Categoria 2</MenuItem>
-          <MenuItem value={'Categoria 3'}>Categoria 3</MenuItem>
+          <MenuItem value={"Desarrollo Web"}>Desarrollo Web</MenuItem>
+          <MenuItem value={"Marketing Digital"}>Marketing Digital</MenuItem>
+          <MenuItem value={"Diseño Gráfico"}>Diseño Gráfico</MenuItem>
+          <MenuItem value={"Idiomas"}>Idiomas</MenuItem>
+          <MenuItem value={"Fotografía"}>Fotografía</MenuItem>
+          <MenuItem value={"Cocina"}>Cocina</MenuItem>
+          <MenuItem value={"Negocios"}>Negocios</MenuItem>
+          <MenuItem value={"Salud y Bienestar"}>Salud y Bienestar</MenuItem>
+          <MenuItem value={"Tecnología"}>Tecnología</MenuItem>
         </Select>
       </FormControl>
 
@@ -53,8 +68,9 @@ export default function FilterBar() {
       />
 
       <div>
-        <label>Switch</label>
-        <Switch checked={isSwitchOn} onChange={handleSwitchChange} />
+        <Button variant="contained" size="small">
+          Buscar
+        </Button>
       </div>
     </Box>
   );

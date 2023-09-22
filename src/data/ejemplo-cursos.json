@@ -1,77 +1,85 @@
 {
-    "cursos": [
-      {
-        "image": "curso-programacion.jpg",
-        "title": "Desarrollo Web Avanzado",
-        "description": "Domina el desarrollo web con tecnologías modernas.",
-        "duration": "12 semanas",
-        "price": "$199.99",
-        "buttonLink": "https://ejemplo.com/curso-desarrollo-web-avanzado"
-      },
-      {
-        "image": "curso-marketing.jpg",
-        "title": "Marketing Digital Estratégico",
-        "description": "Aprende a crear campañas de marketing efectivas.",
-        "duration": "8 semanas",
-        "price": "$149.99",
-        "buttonLink": "https://ejemplo.com/curso-marketing-digital"
-      },
-      {
-        "image": "curso-diseño.jpg",
-        "title": "Diseño Gráfico Profesional",
-        "description": "Crea diseños impactantes con herramientas de diseño avanzadas.",
-        "duration": "10 semanas",
-        "price": "$179.99",
-        "buttonLink": "https://ejemplo.com/curso-diseno-grafico"
-      },
-      {
-        "image": "curso-ingles.jpg",
-        "title": "Inglés Avanzado",
-        "description": "Perfecciona tu inglés con clases prácticas.",
-        "duration": "6 meses",
-        "price": "$299.99",
-        "buttonLink": "https://ejemplo.com/curso-ingles-avanzado"
-      },
-      {
-        "image": "curso-fotografia.jpg",
-        "title": "Fotografía de Naturaleza",
-        "description": "Captura la belleza de la naturaleza con tu cámara.",
-        "duration": "8 semanas",
-        "price": "$129.99",
-        "buttonLink": "https://ejemplo.com/curso-fotografia-naturaleza"
-      },
-      {
-        "image": "curso-cocina.jpg",
-        "title": "Cocina Internacional",
-        "description": "Aprende a cocinar platos del mundo entero.",
-        "duration": "4 meses",
-        "price": "$249.99",
-        "buttonLink": "https://ejemplo.com/curso-cocina-internacional"
-      },
-      {
-        "image": "curso-negocios.jpg",
-        "title": "Gestión Empresarial",
-        "description": "Domina las estrategias de gestión empresarial.",
-        "duration": "6 meses",
-        "price": "$399.99",
-        "buttonLink": "https://ejemplo.com/curso-gestion-empresarial"
-      },
-      {
-        "image": "curso-yoga.jpg",
-        "title": "Yoga y Meditación",
-        "description": "Encuentra la paz interior y la salud con el yoga.",
-        "duration": "3 meses",
-        "price": "$89.99",
-        "buttonLink": "https://ejemplo.com/curso-yoga-meditacion"
-      },
-      {
-        "image": "curso-robotica.jpg",
-        "title": "Robótica para Niños",
-        "description": "Introduce a tus hijos al emocionante mundo de la robótica.",
-        "duration": "8 semanas",
-        "price": "$69.99",
-        "buttonLink": "https://ejemplo.com/curso-robotica-ninos"
-      }
-    ]
-  }
-  
+  "cursos": [
+    {
+      "image": "curso-programacion.jpg",
+      "title": "Desarrollo Web Avanzado",
+      "description": "Domina el desarrollo web con tecnologías modernas.",
+      "duration": "12 semanas",
+      "price": "$199.99",
+      "buttonLink": "https://ejemplo.com/curso-desarrollo-web-avanzado",
+      "category": "Desarrollo Web"
+    },
+    {
+      "image": "curso-marketing.jpg",
+      "title": "Marketing Digital Estratégico",
+      "description": "Aprende a crear campañas de marketing efectivas.",
+      "duration": "8 semanas",
+      "price": "$149.99",
+      "buttonLink": "https://ejemplo.com/curso-marketing-digital",
+      "category": "Marketing Digital"
+    },
+    {
+      "image": "curso-diseño.jpg",
+      "title": "Diseño Gráfico Profesional",
+      "description": "Crea diseños impactantes con herramientas de diseño avanzadas.",
+      "duration": "10 semanas",
+      "price": "$179.99",
+      "buttonLink": "https://ejemplo.com/curso-diseno-grafico",
+      "category": "Diseño Gráfico"
+    },
+    {
+      "image": "curso-ingles.jpg",
+      "title": "Inglés Avanzado",
+      "description": "Perfecciona tu inglés con clases prácticas.",
+      "duration": "6 meses",
+      "price": "$299.99",
+      "buttonLink": "https://ejemplo.com/curso-ingles-avanzado",
+      "category": "Idiomas"
+    },
+    {
+      "image": "curso-fotografia.jpg",
+      "title": "Fotografía de Naturaleza",
+      "description": "Captura la belleza de la naturaleza con tu cámara.",
+      "duration": "8 semanas",
+      "price": "$129.99",
+      "buttonLink": "https://ejemplo.com/curso-fotografia-naturaleza",
+      "category": "Fotografía"
+    },
+    {
+      "image": "curso-cocina.jpg",
+      "title": "Cocina Internacional",
+      "description": "Aprende a cocinar platos del mundo entero.",
+      "duration": "4 meses",
+      "price": "$249.99",
+      "buttonLink": "https://ejemplo.com/curso-cocina-internacional",
+      "category": "Cocina"
+    },
+    {
+      "image": "curso-negocios.jpg",
+      "title": "Gestión Empresarial",
+      "description": "Domina las estrategias de gestión empresarial.",
+      "duration": "6 meses",
+      "price": "$399.99",
+      "buttonLink": "https://ejemplo.com/curso-gestion-empresarial",
+      "category": "Negocios"
+    },
+    {
+      "image": "curso-yoga.jpg",
+      "title": "Yoga y Meditación",
+      "description": "Encuentra la paz interior y la salud con el yoga.",
+      "duration": "3 meses",
+      "price": "$89.99",
+      "buttonLink": "https://ejemplo.com/curso-yoga-meditacion",
+      "category": "Salud y Bienestar"
+    },
+    {
+      "image": "curso-robotica.jpg",
+      "title": "Robótica para Niños",
+      "description": "Introduce a tus hijos al emocionante mundo de la robótica.",
+      "duration": "8 semanas",
+      "price": "$69.99",
+      "buttonLink": "https://ejemplo.com/curso-robotica-ninos",
+      "category": "Tecnología"
+    }
+  ]
+}

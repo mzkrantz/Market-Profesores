@@ -6,38 +6,40 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import BasicModal from "../Modal/Modal";
 
-export default function CardProfesor({}) {
+export default function CardProfesor({ profesores }) {
+  if (!profesores || !Array.isArray(profesores)) {
+    return null; // Puedes mostrar un mensaje de error o carga en su lugar
+  }
+
   return (
+    <>
+      {profesores.map((profesor, index) => (
+        <Card key={index} sx={{ maxWidth: 345 }}>
+          <CardMedia component="img" alt="Profesor" height="140" image={profesor.imagen} />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              {profesor.nombre}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {profesor.descripcion}
+            </Typography>
+          </CardContent>
 
-    <Card sx={{ maxWidth: 345 }}>
+          <CardActions>
+            <BasicModal
+              nombreBoton="Contactar"
+              nombreProfesor={profesor.nombre}
+              descripcion={`Disponible para clases de ${profesor.materia}`}
+            />
 
-   
-    
-
-      <CardMedia component="img" alt="Profesor" height="140" image="#" />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          Carlos
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Profesor de Matematicas con 10 años de experiencia en el area de
-          matematicas y fisica
-        </Typography>
-      </CardContent>
-
-      <CardActions>
-        <BasicModal 
-        nombreBoton="Contactar"
-        nombreProfesor="Carlos"
-        descripcion = "disponible para clases de matematicas y fisica"
-         />
-
-        <BasicModal
-          nombreBoton="Conoceme"
-          nombreProfesor="Carlos"
-          descripcion="Profesor de Matematicas con 10 años de experiencia en el area de matematicas y fisica"
-        />
-      </CardActions>
-    </Card>
+            <BasicModal
+              nombreBoton="Conóceme"
+              nombreProfesor={profesor.nombre}
+              descripcion={profesor.descripcion}
+            />
+          </CardActions>
+        </Card>
+      ))}
+    </>
   );
 }

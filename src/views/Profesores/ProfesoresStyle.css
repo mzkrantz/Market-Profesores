@@ -1,21 +1,9 @@
-.customSearch {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    padding: 30px 0px;
-    position: relative;
-    width: 1200px;
-    top: 100px;
-    left: 20px;
-}
-
 .cardProfesores {
     display: flex;
     flex-wrap: wrap;
     gap: 30px;
     padding:120px 0;
-    max-width: 1200px; /* Cambié 'width' por 'max-width' para que sea responsive */
+    max-width: 1000px; /* Cambié 'width' por 'max-width' para que sea responsive */
     margin: 0 auto; /* Centrar las tarjetas horizontalmente */
     justify-content: space-between; /* Espacio entre las tarjetas */
 }
@@ -33,3 +21,13 @@
     padding: 20px;
     /* Agrega otros estilos según sea necesario */
 }
+.pagination-container {
+    .pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+
+  }
+  

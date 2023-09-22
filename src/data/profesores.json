@@ -1,80 +1,88 @@
 {
-    "profesores": [
-      {
-        "nombre": "Juan Pérez",
-        "materia": "Matemáticas",
-        "edad": 40,
-        "email": "juan.perez@example.com",
-        "imagen": "https://ejemplo.com/imagenes/juan_perez.jpg"
+  "profesores": [
+    {
+      "nombre": "Juan Pérez",
+      "materia": "Matemáticas",
+      "edad": 40,
+      "email": "juan.perez@example.com",
+      "imagen": "https://ejemplo.com/imagenes/juan_perez.jpg",
+      "descripcion": "Profesor de Matemáticas con amplia experiencia en enseñanza de conceptos matemáticos."
+    },
+    {
+      "nombre": "María Rodríguez",
+      "materia": "Ciencias",
+      "edad": 35,
+      "email": "maria.rodriguez@example.com",
+      "imagen": "https://ejemplo.com/imagenes/maria_rodriguez.jpg",
+      "descripcion": "Especialista en Ciencias con enfoque en biología y química."
+    },
+    {
+      "nombre": "Carlos Sánchez",
+      "materia": "Historia",
+      "edad": 45,
+      "email": "carlos.sanchez@example.com",
+      "imagen": "https://ejemplo.com/imagenes/carlos_sanchez.jpg",
+      "descripcion": "Profesor de Historia con pasión por explorar eventos históricos y culturas pasadas."
+    },
+    {
+      "nombre": "Ana López",
+      "materia": "Literatura",
+      "edad": 38,
+      "email": "ana.lopez@example.com",
+      "experiencia": "15 años de enseñanza",
+      "ubicación": "Ciudad Universitaria",
+      "imagen": "https://ejemplo.com/imagenes/ana_lopez.jpg",
+      "descripcion": "Apasionada por la literatura y la enseñanza de obras literarias clásicas y contemporáneas."
+    },
+    {
+      "nombre": "Pedro García",
+      "materia": "Física",
+      "edad": 42,
+      "email": "pedro.garcia@example.com",
+      "experiencia": "20 años de enseñanza",
+      "ubicación": "Colegio San José",
+      "imagen": "https://ejemplo.com/imagenes/pedro_garcia.jpg",
+      "descripcion": "Experto en Física con más de dos décadas de experiencia en educación y experimentación."
+    },
+    {
+      "nombre": "Laura Martínez",
+      "materias": ["Biología", "Química"],
+      "edad": 35,
+      "email": "laura.martinez@example.com",
+      "imagen": "https://ejemplo.com/imagenes/laura_martinez.jpg",
+      "descripcion": "Profesora de Biología y Química apasionada por la vida y la química molecular."
+    },
+    {
+      "nombre": "Manuel Torres",
+      "materias": ["Matemáticas", "Física"],
+      "edad": 40,
+      "email": "manuel.torres@example.com",
+      "imagen": "https://ejemplo.com/imagenes/manuel_torres.jpg",
+      "descripcion": "Dedicado a la enseñanza de Matemáticas y Física, fomentando el pensamiento lógico y la resolución de problemas."
+    },
+    {
+      "nombre": "Sofía Ramírez",
+      "materia": "Historia",
+      "edad": 45,
+      "contacto": {
+        "email": "sofia.ramirez@example.com",
+        "teléfono": "+123456789",
+        "ubicación": "Edificio A, Aula 101",
+        "imagen": "https://ejemplo.com/imagenes/sofia_ramirez.jpg"
       },
-      {
-        "nombre": "María Rodríguez",
-        "materia": "Ciencias",
-        "edad": 35,
-        "email": "maria.rodriguez@example.com",
-        "imagen": "https://ejemplo.com/imagenes/maria_rodriguez.jpg"
+      "descripcion": "Especializada en Historia con enfoque en eventos y figuras históricas destacadas."
+    },
+    {
+      "nombre": "Javier Torres",
+      "materia": "Inglés",
+      "edad": 34,
+      "contacto": {
+        "email": "javier.torres@example.com",
+        "teléfono": "+987654321",
+        "ubicación": "Sala de Idiomas",
+        "imagen": "https://ejemplo.com/imagenes/javier_torres.jpg"
       },
-      {
-        "nombre": "Carlos Sánchez",
-        "materia": "Historia",
-        "edad": 45,
-        "email": "carlos.sanchez@example.com",
-        "imagen": "https://ejemplo.com/imagenes/carlos_sanchez.jpg"
-      },
-      {
-        "nombre": "Ana López",
-        "materia": "Literatura",
-        "edad": 38,
-        "email": "ana.lopez@example.com",
-        "experiencia": "15 años de enseñanza",
-        "ubicación": "Ciudad Universitaria",
-        "imagen": "https://ejemplo.com/imagenes/ana_lopez.jpg"
-      },
-      {
-        "nombre": "Pedro García",
-        "materia": "Física",
-        "edad": 42,
-        "email": "pedro.garcia@example.com",
-        "experiencia": "20 años de enseñanza",
-        "ubicación": "Colegio San José",
-        "imagen": "https://ejemplo.com/imagenes/pedro_garcia.jpg"
-      },
-      {
-        "nombre": "Laura Martínez",
-        "materias": ["Biología", "Química"],
-        "edad": 35,
-        "email": "laura.martinez@example.com",
-        "imagen": "https://ejemplo.com/imagenes/laura_martinez.jpg"
-      },
-      {
-        "nombre": "Manuel Torres",
-        "materias": ["Matemáticas", "Física"],
-        "edad": 40,
-        "email": "manuel.torres@example.com",
-        "imagen": "https://ejemplo.com/imagenes/manuel_torres.jpg"
-      },
-      {
-        "nombre": "Sofía Ramírez",
-        "materia": "Historia",
-        "edad": 45,
-        "contacto": {
-          "email": "sofia.ramirez@example.com",
-          "teléfono": "+123456789",
-          "ubicación": "Edificio A, Aula 101",
-          "imagen": "https://ejemplo.com/imagenes/sofia_ramirez.jpg"
-        }
-      },
-      {
-        "nombre": "Javier Torres",
-        "materia": "Inglés",
-        "edad": 34,
-        "contacto": {
-          "email": "javier.torres@example.com",
-          "teléfono": "+987654321",
-          "ubicación": "Sala de Idiomas",
-          "imagen": "https://ejemplo.com/imagenes/javier_torres.jpg"
-        }
-      }
-    ]
-  }
-  
+      "descripcion": "Instructor de Inglés con énfasis en comunicación efectiva y habilidades lingüísticas."
+    }
+  ]
+}

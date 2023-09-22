@@ -10,7 +10,10 @@ import { Pagination } from '@mui/material';
 export default function Cursos() {
   const [courseData, setCourseData] = useState([]);
   const [page, setPage] = useState(1);
-  const itemsPerPage = 6; // Cantidad de elementos por página
+  const [filterCategory, setFilterCategory] = useState("");
+  const [filterText, setFilterText] = useState("");
+  const [filterDuration, setFilterDuration] = useState("");
+  const itemsPerPage = 3; // Cantidad de elementos por página
 
   useEffect(() => {
     // Usar ejemploCursos directamente en lugar de hacer una solicitud fetch
@@ -20,21 +23,52 @@ export default function Cursos() {
   // Calcula el índice de inicio y fin para mostrar los elementos de la página actual
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentCourses = courseData.slice(startIndex, endIndex);
+
+  // Aplicar filtros a los cursos
+  const filteredCourses = courseData.filter((curso) => {
+    if (filterCategory && curso.category !== filterCategory) {
+      return false; // Filtrar por categoría
+    }
+    if (filterText && !curso.title.toLowerCase().includes(filterText.toLowerCase())) {
+      return false; // Filtrar por palabra clave
+    }
+    if (filterDuration && curso.duration !== filterDuration) {
+      return false; // Filtrar por duración
+    }
+    return true;
+  });
+
+  const currentCourses = filteredCourses.slice(startIndex, endIndex);
 
   // Calcula la cantidad total de páginas
-  const totalPages = Math.ceil(courseData.length / itemsPerPage);
+  const totalPages = Math.ceil(filteredCourses.length / itemsPerPage);
 
   // Maneja el cambio de página
   const handlePageChange = (event, newPage) => {
     setPage(newPage);
   };
 
+  // Maneja el cambio en la categoría de filtro
+  const handleCategoryChange = (selectedCategory) => {
+    setFilterCategory(selectedCategory);
+  };
+
+  // Maneja el cambio en la palabra clave de filtro
+  const handleTextFilter = ({ category, text, duration }) => {
+    setFilterCategory(category);
+    setFilterText(text);
+    setFilterDuration(duration);
+  };
+
   return (
     <>
       <PrimarySearchAppBar />
       <CustomSeparator> Cursos </CustomSeparator>
-      <FilterBar />
+
+      <div style={{ marginTop: "40px" }}>
+        <FilterBar onCategoryChange={handleCategoryChange} onFilter={handleTextFilter}/>
+      </div>
+      
       <ResponsiveGrid cardComponent={CardCurso} cards={currentCourses} />
       <Pagination
         count={totalPages}
@@ -43,8 +77,8 @@ export default function Cursos() {
         style={{
           display: "flex",
           justifyContent: "center",
-          marginTop: "20px"
-        }}       
+          marginTop: "20px",
+        }}
       />
     </>
   );

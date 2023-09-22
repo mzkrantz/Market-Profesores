@@ -233,9 +233,16 @@ export default function NavBar() {
               inputProps={{ "aria-label": "search" }}
             />
             </Search>*/}
-
+            {/*Meti un boton en blanco para dejar espacio*/}
             <Button></Button>
-
+            
+            <NavLink
+            to="/Cursos"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            <Button color="inherit">Cursos</Button>
+          </NavLink>
+          
           <NavLink
             to="/Profesores"
             style={{ textDecoration: "none", color: "white" }}
@@ -243,12 +250,7 @@ export default function NavBar() {
             <Button color="inherit">Profesores</Button>
           </NavLink>
 
-          <NavLink
-            to="/Cursos"
-            style={{ textDecoration: "none", color: "white" }}
-          >
-            <Button color="inherit">Cursos</Button>
-          </NavLink>
+          
 
           <Box sx={{ flexGrow: 1 }} />
 

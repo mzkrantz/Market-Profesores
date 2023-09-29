@@ -12,22 +12,8 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import PrimarySearchAppBar from "../../componentes/NavBarGeneral/NavBar";
-
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit">EduWizard</Link> {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import CustomNavBar from "../../componentes/NavBarGeneral/NavBar";
+import Footer from '../../componentes/Footer/Footer';
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
@@ -45,7 +31,8 @@ export default function Registrate() {
 
   return (
     <>
-      <PrimarySearchAppBar />
+      <CustomNavBar />
+      <div style={{minHeight:'75vh'}}>
       <ThemeProvider theme={defaultTheme}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
@@ -126,9 +113,10 @@ export default function Registrate() {
               </Grid>
             </Box>
           </Box>
-          <Copyright sx={{ mt: 5 }} />
         </Container>
       </ThemeProvider>
+      </div>
+      <Footer />
     </>
   );
 }

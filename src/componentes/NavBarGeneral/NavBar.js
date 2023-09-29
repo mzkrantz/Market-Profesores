@@ -112,23 +112,23 @@ export default function NavBar() {
         <MenuItem
           style={{ textDecoration: "none", color: "none" }}
         >
-          Carga tus clases
+          Mi Perfil
         </MenuItem>
         <MenuItem
           style={{ textDecoration: "none", color: "none" }}
         >
-          Mira tus mensajes
+          Mis Cursos
         </MenuItem>
         <MenuItem
           style={{ textDecoration: "none", color: "none" }}
         >
-          Configura tu perfil
+          Mensajes
         </MenuItem>
         <MenuItem
           onClick={handleLogout}
           style={{ textDecoration: "none", color: "none" }}
         >
-          Cerra Sesion
+          Cerrar Sesion
         </MenuItem>
 
         </>
@@ -203,14 +203,13 @@ export default function NavBar() {
         >
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
       </MenuItem>
     </Menu>
   );
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" style={{minHeight:'10vh', justifyContent:'center'}}>
         <Toolbar>
           <NavLink c to="/" style={{ textDecoration: "none", color: "white" }}>
             <Typography

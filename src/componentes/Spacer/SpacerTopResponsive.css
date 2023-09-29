@@ -21,3 +21,16 @@
     min-height: 9rem;
   }
 }
+
+.spacerTop {
+  display: table;
+  width: 100%; /* Opcional: ajusta el ancho según tus necesidades */
+  height: 100%; /* Opcional: ajusta la altura según tus necesidades */
+  text-align: center; /* Centra el contenido horizontalmente */
+}
+
+.spacerContent {
+  display: table-cell;
+  vertical-align: middle; /* Centra el contenido verticalmente */
+}
+

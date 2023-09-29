@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import PrimarySearchAppBar from '../../componentes/NavBarGeneral/NavBar';
+import CustomNavBar from '../../componentes/NavBarGeneral/NavBar';
 import Breadcrumb from '../../componentes/Breadcrumb/Breadcrumb';
 import ResponsiveGrid from '../../componentes/Grid/ResponsiveGrid';
 import FilterBar from '../../componentes/FilterBar/FilterBar';
@@ -8,6 +8,7 @@ import ejemploCursos from '../../data/ejemplo-cursos.json'; // Ruta al archivo J
 import SpacerTop from '../../componentes/Spacer/SpacerTop';
 import { Pagination } from '@mui/material';
 import Container from "@mui/material/Container";
+import Footer from '../../componentes/Footer/Footer';
 
 export default function Cursos() {
   const [courseData, setCourseData] = useState([]);
@@ -87,7 +88,7 @@ export default function Cursos() {
 
   return (
     <>
-      <PrimarySearchAppBar />
+      <CustomNavBar />
       <Breadcrumb />
       <Container maxWidth="xl">
       <SpacerTop>
@@ -106,6 +107,7 @@ export default function Cursos() {
         }}
       />
       </Container>
+      <Footer />
     </>
   );
 }

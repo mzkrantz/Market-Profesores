@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import PrimarySearchAppBar from "../../componentes/NavBarGeneral/NavBar";
+import CustomNavBar from "../../componentes/NavBarGeneral/NavBar";
 import Breadcrumb from "../../componentes/Breadcrumb/Breadcrumb";
 import ResponsiveGrid from "../../componentes/Grid/ResponsiveGrid";
 import CardProfesor from "../../componentes/Cards/CardProfesor";
@@ -7,6 +7,9 @@ import ejemploProfesores from "../../data/ejemplo-profesores.json"; // Importar 
 import SpacerTop from "../../componentes/Spacer/SpacerTop";
 import { Pagination } from "@mui/material";
 import Container from "@mui/material/Container";
+import Footer from '../../componentes/Footer/Footer';
+import Typography from '@mui/material/Typography';
+
 
 export default function Profesores() {
   const [professorsData, setProfessorsData] = useState([]);
@@ -57,15 +60,15 @@ export default function Profesores() {
 
   return (
     <>
-      <PrimarySearchAppBar />
+      <CustomNavBar />
       <Breadcrumb />
       <Container maxWidth="xl">
       <SpacerTop>
-        <p style={{ margin: "0", padding: "1rem " }}>
-          Nuestros profesores, elegidos por su experiencia y pasión por la
-          enseñanza, te brindarán una educación de calidad y te ayudarán a
-          alcanzar tu máximo potencial.
-        </p>
+          <Typography style={{ margin: "0", padding: "1rem ", fontSize: "1.25rem", textAlign: "center"}}>
+            Nuestros profesores, elegidos por su experiencia y pasión por la
+            enseñanza, te brindarán una educación de calidad y te ayudarán a
+            alcanzar tu máximo potencial.
+          </Typography>
       </SpacerTop>
 
       <ResponsiveGrid cardComponent={CardProfesor} cards={currentProfessors} />
@@ -80,6 +83,7 @@ export default function Profesores() {
         }}
       />
       </Container>
+      <Footer />
     </>
   );
 }

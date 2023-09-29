@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import PrimarySearchAppBar from "../../componentes/NavBarGeneral/NavBar";
+import CustomNavBar from "../../componentes/NavBarGeneral/NavBar";
 import Breadcrumb from "../../componentes/Breadcrumb/Breadcrumb";
 import cursosData from "../../data/ejemplo-cursos.json";
 import Container from "@mui/material/Container";
@@ -19,6 +19,8 @@ import Divider from "@mui/material/Divider";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/system";
 import { ThemeProvider, createTheme } from "@mui/material/styles"; // Importa ThemeProvider y createTheme
+import Footer from '../../componentes/Footer/Footer';
+
 
 const theme = createTheme();
 const HeaderImage = styled("div")({
@@ -74,7 +76,7 @@ export default function CursoIndividual() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <PrimarySearchAppBar />
+        <CustomNavBar />
         <Breadcrumb items={breadcrumbItems} />
 
         <Container maxWidth="xl">
@@ -143,7 +145,7 @@ export default function CursoIndividual() {
           {/*INSERTAR PROFESOR A CARGO DEL CURSO*/}
           </Grid>
         </Container>
-
+        <Footer />
       </ThemeProvider>
     </>
   );

@@ -12,22 +12,12 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import PrimarySearchAppBar from '../../componentes/NavBarGeneral/NavBar';
+import CustomNavBar from '../../componentes/NavBarGeneral/NavBar';
 import { useContext, useState } from 'react';
 import {  UserContext } from '../../context/userProvider';
 import { Navigate } from 'react-router-dom';
+import Footer from '../../componentes/Footer/Footer';
 
-
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-        EduWizard
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
@@ -64,7 +54,8 @@ export default function Login() {
 
   return (
     <>
-    <PrimarySearchAppBar/>
+    <CustomNavBar/>
+    <div style={{minHeight:'75vh'}}>
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -127,9 +118,10 @@ export default function Login() {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
+    </div>
+    <Footer />
     </>
   );
 }

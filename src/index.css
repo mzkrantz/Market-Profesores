@@ -11,15 +11,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-/* Establecer una altura mínima para el contenido */
-#root {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* Asegura que la página ocupe al menos toda la altura de la ventana */
-}
-
-/* Alinear el pie de página en la parte inferior */
-footer {
-  margin-top: auto;
-}

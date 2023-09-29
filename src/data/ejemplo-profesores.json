@@ -1,6 +1,7 @@
 {
   "profesores": [
     {
+      "id": 1,
       "name": "Juan Pérez",
       "subject": "Matemáticas",
       "age": 40,
@@ -9,6 +10,7 @@
       "description": "Profesor de Matemáticas con amplia experiencia en enseñanza de conceptos matemáticos."
     },
     {
+      "id": 2,
       "name": "María Rodríguez",
       "subject": "Ciencias",
       "age": 35,
@@ -17,6 +19,7 @@
       "description": "Especialista en Ciencias con enfoque en biología y química."
     },
     {
+      "id": 3,
       "name": "Carlos Sánchez",
       "subject": "Historia",
       "age": 45,
@@ -25,6 +28,7 @@
       "description": "Profesor de Historia con pasión por explorar eventos históricos y culturas pasadas."
     },
     {
+      "id": 4,
       "name": "Ana López",
       "subject": "Literatura",
       "age": 38,
@@ -33,6 +37,7 @@
       "description": "Apasionada por la literatura y la enseñanza de obras literarias clásicas y contemporáneas."
     },
     {
+      "id": 5,
       "name": "Pedro García",
       "subject": "Física",
       "age": 42,
@@ -41,6 +46,7 @@
       "description": "Experto en Física con más de dos décadas de experiencia en educación y experimentación."
     },
     {
+      "id": 6,
       "name": "Laura Martínez",
       "subject": ["Biología", "Química"],
       "age": 35,
@@ -49,6 +55,7 @@
       "description": "Profesora de Biología y Química apasionada por la vida y la química molecular."
     },
     {
+      "id": 7,
       "name": "Manuel Torres",
       "subject": ["Matemáticas", "Física"],
       "age": 40,
@@ -57,6 +64,7 @@
       "description": "Dedicado a la enseñanza de Matemáticas y Física, fomentando el pensamiento lógico y la resolución de problemas."
     },
     {
+      "id": 8,
       "name": "Sofía Ramírez",
       "subject": "Historia",
       "age": 45,
@@ -69,6 +77,7 @@
       "description": "Especializada en Historia con enfoque en eventos y figuras históricas destacadas."
     },
     {
+      "id": 9,
       "name": "Javier Torres",
       "subject": "Inglés",
       "age": 34,

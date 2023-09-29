@@ -107,32 +107,24 @@ export default function NavBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      {user ? (        
+      {user ? (
         <>
-        <MenuItem
-          style={{ textDecoration: "none", color: "none" }}
-        >
-          Mi Perfil
-        </MenuItem>
-        <MenuItem
-          style={{ textDecoration: "none", color: "none" }}
-        >
-          Mis Cursos
-        </MenuItem>
-        <MenuItem
-          style={{ textDecoration: "none", color: "none" }}
-        >
-          Mensajes
-        </MenuItem>
-        <MenuItem
-          onClick={handleLogout}
-          style={{ textDecoration: "none", color: "none" }}
-        >
-          Cerrar Sesion
-        </MenuItem>
-
+          <MenuItem style={{ textDecoration: "none", color: "none" }}>
+            Mi Perfil
+          </MenuItem>
+          <MenuItem style={{ textDecoration: "none", color: "none" }}>
+            Mis Cursos
+          </MenuItem>
+          <MenuItem style={{ textDecoration: "none", color: "none" }}>
+            Mensajes
+          </MenuItem>
+          <MenuItem
+            onClick={handleLogout}
+            style={{ textDecoration: "none", color: "none" }}
+          >
+            Cerrar Sesion
+          </MenuItem>
         </>
-        
       ) : (
         <>
           <NavLink
@@ -209,7 +201,10 @@ export default function NavBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" style={{minHeight:'10vh', justifyContent:'center'}}>
+      <AppBar
+        position="static"
+        style={{ minHeight: "10vh", justifyContent: "center" }}
+      >
         <Toolbar>
           <NavLink c to="/" style={{ textDecoration: "none", color: "white" }}>
             <Typography
@@ -232,16 +227,16 @@ export default function NavBar() {
               inputProps={{ "aria-label": "search" }}
             />
             </Search>*/}
-            {/*Meti un boton en blanco para dejar espacio*/}
-            <Button></Button>
-            
-            <NavLink
+          {/*Meti un boton en blanco para dejar espacio*/}
+          <Button></Button>
+
+          <NavLink
             to="/Cursos"
             style={{ textDecoration: "none", color: "white" }}
           >
             <Button color="inherit">Cursos</Button>
           </NavLink>
-          
+
           <NavLink
             to="/Profesores"
             style={{ textDecoration: "none", color: "white" }}
@@ -249,13 +244,9 @@ export default function NavBar() {
             <Button color="inherit">Profesores</Button>
           </NavLink>
 
-          
-
           <Box sx={{ flexGrow: 1 }} />
 
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            
-
             {/*<IconButton
               size="large"
               aria-label="show 5 new mails"

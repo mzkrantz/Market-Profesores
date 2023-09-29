@@ -1,6 +1,5 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import CustomNavBar from "../../componentes/NavBarGeneral/NavBar";
 import Breadcrumb from "../../componentes/Breadcrumb/Breadcrumb";
 import cursosData from "../../data/ejemplo-cursos.json";
 import Container from "@mui/material/Container";
@@ -19,8 +18,6 @@ import Divider from "@mui/material/Divider";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/system";
 import { ThemeProvider, createTheme } from "@mui/material/styles"; // Importa ThemeProvider y createTheme
-import Footer from '../../componentes/Footer/Footer';
-
 
 const theme = createTheme();
 const HeaderImage = styled("div")({
@@ -76,7 +73,6 @@ export default function CursoIndividual() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <CustomNavBar />
         <Breadcrumb items={breadcrumbItems} />
 
         <Container maxWidth="xl">
@@ -88,15 +84,16 @@ export default function CursoIndividual() {
             <img src={image} alt="Curso Imagen" width="100%" />
           </Paper>
           <Grid container spacing={3}>
-            
             <Grid item xs={12} md={6}>
               <CourseDetails>
                 <CardContent>
                   <Typography variant="h4" gutterBottom>
                     {title}
                   </Typography>
-                  <Typography variant="body1" gutterBottom>{description}</Typography>
-                  <Typography variant="body2" >Duración: {duration}</Typography>
+                  <Typography variant="body1" gutterBottom>
+                    {description}
+                  </Typography>
+                  <Typography variant="body2">Duración: {duration}</Typography>
                   <Typography variant="body2">Precio: {price}</Typography>
                   <Button
                     variant="contained"
@@ -109,7 +106,8 @@ export default function CursoIndividual() {
                   <Typography variant="subtitle1" gutterBottom>
                     Valoración del Curso
                   </Typography>
-                  <StarIcon color="warning" />  {/*!-- Muestra las estrellas de acuerdo a la valoración del curso - Fijas, ver cambiar a dinámicas*/}
+                  <StarIcon color="warning" />{" "}
+                  {/*!-- Muestra las estrellas de acuerdo a la valoración del curso - Fijas, ver cambiar a dinámicas*/}
                   <StarIcon color="warning" />
                   <StarIcon color="warning" />
                   <StarIcon color="warning" />
@@ -142,10 +140,9 @@ export default function CursoIndividual() {
               </ExtendedDescription>
             </Grid>
 
-          {/*INSERTAR PROFESOR A CARGO DEL CURSO*/}
+            {/*INSERTAR PROFESOR A CARGO DEL CURSO*/}
           </Grid>
         </Container>
-        <Footer />
       </ThemeProvider>
     </>
   );

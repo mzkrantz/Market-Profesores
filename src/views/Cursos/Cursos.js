@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import CustomNavBar from '../../componentes/NavBarGeneral/NavBar';
-import Breadcrumb from '../../componentes/Breadcrumb/Breadcrumb';
-import ResponsiveGrid from '../../componentes/Grid/ResponsiveGrid';
-import FilterBar from '../../componentes/FilterBar/FilterBar';
-import CardCurso from '../../componentes/Cards/CardCurso';
-import ejemploCursos from '../../data/ejemplo-cursos.json'; // Ruta al archivo JSON
-import SpacerTop from '../../componentes/Spacer/SpacerTop';
-import { Pagination } from '@mui/material';
+import React, { useState, useEffect } from "react";
+import Breadcrumb from "../../componentes/Breadcrumb/Breadcrumb";
+import ResponsiveGrid from "../../componentes/Grid/ResponsiveGrid";
+import FilterBar from "../../componentes/FilterBar/FilterBar";
+import CardCurso from "../../componentes/Cards/CardCurso";
+import ejemploCursos from "../../data/ejemplo-cursos.json"; // Ruta al archivo JSON
+import SpacerTop from "../../componentes/Spacer/SpacerTop";
+import { Pagination } from "@mui/material";
 import Container from "@mui/material/Container";
-import Footer from '../../componentes/Footer/Footer';
 
 export default function Cursos() {
   const [courseData, setCourseData] = useState([]);
@@ -35,14 +33,14 @@ export default function Cursos() {
         setItemsPerPage(3); //6 elementos por pagina en escritorio
       }
     };
-  
+
     // Llama a la funcion inicialmente y se actualiza segun cambios en el tamaño de la ventana
     updateItemsPerPage();
-    window.addEventListener('resize', updateItemsPerPage);
-  
+    window.addEventListener("resize", updateItemsPerPage);
+
     // Limpia el evento de cambio de tamaño cuando el componente se desmonta
     return () => {
-      window.removeEventListener('resize', updateItemsPerPage);
+      window.removeEventListener("resize", updateItemsPerPage);
     };
   }, []);
 
@@ -55,7 +53,10 @@ export default function Cursos() {
     if (filterCategory && curso.category !== filterCategory) {
       return false; // Filtrar por categoría
     }
-    if (filterText && !curso.title.toLowerCase().includes(filterText.toLowerCase())) {
+    if (
+      filterText &&
+      !curso.title.toLowerCase().includes(filterText.toLowerCase())
+    ) {
       return false; // Filtrar por palabra clave
     }
     if (filterDuration && curso.duration !== filterDuration) {
@@ -88,26 +89,27 @@ export default function Cursos() {
 
   return (
     <>
-      <CustomNavBar />
       <Breadcrumb />
       <Container maxWidth="xl">
-      <SpacerTop>
-        <FilterBar onCategoryChange={handleCategoryChange} onFilter={handleTextFilter}/>
-      </SpacerTop>
-      
-      <ResponsiveGrid cardComponent={CardCurso} cards={currentCourses} />
-      <Pagination
-        count={totalPages}
-        page={page}
-        onChange={handlePageChange}
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          marginTop: "20px",
-        }}
-      />
+        <SpacerTop>
+          <FilterBar
+            onCategoryChange={handleCategoryChange}
+            onFilter={handleTextFilter}
+          />
+        </SpacerTop>
+
+        <ResponsiveGrid cardComponent={CardCurso} cards={currentCourses} />
+        <Pagination
+          count={totalPages}
+          page={page}
+          onChange={handlePageChange}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "20px",
+          }}
+        />
       </Container>
-      <Footer />
     </>
   );
 }

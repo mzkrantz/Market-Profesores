@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import CustomNavBar from "../../componentes/NavBarGeneral/NavBar";
 import Breadcrumb from "../../componentes/Breadcrumb/Breadcrumb";
 import ResponsiveGrid from "../../componentes/Grid/ResponsiveGrid";
 import CardProfesor from "../../componentes/Cards/CardProfesor";
@@ -7,9 +6,7 @@ import ejemploProfesores from "../../data/ejemplo-profesores.json"; // Importar 
 import SpacerTop from "../../componentes/Spacer/SpacerTop";
 import { Pagination } from "@mui/material";
 import Container from "@mui/material/Container";
-import Footer from '../../componentes/Footer/Footer';
-import Typography from '@mui/material/Typography';
-
+import Typography from "@mui/material/Typography";
 
 export default function Profesores() {
   const [professorsData, setProfessorsData] = useState([]);
@@ -60,30 +57,38 @@ export default function Profesores() {
 
   return (
     <>
-      <CustomNavBar />
       <Breadcrumb />
       <Container maxWidth="xl">
-      <SpacerTop>
-          <Typography style={{ margin: "0", padding: "1rem ", fontSize: "1.25rem", textAlign: "center"}}>
+        <SpacerTop>
+          <Typography
+            style={{
+              margin: "0",
+              padding: "1rem ",
+              fontSize: "1.25rem",
+              textAlign: "center",
+            }}
+          >
             Nuestros profesores, elegidos por su experiencia y pasión por la
             enseñanza, te brindarán una educación de calidad y te ayudarán a
             alcanzar tu máximo potencial.
           </Typography>
-      </SpacerTop>
+        </SpacerTop>
 
-      <ResponsiveGrid cardComponent={CardProfesor} cards={currentProfessors} />
-      <Pagination
-        count={totalPages}
-        page={page}
-        onChange={handlePageChange}
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          marginTop: "20px",
-        }}
-      />
+        <ResponsiveGrid
+          cardComponent={CardProfesor}
+          cards={currentProfessors}
+        />
+        <Pagination
+          count={totalPages}
+          page={page}
+          onChange={handlePageChange}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "20px",
+          }}
+        />
       </Container>
-      <Footer />
     </>
   );
 }

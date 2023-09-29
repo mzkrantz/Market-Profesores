@@ -1,45 +1,39 @@
 import * as React from "react";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import BasicModal from "../Modal/Modal";
 
-export default function CardProfesor({ profesores }) {
-  if (!profesores || !Array.isArray(profesores)) {
-    return null; // Puedes mostrar un mensaje de error o carga en su lugar
-  }
+export default function CardProfesor(props) {
+  const { image, name, description, subject} = props;
 
   return (
-    <>
-      {profesores.map((profesor, index) => (
-        <Card key={index} sx={{ maxWidth: 345 }}>
-          <CardMedia component="img" alt="Profesor" height="140" image={profesor.imagen} />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              {profesor.nombre}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {profesor.descripcion}
-            </Typography>
-          </CardContent>
-
-          <CardActions>
-            <BasicModal
-              nombreBoton="Contactar"
-              nombreProfesor={profesor.nombre}
-              descripcion={`Disponible para clases de ${profesor.materia}`}
-            />
-
-            <BasicModal
-              nombreBoton="Conóceme"
-              nombreProfesor={profesor.nombre}
-              descripcion={profesor.descripcion}
-            />
-          </CardActions>
-        </Card>
-      ))}
-    </>
+    <Card style={{ minHeight: '26rem',  display: 'flex', flexDirection: 'column', justifyContent:'center' }}>
+      <CardMedia
+        component="img"
+        height="140"
+        image={image}
+        alt="Profesor Imagen"
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          {name}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {description}
+        </Typography>
+      </CardContent>
+      <BasicModal
+        buttonName="Contactar"
+        professorName={name}
+        description={`Disponible para clases de ${subject}`}
+      />
+      <BasicModal
+        buttonName="Conóceme"
+        professorName={name}
+        description={description}
+      />
+    </Card>
   );
 }

@@ -1,0 +1,84 @@
+{
+  "profesores": [
+    {
+      "name": "Juan Pérez",
+      "subject": "Matemáticas",
+      "age": 40,
+      "email": "juan.perez@example.com",
+      "image": "https://ejemplo.com/imagenes/juan_perez.jpg",
+      "description": "Profesor de Matemáticas con amplia experiencia en enseñanza de conceptos matemáticos."
+    },
+    {
+      "name": "María Rodríguez",
+      "subject": "Ciencias",
+      "age": 35,
+      "email": "maria.rodriguez@example.com",
+      "image": "https://ejemplo.com/imagenes/maria_rodriguez.jpg",
+      "description": "Especialista en Ciencias con enfoque en biología y química."
+    },
+    {
+      "name": "Carlos Sánchez",
+      "subject": "Historia",
+      "age": 45,
+      "email": "carlos.sanchez@example.com",
+      "image": "https://ejemplo.com/imagenes/carlos_sanchez.jpg",
+      "description": "Profesor de Historia con pasión por explorar eventos históricos y culturas pasadas."
+    },
+    {
+      "name": "Ana López",
+      "subject": "Literatura",
+      "age": 38,
+      "email": "ana.lopez@example.com",
+      "image": "https://ejemplo.com/imagenes/ana_lopez.jpg",
+      "description": "Apasionada por la literatura y la enseñanza de obras literarias clásicas y contemporáneas."
+    },
+    {
+      "name": "Pedro García",
+      "subject": "Física",
+      "age": 42,
+      "email": "pedro.garcia@example.com",
+      "image": "https://ejemplo.com/imagenes/pedro_garcia.jpg",
+      "description": "Experto en Física con más de dos décadas de experiencia en educación y experimentación."
+    },
+    {
+      "name": "Laura Martínez",
+      "subject": ["Biología", "Química"],
+      "age": 35,
+      "email": "laura.martinez@example.com",
+      "image": "https://ejemplo.com/imagenes/laura_martinez.jpg",
+      "description": "Profesora de Biología y Química apasionada por la vida y la química molecular."
+    },
+    {
+      "name": "Manuel Torres",
+      "subject": ["Matemáticas", "Física"],
+      "age": 40,
+      "email": "manuel.torres@example.com",
+      "image": "https://ejemplo.com/imagenes/manuel_torres.jpg",
+      "description": "Dedicado a la enseñanza de Matemáticas y Física, fomentando el pensamiento lógico y la resolución de problemas."
+    },
+    {
+      "name": "Sofía Ramírez",
+      "subject": "Historia",
+      "age": 45,
+      "contacto": {
+        "email": "sofia.ramirez@example.com",
+        "phone": "+123456789",
+        "location": "Edificio A, Aula 101",
+        "image": "https://ejemplo.com/imagenes/sofia_ramirez.jpg"
+      },
+      "description": "Especializada en Historia con enfoque en eventos y figuras históricas destacadas."
+    },
+    {
+      "name": "Javier Torres",
+      "subject": "Inglés",
+      "age": 34,
+      "contacto": {
+        "email": "javier.torres@example.com",
+        "phone": "+987654321",
+        "location": "Sala de Idiomas",
+        "image": "https://ejemplo.com/imagenes/javier_torres.jpg"
+      },
+      "description": "Instructor de Inglés con énfasis en comunicación efectiva y habilidades lingüísticas."
+    }
+  ]
+}

@@ -24,7 +24,7 @@ export default function BasicModal(props) {
   
   return (
     <div>
-      <Button onClick={handleOpen}>{props.nombreBoton}</Button>
+      <Button onClick={handleOpen}>{props.buttonName}</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -33,10 +33,10 @@ export default function BasicModal(props) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            {props.nombreProfesor}
+            {props.professorName}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            {props.descripcion}
+            {props.description}
           </Typography>
         </Box>
       </Modal>

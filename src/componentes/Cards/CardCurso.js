@@ -5,11 +5,11 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
-export default function CardCurso(props) {
-  const { image, title, description, duration, price, buttonLink } = props;
+function CardCurso(props) {
+  const {id, image, title, description, duration, price} = props;
 
   return (
-    <Card>
+    <Card style={{ minHeight: '26rem',  display: 'flex', flexDirection: 'column', justifyContent:'center' }}>
       <CardMedia
         component="img"
         height="140"
@@ -29,10 +29,20 @@ export default function CardCurso(props) {
         <Typography variant="h6" color="text.secondary" style={{ marginTop: '1rem' }}>
           Precio: {price}
         </Typography>
-        <Button variant="contained" color="primary" href={buttonLink} style={{ marginTop: '1rem' }}>
-          Mas Informacion
+
+        <Button
+          variant="contained"
+          color="primary"
+          href={`/Cursos/CursoIndividual/${id}`}
+          style={{ marginTop: '1rem' }}
+        >
+          Mas Información
         </Button>
+
+
       </CardContent>
     </Card>
   );
-};
+}
+
+export default CardCurso;

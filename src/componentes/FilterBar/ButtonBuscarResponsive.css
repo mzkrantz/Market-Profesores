@@ -1,0 +1,21 @@
+@media (max-width: 600px) {
+    .fullWidthButton {
+      min-width: 100% !important; 
+      min-height: 50px;
+    }
+  }
+
+@media (min-width: 600px) and (max-width: 900px) {
+  .fullWidthButton {
+    min-width: 100% !important;
+    min-height: 50px;
+  }
+}
+
+@media (min-width: 900px){
+  .fullWidthButton {
+    min-height: 40px;
+    min-width: 200px !important;
+  }
+}
+  

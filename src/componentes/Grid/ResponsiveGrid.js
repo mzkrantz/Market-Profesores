@@ -16,7 +16,7 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function ResponsiveGrid({ cardComponent, cards }) {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+      <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 2, sm: 8, md: 12 }}>
         {cards.map(card => (
           <Grid item xs={2} sm={4} md={4} key={card.id}>
             <Item className="card-item">

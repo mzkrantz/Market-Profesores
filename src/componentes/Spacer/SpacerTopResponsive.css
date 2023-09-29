@@ -1,0 +1,23 @@
+.spacerTop{
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+@media (max-width: 600px) {
+  .spacerTop {
+    min-height: 18rem;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 900px) {
+  .spacerTop {
+    min-height: 10rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .spacerTop {
+    min-height: 9rem;
+  }
+}

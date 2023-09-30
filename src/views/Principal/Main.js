@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/system";
 import Grid from "@mui/material/Grid";
+import { Link } from "react-router-dom";
 
 /* Cambiar imagen de fondo */
 const Hero = styled("header")`
@@ -112,9 +113,11 @@ function Main() {
             matemáticas, lengua, ciencias y otras asignaturas para estudiantes
             de todas las edades, desde la primaria hasta la universidad.
           </HeroText>
-          <CTAButton variant="contained" component="a" href="/Cursos">
-            Explorar Cursos
-          </CTAButton>
+          <Link to="/Cursos" style={{ textDecoration: "none", color: "white" }}>
+            <CTAButton variant="contained" component="a">
+              Explorar Cursos
+            </CTAButton>
+          </Link>
         </Container>
       </Hero>
 

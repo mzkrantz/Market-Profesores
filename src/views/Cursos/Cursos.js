@@ -5,69 +5,77 @@ import FilterBar from "../../componentes/FilterBar/FilterBar";
 import CardCurso from "../../componentes/Cards/CardCurso";
 import ejemploCursos from "../../data/ejemplo-cursos.json"; // Ruta al archivo JSON
 import SpacerTop from "../../componentes/Spacer/SpacerTop";
-import { Pagination } from "@mui/material";
-import Container from "@mui/material/Container";
+import { Pagination, Container } from "@mui/material";
 
 export default function Cursos() {
   const [courseData, setCourseData] = useState([]);
   const [page, setPage] = useState(1);
   const [filterCategory, setFilterCategory] = useState("");
   const [filterText, setFilterText] = useState("");
-  const [filterDuration, setFilterDuration] = useState("");
-  const [itemsPerPage, setItemsPerPage] = useState(6); // Cantidad de cursos por pagina y valor predeterminado para escritorio
+  const [filterFrequency, setFilterFrequency] = useState("");
+  const [filterType, setFilterType] = useState("");
+  const [sortOrder, setSortOrder] = useState("asc"); // Estado para el orden ascendente/descendente
+  const [sortField] = useState("stars"); // Campo de ordenamiento inicial
+  const [itemsPerPage, setItemsPerPage] = useState(6);
 
   useEffect(() => {
-    // Usar ejemploCursos directamente en lugar de hacer una solicitud fetch
     setCourseData(ejemploCursos.cursos);
   }, []);
 
   useEffect(() => {
-    // Funcion para actualizar el numero de elementos por pagina segun el ancho de la ventana
     const updateItemsPerPage = () => {
       const windowWidth = window.innerWidth;
       if (windowWidth < 600) {
-        setItemsPerPage(1); //1 elemento por pagina en dispositivos moviles
+        setItemsPerPage(1);
       } else if (windowWidth < 900) {
-        setItemsPerPage(2); //2 elementos por pagina en tablets
+        setItemsPerPage(2);
       } else {
-        setItemsPerPage(3); //6 elementos por pagina en escritorio
+        setItemsPerPage(3);
       }
     };
 
-    // Llama a la funcion inicialmente y se actualiza segun cambios en el tamaño de la ventana
     updateItemsPerPage();
     window.addEventListener("resize", updateItemsPerPage);
 
-    // Limpia el evento de cambio de tamaño cuando el componente se desmonta
     return () => {
       window.removeEventListener("resize", updateItemsPerPage);
     };
   }, []);
 
-  // Calcula el índice de inicio y fin para mostrar los elementos de la página actual
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
-  // Aplicar filtros a los cursos
+  // Filtra los cursos según la categoría, la palabra clave, la frecuencia y el tipo
   const filteredCourses = courseData.filter((curso) => {
     if (filterCategory && curso.category !== filterCategory) {
-      return false; // Filtrar por categoría
+      return false;
     }
     if (
       filterText &&
       !curso.title.toLowerCase().includes(filterText.toLowerCase())
     ) {
-      return false; // Filtrar por palabra clave
+      return false;
     }
-    if (filterDuration && curso.duration !== filterDuration) {
-      return false; // Filtrar por duración
+    if (filterFrequency && curso.frequency !== filterFrequency) {
+      return false;
+    }
+    if (filterType && curso.type !== filterType) {
+      return false;
     }
     return true;
   });
 
-  const currentCourses = filteredCourses.slice(startIndex, endIndex);
+  // Ordena los cursos según el campo de ordenamiento y la dirección de ordenamiento de las estrellas
+  const sortedCourses = filteredCourses.slice().sort((a, b) => {
+    if (sortField === "stars") {
+      const aStars = parseFloat(a.stars);
+      const bStars = parseFloat(b.stars);
+      return sortOrder === "asc" ? aStars - bStars : bStars - aStars;
+    }
+    return 0;
+  });
 
-  // Calcula la cantidad total de páginas
+  const currentCourses = sortedCourses.slice(startIndex, endIndex);
   const totalPages = Math.ceil(filteredCourses.length / itemsPerPage);
 
   // Maneja el cambio de página
@@ -75,27 +83,35 @@ export default function Cursos() {
     setPage(newPage);
   };
 
-  // Maneja el cambio en la categoría de filtro
-  const handleCategoryChange = (selectedCategory) => {
-    setFilterCategory(selectedCategory);
-  };
-
-  // Maneja el cambio en la palabra clave de filtro
-  const handleTextFilter = ({ category, text, duration }) => {
+  // Maneja el cambio de texto, frecuencia, tipo y puntaje
+  const handleTextFilter = ({ category, text, frequency, type, sortOrder }) => {
     setFilterCategory(category);
     setFilterText(text);
-    setFilterDuration(duration);
+    setFilterFrequency(frequency);
+    setFilterType(type);
+    setSortOrder(sortOrder); // Actualiza el estado del orden ascendente/descendente
   };
 
+  // Maneja el cambio de orden ascendente/descendente
+  const handleSortChange = (newOrder) => {
+    setSortOrder(newOrder);
+  };
+
+    // Función para limpiar los filtros
+    const clearFilters = () => {
+      setFilterCategory("");
+      setFilterText("");
+      setFilterFrequency("");
+      setFilterType("");
+      setSortOrder("desc");
+    };
+    
   return (
     <>
       <Breadcrumb />
       <Container maxWidth="xl">
         <SpacerTop>
-          <FilterBar
-            onCategoryChange={handleCategoryChange}
-            onFilter={handleTextFilter}
-          />
+          <FilterBar onFilter={handleTextFilter} onSortChange={handleSortChange} onClearFilters={clearFilters}/>
         </SpacerTop>
 
         <ResponsiveGrid cardComponent={CardCurso} cards={currentCourses} />
@@ -107,7 +123,9 @@ export default function Cursos() {
             display: "flex",
             justifyContent: "center",
             marginTop: "20px",
+            marginBottom: "20px"
           }}
+          boundaryCount={0}
         />
       </Container>
     </>

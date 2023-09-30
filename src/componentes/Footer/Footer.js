@@ -3,17 +3,16 @@ import { styled } from "@mui/system";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 
+/* Se colocan los estilos utilizando styled */
 const FooterContainer = styled("footer")`
   background-color: #333;
   color: #fff;
-  padding: 2rem 0;
+  padding: 1rem 0;
   margin-top: 1vh;
   text-align: center;
-  min-height: 2vh;
 `;
-
 const FooterText = styled(Typography)`
-  font-size: 1rem;
+  font-size: 0.8rem;
 `;
 
 function Footer() {

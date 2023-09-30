@@ -4,36 +4,52 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import BasicModal from "../Modal/Modal";
+import "./CardStyles.css";
 
 export default function CardProfesor(props) {
-  const { image, name, description, subject} = props;
+  const { image, name, description, subject } = props;
 
   return (
-    <Card style={{ minHeight: '26rem',  display: 'flex', flexDirection: 'column', justifyContent:'center' }}>
+    <Card
+      style={{
+        minHeight: "30rem",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+      }}
+    >
       <CardMedia
         component="img"
-        height="140"
-        image={image}
+        className="card-image"
+        src={image}
         alt="Profesor Imagen"
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {name}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {description}
-        </Typography>
+        <div className="infoBox">
+          <Typography gutterBottom variant="h5" component="div">
+            {name}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {description}
+          </Typography>
+        </div>
       </CardContent>
-      <BasicModal
-        buttonName="Contactar"
-        professorName={name}
-        description={`Disponible para clases de ${subject}`}
-      />
-      <BasicModal
-        buttonName="Conóceme"
-        professorName={name}
-        description={description}
-      />
+      <div className="infoBox2 ">
+        <div className="modalContent">
+          <BasicModal
+            buttonName="Contactar"
+            className="card-modal"
+            professorName={name}
+            description={`Disponible para clases de ${subject}`}
+          />
+          <BasicModal
+            buttonName="Conóceme"
+            className="card-modal"
+            professorName={name}
+            description={description}
+          />
+        </div>
+      </div>
     </Card>
   );
 }

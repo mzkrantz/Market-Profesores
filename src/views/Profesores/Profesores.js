@@ -86,7 +86,9 @@ export default function Profesores() {
             display: "flex",
             justifyContent: "center",
             marginTop: "20px",
+            marginBottom: "20px"
           }}
+          boundaryCount={0}
         />
       </Container>
     </>

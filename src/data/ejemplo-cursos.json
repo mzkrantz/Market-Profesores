@@ -1,112 +1,172 @@
 {
   "cursos": [
     {
-      "id":1,
+      "id": 1,
       "image": "curso-programacion.jpg",
       "title": "Desarrollo Web Avanzado",
       "description": "Domina el desarrollo web con tecnologías modernas.",
       "duration": "12 semanas",
+      "frequency": "2",
       "price": "$199.99",
       "buttonLink": "https://ejemplo.com/curso-desarrollo-web-avanzado",
       "category": "Desarrollo Web",
       "extendedDescription": "Domina el desarrollo web con tecnologías modernas y conviértete en un experto en el campo.",
-      "subjects": ["HTML", "CSS", "JavaScript"]
+      "subjects": ["HTML", "CSS", "JavaScript"],
+      "stars": "4.5",
+      "type": "Grupal",
+      "teacher": 8
     },
     {
-      "id":2,
+      "id": 2,
       "image": "curso-marketing.jpg",
       "title": "Marketing Digital Estratégico",
       "description": "Aprende a crear campañas de marketing efectivas.",
       "duration": "8 semanas",
+      "frequency": "3",
       "price": "$149.99",
       "buttonLink": "https://ejemplo.com/curso-marketing-digital",
       "category": "Marketing Digital",
       "extendedDescription": "Aprende a crear campañas de marketing efectivas y maximiza el impacto de tu estrategia.",
-      "subjects": ["Marketing en redes sociales", "SEO", "Publicidad en línea"]
+      "subjects": ["Marketing en redes sociales", "SEO", "Publicidad en línea"],
+      "stars": "4",
+      "type": "Individual",
+      "teacher": 7
     },
     {
-      "id":3,
+      "id": 3,
       "image": "curso-diseño.jpg",
       "title": "Diseño Gráfico Profesional",
       "description": "Crea diseños impactantes con herramientas de diseño.",
       "duration": "10 semanas",
+      "frequency": "4",
       "price": "$179.99",
       "buttonLink": "https://ejemplo.com/curso-diseno-grafico",
       "category": "Diseño Gráfico",
       "extendedDescription": "Aprende a crear diseños impactantes con herramientas de diseño avanzadas y desarrolla tus habilidades creativas.",
-      "subjects": ["Diseño de logotipos", "Edición de imágenes", "Diseño de carteles"]
+      "subjects": [
+        "Diseño de logotipos",
+        "Edición de imágenes",
+        "Diseño de carteles"
+      ],
+      "stars": "5",
+      "type": "Grupal",
+      "teacher": 6
     },
     {
-      "id":4,
+      "id": 4,
       "image": "curso-ingles.jpg",
       "title": "Inglés Avanzado",
       "description": "Perfecciona tu inglés con clases prácticas.",
       "duration": "6 meses",
+      "frequency": "3",
       "price": "$299.99",
       "buttonLink": "https://ejemplo.com/curso-ingles-avanzado",
       "category": "Idiomas",
       "extendedDescription": "Perfecciona tu inglés con clases prácticas y alcanza un nivel avanzado de fluidez en el idioma.",
-      "subjects": ["Gramática inglesa", "Conversación avanzada", "Vocabulario"]
+      "subjects": ["Gramática inglesa", "Conversación avanzada", "Vocabulario"],
+      "stars": "3",
+      "type": "Individual",
+      "teacher": 5
     },
     {
-      "id":5,
+      "id": 5,
       "image": "curso-fotografia.jpg",
       "title": "Fotografía de Naturaleza",
       "description": "Captura la belleza de la naturaleza con tu cámara.",
       "duration": "8 semanas",
+      "frequency": "1",
       "price": "$129.99",
       "buttonLink": "https://ejemplo.com/curso-fotografia-naturaleza",
       "category": "Fotografía",
       "extendedDescription": "Aprende a capturar la belleza de la naturaleza con tu cámara y desarrolla tus habilidades fotográficas.",
-      "subjects": ["Técnicas de fotografía", "Edición de fotos", "Exploración de la naturaleza"]
+      "subjects": [
+        "Técnicas de fotografía",
+        "Edición de fotos",
+        "Exploración de la naturaleza"
+      ],
+      "stars": "2",
+      "type": "Grupal",
+      "teacher": 4
     },
     {
-      "id":6,
+      "id": 6,
       "image": "curso-cocina.jpg",
       "title": "Cocina Internacional",
       "description": "Aprende a cocinar platos del mundo entero.",
       "duration": "4 meses",
+      "frequency": "4",
       "price": "$249.99",
       "buttonLink": "https://ejemplo.com/curso-cocina-internacional",
       "category": "Cocina",
       "extendedDescription": "Descubre los secretos de la cocina internacional y sorprende a tus amigos y familiares con deliciosos platos de todo el mundo.",
-      "subjects": ["Cocina italiana", "Cocina asiática", "Postres internacionales"]
+      "subjects": [
+        "Cocina italiana",
+        "Cocina asiática",
+        "Postres internacionales"
+      ],
+      "stars": "4.6",
+      "type": "Individual",
+      "teacher": 3
     },
     {
-      "id":7,
+      "id": 7,
       "image": "curso-negocios.jpg",
       "title": "Gestión Empresarial",
       "description": "Domina las estrategias de gestión empresarial.",
       "duration": "6 meses",
+      "frequency": "2",
       "price": "$399.99",
       "buttonLink": "https://ejemplo.com/curso-gestion-empresarial",
       "category": "Negocios",
       "extendedDescription": "Domina las estrategias de gestión empresarial y lleva tu carrera al siguiente nivel.",
-      "subjects": ["Planificación estratégica", "Finanzas empresariales", "Gestión de proyectos"]
+      "subjects": [
+        "Planificación estratégica",
+        "Finanzas empresariales",
+        "Gestión de proyectos"
+      ],
+      "stars": "2.3",
+      "type": "Grupal",
+      "teacher": 2
     },
     {
-      "id":8,
+      "id": 8,
       "image": "curso-yoga.jpg",
       "title": "Yoga y Meditación",
       "description": "Encuentra la paz interior y la salud con el yoga.",
       "duration": "3 meses",
+      "frequency": "3",
       "price": "$89.99",
       "buttonLink": "https://ejemplo.com/curso-yoga-meditacion",
       "category": "Salud y Bienestar",
       "extendedDescription": "Encuentra la paz interior y mejora tu salud con el yoga y la meditación. Aprende prácticas ancestrales para una vida equilibrada.",
-      "subjects": ["Yoga para principiantes", "Meditación mindfulness", "Ejercicios de relajación"]
+      "subjects": [
+        "Yoga para principiantes",
+        "Meditación mindfulness",
+        "Ejercicios de relajación"
+      ],
+      "stars": "4",
+      "type": "Individual",
+      "teacher": 1
     },
     {
-      "id":9,
-      "image": "curso-robotica.jpg",
-      "title": "Robótica para Niños",
-      "description": "Introduce a tus hijos al emocionante mundo de la robótica.",
-      "duration": "8 semanas",
-      "price": "$69.99",
-      "buttonLink": "https://ejemplo.com/curso-robotica-ninos",
-      "category": "Tecnología",
-      "extendedDescription": "Introduce a tus hijos al emocionante mundo de la robótica y fomenta su creatividad y habilidades técnicas.",
-      "subjects": ["Robótica básica", "Programación de robots", "Proyectos de robótica"]
+      "id": 9,
+      "image": "curso-yoga2.jpg",
+      "title": "Yoga y Meditación 2",
+      "description": "Encuentra la paz interior y la salud con el yoga.",
+      "duration": "4 meses",
+      "frequency": "5",
+      "price": "$189.99",
+      "buttonLink": "https://ejemplo.com/curso-yoga-meditacion2",
+      "category": "Salud y Bienestar",
+      "extendedDescription": "Aprende prácticas ancestrales para una vida equilibrada.",
+      "subjects": [
+        "Yoga para Intermedios",
+        "Meditación Avanzada",
+        "Ejercicios de relajación"
+      ],
+      "stars": "5",
+      "type": "Individual",
+      "teacher": 9
     }
   ]
 }

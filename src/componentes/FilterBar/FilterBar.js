@@ -7,20 +7,21 @@ import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
-import './ButtonBuscarResponsive.css'
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import "./ButtonResponsive.css";
 
-
-export default function FilterBar({ onCategoryChange, onFilter }) {
+export default function FilterBar({ onFilter, onSortChange, onClearFilters }) {
   const [category, setCategory] = useState("");
   const [text, setText] = useState("");
-  const [duration, setDuration] = useState("");
+  const [frequency, setFrequency] = useState("");
+  const [type, setType] = useState("");
+  const [sortOrder, setSortOrder] = useState("desc");
 
+  //Handlers para los cambios en los filtros
   const handleCategoryChange = (event) => {
     const selectedCategory = event.target.value;
     setCategory(selectedCategory);
-
-    // Llama a la función de devolución de llamada para enviar la categoría seleccionada
-    onCategoryChange(selectedCategory);
   };
 
   const handleTextChange = (event) => {
@@ -28,19 +29,43 @@ export default function FilterBar({ onCategoryChange, onFilter }) {
     setText(searchText);
   };
 
-  const handleDurationChange = (event) => {
-    const selectedDuration = event.target.value;
-    setDuration(selectedDuration);
+  const handleFrequencyChange = (event) => {
+    const selectedFrequency = event.target.value;
+    setFrequency(selectedFrequency);
+  };
+
+  const handleTypeChange = (event) => {
+    const searchType = event.target.value;
+    setType(searchType);
+  };
+
+  const toggleSortOrder = () => {
+    // Cambia el orden entre "asc" y "desc" cuando se hace clic en el botón. Si sortOrder es "desc", se cambia a "asc" y viceversa.
+    const newOrder = sortOrder === "desc" ? "asc" : "desc";
+    setSortOrder(newOrder);
+    // Llama a la función de devolución de llamada para notificar el cambio en el orden
+    onSortChange(newOrder);
+  };
+
+  const clearFilters = () => {
+    setCategory("");
+    setText("");
+    setFrequency("");
+    setType("");
+    setSortOrder("desc");
+    // Llama a la función de devolución de llamada para notificar la limpieza de filtros
+    onClearFilters();
   };
 
   const handleSearch = () => {
-    // Llama a la función de devolución de llamada para enviar la categoría, palabra clave y duración
-    onFilter({ category, text, duration });
+    // Llama a la función de devolución de llamada para enviar los filtros al componente padre
+    onFilter({ category, text, frequency, type, sortOrder });
   };
 
   return (
     <Box p={2}>
       <Grid container spacing={2} justifyContent="center" alignItems="center">
+        {/* Agrega un Grid item de Categoria */}
         <Grid item xs={12} sm={6} md={4}>
           <FormControl fullWidth>
             <InputLabel id="category-select-label">Categoría</InputLabel>
@@ -65,26 +90,49 @@ export default function FilterBar({ onCategoryChange, onFilter }) {
           </FormControl>
         </Grid>
 
+        {/* Agrega un Grid item de Frecuencia */}
         <Grid item xs={12} sm={6} md={4}>
           <FormControl fullWidth>
-            <InputLabel id="duration-select-label">Duración</InputLabel>
+            <InputLabel id="frequency-select-label">Frecuencia</InputLabel>
             <Select
-              labelId="duration-select-label"
-              id="duration-select"
-              value={duration}
-              label="Duración"
-              onChange={handleDurationChange}
+              labelId="frequency-select-label"
+              id="frequency-select"
+              value={frequency}
+              label="Frecuencia"
+              onChange={handleFrequencyChange}
             >
-              <MenuItem value={""}>Cualquier Duración</MenuItem>
-              <MenuItem value={"4 semanas"}>4 semanas</MenuItem>
-              <MenuItem value={"8 semanas"}>8 semanas</MenuItem>
-              <MenuItem value={"12 semanas"}>12 semanas</MenuItem>
-              <MenuItem value={"6 meses"}>6 meses</MenuItem>
+              <MenuItem value={""}>Cualquier Frecuencia</MenuItem>
+              <MenuItem value={"1"}>1 vez a la semana</MenuItem>
+              <MenuItem value={"2"}>2 veces a la semana</MenuItem>
+              <MenuItem value={"3"}>3 veces a la semana</MenuItem>
+              <MenuItem value={"4"}>4 veces a la semana</MenuItem>
+              <MenuItem value={"5"}>5 veces a la semana</MenuItem>
+              <MenuItem value={"6"}>6 veces a la semana</MenuItem>
+              <MenuItem value={"7"}>7 veces a la semana</MenuItem>
             </Select>
           </FormControl>
         </Grid>
 
-        <Grid item xs={12} sm={6} md={4}>
+        {/* Agrega un Grid item de Tipo de Clase */}
+        <Grid item xs={12} sm={12} md={4}>
+          <FormControl fullWidth>
+            <InputLabel id="type-select-label">Tipo de Clase</InputLabel>
+            <Select
+              labelId="type-select-label"
+              id="type-select"
+              value={type}
+              label="Tipo de Clase"
+              onChange={handleTypeChange}
+            >
+              <MenuItem value={""}>Cualquiera</MenuItem>
+              <MenuItem value={"Grupal"}>Grupal</MenuItem>
+              <MenuItem value={"Individual"}>Individual</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+
+        {/* Agrega un Grid item de Busqueda por Texto */}
+        <Grid item xs={12} sm={6} md={3} lg={6}>
           <TextField
             id="text-filter"
             label="Buscar"
@@ -94,14 +142,58 @@ export default function FilterBar({ onCategoryChange, onFilter }) {
             fullWidth
           />
         </Grid>
-        <Grid item xs={12} sm={6} md={12}>
-        <Box display="flex" justifyContent="center">
-            <Button variant="contained" size="small" onClick={handleSearch} className={'fullWidthButton'}>
+
+        {/* Agrega un Grid item con un boton Buscar */}
+        <Grid item xs={12} sm={6} md={3} lg={2}>
+          <Box display="flex" justifyContent="center">
+            <Button
+              variant="contained"
+              size="small"
+              onClick={handleSearch}
+              className={"fullWidthButton"}
+            >
               Buscar
             </Button>
-        </Box>
+          </Box>
         </Grid>
 
+        {/* Agrega un Grid item con un boton Limpiar Filtros */}
+        <Grid item xs={12} sm={6} md={3} lg={2}>
+          <Box display="flex" justifyContent="center">
+            <Button
+              variant="outlined"
+              size="small"
+              onClick={clearFilters} // Llama a la función clearFilters para limpiar los filtros
+              className={"fullWidthButton"}
+            >
+              Limpiar Filtros
+            </Button>
+          </Box>
+        </Grid>
+
+        {/* Agrega un Grid item con un boton para cambiar el orden en el que se muestran los elementos */}
+        <Grid item xs={12} sm={6} md={3} lg={2}>
+          <Box display="flex" justifyContent="center">
+            <Button
+              variant="outlined"
+              size="small"
+              onClick={toggleSortOrder}
+              className={"fullWidthButton"}
+            >
+              {sortOrder === "asc" ? (
+                <>
+                  <ArrowUpwardIcon />
+                  <span>Puntaje</span>
+                </>
+              ) : (
+                <>
+                  <ArrowDownwardIcon />
+                  <span>Puntaje</span>
+                </>
+              )}
+            </Button>
+          </Box>
+        </Grid>
       </Grid>
     </Box>
   );

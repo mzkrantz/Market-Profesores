@@ -1,0 +1,15 @@
+.info-square{
+    min-height: 26rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.info-square2{
+    min-height: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}

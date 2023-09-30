@@ -16,7 +16,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { Avatar } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../../context/userProvider";
 
@@ -109,15 +109,27 @@ export default function NavBar() {
     >
       {user ? (
         <>
-          <MenuItem style={{ textDecoration: "none", color: "none" }}>
-            Mi Perfil
-          </MenuItem>
-          <MenuItem style={{ textDecoration: "none", color: "none" }}>
-            Mis Cursos
-          </MenuItem>
-          <MenuItem style={{ textDecoration: "none", color: "none" }}>
-            Mensajes
-          </MenuItem>
+          <Link to="/Perfil" style={{ textDecoration: "none", color: "none" }}>
+            <MenuItem style={{ textDecoration: "none", color: "none" }}>
+              Mi Perfil
+            </MenuItem>
+          </Link>
+          <Link
+            to="/MisCursos"
+            style={{ textDecoration: "none", color: "none" }}
+          >
+            <MenuItem style={{ textDecoration: "none", color: "none" }}>
+              Mis Cursos
+            </MenuItem>
+          </Link>
+          <Link
+            to="/Mensajes"
+            style={{ textDecoration: "none", color: "none" }}
+          >
+            <MenuItem style={{ textDecoration: "none", color: "none" }}>
+              Mensajes
+            </MenuItem>
+          </Link>
           <MenuItem
             onClick={handleLogout}
             style={{ textDecoration: "none", color: "none" }}
@@ -203,7 +215,7 @@ export default function NavBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
         position="static"
-        style={{ minHeight: "10vh", justifyContent: "center" }}
+        style={{ minHeight: "5vh", justifyContent: "center" }}
       >
         <Toolbar>
           <NavLink c to="/" style={{ textDecoration: "none", color: "white" }}>

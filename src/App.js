@@ -9,7 +9,7 @@ import Login from "./views/Login/Login";
 import Registrate from "./views/Registrate/Registrate";
 import Footer from "./componentes/Footer/Footer";
 import CustomNavBar from "./componentes/NavBarGeneral/NavBar";
-import MisCursos from "./views/Admin/Cursos/MisCursos";
+import MisCursos from "./views/Admin/MisCursos/MisCursos";
 import Mensajes from "./views/Admin/Mensajes/Mensajes";
 import Perfil from "./views/Admin/Perfil/Perfil";
 

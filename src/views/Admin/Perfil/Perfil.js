@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/system";
+import CambiarDatosForm from "./CambiarDatosForm"; // Asegúrate de proporcionar la ruta correcta
 
-// Datos del profesor (reemplazar con los datos reales)
+
+// Datos del profesor (reemplazar con los datos reales) - Recuperacion de datos del JSON + Relacion usuario logueado - profesor - cursos
 const teacherData = {
   name: "Ana Martínez",
   subject: "Cocina",
@@ -18,6 +20,7 @@ const teacherData = {
     "Carrera en Gastronomía y experiencia en restaurantes de renombre.",
 };
 
+//Estilos
 const ProfileContainer = styled(Container)`
   margin-top: ${({ theme }) => theme.spacing(4)};
   display: flex;
@@ -64,9 +67,25 @@ const ProfileButton = styled(Button)`
 `;
 
 const Perfil = () => {
+  const [editing, setEditing] = useState(false);
+
+  const handleEdit = () => {
+    setEditing(true);
+  };
+
+  const handleFormSubmit = (formData) => {
+    // Aquí puedes manejar los nuevos datos del formulario, ya sea enviándolos al servidor o actualizando el estado de la aplicación.
+    // Por ahora, simplemente imprime los nuevos datos en la consola.
+    console.log("Nuevos datos:", formData);
+    setEditing(false); // Cierra el formulario después de enviar los datos
+  };
   return (
     <>
       <ProfileContainer>
+      {editing ? (
+          <CambiarDatosForm onSubmit={handleFormSubmit} />
+        ) : (
+          <>
         <ProfileImage src={teacherData.image} alt={teacherData.name} />
         <ProfileTitle variant="h1">{teacherData.name}</ProfileTitle>
         <ProfileSubtitle variant="h2">{teacherData.subject}</ProfileSubtitle>
@@ -75,7 +94,11 @@ const Perfil = () => {
         <ProfileText>Teléfono: {teacherData.phone}</ProfileText>
         <ProfileText>Experiencia: {teacherData.background}</ProfileText>
         <ProfileText>Descripción: {teacherData.description}</ProfileText>
-        <ProfileButton variant="contained">Cambiar Datos</ProfileButton> {/*Abrir vista de CambiarDatos, que sea una tabla? Campos Editables? Form? No se*/}
+        <ProfileButton variant="contained" onClick={handleEdit}>
+              Cambiar Datos
+            </ProfileButton>
+          </>
+        )}
       </ProfileContainer>
     </>
   );

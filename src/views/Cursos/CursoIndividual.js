@@ -21,6 +21,7 @@ import RatingStars from "../../componentes/RatingStars/RatingStars";
 import { CardMedia } from "@mui/material";
 import "./CursoIndividualStyles.css";
 
+//Creacion del tema, header e infobox
 const theme = createTheme();
 const HeaderImage = styled("div")({
   width: "100%",

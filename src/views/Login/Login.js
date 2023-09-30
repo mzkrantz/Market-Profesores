@@ -16,7 +16,7 @@ import { useContext, useState } from "react";
 import { UserContext } from "../../context/userProvider";
 import { Navigate } from "react-router-dom";
 
-// Importa tu archivo JSON con los usuarios
+// Importa archivo JSON con los usuarios
 import usersData from "../../data/ejemplo-usuarios.json";
 
 const defaultTheme = createTheme();
@@ -31,15 +31,15 @@ export default function Login() {
     const email = data.get("email");
     const password = data.get("password");
 
-    // Busca el usuario en la lista de usuarios registrados
+    // Buscar el usuario en la lista de usuarios registrados
     const user = usersData.users.find((user) => user.user === email);
 
     if (user && user.pass === password) {
-      // Acceso concedido, puedes redirigir al usuario o hacer lo que necesites aquí
+      // Acceso concedido, guarda el usuario en el contexto y redirige a la home
       setUser(true);
       setLoggedIn(true);
     } else {
-      // Acceso denegado, muestra un mensaje de error o toma otra acción apropiada
+      // Acceso denegado, muestra un mensaje de error
       alert("Usuario o contraseña incorrectos");
     }
   };

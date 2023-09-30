@@ -10,7 +10,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/system';
 
-// Simulacion datos de cursos del profesor
+// Simulacion datos de cursos del profesor, cargar desde el json? Mock=simulacion
 const mockCourses = [
   { id: 1, title: 'Curso 1', description: 'Descripción del Curso 1', published: true },
   { id: 2, title: 'Curso 2', description: 'Descripción del Curso 2', published: false },

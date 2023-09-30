@@ -16,7 +16,7 @@ export default function FilterBar({ onFilter, onSortChange, onClearFilters }) {
   const [text, setText] = useState("");
   const [frequency, setFrequency] = useState("");
   const [type, setType] = useState("");
-  const [sortOrder, setSortOrder] = useState("desc");
+  const [sortOrder, setSortOrder] = useState("asc");
 
   //Handlers para los cambios en los filtros
   const handleCategoryChange = (event) => {

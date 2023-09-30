@@ -6,6 +6,7 @@ import { styled } from "@mui/system";
 import Grid from "@mui/material/Grid";
 import { Link } from "react-router-dom";
 
+/* Estilos de la pagina principal */
 /* Cambiar imagen de fondo */
 const Hero = styled("header")`
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
@@ -27,7 +28,7 @@ const HeroText = styled(Typography)`
   margin-bottom: ${({ theme }) => theme.spacing(4)};
 `;
 
-const CTAButton = styled(Button)`
+const CursosButton = styled(Button)`
   font-size: 1.25rem;
   padding: ${({ theme }) => theme.spacing(1.5, 4)};
   background: #007bff;
@@ -114,9 +115,9 @@ function Main() {
             de todas las edades, desde la primaria hasta la universidad.
           </HeroText>
           <Link to="/Cursos" style={{ textDecoration: "none", color: "white" }}>
-            <CTAButton variant="contained" component="a">
+            <CursosButton variant="contained" component="a">
               Explorar Cursos
-            </CTAButton>
+            </CursosButton>
           </Link>
         </Container>
       </Hero>

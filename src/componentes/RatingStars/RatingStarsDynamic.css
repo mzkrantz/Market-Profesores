@@ -1,0 +1,25 @@
+/* RatingStars.css */
+.star {
+    font-size: 2rem; /* Tamaño de las estrellas */
+    vertical-align: middle; /* Alinea las estrellas verticalmente */
+    color: #ed6c02 !important; /* Establece el color de las estrellas en amarillo */
+  }
+  
+  .rating-container {
+    display: flex;
+    align-items: center; /* Alinea los elementos verticalmente en el centro */
+  }
+  
+  /* Estilos para pantallas pequeñas (menos de 500px de ancho) */
+@media (max-width: 500px) {
+  .star {
+    font-size: 1.5rem; /* Reduce el tamaño de las estrellas para pantallas pequeñas */
+  }
+
+  .rating-container {
+    text-align: center; /* Centra los elementos horizontalmente */
+    align-items: center;
+    justify-content: center;
+  }
+
+}

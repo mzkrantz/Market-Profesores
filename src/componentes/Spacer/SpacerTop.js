@@ -1,8 +1,12 @@
 import React from 'react';
 import './SpacerTopResponsive.css';
 
-const Spacer = ({ children }) => {
-  return <div className='spacerTop'>{children}</div>;
+const SpacerTop = ({ children }) => {
+  return (
+    <div className='spacerTop'>
+      <div className='spacerContent'>{children}</div>
+    </div>
+  );
 };
 
-export default Spacer;
+export default SpacerTop;

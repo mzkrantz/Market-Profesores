@@ -1,84 +1,102 @@
 {
   "profesores": [
     {
-      "name": "Juan Pérez",
-      "subject": "Matemáticas",
+      "id": 1,
+      "name": "Luisa Rodríguez",
+      "subject": "Yoga",
       "age": 40,
-      "email": "juan.perez@example.com",
-      "image": "https://ejemplo.com/imagenes/juan_perez.jpg",
-      "description": "Profesor de Matemáticas con amplia experiencia en enseñanza de conceptos matemáticos."
+      "email": "luisa.rodriguez@example.com",
+      "phone": "123456789",
+      "image": "https://ejemplo.com/imagenes/luisa_rodriguez.jpg",
+      "description": "Instructora de Yoga con más de 15 años de experiencia en la enseñanza de técnicas de relajación y bienestar.",
+      "background": "Certificación en Yoga Alliance y formación en varias escuelas de yoga reconocidas."
     },
     {
-      "name": "María Rodríguez",
-      "subject": "Ciencias",
-      "age": 35,
-      "email": "maria.rodriguez@example.com",
-      "image": "https://ejemplo.com/imagenes/maria_rodriguez.jpg",
-      "description": "Especialista en Ciencias con enfoque en biología y química."
-    },
-    {
-      "name": "Carlos Sánchez",
-      "subject": "Historia",
+      "id": 2,
+      "name": "Carlos Pérez",
+      "subject": "Gestión Empresarial",
       "age": 45,
-      "email": "carlos.sanchez@example.com",
-      "image": "https://ejemplo.com/imagenes/carlos_sanchez.jpg",
-      "description": "Profesor de Historia con pasión por explorar eventos históricos y culturas pasadas."
+      "email": "carlos.perez@example.com",
+      "phone": "123456789",
+      "image": "https://ejemplo.com/imagenes/carlos_perez.jpg",
+      "description": "Experto en Gestión Empresarial con enfoque en estrategias de negocios y liderazgo corporativo.",
+      "background": "MBA en Administración de Empresas y consultoría para empresas multinacionales."
     },
     {
-      "name": "Ana López",
-      "subject": "Literatura",
+      "id": 3,
+      "name": "Ana Martínez",
+      "subject": "Cocina",
+      "age": 35,
+      "email": "ana.martinez@example.com",
+      "phone": "123456789",
+      "image": "https://ejemplo.com/imagenes/ana_martinez.jpg",
+      "description": "Chef profesional con pasión por la cocina internacional y la enseñanza de técnicas culinarias.",
+      "background": "Carrera en Gastronomía y experiencia en restaurantes de renombre."
+    },
+    {
+      "id": 4,
+      "name": "David González",
+      "subject": "Fotografía",
       "age": 38,
-      "email": "ana.lopez@example.com",
-      "image": "https://ejemplo.com/imagenes/ana_lopez.jpg",
-      "description": "Apasionada por la literatura y la enseñanza de obras literarias clásicas y contemporáneas."
+      "email": "david.gonzalez@example.com",
+      "phone": "123456789",
+      "image": "https://ejemplo.com/imagenes/david_gonzalez.jpg",
+      "description": "Fotógrafo creativo con amplia experiencia en la captura de momentos únicos y la enseñanza de técnicas fotográficas.",
+      "background": "Formación en Fotografía Artística y trabajo en estudios de renombre."
     },
     {
-      "name": "Pedro García",
-      "subject": "Física",
-      "age": 42,
-      "email": "pedro.garcia@example.com",
-      "image": "https://ejemplo.com/imagenes/pedro_garcia.jpg",
-      "description": "Experto en Física con más de dos décadas de experiencia en educación y experimentación."
-    },
-    {
-      "name": "Laura Martínez",
-      "subject": ["Biología", "Química"],
-      "age": 35,
-      "email": "laura.martinez@example.com",
-      "image": "https://ejemplo.com/imagenes/laura_martinez.jpg",
-      "description": "Profesora de Biología y Química apasionada por la vida y la química molecular."
-    },
-    {
-      "name": "Manuel Torres",
-      "subject": ["Matemáticas", "Física"],
-      "age": 40,
-      "email": "manuel.torres@example.com",
-      "image": "https://ejemplo.com/imagenes/manuel_torres.jpg",
-      "description": "Dedicado a la enseñanza de Matemáticas y Física, fomentando el pensamiento lógico y la resolución de problemas."
-    },
-    {
-      "name": "Sofía Ramírez",
-      "subject": "Historia",
-      "age": 45,
-      "contacto": {
-        "email": "sofia.ramirez@example.com",
-        "phone": "+123456789",
-        "location": "Edificio A, Aula 101",
-        "image": "https://ejemplo.com/imagenes/sofia_ramirez.jpg"
-      },
-      "description": "Especializada en Historia con enfoque en eventos y figuras históricas destacadas."
-    },
-    {
-      "name": "Javier Torres",
+      "id": 5,
+      "name": "Olivia Smith",
       "subject": "Inglés",
-      "age": 34,
-      "contacto": {
-        "email": "javier.torres@example.com",
-        "phone": "+987654321",
-        "location": "Sala de Idiomas",
-        "image": "https://ejemplo.com/imagenes/javier_torres.jpg"
-      },
-      "description": "Instructor de Inglés con énfasis en comunicación efectiva y habilidades lingüísticas."
+      "age": 42,
+      "email": "olivia.smith@example.com",
+      "phone": "123456789",
+      "image": "https://ejemplo.com/imagenes/olivia_smith.jpg",
+      "description": "Profesora de Inglés con un enfoque comunicativo y experiencia en la enseñanza de habilidades lingüísticas.",
+      "background": "Certificación en Enseñanza de Inglés como Segundo Idioma y años de enseñanza en escuelas internacionales."
+    },
+    {
+      "id": 6,
+      "name": "Gabriel López",
+      "subject": "Diseño Gráfico",
+      "age": 35,
+      "email": "gabriel.lopez@example.com",
+      "image": "https://ejemplo.com/imagenes/gabriel_lopez.jpg",
+      "description": "Diseñador gráfico con creatividad y pasión por el diseño digital y la comunicación visual.",
+      "background": "Diploma en Diseño Gráfico y experiencia en agencias de publicidad."
+    },
+    {
+      "id": 7,
+      "name": "Laura Ramírez",
+      "subject": "Marketing",
+      "age": 40,
+      "email": "laura.ramirez@example.com",
+      "phone": "123456789",
+      "image": "https://ejemplo.com/imagenes/laura_ramirez.jpg",
+      "description": "Especialista en Marketing con enfoque en estrategias digitales y marketing de contenidos.",
+      "background": "Máster en Marketing Digital y consultoría para empresas de diversos sectores."
+    },
+    {
+      "id": 8,
+      "name": "Andrés Torres",
+      "subject": "Programación",
+      "age": 30,
+      "email": "andres.torres@example.com",
+      "phone": "123456789",
+      "image": "https://ejemplo.com/imagenes/andres_torres.jpg",
+      "description": "Desarrollador de software con experiencia en programación web y móvil.",
+      "background": "Grado en Ciencias de la Computación y trabajo en startups tecnológicas."
+    },
+    {
+      "id": 9,
+      "name": "María Fernández",
+      "subject": "Yoga",
+      "age": 36,
+      "email": "maria.fernandez@example.com",
+      "phone": "123456789",
+      "image": "https://ejemplo.com/imagenes/maria_fernandez.jpg",
+      "description": "Instructora de Yoga con enfoque en la salud mental y el bienestar físico.",
+      "background": "Certificación en Yoga Terapéutico y experiencia en clases individuales y grupales."
     }
   ]
 }

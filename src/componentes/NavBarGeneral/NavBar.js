@@ -16,7 +16,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { Avatar } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../../context/userProvider";
 
@@ -107,32 +107,36 @@ export default function NavBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      {user ? (        
+      {user ? (
         <>
-        <MenuItem
-          style={{ textDecoration: "none", color: "none" }}
-        >
-          Carga tus clases
-        </MenuItem>
-        <MenuItem
-          style={{ textDecoration: "none", color: "none" }}
-        >
-          Mira tus mensajes
-        </MenuItem>
-        <MenuItem
-          style={{ textDecoration: "none", color: "none" }}
-        >
-          Configura tu perfil
-        </MenuItem>
-        <MenuItem
-          onClick={handleLogout}
-          style={{ textDecoration: "none", color: "none" }}
-        >
-          Cerra Sesion
-        </MenuItem>
-
+          <Link to="/Perfil" style={{ textDecoration: "none", color: "none" }}>
+            <MenuItem style={{ textDecoration: "none", color: "none" }}>
+              Mi Perfil
+            </MenuItem>
+          </Link>
+          <Link
+            to="/MisCursos"
+            style={{ textDecoration: "none", color: "none" }}
+          >
+            <MenuItem style={{ textDecoration: "none", color: "none" }}>
+              Mis Cursos
+            </MenuItem>
+          </Link>
+          <Link
+            to="/Mensajes"
+            style={{ textDecoration: "none", color: "none" }}
+          >
+            <MenuItem style={{ textDecoration: "none", color: "none" }}>
+              Mensajes
+            </MenuItem>
+          </Link>
+          <MenuItem
+            onClick={handleLogout}
+            style={{ textDecoration: "none", color: "none" }}
+          >
+            Cerrar Sesion
+          </MenuItem>
         </>
-        
       ) : (
         <>
           <NavLink
@@ -203,14 +207,16 @@ export default function NavBar() {
         >
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
       </MenuItem>
     </Menu>
   );
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar
+        position="static"
+        style={{ minHeight: "5vh", justifyContent: "center" }}
+      >
         <Toolbar>
           <NavLink c to="/" style={{ textDecoration: "none", color: "white" }}>
             <Typography
@@ -233,16 +239,16 @@ export default function NavBar() {
               inputProps={{ "aria-label": "search" }}
             />
             </Search>*/}
-            {/*Meti un boton en blanco para dejar espacio*/}
-            <Button></Button>
-            
-            <NavLink
+          {/*Meti un boton en blanco para dejar espacio*/}
+          <Button></Button>
+
+          <NavLink
             to="/Cursos"
             style={{ textDecoration: "none", color: "white" }}
           >
             <Button color="inherit">Cursos</Button>
           </NavLink>
-          
+
           <NavLink
             to="/Profesores"
             style={{ textDecoration: "none", color: "white" }}
@@ -250,13 +256,9 @@ export default function NavBar() {
             <Button color="inherit">Profesores</Button>
           </NavLink>
 
-          
-
           <Box sx={{ flexGrow: 1 }} />
 
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            
-
             {/*<IconButton
               size="large"
               aria-label="show 5 new mails"

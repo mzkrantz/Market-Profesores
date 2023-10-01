@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
-import PrimarySearchAppBar from "../../componentes/NavBarGeneral/NavBar";
 import Breadcrumb from "../../componentes/Breadcrumb/Breadcrumb";
 import ResponsiveGrid from "../../componentes/Grid/ResponsiveGrid";
 import CardProfesor from "../../componentes/Cards/CardProfesor";
-import ejemploProfesores from "../../data/ejemplo-profesores.json"; // Importar los profesores desde el archivo JSON
+import ejemploProfesores from "../../data/ejemplo-profesores.json";
 import SpacerTop from "../../componentes/Spacer/SpacerTop";
 import { Pagination } from "@mui/material";
 import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
 
 export default function Profesores() {
   const [professorsData, setProfessorsData] = useState([]);
   const [page, setPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(6); // Cantidad de profesores por página y valor predeterminado para escritorio
+  const [itemsPerPage, setItemsPerPage] = useState(3); // Cantidad de profesores por página y valor predeterminado para escritorio
 
   useEffect(() => {
     // Usar ejemploProfesores directamente en lugar de hacer una solicitud fetch
@@ -50,35 +50,46 @@ export default function Profesores() {
   // Calcula la cantidad total de páginas
   const totalPages = Math.ceil(professorsData.length / itemsPerPage);
 
-  // Maneja el cambio de página
+  // Manejador del cambio de página
   const handlePageChange = (event, newPage) => {
     setPage(newPage);
   };
 
   return (
     <>
-      <PrimarySearchAppBar />
       <Breadcrumb />
       <Container maxWidth="xl">
-      <SpacerTop>
-        <p style={{ margin: "0", padding: "1rem " }}>
-          Nuestros profesores, elegidos por su experiencia y pasión por la
-          enseñanza, te brindarán una educación de calidad y te ayudarán a
-          alcanzar tu máximo potencial.
-        </p>
-      </SpacerTop>
+        <SpacerTop>
+          <Typography
+            style={{
+              margin: "0",
+              padding: "1rem ",
+              fontSize: "1.25rem",
+              textAlign: "center",
+            }}
+          >
+            Nuestros profesores, elegidos por su experiencia y pasión por la
+            enseñanza, te brindarán una educación de calidad y te ayudarán a
+            alcanzar tu máximo potencial.
+          </Typography>
+        </SpacerTop>
 
-      <ResponsiveGrid cardComponent={CardProfesor} cards={currentProfessors} />
-      <Pagination
-        count={totalPages}
-        page={page}
-        onChange={handlePageChange}
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          marginTop: "20px",
-        }}
-      />
+        <ResponsiveGrid
+          cardComponent={CardProfesor}
+          cards={currentProfessors}
+        />
+        <Pagination
+          count={totalPages}
+          page={page}
+          onChange={handlePageChange}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "20px",
+            marginBottom: "20px"
+          }}
+          boundaryCount={0}
+        />
       </Container>
     </>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import Breadcrumb from "../../componentes/Breadcrumb/Breadcrumb";
 import cursosData from "../../data/ejemplo-cursos.json";
@@ -22,6 +22,7 @@ import { CardMedia } from "@mui/material";
 import "./CursoIndividualStyles.css";
 import CommentGrid from "../../componentes/Comments/CommentGrid";
 import CommentTextArea from "../../componentes/Comments/CommentTextArea";
+import CompraForm from "../../componentes/Forms/CompraForm";
 
 //Mock de comentarios
 const comments = [
@@ -62,7 +63,16 @@ const InfoBox = styled(Card)(({ theme }) => ({
 
 export default function CursoIndividual() {
   const { id } = useParams(); // Obtiene el id de los parámetros de la URL
-  console.log("ID:", id);
+  const [isDialogOpen, setDialogOpen] = useState(false);
+
+  const handleOpenDialog = () => {
+    setDialogOpen(true);
+  };
+
+  const handleCloseDialog = () => {
+    setDialogOpen(false);
+  };
+
   const curso = cursosData.cursos.find(
     (curso) => curso.id === parseInt(id, 10)
   ); // Busca el curso por id
@@ -121,19 +131,25 @@ export default function CursoIndividual() {
                     {description}
                   </Typography>
                   <Typography variant="body2">Duración: {duration}</Typography>
-                  <Typography variant="body2">
+                  <Typography variant="body2" gutterBottom>
                     {frequency === "1"
                       ? "1 vez por semana"
                       : `${frequency} veces por semana`}
                   </Typography>
-                  <Typography variant="body2">Precio: {price}</Typography>
+                  <Typography variant="body2" gutterBottom>Precio: {price}</Typography>
                   <Button
                     variant="contained"
                     color="primary"
                     startIcon={<ShoppingCartIcon />}
+                    onClick={handleOpenDialog}
                   >
                     Comprar
                   </Button>
+
+                  <CompraForm
+                    open={isDialogOpen}
+                    handleClose={handleCloseDialog}
+                  />
                   <Divider style={{ padding: "2rem" }} />
                   <Typography variant="subtitle1" gutterBottom>
                     Valoración del Curso

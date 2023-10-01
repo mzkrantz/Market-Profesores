@@ -5,6 +5,7 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 import "./CommentStyles.css";
+import RatingStarsDynamic from "../RatingStars/RatingStarsDynamic";
 
 export default function CommentTextArea() {
   const [comment, setComment] = React.useState("");
@@ -26,10 +27,12 @@ export default function CommentTextArea() {
             fontSize: "1.5rem",
             color: "text.primary",
             marginBottom: "1rem",
+            marginTop: "1rem",
           }}
         >
           Deja un Comentario
         </FormLabel>
+        <RatingStarsDynamic />
         <TextareaAutosize
           placeholder="Escribe algo aquí..."
           minRows={8}

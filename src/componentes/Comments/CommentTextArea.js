@@ -1,15 +1,29 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
-import "./CommentStyles.css";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 import RatingStarsDynamic from "../RatingStars/RatingStarsDynamic";
 
-export default function CommentTextArea() {
+export default function CommentTextArea({ handleClose }) {
   const [comment, setComment] = React.useState("");
   const maxCharacters = 100; // Define límite máximo de caracteres
+  const [isSnackbarOpen, setSnackbarOpen] = useState(false);
+
+  const handleSubmit = () => {
+    // Lógica de envío de comentario
+    // Después de enviar el comentario, abre el Snackbar
+    setSnackbarOpen(true);
+    handleClose();
+  };
+
+  // Función para cerrar el snackbar
+  const handleCloseSnackbar = () => {
+    setSnackbarOpen(false);
+  };
 
   const handleChange = (event) => {
     const inputText = event.target.value;
@@ -68,14 +82,27 @@ export default function CommentTextArea() {
             className="button-comment"
             variant="contained"
             color="primary"
-            onClick={() => {
-              // Agregar la lógica para enviar el comentario
-            }}
+            onClick={handleSubmit}
           >
             Enviar
           </Button>
         </Box>
       </Box>
+      {/* Snackbar para mostrar el mensaje de éxito */}
+      <Snackbar
+        open={isSnackbarOpen}
+        autoHideDuration={3000}
+        onClose={handleCloseSnackbar}
+      >
+        <MuiAlert
+          elevation={6}
+          variant="filled"
+          severity="success"
+          onClose={handleCloseSnackbar}
+        >
+          Comentario enviado correctamente
+        </MuiAlert>
+      </Snackbar>
     </FormControl>
   );
 }

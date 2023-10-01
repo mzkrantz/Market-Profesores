@@ -73,6 +73,10 @@ export default function CursoIndividual() {
     setDialogOpen(false);
   };
 
+  const handleCloseComments = () => {
+    // Lógica para cerrar la snackbar
+  };
+
   const curso = cursosData.cursos.find(
     (curso) => curso.id === parseInt(id, 10)
   ); // Busca el curso por id
@@ -136,7 +140,9 @@ export default function CursoIndividual() {
                       ? "1 vez por semana"
                       : `${frequency} veces por semana`}
                   </Typography>
-                  <Typography variant="body2" gutterBottom>Precio: {price}</Typography>
+                  <Typography variant="body2" gutterBottom>
+                    Precio: {price}
+                  </Typography>
                   <Button
                     variant="contained"
                     color="primary"
@@ -217,7 +223,7 @@ export default function CursoIndividual() {
             <Grid item xs={12}>
               <InfoBox>
                 <CardContent>
-                  <CommentTextArea />
+                <CommentTextArea handleClose={handleCloseComments} />
                   <Typography variant="h5" style={{ paddingTop: "2rem" }}>
                     Comentarios
                   </Typography>

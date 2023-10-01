@@ -7,6 +7,8 @@ import {
   Button,
   Snackbar,
 } from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
+
 
 export default function CompraForm({ open, handleClose }) {
   const [nombre, setNombre] = useState("");
@@ -85,8 +87,16 @@ export default function CompraForm({ open, handleClose }) {
         open={isSnackbarOpen}
         autoHideDuration={3000}
         onClose={handleCloseSnackbar}
-        message="Mensaje enviado correctamente"
-      />
+      >
+        <MuiAlert
+          elevation={6}
+          variant="filled"
+          severity="success"
+          onClose={handleCloseSnackbar}
+        >
+          Solicitud enviada correctamente
+        </MuiAlert>
+      </Snackbar>
     </div>
   );
 }

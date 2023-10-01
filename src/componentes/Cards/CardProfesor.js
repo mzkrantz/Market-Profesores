@@ -3,7 +3,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import BasicModal from "../Modal/Modal";
+import BasicModal from "../Modal/ModalProfesor";
 import "./CardStyles.css";
 
 export default function CardProfesor(props) {

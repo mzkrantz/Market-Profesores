@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { Grid, Button, ButtonGroup } from '@mui/material';
-import Comment from './Comment';
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import React, { useState } from "react";
+import { Grid, Button } from "@mui/material";
+import Comment from "./Comment";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import "./CommentStyles.css";
 
 const CommentGrid = ({ comments }) => {
   const [sortedComments, setSortedComments] = useState([...comments]);
@@ -31,27 +32,39 @@ const CommentGrid = ({ comments }) => {
   };
 
   return (
-    <div>
-      <ButtonGroup>
-        <Button onClick={toggleSortOrder}>
-          {sortOrder === "asc" ? (
-            <>
-              <ArrowUpwardIcon />
-              <span>Puntaje</span>
-            </>
-          ) : (
-            <>
-              <ArrowDownwardIcon />
-              <span>Puntaje</span>
-            </>
-          )}
-        </Button>
-        <Button onClick={handleResetSort}>Reiniciar orden</Button>
-      </ButtonGroup>
-      <Grid container spacing={2} style={{ paddingTop: '1rem' }}>
+    <div className="responsive-container">
+      <Button
+        variant="outlined"
+        className="responsive-button"
+        onClick={toggleSortOrder}
+      >
+        {sortOrder === "asc" ? (
+          <>
+            <ArrowUpwardIcon />
+            <span>Puntaje</span>
+          </>
+        ) : (
+          <>
+            <ArrowDownwardIcon />
+            <span>Puntaje</span>
+          </>
+        )}
+      </Button>
+      <Button
+        onClick={handleResetSort}
+        variant="outlined"
+        className="responsive-button"
+      >
+        Reiniciar orden
+      </Button>
+      <Grid container spacing={2} style={{ paddingTop: "1rem" }}>
         {sortedComments.map((comment, index) => (
           <Grid item xs={12} key={index}>
-            <Comment name={comment.name} comment={comment.comment} score={comment.score} />
+            <Comment
+              name={comment.name}
+              comment={comment.comment}
+              score={comment.score}
+            />
           </Grid>
         ))}
       </Grid>

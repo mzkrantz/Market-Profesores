@@ -21,14 +21,27 @@ import RatingStars from "../../componentes/RatingStars/RatingStars";
 import { CardMedia } from "@mui/material";
 import "./CursoIndividualStyles.css";
 import CommentGrid from "../../componentes/Comments/CommentGrid";
+import CommentTextArea from "../../componentes/Comments/CommentTextArea";
 
 //Mock de comentarios
 const comments = [
-  { name: 'Juan Gomez', score: 4, comment: 'Este es un comentario de ejemplo.' },
-  { name: 'Juan Juanes', score: 3, comment: 'Este es un comentario de ejemplo.' },
-  { name: 'Juan Garcia', score: 5, comment: 'Este es un comentario de ejemplo.' },
-  { name: 'Juan Cito', score: 2, comment: 'Este es un comentario de ejemplo.' },
-  { name: 'Juan Manuel', score: 5, comment: '¡Me encantó este producto!' },
+  {
+    name: "Juan Gomez",
+    score: 4,
+    comment: "Este es un comentario de ejemplo.",
+  },
+  {
+    name: "Juan Juanes",
+    score: 3,
+    comment: "Este es un comentario de ejemplo.",
+  },
+  {
+    name: "Juan Garcia",
+    score: 5,
+    comment: "Este es un comentario de ejemplo.",
+  },
+  { name: "Juan Cito", score: 2, comment: "Este es un comentario de ejemplo." },
+  { name: "Juan Manuel", score: 5, comment: "¡Me encantó este producto!" },
 ];
 
 //Creacion del tema, header e infobox
@@ -70,7 +83,7 @@ export default function CursoIndividual() {
     teacher,
     category,
     frequency,
-    type
+    type,
   } = curso;
 
   // Busca al docente utilizando el ID del curso
@@ -188,9 +201,12 @@ export default function CursoIndividual() {
             <Grid item xs={12}>
               <InfoBox>
                 <CardContent>
-                  <Typography variant="h5">Comentarios</Typography>
+                  <CommentTextArea />
+                  <Typography variant="h5" style={{ paddingTop: "2rem" }}>
+                    Comentarios
+                  </Typography>
                   <div>
-                  <CommentGrid comments={comments} />
+                    <CommentGrid comments={comments} />
                   </div>
                 </CardContent>
               </InfoBox>

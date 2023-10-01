@@ -12,6 +12,7 @@ import CustomNavBar from "./componentes/NavBarGeneral/NavBar";
 import MisCursos from "./views/Admin/Cursos/MisCursos";
 import Mensajes from "./views/Admin/Mensajes/Mensajes";
 import Perfil from "./views/Admin/Perfil/Perfil";
+import Comentarios from "./views/Admin/Comentarios/Comentarios";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/MisCursos" element={<MisCursos />} />
           <Route path="/Mensajes" element={<Mensajes />} />
           <Route path="/Perfil" element={<Perfil />} />
+          <Route path="/Comentarios" element={<Comentarios />} />
         </Routes>
       </div>
       <Footer />

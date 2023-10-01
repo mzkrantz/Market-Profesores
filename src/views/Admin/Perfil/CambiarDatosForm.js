@@ -1,19 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
-const CambiarDatosForm = ({ onSubmit }) => {
-  const [formData, setFormData] = useState({
-    name: "",
-    subject: "",
-    age: "",
-    email: "",
-    phone: "",
-    description: "",
-    background: "",
-  });
+const CambiarDatosForm = ({ initialData, onSubmit }) => {
+  const [formData, setFormData] = useState(initialData); // Establece los datos iniciales
+
+  // Actualiza el estado de los datos iniciales cuando cambian las propiedades
+  useEffect(() => {
+    setFormData(initialData);
+  }, [initialData]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;

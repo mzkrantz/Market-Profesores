@@ -130,6 +130,14 @@ export default function NavBar() {
               Mensajes
             </MenuItem>
           </Link>
+          <Link
+            to="/Comentarios"
+            style={{ textDecoration: "none", color: "none" }}
+          >
+            <MenuItem style={{ textDecoration: "none", color: "none" }}>
+              Comentarios
+            </MenuItem>
+          </Link>
           <MenuItem
             onClick={handleLogout}
             style={{ textDecoration: "none", color: "none" }}

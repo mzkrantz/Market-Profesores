@@ -15,7 +15,7 @@
       "stars": "4.5",
       "type": "Grupal",
       "teacher": 8,
-      "status": true
+      "published": true
     },
     {
       "id": 2,
@@ -32,7 +32,7 @@
       "stars": "4",
       "type": "Individual",
       "teacher": 7,
-      "status": true
+      "published": true
     },
     {
       "id": 3,
@@ -53,7 +53,7 @@
       "stars": "5",
       "type": "Grupal",
       "teacher": 6,
-      "status": true
+      "published": true
     },
     {
       "id": 4,
@@ -70,7 +70,7 @@
       "stars": "3",
       "type": "Individual",
       "teacher": 5,
-      "status": true
+      "published": true
     },
     {
       "id": 5,
@@ -91,7 +91,7 @@
       "stars": "2",
       "type": "Grupal",
       "teacher": 4,
-      "status": true
+      "published": true
     },
     {
       "id": 6,
@@ -112,7 +112,7 @@
       "stars": "4.6",
       "type": "Individual",
       "teacher": 3,
-      "status": true
+      "published": true
     },
     {
       "id": 7,
@@ -132,7 +132,7 @@
       ],
       "stars": "2.3",
       "type": "Grupal",
-      "status": true
+      "published": true
     },
     {
       "id": 8,
@@ -153,7 +153,7 @@
       "stars": "4",
       "type": "Individual",
       "teacher": 1,
-      "status": true
+      "published": true
     },
     {
       "id": 9,
@@ -174,7 +174,7 @@
       "stars": "5",
       "type": "Individual",
       "teacher": 9,
-      "status": true
+      "published": true
     }
   ]
 }

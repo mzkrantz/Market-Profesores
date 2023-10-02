@@ -11,6 +11,7 @@ import TableRow from "@mui/material/TableRow";
 import { styled } from "@mui/system";
 import "./MisCursosStyles.css";
 import SpacerTop from "../../../componentes/Spacer/SpacerTop";
+import EditCursoForm from "../../../componentes/Forms/EditCursoForm";
 
 // Simulacion datos de cursos del profesor, cargar desde el json? Mock=simulacion
 const mockCourses = [
@@ -70,11 +71,21 @@ const ResponsiveTable = styled(Table)`
 
 const MisCursos = () => {
   const [courses, setCourses] = useState([]);
+  const [isFormOpen, setIsFormOpen] = useState(false); // Estado para controlar si el formulario está abierto
+  const [editingCourse, setEditingCourse] = useState(null);
 
   // Simulacion de la carga de datos
   useEffect(() => {
     setCourses(mockCourses);
   }, []);
+
+  const openForm = () => {
+    setIsFormOpen(true); // Abre el formulario al hacer clic en "Crear Nuevo Curso"
+  };
+
+  const closeForm = () => {
+    setIsFormOpen(false); // Cierra el formulario
+  };
 
   return (
     <>
@@ -87,9 +98,9 @@ const MisCursos = () => {
             variant="contained"
             color="primary"
             onClick={() => {
-              // Abrir un formulario de creacion de cursos
-              alert("Implementar el formulario de creacion de cursos");
-            }}
+              setEditingCourse(); // Establece el curso que se va a editar
+              openForm(); // Abre el formulario de creacion
+            }} // Abre el formulario al hacer clic
           >
             Crear Nuevo Curso
           </Button>
@@ -109,7 +120,9 @@ const MisCursos = () => {
                 <TableRow key={course.id}>
                   <TableCell>{course.title}</TableCell>
                   <TableCell>{course.description}</TableCell>
-                  <TableCell>{course.published ? "Publicado" : "No Publicado"}</TableCell>
+                  <TableCell>
+                    {course.published ? "Publicado" : "No Publicado"}
+                  </TableCell>
                   <TableCell
                     style={{ display: "flex", flexDirection: "column" }}
                   >
@@ -117,8 +130,8 @@ const MisCursos = () => {
                       className="boton-tabla"
                       variant="outlined"
                       onClick={() => {
-                        // Abrir un formulario de edicion de cursos
-                        alert("Implementar el formulario de edición de cursos");
+                        setEditingCourse(course); // Establece el curso que se va a editar
+                        openForm(); // Abre el formulario de edición
                       }}
                     >
                       Editar
@@ -153,6 +166,14 @@ const MisCursos = () => {
           </ResponsiveTable>
         </CourseList>
       </Container>
+      {isFormOpen && (
+        <EditCursoForm
+          open={isFormOpen}
+          handleClose={closeForm}
+          cursoToEdit={editingCourse}
+          title={editingCourse ? "Editar Curso" : "Crear Nuevo Curso"}
+        />
+      )}
     </>
   );
 };

@@ -24,7 +24,9 @@ export default function BasicModal(props) {
 
   return (
     <div>
-      <Button onClick={handleOpen}>{props.buttonName}</Button>
+      <Button variant="contained" color="primary" onClick={handleOpen}>
+        {props.buttonName}
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}

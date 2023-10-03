@@ -6,18 +6,14 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
-import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Button from "@mui/material/Button";
-import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import { Avatar } from "@mui/material";
+import { Avatar, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
 import { Link, NavLink } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react"; 
 import { UserContext } from "../../context/userProvider";
 
 const Search = styled("div")(({ theme }) => ({
@@ -50,7 +46,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
@@ -62,9 +57,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function NavBar() {
   const { user, setUser } = useContext(UserContext);
-
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [isLogoutDialogOpen, setLogoutDialogOpen] = useState(false);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -85,8 +80,22 @@ export default function NavBar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+  
   const handleLogout = () => {
+    // Abre el cuadro de diálogo de confirmación
+    setLogoutDialogOpen(true);
+  };
+
+  const handleConfirmLogout = () => {
+    // Cierra la sesión del usuario
     setUser(null);
+    // Cierra el cuadro de diálogo de confirmación
+    setLogoutDialogOpen(false);
+  };
+
+  const handleCancelLogout = () => {
+    // Cancela el cierre de sesión y cierra el cuadro de diálogo
+    setLogoutDialogOpen(false);
   };
 
   const menuId = "primary-search-account-menu";
@@ -182,29 +191,6 @@ export default function NavBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      {/*<MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={0} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={0} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-    */}
-
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           size="large"
@@ -226,7 +212,7 @@ export default function NavBar() {
         style={{ minHeight: "5vh", justifyContent: "center" }}
       >
         <Toolbar>
-          <NavLink c to="/" style={{ textDecoration: "none", color: "white" }}>
+          <NavLink to="/" style={{ textDecoration: "none", color: "white" }}>
             <Typography
               variant="h6"
               noWrap
@@ -238,16 +224,7 @@ export default function NavBar() {
             </Typography>
           </NavLink>
 
-          {/*<Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Busque aqui..."
-              inputProps={{ "aria-label": "search" }}
-            />
-            </Search>*/}
-          {/*Meti un boton en blanco para dejar espacio*/}
+          {/* Agregamos un botón en blanco para dejar espacio */}
           <Button></Button>
 
           <NavLink
@@ -267,27 +244,6 @@ export default function NavBar() {
           <Box sx={{ flexGrow: 1 }} />
 
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            {/*<IconButton
-              size="large"
-              aria-label="show 5 new mails"
-              color="inherit"
-            >
-              <Badge badgeContent={0} color="error">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={0} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-          */}
-
             <IconButton
               size="large"
               edge="end"
@@ -301,7 +257,7 @@ export default function NavBar() {
             </IconButton>
           </Box>
 
-          {/* Mobile version */}
+          {/* Versión móvil */}
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -318,6 +274,22 @@ export default function NavBar() {
       </AppBar>
       {renderMobileMenu}
       {MenuPerfil}
+
+      
+      <Dialog open={isLogoutDialogOpen} onClose={handleCancelLogout}>
+        <DialogTitle>Cerrar sesión:</DialogTitle>
+        <DialogContent>
+          <Typography>¿Estás seguro de que deseas cerrar sesión?</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCancelLogout} color="primary">
+            Cancelar
+          </Button>
+          <Button onClick={handleConfirmLogout} color="primary">
+            Cerrar Sesión
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 }

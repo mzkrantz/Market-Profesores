@@ -1,11 +1,31 @@
-.card-image {
-    height: 10rem;
-  }
-  
-  .infoBox{
-    min-height: 10rem;
-  }
+/* CardStyles.css */
 
-  .infoBox2{
-    min-height: 10rem;
-  }
+.card {
+  /* Estilos generales del componente Card */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 30rem;
+}
+
+.card-image {
+  /* Estilos para la imagen dentro del Card */
+  height: 10rem;
+}
+
+.infoBox {
+  /* Estilos para la caja de información */
+  min-height: 10rem;
+}
+
+.infoBox2 {
+  /* Estilos para la segunda caja de información */
+  min-height: 10rem;
+}
+
+.card-modal {
+  /* Estilos para los botones modales */
+  margin-bottom: 12px; /* Espacio entre los botones */
+}
+
+/* Agregar estilos adicionales según sea necesario */

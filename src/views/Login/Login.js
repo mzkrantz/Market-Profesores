@@ -106,7 +106,7 @@ export default function Login() {
                   required
                   fullWidth
                   id="email"
-                  label="Email Address"
+                  label="Correo Electrónico"
                   name="email"
                   autoComplete="email"
                   autoFocus

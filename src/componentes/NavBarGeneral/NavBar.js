@@ -16,45 +16,6 @@ import { Link, NavLink } from "react-router-dom";
 import { useContext, useState } from "react"; 
 import { UserContext } from "../../context/userProvider";
 
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(3),
-    width: "auto",
-  },
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "20ch",
-    },
-  },
-}));
-
 export default function NavBar() {
   const { user, setUser } = useContext(UserContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -81,22 +42,22 @@ export default function NavBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
   
-  const handleLogout = () => {
-    // Abre el cuadro de diálogo de confirmación
+  const handleLogout = () => {    
     setLogoutDialogOpen(true);
   };
 
   const handleConfirmLogout = () => {
-    // Cierra la sesión del usuario
-    setUser(null);
-    // Cierra el cuadro de diálogo de confirmación
+    setUser(null);    
     setLogoutDialogOpen(false);
   };
 
-  const handleCancelLogout = () => {
-    // Cancela el cierre de sesión y cierra el cuadro de diálogo
+  const handleCancelLogout = () => {    
     setLogoutDialogOpen(false);
   };
+
+  const CustomSpacing = styled("div")({
+    marginRight: "50px", 
+  });
 
   const menuId = "primary-search-account-menu";
 
@@ -118,38 +79,38 @@ export default function NavBar() {
     >
       {user ? (
         <>
-          <Link to="/Perfil" style={{ textDecoration: "none", color: "none" }}>
-            <MenuItem style={{ textDecoration: "none", color: "none" }}>
+          <Link to="/Perfil" style={{ textDecoration: "none", color: "black" }}>
+            <MenuItem style={{ textDecoration: "none", color: "none"}}>
               Mi Perfil
             </MenuItem>
           </Link>
           <Link
             to="/MisCursos"
-            style={{ textDecoration: "none", color: "none" }}
+            style={{ textDecoration: "none", color: "black  " }}
           >
-            <MenuItem style={{ textDecoration: "none", color: "none" }}>
+            <MenuItem style={{ textDecoration: "none", color: "none"}}>
               Mis Cursos
             </MenuItem>
           </Link>
           <Link
             to="/Mensajes"
-            style={{ textDecoration: "none", color: "none" }}
+            style={{ textDecoration: "none", color: "black" }}
           >
-            <MenuItem style={{ textDecoration: "none", color: "none" }}>
+            <MenuItem style={{ textDecoration: "none", color: "none"}}>
               Mensajes
             </MenuItem>
           </Link>
           <Link
             to="/Comentarios"
-            style={{ textDecoration: "none", color: "none" }}
+            style={{ textDecoration: "none", color: "black" }}
           >
-            <MenuItem style={{ textDecoration: "none", color: "none" }}>
+            <MenuItem style={{ textDecoration: "none", color: "none"}}>
               Comentarios
             </MenuItem>
           </Link>
           <MenuItem
             onClick={handleLogout}
-            style={{ textDecoration: "none", color: "none" }}
+            style={{ textDecoration: "none", color: "black"}}
           >
             Cerrar Sesion
           </MenuItem>
@@ -158,13 +119,13 @@ export default function NavBar() {
         <>
           <NavLink
             to="/Login"
-            style={{ textDecoration: "none", color: "blue" }}
+            style={{ textDecoration: "none", color: "black" }}
           >
             <MenuItem onClick={handleMenuClose}>Ingresá</MenuItem>
           </NavLink>
           <NavLink
             to="/Registrate"
-            style={{ textDecoration: "none", color: "blue" }}
+            style={{ textDecoration: "none", color: "black" }}
           >
             <MenuItem onClick={handleMenuClose}>Registrate</MenuItem>
           </NavLink>
@@ -212,7 +173,7 @@ export default function NavBar() {
         style={{ minHeight: "5vh", justifyContent: "center" }}
       >
         <Toolbar>
-          <NavLink to="/" style={{ textDecoration: "none", color: "white" }}>
+        <NavLink to="/" style={{ textDecoration: "none", color: "white" }}>
             <Typography
               variant="h6"
               noWrap
@@ -220,12 +181,12 @@ export default function NavBar() {
               underline="none"
               sx={{ display: { xs: "none", sm: "block" } }}
             >
-              Eduwizard
+              <CustomSpacing> {/* Agrega espaciado */}
+                Eduwizard
+              </CustomSpacing>
             </Typography>
           </NavLink>
-
-          {/* Agregamos un botón en blanco para dejar espacio */}
-          <Button></Button>
+          
 
           <NavLink
             to="/Cursos"

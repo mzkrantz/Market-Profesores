@@ -3,9 +3,16 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { useDropzone } from "react-dropzone";
+
 
 const CambiarDatosForm = ({ initialData, onSubmit }) => {
   const [formData, setFormData] = useState(initialData); // Establece los datos iniciales
+  const handleFileUpload = (acceptedFiles) => {
+    // Manejar la carga de archivos aquí
+    const file = acceptedFiles[0];
+    setFormData({ ...formData, image: file });
+  };
 
   // Actualiza el estado de los datos iniciales cuando cambian las propiedades
   useEffect(() => {
@@ -25,6 +32,10 @@ const CambiarDatosForm = ({ initialData, onSubmit }) => {
     onSubmit(formData);
   };
 
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: "image/*", // Solo permitir archivos de imagen
+    onDrop: handleFileUpload,
+  });
   return (
     <Container>
       <Typography variant="h4" gutterBottom>
@@ -87,6 +98,16 @@ const CambiarDatosForm = ({ initialData, onSubmit }) => {
           fullWidth
           margin="normal"
         />
+        {/* Campo de carga de archivos para la imagen */}
+        <Typography variant="h5" gutterBottom marginTop={'2rem'}>
+        Cambiar Foto de Perfil
+      </Typography>
+        <div {...getRootProps()} style={dropzoneStyle}>
+          <input {...getInputProps()} />
+          <p>
+            Arrastra y suelta una imagen aquí, o haz clic para seleccionar una.
+          </p>
+        </div>
         <Button
           variant="contained"
           color="primary"
@@ -98,6 +119,14 @@ const CambiarDatosForm = ({ initialData, onSubmit }) => {
       </form>
     </Container>
   );
+};
+
+const dropzoneStyle = {
+  border: "2px dashed #ccc",
+  borderRadius: "4px",
+  padding: "20px",
+  textAlign: "center",
+  cursor: "pointer",
 };
 
 export default CambiarDatosForm;

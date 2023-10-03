@@ -1,0 +1,8 @@
+.boton-tabla{
+    min-width: 100% !important;
+}
+
+th {
+    background-color: #f2f2f2;
+    text-align: center !important;
+  }

@@ -14,7 +14,8 @@
       "subjects": ["HTML", "CSS", "JavaScript"],
       "stars": "4.5",
       "type": "Grupal",
-      "teacher": 8
+      "teacher": 8,
+      "published": true
     },
     {
       "id": 2,
@@ -30,7 +31,8 @@
       "subjects": ["Marketing en redes sociales", "SEO", "Publicidad en línea"],
       "stars": "4",
       "type": "Individual",
-      "teacher": 7
+      "teacher": 7,
+      "published": true
     },
     {
       "id": 3,
@@ -50,7 +52,8 @@
       ],
       "stars": "5",
       "type": "Grupal",
-      "teacher": 6
+      "teacher": 6,
+      "published": true
     },
     {
       "id": 4,
@@ -66,7 +69,8 @@
       "subjects": ["Gramática inglesa", "Conversación avanzada", "Vocabulario"],
       "stars": "3",
       "type": "Individual",
-      "teacher": 5
+      "teacher": 5,
+      "published": true
     },
     {
       "id": 5,
@@ -86,7 +90,8 @@
       ],
       "stars": "2",
       "type": "Grupal",
-      "teacher": 4
+      "teacher": 4,
+      "published": true
     },
     {
       "id": 6,
@@ -106,7 +111,8 @@
       ],
       "stars": "4.6",
       "type": "Individual",
-      "teacher": 3
+      "teacher": 3,
+      "published": true
     },
     {
       "id": 7,
@@ -126,7 +132,7 @@
       ],
       "stars": "2.3",
       "type": "Grupal",
-      "teacher": 2
+      "published": true
     },
     {
       "id": 8,
@@ -146,7 +152,8 @@
       ],
       "stars": "4",
       "type": "Individual",
-      "teacher": 1
+      "teacher": 1,
+      "published": true
     },
     {
       "id": 9,
@@ -166,7 +173,8 @@
       ],
       "stars": "5",
       "type": "Individual",
-      "teacher": 9
+      "teacher": 9,
+      "published": true
     }
   ]
 }

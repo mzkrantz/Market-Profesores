@@ -74,16 +74,17 @@ const Perfil = () => {
   };
 
   const handleFormSubmit = (formData) => {
-    // Aquí puedes manejar los nuevos datos del formulario, ya sea enviándolos al servidor o actualizando el estado de la aplicación.
-    // Por ahora, simplemente imprime los nuevos datos en la consola.
-    console.log("Nuevos datos:", formData);
+    // Manejar los nuevos datos del formulario, enviar a backend y actualizar datos del perfil
     setEditing(false); // Cierra el formulario después de enviar los datos
   };
   return (
     <>
       <ProfileContainer>
       {editing ? (
-          <CambiarDatosForm onSubmit={handleFormSubmit} />
+          <CambiarDatosForm
+          initialData={teacherData} // Pasa los datos del perfil como propiedades
+          onSubmit={handleFormSubmit}
+        />
         ) : (
           <>
         <ProfileImage src={teacherData.image} alt={teacherData.name} />

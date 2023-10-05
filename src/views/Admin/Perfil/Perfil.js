@@ -60,9 +60,14 @@ const EditButton = styled(Button)`
 `;
 const Perfil = () => {
   const [editing, setEditing] = useState(false);
+  const [isDialogOpen, setDialogOpen] = useState(false);
 
-  const handleEdit = () => {
-    setEditing(true);
+  const handleOpenDialog = () => {
+    setDialogOpen(true);
+  };
+
+  const handleCloseDialog = () => {
+    setDialogOpen(false);
   };
 
   const handleFormSubmit = (formData) => {
@@ -91,11 +96,20 @@ const Perfil = () => {
               <ProfileInfo>Experiencia: {teacherData.background}</ProfileInfo>
               <ProfileInfo>Descripción: {teacherData.description}</ProfileInfo>
               <ProfileButtonContainer>
-                <EditButton variant="contained" onClick={handleEdit}>
+                <EditButton
+                  variant="contained"
+                  onClick={handleOpenDialog}
+                  open={isDialogOpen}
+                >
                   <EditIcon />
                   Cambiar Datos
                 </EditButton>
               </ProfileButtonContainer>
+              <EditProfileForm
+                open={isDialogOpen}
+                handleClose={handleCloseDialog}
+                teacherData={teacherData}
+              />
             </>
           )}
         </Paper>

@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 
 import MuiAlert from "@mui/material/Alert";
+const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
 export default function EditProfileForm({ open, teacherData, handleClose }) {
   const [isSnackbarOpen, setSnackbarOpen] = useState(false);
@@ -23,6 +24,16 @@ export default function EditProfileForm({ open, teacherData, handleClose }) {
     background: teacherData.background,
   });
 
+  const [errors, setErrors] = useState({
+    name: "",
+    subject: "",
+    age: "",
+    email: "",
+    phone: "",
+    description: "",
+    background: "",
+  });
+
   const handleFormChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -32,14 +43,64 @@ export default function EditProfileForm({ open, teacherData, handleClose }) {
   };
 
   const handleSubmit = () => {
-    // Agregar la lógica de compra
-    setSnackbarOpen(true); // Abre el snackbar
-    handleClose();
+    const newErrors = {};
+
+    if (formData.name.trim() === "") {
+      newErrors.name = "Nombre es obligatorio";
+    }
+    if (formData.subject.trim() === "") {
+      newErrors.subject = "Materia es obligatoria";
+    }
+    if (!/^\d+$/.test(formData.age)) {
+      newErrors.age = "Ingrese un número entero";
+    }
+    if (!emailRegex.test(formData.email)) {
+      newErrors.email = "Ingrese un mail Valido";
+    }
+    if (formData.phone.trim() === "") {
+      newErrors.phone = "Teléfono es obligatorio";
+    }
+    if (formData.description.trim() === "") {
+      newErrors.description = "Descripción es obligatoria";
+    }
+    if (formData.background.trim() === "") {
+      newErrors.background = "Experiencia es obligatoria";
+    }
+
+    setErrors(newErrors);
+
+    if (Object.values(newErrors).every((error) => error === "")) {
+      // Lógica para enviar el formulario
+      setSnackbarOpen(true);
+      handleClose();
+    }
   };
 
-  // Función para cerrar el snackbar
   const handleCloseSnackbar = () => {
     setSnackbarOpen(false);
+  };
+
+  const resetForm = () => {
+    setFormData({
+      name: teacherData.name,
+      subject: teacherData.subject,
+      age: teacherData.age,
+      email: teacherData.email,
+      phone: teacherData.phone,
+      description: teacherData.description,
+      background: teacherData.background,
+    });
+
+    // También debes restablecer los errores a valores iniciales si es necesario
+    setErrors({
+      name: "",
+      subject: "",
+      age: "",
+      email: "",
+      phone: "",
+      description: "",
+      background: "",
+    });
   };
 
   return (
@@ -56,6 +117,7 @@ export default function EditProfileForm({ open, teacherData, handleClose }) {
             onChange={handleFormChange}
             fullWidth
             margin="normal"
+            helperText={<span style={{ color: "#d32f2f" }}>{errors.name}</span>}
           />
           <TextField
             label="Materia"
@@ -64,6 +126,9 @@ export default function EditProfileForm({ open, teacherData, handleClose }) {
             onChange={handleFormChange}
             fullWidth
             margin="normal"
+            helperText={
+              <span style={{ color: "#d32f2f" }}>{errors.subject}</span>
+            }
           />
           <TextField
             label="Edad"
@@ -72,6 +137,7 @@ export default function EditProfileForm({ open, teacherData, handleClose }) {
             onChange={handleFormChange}
             fullWidth
             margin="normal"
+            helperText={<span style={{ color: "#d32f2f" }}>{errors.age}</span>}
           />
           <TextField
             label="Email"
@@ -80,6 +146,9 @@ export default function EditProfileForm({ open, teacherData, handleClose }) {
             onChange={handleFormChange}
             fullWidth
             margin="normal"
+            helperText={
+              <span style={{ color: "#d32f2f" }}>{errors.email}</span>
+            }
           />
           <TextField
             label="Teléfono"
@@ -88,6 +157,9 @@ export default function EditProfileForm({ open, teacherData, handleClose }) {
             onChange={handleFormChange}
             fullWidth
             margin="normal"
+            helperText={
+              <span style={{ color: "#d32f2f" }}>{errors.phone}</span>
+            }
           />
           <TextField
             label="Descripción"
@@ -96,6 +168,9 @@ export default function EditProfileForm({ open, teacherData, handleClose }) {
             onChange={handleFormChange}
             fullWidth
             margin="normal"
+            helperText={
+              <span style={{ color: "#d32f2f" }}>{errors.description}</span>
+            }
           />
           <TextField
             label="Experiencia"
@@ -104,14 +179,15 @@ export default function EditProfileForm({ open, teacherData, handleClose }) {
             onChange={handleFormChange}
             fullWidth
             margin="normal"
+            helperText={
+              <span style={{ color: "#d32f2f" }}>{errors.background}</span>
+            }
           />
           <Button
             variant="contained"
             color="primary"
             style={{ marginBottom: "10px" }}
-            onClick={() => {
-              handleSubmit(formData);
-            }}
+            onClick={handleSubmit}
             fullWidth
           >
             Confirmar cambios
@@ -119,7 +195,10 @@ export default function EditProfileForm({ open, teacherData, handleClose }) {
           <Button
             variant="outlined"
             color="error"
-            onClick={handleClose}
+            onClick={() => {
+              handleClose();
+              resetForm();
+            }}
             fullWidth
           >
             Cancelar cambios
@@ -127,7 +206,6 @@ export default function EditProfileForm({ open, teacherData, handleClose }) {
         </DialogContent>
       </Dialog>
 
-      {/* Snackbar para mostrar el mensaje emergente */}
       <Snackbar
         open={isSnackbarOpen}
         autoHideDuration={3000}

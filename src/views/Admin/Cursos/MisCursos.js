@@ -16,38 +16,40 @@ import EditCursoForm from "../../../componentes/Forms/EditCursoForm";
 // Simulacion datos de cursos del profesor, cargar desde el json? Mock=simulacion
 const mockCourses = [
   {
-    "id": 1,
-    "image": "curso-programacion.jpg",
-    "title": "Desarrollo Web Avanzado",
-    "description": "Domina el desarrollo web con tecnologías modernas.",
-    "duration": "12 semanas",
-    "frequency": "2",
-    "price": "$199.99",
-    "buttonLink": "https://ejemplo.com/curso-desarrollo-web-avanzado",
-    "category": "Desarrollo Web",
-    "extendedDescription": "Domina el desarrollo web con tecnologías modernas y conviértete en un experto en el campo.",
-    "subjects": ["HTML", "CSS", "JavaScript"],
-    "stars": "4.5",
-    "type": "Grupal",
-    "teacher": 8,
-    "published": true
+    id: 1,
+    image: "curso-programacion.jpg",
+    title: "Desarrollo Web Avanzado",
+    description: "Domina el desarrollo web con tecnologías modernas.",
+    duration: "12",
+    frequency: "2",
+    price: "199.99",
+    buttonLink: "https://ejemplo.com/curso-desarrollo-web-avanzado",
+    category: "Desarrollo Web",
+    extendedDescription:
+      "Domina el desarrollo web con tecnologías modernas y conviértete en un experto en el campo.",
+    subjects: ["HTML", "CSS", "JavaScript"],
+    stars: "4.5",
+    type: "Grupal",
+    teacher: 8,
+    published: true,
   },
   {
-    "id": 2,
-    "image": "curso-marketing.jpg",
-    "title": "Marketing Digital Estratégico",
-    "description": "Aprende a crear campañas de marketing efectivas.",
-    "duration": "8 semanas",
-    "frequency": "3",
-    "price": "$149.99",
-    "buttonLink": "https://ejemplo.com/curso-marketing-digital",
-    "category": "Marketing Digital",
-    "extendedDescription": "Aprende a crear campañas de marketing efectivas y maximiza el impacto de tu estrategia.",
-    "subjects": ["Marketing en redes sociales", "SEO", "Publicidad en línea"],
-    "stars": "4",
-    "type": "Individual",
-    "teacher": 7,
-    "published": false
+    id: 2,
+    image: "curso-marketing.jpg",
+    title: "Marketing Digital Estratégico",
+    description: "Aprende a crear campañas de marketing efectivas.",
+    duration: "8",
+    frequency: "3",
+    price: "149.99",
+    buttonLink: "https://ejemplo.com/curso-marketing-digital",
+    category: "Marketing Digital",
+    extendedDescription:
+      "Aprende a crear campañas de marketing efectivas y maximiza el impacto de tu estrategia.",
+    subjects: ["Marketing en redes sociales", "SEO", "Publicidad en línea"],
+    stars: "4",
+    type: "Individual",
+    teacher: 7,
+    published: false,
   },
 ];
 
@@ -70,7 +72,6 @@ const ResponsiveTable = styled(Table)`
       flex-direction: column;
       text-align: center; /* Alinear el texto a la izquierda */
       margin-bottom: 10px; /* Agregar un espacio entre las celdas */
-      
     }
 
     td {

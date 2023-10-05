@@ -36,7 +36,9 @@ function CardCurso(props) {
             {description}
           </Typography>
           <Typography variant="body2" gutterBottom color="text.secondary">
-            {frequency} veces por semana
+            {frequency === "1"
+              ? "1 vez por semana"
+              : `${frequency} veces por semana`}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             Tipo: {type}
@@ -45,7 +47,7 @@ function CardCurso(props) {
         <div className="infoBox2">
           <RatingStars rating={parseFloat(stars)} />
           <Typography variant="h6" color="text.secondary">
-            Precio: {price}
+            Precio: ${price}
           </Typography>
 
           <Link

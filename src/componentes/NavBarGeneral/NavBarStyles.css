@@ -1,0 +1,49 @@
+/* Navbar container */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: #333;
+}
+
+.navbar-toolbar {
+  display: flex;
+  width: 95%;
+  align-self: center;
+  justify-content: space-between;
+}
+
+/* Logo y título */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+}
+
+.navbar-title {
+  margin-left: 20px;
+}
+
+/* Botones de navegación */
+.button-holder {
+  display: flex;
+  align-items: center;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  min-height: 50px; /* Establece una altura mínima del 100% */
+}
+
+.navbar-button {
+  text-decoration: none;
+  color: white;
+  margin-right: 10px;
+}
+
+/* Avatar */
+.navbar-avatar {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  font-size: 16px;
+  justify-self: flex-end;
+}

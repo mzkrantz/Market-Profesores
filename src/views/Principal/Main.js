@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import { styled } from "@mui/system";
 import Grid from "@mui/material/Grid";
 import { Link } from "react-router-dom";
+import LogoWizard from "../../componentes/LogoWizard/LogoWizard";
 
 /* Estilos de la pagina principal */
 /* Cambiar imagen de fondo */
@@ -106,8 +107,13 @@ const TestimonialText = styled(Typography)`
 function Main() {
   return (
     <>
+            <LogoWizard
+              width={300}
+              height={300}
+            />
       <Hero>
         <Container>
+
           <HeroTitle variant="h1">Bienvenido a EDUWIZARD</HeroTitle>
           <HeroText variant="body1">
             Como expertos en la educación, ofrecemos clases particulares de

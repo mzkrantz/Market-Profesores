@@ -4,7 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import ContactModal from "../ContactModal/ContactModal";
+import ContactModal from "../Forms/ContactForm";
 import BasicModal from "../Modal/ModalProfesor";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -12,14 +12,14 @@ import "./CardStyles.css";
 
 export default function CardProfesor(props) {
   const { image, name, description } = props;
-  const [openModal, setOpenModal] = useState(false);
+  const [isDialogOpen, setDialogOpen] = useState(false);
 
-  const handleOpenModal = () => {
-    setOpenModal(true);
+  const handleOpenDialog = () => {
+    setDialogOpen(true);
   };
 
-  const handleCloseModal = () => {
-    setOpenModal(false);
+  const handleCloseDialog = () => {
+    setDialogOpen(false);
   };
 
   return (
@@ -60,7 +60,8 @@ export default function CardProfesor(props) {
               <Button
                 variant="contained"
                 color="primary"
-                onClick={handleOpenModal}               
+                onClick={handleOpenDialog}
+                open={isDialogOpen}             
                 className="card-modal"
                 style={{ maxWidth: "100%" }} 
               >
@@ -80,8 +81,8 @@ export default function CardProfesor(props) {
         </Grid>
       </div>
       <ContactModal
-        open={openModal}
-        onClose={handleCloseModal}
+        open={isDialogOpen}
+        handleClose={handleCloseDialog}
         professorName={name}
       />
     </Card>

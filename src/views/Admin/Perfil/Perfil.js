@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
+import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
+import EditIcon from "@mui/icons-material/Edit";
+import Avatar from "@mui/material/Avatar";
+import Grid from "@mui/material/Grid";
+import EditProfileForm from "./EditProfileForm";
 import { styled } from "@mui/system";
-import CambiarDatosForm from "./CambiarDatosForm"; // Asegúrate de proporcionar la ruta correcta
 
-
-// Datos del profesor (reemplazar con los datos reales) - Recuperacion de datos del JSON + Relacion usuario logueado - profesor - cursos
 const teacherData = {
   name: "Ana Martínez",
   subject: "Cocina",
@@ -20,57 +22,52 @@ const teacherData = {
     "Carrera en Gastronomía y experiencia en restaurantes de renombre.",
 };
 
-//Estilos
 const ProfileContainer = styled(Container)`
-  margin-top: ${({ theme }) => theme.spacing(4)};
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
+  padding: 32px;
 `;
 
-const ProfileImage = styled("img")`
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  margin-bottom: ${({ theme }) => theme.spacing(2)};
-  border: 5px solid #007bff;
+const ProfileImage = styled(Avatar)`
+  width: 150px;
+  height: 150px;
 `;
 
 const ProfileTitle = styled(Typography)`
-  font-size: 2.5rem;
-  margin-bottom: ${({ theme }) => theme.spacing(1)};
+  font-size: 2rem;
+  margin-top: 16px;
 `;
 
 const ProfileSubtitle = styled(Typography)`
   font-size: 1.5rem;
   color: #666;
-  margin-bottom: ${({ theme }) => theme.spacing(3)};
 `;
 
-const ProfileText = styled(Typography)`
+const ProfileInfo = styled(Typography)`
   font-size: 1.25rem;
-  margin-bottom: ${({ theme }) => theme.spacing(2)};
+  margin: 8px 0;
 `;
 
-const ProfileButton = styled(Button)`
-  font-size: 1.25rem;
-  padding: ${({ theme }) => theme.spacing(1.5, 4)};
-  background: #007bff;
-  color: #fff;
-  text-decoration: none;
-  border-radius: ${({ theme }) => theme.spacing(1)};
-  transition: background-color 0.3s ease;
-  &:hover {
-    background: #0056b3;
-  }
+const ProfileButtonContainer = styled(Grid)`
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
 `;
 
+const EditButton = styled(Button)`
+  margin-top: 20px;
+`;
 const Perfil = () => {
   const [editing, setEditing] = useState(false);
+  const [isDialogOpen, setDialogOpen] = useState(false);
 
-  const handleEdit = () => {
-    setEditing(true);
+  const handleOpenDialog = () => {
+    setDialogOpen(true);
+  };
+
+  const handleCloseDialog = () => {
+    setDialogOpen(false);
   };
 
   const handleFormSubmit = (formData) => {
@@ -80,26 +77,42 @@ const Perfil = () => {
   return (
     <>
       <ProfileContainer>
-      {editing ? (
-          <CambiarDatosForm
-          initialData={teacherData} // Pasa los datos del perfil como propiedades
-          onSubmit={handleFormSubmit}
-        />
-        ) : (
-          <>
-        <ProfileImage src={teacherData.image} alt={teacherData.name} />
-        <ProfileTitle variant="h1">{teacherData.name}</ProfileTitle>
-        <ProfileSubtitle variant="h2">{teacherData.subject}</ProfileSubtitle>
-        <ProfileText>{teacherData.age} años</ProfileText>
-        <ProfileText>Email: {teacherData.email}</ProfileText>
-        <ProfileText>Teléfono: {teacherData.phone}</ProfileText>
-        <ProfileText>Experiencia: {teacherData.background}</ProfileText>
-        <ProfileText>Descripción: {teacherData.description}</ProfileText>
-        <ProfileButton variant="contained" onClick={handleEdit}>
-              Cambiar Datos
-            </ProfileButton>
-          </>
-        )}
+        <Paper elevation={3} style={{ padding: "32px" }}>
+          {editing ? (
+            <EditProfileForm
+              initialData={teacherData} // Pasa los datos del perfil como propiedades
+              onSubmit={handleFormSubmit}
+            />
+          ) : (
+            <>
+              <ProfileImage src={teacherData.image} alt={teacherData.name} />
+              <ProfileTitle variant="h1">{teacherData.name}</ProfileTitle>
+              <ProfileSubtitle variant="h2">
+                {teacherData.subject}
+              </ProfileSubtitle>
+              <ProfileInfo>{teacherData.age} años</ProfileInfo>
+              <ProfileInfo>Email: {teacherData.email}</ProfileInfo>
+              <ProfileInfo>Teléfono: {teacherData.phone}</ProfileInfo>
+              <ProfileInfo>Experiencia: {teacherData.background}</ProfileInfo>
+              <ProfileInfo>Descripción: {teacherData.description}</ProfileInfo>
+              <ProfileButtonContainer>
+                <EditButton
+                  variant="contained"
+                  onClick={handleOpenDialog}
+                  open={isDialogOpen}
+                >
+                  <EditIcon />
+                  Cambiar Datos
+                </EditButton>
+              </ProfileButtonContainer>
+              <EditProfileForm
+                open={isDialogOpen}
+                handleClose={handleCloseDialog}
+                teacherData={teacherData}
+              />
+            </>
+          )}
+        </Paper>
       </ProfileContainer>
     </>
   );

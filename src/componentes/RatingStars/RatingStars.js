@@ -20,7 +20,7 @@ function RatingStars({ rating }) {
     }
   }
 
-  return <div>{stars}</div>;
+  return <div style={{display:'flex', justifyContent:'center'}}>{stars}</div>;
 }
 
 export default RatingStars;

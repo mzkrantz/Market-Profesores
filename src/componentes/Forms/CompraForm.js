@@ -6,15 +6,18 @@ import {
   TextField,
   Button,
   Snackbar,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
 } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
-
 
 export default function CompraForm({ open, handleClose }) {
   const [nombre, setNombre] = useState("");
   const [telefono, setTelefono] = useState("");
   const [mail, setMail] = useState("");
-  const [horario, setHorario] = useState("");
+  const [horario, setHorario] = useState("Cualquiera"); // Valor por defecto "Mañana"
   const [mensaje, setMensaje] = useState("");
   const [isSnackbarOpen, setSnackbarOpen] = useState(false);
 
@@ -58,14 +61,25 @@ export default function CompraForm({ open, handleClose }) {
             value={mail}
             onChange={(e) => setMail(e.target.value)}
           />
-          <TextField
-            label="Horario de Preferencia"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            value={horario}
-            onChange={(e) => setHorario(e.target.value)}
-          />
+
+          <FormControl margin="normal" variant="outlined" fullWidth>
+            <InputLabel id="horario-preferencia">
+              Horario de Preferencia
+            </InputLabel>
+            <Select
+              label="Horario de Preferencia"
+              fullWidth
+              margin="normal"
+              value={horario}
+              onChange={(e) => setHorario(e.target.value)}
+            >
+              <MenuItem value={"Cualquiera"}>Cualquiera</MenuItem>
+              <MenuItem value="Mañana">Mañana</MenuItem>
+              <MenuItem value="Tarde">Tarde</MenuItem>
+              <MenuItem value="Noche">Noche</MenuItem>
+            </Select>
+          </FormControl>
+
           <TextField
             label="Mensaje al Proveedor"
             variant="outlined"

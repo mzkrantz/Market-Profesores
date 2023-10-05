@@ -9,7 +9,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { styled } from "@mui/system";
-import "./MisCursosStyles.css";
+import "../TableStyles.css";
 import SpacerTop from "../../../componentes/Spacer/SpacerTop";
 import EditCursoForm from "../../../componentes/Forms/EditCursoForm";
 
@@ -129,7 +129,7 @@ const MisCursos = () => {
               <TableRow>
                 <TableCell>Curso</TableCell>
                 <TableCell>Descripción</TableCell>
-                <TableCell>Publicado</TableCell>
+                <TableCell>Estado</TableCell>
                 <TableCell>Acciones</TableCell>
               </TableRow>
             </TableHead>

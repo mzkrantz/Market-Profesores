@@ -9,40 +9,38 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { styled } from "@mui/system";
-import PopupUserInfo from "../../../componentes/Popup/PopupUserInfo";
+import PopupCommentInfo from "../../../componentes/Popup/PopupCommentInfo";
 import ModalCustom from "../../../componentes/Modal/ModalCustom";
 import SpacerTop from "../../../componentes/Spacer/SpacerTop";
-
+import RatingStars from "../../../componentes/RatingStars/RatingStars";
+import "../TableStyles.css";
 
 const mockComments = [
   {
     id: 1,
     title: "Curso de Desarrollo Web",
-    published: true,
     user: {
       id: 1,
-      nombre: "Juan",
-      apellido: "Perez",
+      nombre: "Juan Perez",
       telefono: "123-456-7890",
       mail: "juan@example.com",
       horario: "Tarde",
       mensaje: "Este curso es genial, lo recomiendo completamente.",
-      score: 3
+      score: 3,
     },
   },
   {
     id: 2,
     title: "Curso de Marketing Digital",
-    published: false,
     user: {
       id: 2,
-      nombre: "María",
+      nombre: "María Gonzalez",
       apellido: "González",
       telefono: "987-654-3210",
       mail: "maria@example.com",
       horario: "Mañana",
       mensaje: "Estoy interesada en este curso. ¿Cómo puedo inscribirme?",
-      score: 2
+      score: 2,
     },
   },
 ];
@@ -54,7 +52,7 @@ const CommentList = styled(TableContainer)`
 `;
 
 const ResponsiveTable = styled(Table)`
-@media (max-width: 600px) {
+  @media (max-width: 600px) {
     font-size: 12px; // Reducir el tamaño del texto en las celdas para pantallas pequeñas
     table {
       width: 100%; /* Asegurar que la tabla ocupe todo el ancho disponible */
@@ -66,7 +64,6 @@ const ResponsiveTable = styled(Table)`
       flex-direction: column;
       text-align: center; /* Alinear el texto a la izquierda */
       margin-bottom: 10px; /* Agregar un espacio entre las celdas */
-      
     }
 
     td {
@@ -103,7 +100,7 @@ const Comentarios = () => {
   return (
     <>
       <Container>
-      <SpacerTop>
+        <SpacerTop>
           <Typography variant="h4" component="h1" gutterBottom>
             Comentarios
           </Typography>
@@ -112,19 +109,19 @@ const Comentarios = () => {
           <ResponsiveTable>
             <TableHead>
               <TableRow>
-              <TableCell>Usuario</TableCell>
                 <TableCell>Curso</TableCell>
-                <TableCell>Publicado</TableCell>
+                <TableCell>Usuario</TableCell>
+                <TableCell>Puntaje</TableCell>
                 <TableCell>Acciones</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {mockComments.map((comment) => (
                 <TableRow key={comment.id}>
-                <TableCell>{comment.user.nombre + " " + comment.user.apellido}</TableCell>
                   <TableCell>{comment.title}</TableCell>
+                  <TableCell>{comment.user.nombre}</TableCell>
                   <TableCell>
-                    {comment.published ? "Publicado" : "No Publicado"}
+                    <RatingStars rating={parseFloat(comment.user.score)} />
                   </TableCell>
                   <TableCell>
                     <Button
@@ -134,11 +131,24 @@ const Comentarios = () => {
                     >
                       Ver
                     </Button>
-                    <Button className="boton-tabla" variant="outlined">
-                      Bloquear
-                    </Button>
-                    <Button className="boton-tabla" variant="outlined">
+                    <Button
+                      className="boton-tabla"
+                      variant="outlined"
+                      onClick={() => {
+                        alert("Implementar la lógica de Aceptado");
+                      }}
+                    >
                       Aceptar
+                    </Button>
+                    <Button
+                      className="boton-tabla"
+                      variant="outlined"
+                      color="error"
+                      onClick={() => {
+                        alert("Implementar la lógica de Bloqueo");
+                      }}
+                    >
+                      Bloquear
                     </Button>
                   </TableCell>
                 </TableRow>
@@ -149,7 +159,7 @@ const Comentarios = () => {
       </Container>
       {isPopupOpen && (
         <ModalCustom open={isCommentModalOpen} onClose={closeCommentModal}>
-          <PopupUserInfo
+          <PopupCommentInfo
             user={selectedUser}
             onClose={() => setIsPopupOpen(false)}
           />
@@ -157,6 +167,5 @@ const Comentarios = () => {
       )}
     </>
   );
-}
+};
 export default Comentarios;
-;

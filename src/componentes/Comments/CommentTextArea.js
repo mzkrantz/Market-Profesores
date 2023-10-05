@@ -7,22 +7,29 @@ import TextareaAutosize from "@mui/material/TextareaAutosize";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import RatingStarsDynamic from "../RatingStars/RatingStarsDynamic";
+import TextField from "@mui/material/TextField";
 
 export default function CommentTextArea({ handleClose }) {
-  const [comment, setComment] = React.useState("");
-  const maxCharacters = 100; // Define límite máximo de caracteres
+  const [name, setName] = useState(""); // Estado para el nombre
+  const [comment, setComment] = useState("");
+  const [rating, setRating] = useState(0);
+  const maxCharacters = 100;
   const [isSnackbarOpen, setSnackbarOpen] = useState(false);
+  const [isErrorSnackbarOpen, setErrorSnackbarOpen] = useState(false);
 
   const handleSubmit = () => {
-    // Lógica de envío de comentario
-    // Después de enviar el comentario, abre el Snackbar
-    setSnackbarOpen(true);
-    handleClose();
+    if (name.trim() !== "" && comment.trim() !== "") {
+      // Agregar la lógica para enviar el comentario
+      setSnackbarOpen(true);
+      handleClose();
+    } else {
+      setErrorSnackbarOpen(true); // Mostrar alerta de error si no se cumplen las condiciones
+    }
   };
 
-  // Función para cerrar el snackbar
   const handleCloseSnackbar = () => {
     setSnackbarOpen(false);
+    setErrorSnackbarOpen(false);
   };
 
   const handleChange = (event) => {
@@ -46,7 +53,18 @@ export default function CommentTextArea({ handleClose }) {
         >
           Deja un Comentario
         </FormLabel>
-        <RatingStarsDynamic />
+        <TextField
+          name="name"
+          label="Nombre"
+          variant="outlined"
+          margin="normal"
+          value={name}
+          onChange={(e) => setName(e.target.value)} // Actualizar el estado del nombre
+        />
+        <RatingStarsDynamic
+          rating={rating}
+          setRating={setRating} // Pasar el estado del puntaje y la función para actualizarlo
+        />
         <TextareaAutosize
           placeholder="Escribe algo aquí..."
           minRows={8}
@@ -101,6 +119,22 @@ export default function CommentTextArea({ handleClose }) {
           onClose={handleCloseSnackbar}
         >
           Comentario enviado correctamente
+        </MuiAlert>
+      </Snackbar>
+
+      {/* Snackbar para mostrar el mensaje de error */}
+      <Snackbar
+        open={isErrorSnackbarOpen}
+        autoHideDuration={3000}
+        onClose={handleCloseSnackbar}
+      >
+        <MuiAlert
+          elevation={6}
+          variant="filled"
+          severity="error"
+          onClose={handleCloseSnackbar}
+        >
+          Por favor, complete todos los campos y seleccione un puntaje.
         </MuiAlert>
       </Snackbar>
     </FormControl>

@@ -19,10 +19,6 @@ const PopupUserInfo = ({ user }) => {
           <span className="user-info-value">{user.mail}</span>
         </div>
         <div className="user-info-item">
-          <span className="user-info-label">Horario de Preferencia:</span>
-          <span className="user-info-value">{user.horario}</span>
-        </div>
-        <div className="user-info-item">
           <span className="user-info-label">Mensaje:</span>
           <span className="user-info-value">{user.mensaje}</span>
         </div>

@@ -1,11 +1,10 @@
 import * as React from "react";
-import { styled, alpha } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Button from "@mui/material/Button";
@@ -93,11 +92,11 @@ export default function NavBar() {
             </MenuItem>
           </Link>
           <Link
-            to="/Mensajes"
+            to="/Solicitudes"
             style={{ textDecoration: "none", color: "black" }}
           >
             <MenuItem style={{ textDecoration: "none", color: "none"}}>
-              Mensajes
+              Solicitudes
             </MenuItem>
           </Link>
           <Link

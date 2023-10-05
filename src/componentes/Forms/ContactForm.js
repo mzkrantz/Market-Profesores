@@ -1,11 +1,19 @@
 import React, { useState } from "react";
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  TextField,
+  Button,
+  Snackbar,
+  Typography
+} from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
 
-const ContactModal = ({ open, onClose, professorName, handleSubmit }) => {
+
+export default function ContactForm({ open, professorName, handleClose }) {
+  const [isSnackbarOpen, setSnackbarOpen] = useState(false);
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -22,32 +30,23 @@ const ContactModal = ({ open, onClose, professorName, handleSubmit }) => {
     });
   };
 
-  const handleCloseModal = () => {
-    setFormData({
-      firstName: "",
-      lastName: "",
-      phone: "",
-      email: "",
-      message: "",
-    });
-    onClose();
+
+  const handleSubmit = () => {
+    // Agregar la lógica de compra
+    setSnackbarOpen(true); // Abre el snackbar
+    handleClose();
+  };
+
+  // Función para cerrar el snackbar
+  const handleCloseSnackbar = () => {
+    setSnackbarOpen(false);
   };
 
   return (
-    <Modal open={open} onClose={handleCloseModal}>
-      <Box
-        sx={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: 400,
-          bgcolor: "background.paper",
-          border: "2px solid #000",
-          boxShadow: 24,
-          p: 4,
-        }}
-      >
+    <div>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Formulario de Compra</DialogTitle>
+        <DialogContent>
         <Typography variant="h6" gutterBottom>
           Contactar a {professorName}
         </Typography>
@@ -55,6 +54,7 @@ const ContactModal = ({ open, onClose, professorName, handleSubmit }) => {
           name="firstName"
           label="Nombre"
           variant="outlined"
+          margin="normal"
           fullWidth
           onChange={handleFormChange}
           value={formData.firstName}
@@ -63,6 +63,7 @@ const ContactModal = ({ open, onClose, professorName, handleSubmit }) => {
           name="lastName"
           label="Apellido"
           variant="outlined"
+          margin="normal"
           fullWidth
           onChange={handleFormChange}
           value={formData.lastName}
@@ -71,6 +72,7 @@ const ContactModal = ({ open, onClose, professorName, handleSubmit }) => {
           name="phone"
           label="Teléfono"
           variant="outlined"
+          margin="normal"
           fullWidth
           onChange={handleFormChange}
           value={formData.phone}
@@ -79,6 +81,7 @@ const ContactModal = ({ open, onClose, professorName, handleSubmit }) => {
           name="email"
           label="Correo Electrónico"
           variant="outlined"
+          margin="normal"
           fullWidth
           onChange={handleFormChange}
           value={formData.email}
@@ -89,6 +92,7 @@ const ContactModal = ({ open, onClose, professorName, handleSubmit }) => {
           multiline
           rows={4}
           variant="outlined"
+          margin="normal"
           fullWidth
           onChange={handleFormChange}
           value={formData.message}
@@ -98,15 +102,29 @@ const ContactModal = ({ open, onClose, professorName, handleSubmit }) => {
           color="primary"
           onClick={() => {
             handleSubmit(formData);
-            handleCloseModal();
           }}
           fullWidth
         >
           Enviar
         </Button>
-      </Box>
-    </Modal>
+        </DialogContent>
+      </Dialog>
+
+      {/* Snackbar para mostrar el mensaje emergente */}
+      <Snackbar
+        open={isSnackbarOpen}
+        autoHideDuration={3000}
+        onClose={handleCloseSnackbar}
+      >
+        <MuiAlert
+          elevation={6}
+          variant="filled"
+          severity="success"
+          onClose={handleCloseSnackbar}
+        >
+          Solicitud enviada correctamente
+        </MuiAlert>
+      </Snackbar>
+    </div>
   );
 };
-
-export default ContactModal;

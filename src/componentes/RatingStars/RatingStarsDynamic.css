@@ -1,16 +1,16 @@
-/* RatingStars.css */
+/* RatingStarsDynamic.css */
 .star {
-    font-size: 2rem; /* Tamaño de las estrellas */
-    vertical-align: middle; /* Alinea las estrellas verticalmente */
-    color: #ed6c02 !important; /* Establece el color de las estrellas en amarillo */
-  }
-  
-  .rating-container {
-    display: flex;
-    align-items: center; /* Alinea los elementos verticalmente en el centro */
-  }
-  
-  /* Estilos para pantallas pequeñas (menos de 500px de ancho) */
+  font-size: 2rem; /* Tamaño de las estrellas */
+  vertical-align: middle; /* Alinea las estrellas verticalmente */
+  color: #ed6c02 !important; /* Establece el color de las estrellas en amarillo */
+}
+
+.rating-container {
+  display: flex;
+  align-items: center; /* Alinea los elementos verticalmente en el centro */
+}
+
+/* Estilos para pantallas pequeñas (menos de 500px de ancho) */
 @media (max-width: 500px) {
   .star {
     font-size: 1.5rem; /* Reduce el tamaño de las estrellas para pantallas pequeñas */
@@ -22,4 +22,12 @@
     justify-content: center;
   }
 
+}
+
+/* Nuevos estilos para centrar verticalmente en pantallas más grandes */
+@media (min-width: 501px) {
+  .rating-container {
+    height: 100%; /* Establece la altura al 100% del contenedor padre */
+    justify-content: center; /* Centra verticalmente */
+  }
 }

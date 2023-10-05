@@ -12,7 +12,7 @@ import { styled } from "@mui/system";
 import PopupUserInfo from "../../../componentes/Popup/PopupUserInfo";
 import ModalCustom from "../../../componentes/Modal/ModalCustom";
 import SpacerTop from "../../../componentes/Spacer/SpacerTop";
-
+import "../TableStyles.css";
 
 const mockComments = [
   {
@@ -27,7 +27,7 @@ const mockComments = [
       mail: "juan@example.com",
       horario: "Tarde",
       mensaje: "Este curso es genial, lo recomiendo completamente.",
-      score: 3
+      score: 3,
     },
   },
   {
@@ -42,7 +42,7 @@ const mockComments = [
       mail: "maria@example.com",
       horario: "Mañana",
       mensaje: "Estoy interesada en este curso. ¿Cómo puedo inscribirme?",
-      score: 2
+      score: 2,
     },
   },
 ];
@@ -54,7 +54,7 @@ const CommentList = styled(TableContainer)`
 `;
 
 const ResponsiveTable = styled(Table)`
-@media (max-width: 600px) {
+  @media (max-width: 600px) {
     font-size: 12px; // Reducir el tamaño del texto en las celdas para pantallas pequeñas
     table {
       width: 100%; /* Asegurar que la tabla ocupe todo el ancho disponible */
@@ -66,7 +66,6 @@ const ResponsiveTable = styled(Table)`
       flex-direction: column;
       text-align: center; /* Alinear el texto a la izquierda */
       margin-bottom: 10px; /* Agregar un espacio entre las celdas */
-      
     }
 
     td {
@@ -103,7 +102,7 @@ const Comentarios = () => {
   return (
     <>
       <Container>
-      <SpacerTop>
+        <SpacerTop>
           <Typography variant="h4" component="h1" gutterBottom>
             Comentarios
           </Typography>
@@ -112,8 +111,8 @@ const Comentarios = () => {
           <ResponsiveTable>
             <TableHead>
               <TableRow>
-              <TableCell>Usuario</TableCell>
                 <TableCell>Curso</TableCell>
+                <TableCell>Usuario</TableCell>
                 <TableCell>Publicado</TableCell>
                 <TableCell>Acciones</TableCell>
               </TableRow>
@@ -121,8 +120,10 @@ const Comentarios = () => {
             <TableBody>
               {mockComments.map((comment) => (
                 <TableRow key={comment.id}>
-                <TableCell>{comment.user.nombre + " " + comment.user.apellido}</TableCell>
                   <TableCell>{comment.title}</TableCell>
+                  <TableCell>
+                    {comment.user.nombre + " " + comment.user.apellido}
+                  </TableCell>
                   <TableCell>
                     {comment.published ? "Publicado" : "No Publicado"}
                   </TableCell>
@@ -134,11 +135,24 @@ const Comentarios = () => {
                     >
                       Ver
                     </Button>
-                    <Button className="boton-tabla" variant="outlined">
-                      Bloquear
-                    </Button>
-                    <Button className="boton-tabla" variant="outlined">
+                    <Button
+                      className="boton-tabla"
+                      variant="outlined"
+                      onClick={() => {
+                        alert("Implementar la lógica de Aceptado");
+                      }}
+                    >
                       Aceptar
+                    </Button>
+                    <Button
+                      className="boton-tabla"
+                      variant="outlined"
+                      color="error"
+                      onClick={() => {
+                        alert("Implementar la lógica de Bloqueo");
+                      }}
+                    >
+                      Bloquear
                     </Button>
                   </TableCell>
                 </TableRow>
@@ -157,6 +171,5 @@ const Comentarios = () => {
       )}
     </>
   );
-}
+};
 export default Comentarios;
-;

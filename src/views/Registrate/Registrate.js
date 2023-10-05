@@ -9,23 +9,72 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-/* Imports que podrian ser utiles en un futuro
-
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-*/
-
 
 const defaultTheme = createTheme();
 
 export default function Registrate() {
+  const [formData, setFormData] = React.useState({
+    nombre: "",
+    apellido: "",
+    email: "",
+    phone: "",
+    password: "",
+  });
+
+  const [formErrors, setFormErrors] = React.useState({
+    nombre: "",
+    apellido: "",
+    email: "",
+    phone: "",
+    password: "",
+  });
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
+    if (validateForm()) {
+      console.log(formData);
+      // Aquí puedes enviar los datos del formulario al servidor o realizar otras acciones.
+    }
+  };
+
+  const validateForm = () => {
+    const errors = {};
+    let isValid = true;
+
+    if (formData.nombre.trim() === "") {
+      errors.nombre = "El nombre es obligatorio.";
+      isValid = false;
+    }
+
+    if (formData.apellido.trim() === "") {
+      errors.apellido = "El apellido es obligatorio.";
+      isValid = false;
+    }
+
+    if (!formData.email.match(/^\S+@\S+\.\S+$/)) {
+      errors.email = "El correo electrónico no es válido.";
+      isValid = false;
+    }
+
+    if (!formData.phone.match(/^\d+$/)) {
+      errors.phone = "El teléfono debe contener solo números.";
+      isValid = false;
+    }
+
+    if (formData.password.length < 8) {
+      errors.password = "La contraseña debe tener al menos 8 caracteres.";
+      isValid = false;
+    }
+
+    setFormErrors(errors);
+    return isValid;
+  };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
     });
   };
 
@@ -47,7 +96,7 @@ export default function Registrate() {
                 <LockOutlinedIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
-                Registrate en EduWizard
+                Regístrate en EduWizard
               </Typography>
               <Box
                 component="form"
@@ -65,6 +114,9 @@ export default function Registrate() {
                       id="nombre"
                       label="Nombre"
                       autoFocus
+                      value={formData.nombre}
+                      onChange={handleInputChange}
+                      helperText={<span style={{ color: "#d32f2f" }}>{formErrors.nombre}</span>}
                     />
                   </Grid>
                   <Grid item xs={12} sm={6}>
@@ -75,6 +127,9 @@ export default function Registrate() {
                       label="Apellido"
                       name="apellido"
                       autoComplete="family-name"
+                      value={formData.apellido}
+                      onChange={handleInputChange}
+                      helperText={<span style={{ color: "#d32f2f" }}>{formErrors.apellido}</span>}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -85,6 +140,9 @@ export default function Registrate() {
                       label="Email"
                       name="email"
                       autoComplete="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      helperText={<span style={{ color: "#d32f2f" }}>{formErrors.email}</span>}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -92,9 +150,12 @@ export default function Registrate() {
                       required
                       fullWidth
                       id="phone"
-                      label="Telefono"
+                      label="Teléfono"
                       name="phone"
                       autoComplete="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      helperText={<span style={{ color: "#d32f2f" }}>{formErrors.phone}</span>}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -102,10 +163,13 @@ export default function Registrate() {
                       required
                       fullWidth
                       name="password"
-                      label="Password"
+                      label="Contraseña"
                       type="password"
                       id="password"
                       autoComplete="new-password"
+                      value={formData.password}
+                      onChange={handleInputChange}
+                      helperText={<span style={{ color: "#d32f2f" }}>{formErrors.password}</span>}
                     />
                   </Grid>
                 </Grid>
@@ -115,7 +179,7 @@ export default function Registrate() {
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
                 >
-                  Registrate
+                  Regístrate
                 </Button>
                 <Grid container justifyContent="flex-end">
                   <Grid item></Grid>

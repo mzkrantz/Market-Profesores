@@ -9,44 +9,37 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { styled } from "@mui/system";
-import PopupCommentInfo from "../../../componentes/Popup/PopupCommentInfo";
+import PopupUserInfo from "../../../componentes/Popup/PopupUserInfo";
 import ModalCustom from "../../../componentes/Modal/ModalCustom";
 import SpacerTop from "../../../componentes/Spacer/SpacerTop";
 import "../TableStyles.css";
 
-const mockComments = [
+const mockSolicitudes = [
   {
     id: 1,
     title: "Curso de Desarrollo Web",
-    published: true,
-    user: {
-      id: 1,
-      nombre: "Juan",
-      apellido: "Perez",
-      telefono: "123-456-7890",
+    solicitud: {
+      status: "Finalizada",
+      nombre: "Juan Perez",
+      telefono: "123456789",
       mail: "juan@example.com",
       horario: "Tarde",
-      mensaje: "Este curso es genial, lo recomiendo completamente.",
-      score: 3,
+      mensaje: "Estoy interesado en tus cursos, ¿cómo puedo inscribirme?",
     },
   },
   {
     id: 2,
     title: "Curso de Marketing Digital",
-    published: false,
-    user: {
-      id: 2,
-      nombre: "María",
-      apellido: "González",
-      telefono: "987-654-3210",
+    solicitud: {
+      status: "Solicitada",
+      nombre: "María Perez",
+      telefono: "123456789",
       mail: "maria@example.com",
       horario: "Mañana",
-      mensaje: "Estoy interesada en este curso. ¿Cómo puedo inscribirme?",
-      score: 2,
+      mensaje: "¿Puedes proporcionarme más información sobre los cursos?",
     },
   },
 ];
-
 const CommentList = styled(TableContainer)`
   margin-top: ${({ theme }) => theme.spacing(2)};
   overflow-x: auto;
@@ -82,7 +75,7 @@ const ResponsiveTable = styled(Table)`
   }
 `;
 
-const Comentarios = () => {
+const Solicitudes = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
@@ -104,7 +97,7 @@ const Comentarios = () => {
       <Container>
         <SpacerTop>
           <Typography variant="h4" component="h1" gutterBottom>
-            Comentarios
+            Solicitudes
           </Typography>
         </SpacerTop>
         <CommentList component={TableContainer}>
@@ -113,25 +106,27 @@ const Comentarios = () => {
               <TableRow>
                 <TableCell>Curso</TableCell>
                 <TableCell>Usuario</TableCell>
-                <TableCell>Publicado</TableCell>
+                <TableCell>Estado</TableCell>
                 <TableCell>Acciones</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {mockComments.map((comment) => (
-                <TableRow key={comment.id}>
-                  <TableCell>{comment.title}</TableCell>
+              {mockSolicitudes.map((curso) => (
+                <TableRow key={curso.id}>
+                  <TableCell>{curso.title}</TableCell>
                   <TableCell>
-                    {comment.user.nombre + " " + comment.user.apellido}
+                    {curso.solicitud.nombre}
                   </TableCell>
                   <TableCell>
-                    {comment.published ? "Publicado" : "No Publicado"}
+                    {curso.solicitud.status}
                   </TableCell>
                   <TableCell>
                     <Button
                       className="boton-tabla"
                       variant="outlined"
-                      onClick={() => openCommentModal(openPopup(comment.user))}
+                      onClick={() =>
+                        openCommentModal(openPopup(curso.solicitud))
+                      }
                     >
                       Ver
                     </Button>
@@ -149,10 +144,10 @@ const Comentarios = () => {
                       variant="outlined"
                       color="error"
                       onClick={() => {
-                        alert("Implementar la lógica de Bloqueo");
+                        alert("Implementar la lógica de Cancelacion");
                       }}
                     >
-                      Bloquear
+                      Rechazar
                     </Button>
                   </TableCell>
                 </TableRow>
@@ -163,7 +158,7 @@ const Comentarios = () => {
       </Container>
       {isPopupOpen && (
         <ModalCustom open={isCommentModalOpen} onClose={closeCommentModal}>
-          <PopupCommentInfo
+          <PopupUserInfo
             user={selectedUser}
             onClose={() => setIsPopupOpen(false)}
           />
@@ -172,4 +167,5 @@ const Comentarios = () => {
     </>
   );
 };
-export default Comentarios;
+
+export default Solicitudes;

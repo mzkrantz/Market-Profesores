@@ -92,11 +92,11 @@ export default function NavBar() {
             </MenuItem>
           </Link>
           <Link
-            to="/Mensajes"
+            to="/Solicitudes"
             style={{ textDecoration: "none", color: "black" }}
           >
             <MenuItem style={{ textDecoration: "none", color: "none"}}>
-              Mensajes
+              Solicitudes
             </MenuItem>
           </Link>
           <Link

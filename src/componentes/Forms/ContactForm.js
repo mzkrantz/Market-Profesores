@@ -5,33 +5,83 @@ import {
   TextField,
   Button,
   Snackbar,
-  Typography
+  Typography,
 } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
-
+const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
 export default function ContactForm({ open, professorName, handleClose }) {
+  const [nombre, setNombre] = useState("");
+  const [telefono, setTelefono] = useState("");
+  const [mail, setMail] = useState("");
+  const [mensaje, setMensaje] = useState("");
   const [isSnackbarOpen, setSnackbarOpen] = useState(false);
-
-  const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    message: "",
+  
+  const [errors, setErrors] = useState({
+    nombre: "",
+    telefono: "",
+    mail: "",
+    mensaje: "",
   });
 
-  const handleFormChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
+  const handleFieldChange = (field, value) => {
+    if (value.trim() === "") {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [field]: `${
+          field.charAt(0).toUpperCase() + field.slice(1)
+        } es obligatorio`,
+      }));
+    } else {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [field]: "",
+      }));
+    }
+  };
+
+  const handleSend = () => {
+    const newErrors = {};
+    if (nombre.trim() === "") {
+      newErrors.nombre = "Nombre es obligatorio";
+    }
+    if (telefono.trim() === "") {
+      newErrors.telefono = "Teléfono es obligatorio";
+    }
+    if (!emailRegex.test(mail)) {
+      newErrors.mail = "Ingrese un mail válido";
+    }
+    if (mensaje.trim() === "") {
+      newErrors.mensaje = "Mensaje es obligatorio";
+    }
+
+    setErrors(newErrors);
+
+    // Si no hay errores, enviar el formulario
+    if (
+      Object.values(newErrors).every((error) => error === "") // Comprueba si todos los valores en el objeto de errores son cadenas vacías
+    ) {
+      handleSubmit();
+    }
+  };
+
+  const resetForm = () => {
+    setNombre("");
+    setTelefono("");
+    setMail("");
+    setMensaje("");
+    setErrors({
+      nombre: "",
+      telefono: "",
+      mail: "",
+      mensaje: "",
     });
   };
 
-
   const handleSubmit = () => {
-    // Agregar la lógica de compra
-    setSnackbarOpen(true); // Abre el snackbar
+    // Agregar la lógica real para enviar la solicitud de compra
+    setSnackbarOpen(true);
+    resetForm();
     handleClose();
   };
 
@@ -44,57 +94,81 @@ export default function ContactForm({ open, professorName, handleClose }) {
     <div>
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
-        <Typography variant="h6" gutterBottom>
-          Contactar a {professorName}
-        </Typography>
-        <TextField
-          name="name"
-          label="Nombre y Apellido"
-          variant="outlined"
-          margin="normal"
-          fullWidth
-          onChange={handleFormChange}
-          value={formData.name}
-        />
-        <TextField
-          name="phone"
-          label="Teléfono"
-          variant="outlined"
-          margin="normal"
-          fullWidth
-          onChange={handleFormChange}
-          value={formData.phone}
-        />
-        <TextField
-          name="email"
-          label="Correo Electrónico"
-          variant="outlined"
-          margin="normal"
-          fullWidth
-          onChange={handleFormChange}
-          value={formData.email}
-        />
-        <TextField
-          name="message"
-          label="Mensaje"
-          multiline
-          rows={4}
-          variant="outlined"
-          margin="normal"
-          fullWidth
-          onChange={handleFormChange}
-          value={formData.message}
-        />
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => {
-            handleSubmit(formData);
-          }}
-          fullWidth
-        >
-          Enviar
-        </Button>
+          <Typography variant="h6" gutterBottom>
+            Contactar a {professorName}
+          </Typography>
+          <TextField
+            name="nombre"
+            label="Nombre y Apellido"
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            onChange={(e) => {
+              const value = e.target.value;
+              setNombre(value);
+              handleFieldChange("nombre", value);
+            }}
+            helperText={
+              <span style={{ color: "#d32f2f" }}>{errors.nombre}</span>
+            }
+            value={nombre}
+          />
+          <TextField
+            name="telefono"
+            label="Teléfono"
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            onChange={(e) => {
+              const value = e.target.value;
+              setTelefono(value);
+              handleFieldChange("telefono", value);
+            }}
+            helperText={
+              <span style={{ color: "#d32f2f" }}>{errors.telefono}</span>
+            }
+            value={telefono}
+          />
+          <TextField
+            label="Mail"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            value={mail}
+            onChange={(e) => {
+              const value = e.target.value;
+              setMail(value);
+              handleFieldChange("mail", value);
+            }}
+            helperText={<span style={{ color: "#d32f2f" }}>{errors.mail}</span>}
+          />
+          <TextField
+            label="Mensaje"
+            variant="outlined"
+            fullWidth
+            multiline
+            rows={4}
+            margin="normal"
+            value={mensaje}
+            onChange={(e) => {
+              const value = e.target.value;
+              setMensaje(value);
+              handleFieldChange("mensaje", value);
+            }}
+            helperText={
+              <span style={{ color: "#d32f2f" }}>{errors.mensaje}</span>
+            }
+          />
+          <Button
+            variant="contained"
+            color="primary"
+            fullWidth
+            onClick={(e) => {
+              handleSend();
+            }}
+          >
+            Enviar
+          </Button>
         </DialogContent>
       </Dialog>
 
@@ -115,4 +189,4 @@ export default function ContactForm({ open, professorName, handleClose }) {
       </Snackbar>
     </div>
   );
-};
+}

@@ -15,7 +15,12 @@ import MuiAlert from "@mui/material/Alert";
 import { useDropzone } from "react-dropzone";
 import "./FormStyles.css";
 
-export default function EditCursoForm({ open, handleClose, cursoToEdit, title }) {
+export default function EditCursoForm({
+  open,
+  handleClose,
+  cursoToEdit,
+  title,
+}) {
   const [cursoData, setCursoData] = useState({
     id: 0,
     image: null,
@@ -33,6 +38,7 @@ export default function EditCursoForm({ open, handleClose, cursoToEdit, title })
     teacher: 0,
     published: false,
   });
+  
   const [isSnackbarOpen, setSnackbarOpen] = useState(false);
 
   useEffect(() => {
@@ -59,12 +65,67 @@ export default function EditCursoForm({ open, handleClose, cursoToEdit, title })
     }
   }, [cursoToEdit]);
 
+  const [errors, setErrors] = useState({
+    title: "",
+    description: "",
+    duration: "",
+    frequency: "",
+    price: "",
+    category: "",
+    extendedDescription: "",
+    type: "",
+  });
+
+  const handleSend = () => {
+    const newErrors = {};
+
+    if (cursoData.title.trim() === "") {
+      newErrors.title = "Titulo es obligatorio";
+    }
+    if (cursoData.description.trim() === "") {
+      newErrors.description = "Descripción Extendida es obligatorio";
+    }
+    if (cursoData.duration.trim() === "") {
+      newErrors.duration = "Duración es obligatorio";
+    } else if (!/^\d+$/.test(cursoData.duration)) {
+      newErrors.duration = "Ingrese un número entero";
+    }
+    if (cursoData.frequency.trim() === "") {
+      newErrors.frequency = "Frecuencia es obligatorio";
+    } else if (!/^\d+$/.test(cursoData.frequency)) {
+      newErrors.frequency = "Ingrese un número entero";
+    }
+    if (cursoData.price.trim() === "") {
+      newErrors.price = "Precio es obligatorio";
+    } else if (!/^\d+(\.\d{1,2})?$/.test(cursoData.price)) {
+      newErrors.price =
+        "Ingrese un número decimal válido (hasta 2 decimales separados por punto)";
+    }
+    if (cursoData.category.trim() === "") {
+      newErrors.category = "Categoría es obligatorio";
+    }
+    if (cursoData.extendedDescription.trim() === "") {
+      newErrors.extendedDescription = "Descripción Extendida es obligatorio";
+    }
+    if (cursoData.type.trim() === "") {
+      newErrors.type = "Tipo es obligatorio";
+    }
+
+    setErrors(newErrors);
+    // Si no hay errores, enviar el formulario
+    if (
+      Object.values(newErrors).every((error) => error === "") // Comprueba si todos los valores en el objeto de errores son cadenas vacías
+    ) {
+      
+      handleSubmit();
+    }
+  };
+
   const handleSubmit = () => {
     // Agregar la lógica para enviar el formulario aquí
 
     // Simulación de éxito
     setSnackbarOpen(true);
-    handleClose();
   };
 
   const handleFileUpload = (acceptedFiles) => {
@@ -78,6 +139,7 @@ export default function EditCursoForm({ open, handleClose, cursoToEdit, title })
   });
 
   const handleCloseSnackbar = () => {
+    handleClose();
     setSnackbarOpen(false);
   };
 
@@ -90,147 +152,175 @@ export default function EditCursoForm({ open, handleClose, cursoToEdit, title })
   };
 
   return (
-    <div>
-      <Dialog open={open} onClose={handleClose} className="custom-opacity">
-        <DialogTitle>{title}</DialogTitle>
-        <DialogContent>
-          <TextField
-            label="Título"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            value={cursoData.title}
-            onChange={(e) =>
-              setCursoData({ ...cursoData, title: e.target.value })
-            }
-          />
-          <TextField
-            label="Descripción"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            value={cursoData.description}
-            onChange={(e) =>
-              setCursoData({ ...cursoData, description: e.target.value })
-            }
-          />
-          <TextField
-            label="Duración (meses)"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            value={cursoData.duration}
-            onChange={(e) =>
-              setCursoData({ ...cursoData, duration: e.target.value })
-            }
-          />
-          <TextField
-            label="Frecuencia (N)"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            value={cursoData.frequency}
-            onChange={(e) =>
-              setCursoData({ ...cursoData, frequency: e.target.value })
-            }
-          />
-          <TextField
-            label="Precio"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            value={cursoData.price}
-            onChange={(e) =>
-              setCursoData({ ...cursoData, price: e.target.value })
-            }
-          />
-          <TextField
-            label="Descripción Extendida"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            value={cursoData.extendedDescription}
-            onChange={(e) =>
-              setCursoData({
-                ...cursoData,
-                extendedDescription: e.target.value
-              })
-            }
-          />
-          <TextField
-            label="Materias (hasta 5, separadas por comas)"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            value={cursoData.subjects ? cursoData.subjects.join(", ") : ""}
-            onChange={(e) =>
-              setCursoData({
-                ...cursoData,
-                subjects: e.target.value.split(",").map((subject) => subject.trim()),
-              })
-            }
-          />
-          <FormControl fullWidth margin="normal">
-            <InputLabel label="Categoría">Categoría</InputLabel>
-            <Select
-              value={cursoData.category}
-              label="Categoría"
+      <div>
+        <Dialog open={open} onClose={handleClose} className="custom-opacity">
+          <DialogTitle>{title}</DialogTitle>
+          <DialogContent>
+            <TextField
+              label="Título"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              value={cursoData.title}
               onChange={(e) =>
-                setCursoData({ ...cursoData, category: e.target.value })
+                setCursoData({ ...cursoData, title: e.target.value })
               }
-            >
-              <MenuItem value={""}>Todas las Categorías</MenuItem>
-              <MenuItem value={"Desarrollo Web"}>Desarrollo Web</MenuItem>
-              <MenuItem value={"Marketing Digital"}>Marketing Digital</MenuItem>
-              <MenuItem value={"Diseño Gráfico"}>Diseño Gráfico</MenuItem>
-              <MenuItem value={"Idiomas"}>Idiomas</MenuItem>
-              <MenuItem value={"Fotografía"}>Fotografía</MenuItem>
-              <MenuItem value={"Cocina"}>Cocina</MenuItem>
-              <MenuItem value={"Negocios"}>Negocios</MenuItem>
-              <MenuItem value={"Salud y Bienestar"}>Salud y Bienestar</MenuItem>
-              <MenuItem value={"Tecnología"}>Tecnología</MenuItem>
-            </Select>
-          </FormControl>
-          <FormControl fullWidth margin="normal">
-            <InputLabel label="Tipo">Tipo</InputLabel>
-            <Select
-              value={cursoData.type}
-              label="Tipo"
+              helperText={
+                <span style={{ color: "#d32f2f" }}>{errors.title}</span>
+              }
+            />
+            <TextField
+              label="Descripción"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              value={cursoData.description}
               onChange={(e) =>
-                setCursoData({ ...cursoData, type: e.target.value })
+                setCursoData({ ...cursoData, description: e.target.value })
               }
-            >
-              <MenuItem value="Individual">Individual</MenuItem>
-              <MenuItem value="Grupal">Grupal</MenuItem>
-            </Select>
-          </FormControl>
-          <div {...getRootProps()} style={dropzoneStyle}>
-            <input {...getInputProps()} />
-            <p>
-              Arrastra y suelta una imagen aquí, o haz clic para seleccionar
-              una.
-            </p>
-          </div>
-          <Button variant="contained" color="primary" onClick={handleSubmit}>
-            Enviar
-          </Button>
-        </DialogContent>
-      </Dialog>
+              helperText={
+                <span style={{ color: "#d32f2f" }}>{errors.description}</span>
+              }
+            />
+            <TextField
+              label="Duración"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              value={cursoData.duration}
+              onChange={(e) =>
+                setCursoData({ ...cursoData, duration: e.target.value })
+              }
+              helperText={
+                <span style={{ color: "#d32f2f" }}>{errors.duration}</span>
+              }
+            />
+            <TextField
+              label="Frecuencia"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              value={cursoData.frequency}
+              onChange={(e) =>
+                setCursoData({ ...cursoData, frequency: e.target.value })
+              }
+              helperText={
+                <span style={{ color: "#d32f2f" }}>{errors.frequency}</span>
+              }
+            />
+            <TextField
+              label="Precio"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              value={cursoData.price}
+              onChange={(e) =>
+                setCursoData({ ...cursoData, price: e.target.value })
+              }
+              helperText={
+                <span style={{ color: "#d32f2f" }}>{errors.price}</span>
+              }
+            />
+            <TextField
+              label="Descripción Extendida"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              value={cursoData.extendedDescription}
+              onChange={(e) =>
+                setCursoData({
+                  ...cursoData,
+                  extendedDescription: e.target.value,
+                })
+              }
+              helperText={
+                <span style={{ color: "#d32f2f" }}>
+                  {errors.extendedDescription}
+                </span>
+              }
+            />
+            <TextField
+              label="Materias (hasta 5, separadas por comas)"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              value={cursoData.subjects ? cursoData.subjects.join(", ") : ""}
+              onChange={(e) =>
+                setCursoData({
+                  ...cursoData,
+                  subjects: e.target.value
+                    .split(",")
+                    .map((subject) => subject.trim()),
+                })
+              }
+            />
+            <FormControl fullWidth margin="normal">
+              <InputLabel label="Categoría">Categoría</InputLabel>
+              <Select
+                value={cursoData.category}
+                label="Categoría"
+                onChange={(e) =>
+                  setCursoData({ ...cursoData, category: e.target.value })
+                }
+              >
+                <MenuItem value={"Desarrollo Web"}>Desarrollo Web</MenuItem>
+                <MenuItem value={"Marketing Digital"}>
+                  Marketing Digital
+                </MenuItem>
+                <MenuItem value={"Diseño Gráfico"}>Diseño Gráfico</MenuItem>
+                <MenuItem value={"Idiomas"}>Idiomas</MenuItem>
+                <MenuItem value={"Fotografía"}>Fotografía</MenuItem>
+                <MenuItem value={"Cocina"}>Cocina</MenuItem>
+                <MenuItem value={"Negocios"}>Negocios</MenuItem>
+                <MenuItem value={"Salud y Bienestar"}>
+                  Salud y Bienestar
+                </MenuItem>
+                <MenuItem value={"Tecnología"}>Tecnología</MenuItem>
+              </Select>
+              <span style={{ color: "#d32f2f" }}>{errors.category}</span>
+            </FormControl>
+            <FormControl fullWidth margin="normal">
+              <InputLabel label="Tipo">Tipo</InputLabel>
+              <Select
+                value={cursoData.type}
+                label="Tipo"
+                onChange={(e) =>
+                  setCursoData({ ...cursoData, type: e.target.value })
+                }
+              >
+                <MenuItem value="Individual">Individual</MenuItem>
+                <MenuItem value="Grupal">Grupal</MenuItem>
+              </Select>
+              <span style={{ color: "#d32f2f" }}>{errors.type}</span>
+            </FormControl>
+            <div {...getRootProps()} style={dropzoneStyle}>
+              <input {...getInputProps()} />
+              <p>
+                Arrastra y suelta una imagen aquí, o haz clic para seleccionar
+                una.
+              </p>
+            </div>
+            <Button variant="contained" color="primary" onClick={handleSend}>
+              Enviar
+            </Button>
+          </DialogContent>
+        </Dialog>
 
-      <Snackbar
-        open={isSnackbarOpen}
-        autoHideDuration={3000}
-        onClose={handleCloseSnackbar}
-      >
-        <MuiAlert
-          elevation={6}
-          variant="filled"
-          severity="success"
+        {/* Snackbar para mostrar el mensaje emergente */}
+        <Snackbar
+          open={isSnackbarOpen}
+          autoHideDuration={3000}
           onClose={handleCloseSnackbar}
         >
-          Curso creado o actualizado correctamente
-        </MuiAlert>
-      </Snackbar>
-    </div>
+          <MuiAlert
+            elevation={6}
+            variant="filled"
+            severity="success"
+            onClose={handleCloseSnackbar}
+          >
+            Curso creado o actualizado correctamente
+          </MuiAlert>
+        </Snackbar>
+      </div>
   );
 }

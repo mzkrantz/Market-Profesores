@@ -127,12 +127,12 @@ const Solicitudes = () => {
           <Typography variant="h4" component="h1" gutterBottom>
             Solicitudes y Mensajes
           </Typography>
-        </SpacerTop>
 
-        <Tabs value={activeTab} onChange={handleTabChange}>
-          <Tab label="Solicitudes" />
-          <Tab label="Mensajes" />
-        </Tabs>
+          <Tabs value={activeTab} onChange={handleTabChange}>
+            <Tab label="Solicitudes" />
+            <Tab label="Mensajes" />
+          </Tabs>
+        </SpacerTop>
 
         {activeTab === 0 && (
           <CommentList component={TableContainer}>
@@ -200,7 +200,7 @@ const Solicitudes = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-              {mockMensajes.map((mensaje) => (
+                {mockMensajes.map((mensaje) => (
                   <TableRow key={mensaje.id}>
                     <TableCell>{mensaje.nombre}</TableCell>
                     <TableCell>{mensaje.mail}</TableCell>
@@ -209,9 +209,7 @@ const Solicitudes = () => {
                       <Button
                         className="boton-tabla"
                         variant="outlined"
-                        onClick={() =>
-                          openCommentModal(openPopup(mensaje))
-                        }
+                        onClick={() => openCommentModal(openPopup(mensaje))}
                       >
                         Ver
                       </Button>

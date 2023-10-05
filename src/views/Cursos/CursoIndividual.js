@@ -134,14 +134,14 @@ export default function CursoIndividual() {
                   <Typography variant="body1" gutterBottom>
                     {description}
                   </Typography>
-                  <Typography variant="body2">Duración: {duration}</Typography>
+                  <Typography variant="body2">Duración: {duration} semanas</Typography>
                   <Typography variant="body2" gutterBottom>
                     {frequency === "1"
                       ? "1 vez por semana"
                       : `${frequency} veces por semana`}
                   </Typography>
                   <Typography variant="body2" gutterBottom>
-                    Precio: {price}
+                    Precio: ${price}
                   </Typography>
                   <Button
                     variant="contained"

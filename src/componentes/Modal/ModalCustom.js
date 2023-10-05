@@ -1,12 +1,8 @@
 import React from "react";
 import { Modal, Box, Button } from "@mui/material";
+import "./ModalCustomStyles.css"
 
 const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -16,7 +12,7 @@ const style = {
 const ModalDialog = ({ open, onClose, children }) => {
   return (
     <Modal open={open} onClose={onClose} ariaHideApp={false}>
-      <Box sx={style}>
+      <Box sx={style} className="custom-modal">
         {children}
         <Button variant="text" color="primary" fullWidth onClick={onClose} />
       </Box>

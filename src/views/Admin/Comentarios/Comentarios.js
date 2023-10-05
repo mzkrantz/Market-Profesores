@@ -12,17 +12,16 @@ import { styled } from "@mui/system";
 import PopupCommentInfo from "../../../componentes/Popup/PopupCommentInfo";
 import ModalCustom from "../../../componentes/Modal/ModalCustom";
 import SpacerTop from "../../../componentes/Spacer/SpacerTop";
+import RatingStars from "../../../componentes/RatingStars/RatingStars";
 import "../TableStyles.css";
 
 const mockComments = [
   {
     id: 1,
     title: "Curso de Desarrollo Web",
-    published: true,
     user: {
       id: 1,
-      nombre: "Juan",
-      apellido: "Perez",
+      nombre: "Juan Perez",
       telefono: "123-456-7890",
       mail: "juan@example.com",
       horario: "Tarde",
@@ -33,10 +32,9 @@ const mockComments = [
   {
     id: 2,
     title: "Curso de Marketing Digital",
-    published: false,
     user: {
       id: 2,
-      nombre: "María",
+      nombre: "María Gonzalez",
       apellido: "González",
       telefono: "987-654-3210",
       mail: "maria@example.com",
@@ -113,7 +111,7 @@ const Comentarios = () => {
               <TableRow>
                 <TableCell>Curso</TableCell>
                 <TableCell>Usuario</TableCell>
-                <TableCell>Publicado</TableCell>
+                <TableCell>Puntaje</TableCell>
                 <TableCell>Acciones</TableCell>
               </TableRow>
             </TableHead>
@@ -121,11 +119,9 @@ const Comentarios = () => {
               {mockComments.map((comment) => (
                 <TableRow key={comment.id}>
                   <TableCell>{comment.title}</TableCell>
+                  <TableCell>{comment.user.nombre}</TableCell>
                   <TableCell>
-                    {comment.user.nombre + " " + comment.user.apellido}
-                  </TableCell>
-                  <TableCell>
-                    {comment.published ? "Publicado" : "No Publicado"}
+                    <RatingStars rating={parseFloat(comment.user.score)} />
                   </TableCell>
                   <TableCell>
                     <Button

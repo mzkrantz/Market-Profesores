@@ -157,7 +157,7 @@ export default function CursoIndividual() {
                     handleClose={handleCloseDialog}
                   />
                   <Divider style={{ padding: "2rem" }} />
-                  <Typography variant="subtitle1" gutterBottom>
+                  <Typography variant="subtitle1" gutterBottom textAlign={"center"}>
                     Valoración del Curso
                   </Typography>
                   <RatingStars rating={parseFloat(curso.stars)} />

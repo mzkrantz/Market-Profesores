@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Dialog,
-  DialogTitle,
   DialogContent,
   TextField,
   Button,
@@ -15,8 +14,7 @@ export default function ContactForm({ open, professorName, handleClose }) {
   const [isSnackbarOpen, setSnackbarOpen] = useState(false);
 
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    name: "",
     phone: "",
     email: "",
     message: "",
@@ -45,28 +43,18 @@ export default function ContactForm({ open, professorName, handleClose }) {
   return (
     <div>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Formulario de Compra</DialogTitle>
         <DialogContent>
         <Typography variant="h6" gutterBottom>
           Contactar a {professorName}
         </Typography>
         <TextField
-          name="firstName"
-          label="Nombre"
+          name="name"
+          label="Nombre y Apellido"
           variant="outlined"
           margin="normal"
           fullWidth
           onChange={handleFormChange}
-          value={formData.firstName}
-        />
-        <TextField
-          name="lastName"
-          label="Apellido"
-          variant="outlined"
-          margin="normal"
-          fullWidth
-          onChange={handleFormChange}
-          value={formData.lastName}
+          value={formData.name}
         />
         <TextField
           name="phone"

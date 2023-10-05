@@ -129,7 +129,7 @@ const MisCursos = () => {
               <TableRow>
                 <TableCell>Curso</TableCell>
                 <TableCell>Descripción</TableCell>
-                <TableCell>Publicado</TableCell>
+                <TableCell>Estado</TableCell>
                 <TableCell>Acciones</TableCell>
               </TableRow>
             </TableHead>

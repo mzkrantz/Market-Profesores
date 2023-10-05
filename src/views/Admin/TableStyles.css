@@ -1,8 +1,28 @@
-.boton-tabla{
-    min-width: 100% !important;
+.boton-tabla {
+  min-width: 100% !important;
 }
 
 th {
-    background-color: #f2f2f2;
-    text-align: center !important;
+  background-color: #f2f2f2;
+  text-align: center !important;
+}
+
+@media (min-width: 600px) {
+  td:first-child,
+  th:first-child {
+    width: 250px;
   }
+  td:last-child,
+  th:last-child {
+    width: 150px;
+  }
+  td:nth-last-child(2),
+  th:nth-last-child(2) {
+    width: 150px;
+  }
+
+  td:nth-last-child(2){
+    text-align: center;
+  }
+  
+}

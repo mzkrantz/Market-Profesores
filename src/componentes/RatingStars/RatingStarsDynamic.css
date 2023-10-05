@@ -7,7 +7,8 @@
 
 .rating-container {
   display: flex;
-  align-items: center; /* Alinea los elementos verticalmente en el centro */
+  align-items: center;
+  justify-content: center; /* Alinea los elementos verticalmente en el centro */
 }
 
 /* Estilos para pantallas pequeñas (menos de 500px de ancho) */

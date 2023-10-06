@@ -52,7 +52,7 @@ section {
 /* Estilos para la sección de características */
 .features-section {
   background: #fff;
-  min-height: 47vh;
+  min-height: 45vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -67,7 +67,7 @@ section {
 /* Estilos para la sección de testimonios */
 .testimonials-section {
   background: #f8f8f8;
-  min-height: 47vh;
+  min-height: 45vh;
   display: flex;
   flex-direction: column;
   justify-content: center;

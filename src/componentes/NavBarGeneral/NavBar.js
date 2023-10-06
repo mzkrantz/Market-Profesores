@@ -11,12 +11,15 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  Hidden,
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { useContext, useState } from "react";
 import { UserContext } from "../../context/userProvider";
 import LogoWizard from "../LogoWizard/LogoWizard";
 import UserMenu from "./UserMenu";
+import MoreVertIcon from "@mui/icons-material/MoreVert"; // Importa el ícono de tres puntos
+
 import "./NavBarStyles.css";
 
 const StyledAvatar = styled(Avatar)`
@@ -61,21 +64,17 @@ export default function NavBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar
-        position="static"
-        className="navbar" // Aplica la clase CSS a la barra de navegación
-      >
+      <AppBar position="static" className="navbar">
         <Toolbar className="navbar-toolbar">
-          
           <NavLink to="/" style={{ textDecoration: "none", color: "white" }}>
             <div className="navbar-logo">
-              <LogoWizard width={50} height={50} />
-              {"     "}
+              <LogoWizard width={50} height={50}/>
               <Typography
                 variant="h6"
                 noWrap
                 component="div"
                 className="navbar-title"
+                sx={{ display: { xs: "none", sm: "block" } }}
               >
                 EDUWIZARD
               </Typography>
@@ -86,6 +85,7 @@ export default function NavBar() {
             <NavLink
               to="/Cursos"
               style={{ textDecoration: "none", color: "white" }}
+              className="navbar-button"
             >
               <Button color="inherit">Cursos</Button>
             </NavLink>
@@ -93,19 +93,29 @@ export default function NavBar() {
             <NavLink
               to="/Profesores"
               style={{ textDecoration: "none", color: "white" }}
+              className="navbar-button"
             >
               <Button color="inherit">Profesores</Button>
             </NavLink>
           </div>
 
-          <Box className="navbar-avatar" sx={{ display: { xs: "block", md: "flex" } }}>
-            {user ? (
-              <StyledAvatar onClick={handleProfileMenuOpen}>
-                {user.name ? user.name.charAt(0) : "U"}
-              </StyledAvatar>
-            ) : (
-              <StyledAvatar onClick={handleProfileMenuOpen} />
-            )}
+          <Box className="navbar-avatar">
+            <Hidden smUp>
+              {" "}
+              <MoreVertIcon
+                className="vertIcon-avatar"
+                onClick={handleProfileMenuOpen}
+              />{" "}
+            </Hidden>
+            <Hidden smDown>
+              {user ? (
+                <StyledAvatar onClick={handleProfileMenuOpen}>
+                  {user.name ? user.name.charAt(0) : "U"}
+                </StyledAvatar>
+              ) : (
+                <StyledAvatar onClick={handleProfileMenuOpen} />
+              )}
+            </Hidden>
           </Box>
         </Toolbar>
       </AppBar>

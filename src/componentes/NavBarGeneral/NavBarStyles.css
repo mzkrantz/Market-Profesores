@@ -1,0 +1,92 @@
+/* Navbar container */
+.navbar {
+  background-color: #333 !important;
+  width: 100%;
+}
+
+.navbar-toolbar {
+  width: 92%;
+  align-self: center;
+}
+
+/* Logo y título */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+}
+
+/* Botones de navegación */
+.button-holder {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  min-height: 50px; /* Establece una altura mínima del 100% */
+}
+
+.navbar-button {
+  text-decoration: none;
+  color: white;
+  margin-right: 20px;
+}
+
+/* Avatar */
+.navbar-avatar {
+  display: flex;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  font-size: 16px;
+}
+
+.vertIcon-avatar {
+  align-self: center;
+  justify-self: center;
+}
+
+@media (max-width: 400px) {
+  .navbar-toolbar {
+    width: 80% !important;
+    align-self: center;
+  }
+
+  .navbar-logo {
+    min-width: 25px;
+  }
+}
+
+@media (max-width: 500px) {
+  .button-holder {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .navbar-button {
+    margin-right: 5px;
+  }
+}
+
+@media (min-width: 900px) {
+  .navbar-avatar {
+    margin-left: auto;
+  }
+  .navbar-title {
+    margin-left: 20px !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .navbar-avatar {
+    margin-left: 0px;
+  }
+
+  .navbar-toolbar {
+    display: flex;
+    width: 92%;
+    align-self: center;
+    justify-content: space-between;
+  }
+}

@@ -11,7 +11,7 @@ import Box from "@mui/material/Box";
 import "./CardStyles.css";
 
 export default function CardProfesor(props) {
-  const { image, name, description } = props;
+  const { image, name, description, background } = props;
   const [isDialogOpen, setDialogOpen] = useState(false);
 
   const handleOpenDialog = () => {
@@ -55,15 +55,15 @@ export default function CardProfesor(props) {
               flexDirection="column"
               alignItems="center"
               justifyContent="center"
-              marginBottom={1} 
+              marginBottom={1}
             >
               <Button
                 variant="contained"
                 color="primary"
                 onClick={handleOpenDialog}
-                open={isDialogOpen}             
+                open={isDialogOpen}
                 className="card-modal"
-                style={{ maxWidth: "100%" }} 
+                style={{ maxWidth: "100%" }}
               >
                 Contactar
               </Button>
@@ -74,8 +74,8 @@ export default function CardProfesor(props) {
               buttonName="Conóceme"
               className="card-modal"
               professorName={name}
-              description={description}
-              style={{ maxWidth: "100%" }} 
+              description={background}
+              style={{ maxWidth: "100%" }}
             />
           </Grid>
         </Grid>

@@ -43,7 +43,48 @@ const mockComments = [
       score: 2,
     },
   },
+  {
+    id: 10,
+    title: "Curso de Diseño Gráfico",
+    user: {
+      id: 3,
+      nombre: "Luis Ramirez",
+      telefono: "555-555-5555",
+      mail: "luis@example.com",
+      horario: "Tarde",
+      mensaje: "Me encanta el diseño gráfico. ¡Este curso suena emocionante!",
+      score: 4,
+    },
+  },
+  {
+    id: 11,
+    title: "Curso de Programación Avanzada",
+    user: {
+      id: 4,
+      nombre: "Ana Sánchez",
+      telefono: "777-777-7777",
+      mail: "ana@example.com",
+      horario: "Noche",
+      mensaje: "¿Este curso requiere experiencia previa en programación?",
+      score: 5,
+    },
+  },
+  {
+    id: 12,
+    title: "Curso de Fotografía Digital",
+    user: {
+      id: 5,
+      nombre: "Carlos Rodriguez",
+      telefono: "888-888-8888",
+      mail: "carlos@example.com",
+      horario: "Tarde",
+      mensaje: "Me interesa la fotografía. ¿Cuál es el costo del curso?",
+      score: 4,
+    },
+  },
 ];
+
+
 
 const CommentList = styled(TableContainer)`
   margin-top: ${({ theme }) => theme.spacing(2)};
@@ -148,7 +189,7 @@ const Comentarios = () => {
                         alert("Implementar la lógica de Bloqueo");
                       }}
                     >
-                      Bloquear
+                      Rechazar
                     </Button>
                   </TableCell>
                 </TableRow>

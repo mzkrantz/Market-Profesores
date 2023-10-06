@@ -5,17 +5,17 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 30rem;
+  min-height: 28rem;
 }
 
 .card-image {
   /* Estilos para la imagen dentro del Card */
-  height: 15rem;
+  height: 13rem;
 }
 
 .infoBox {
   /* Estilos para la caja de información */
-  min-height: 8rem;
+  min-height: 10rem;
 }
 
 .infoBox2 {

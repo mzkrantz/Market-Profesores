@@ -1,21 +1,15 @@
-/* Estilos para cada sección (hero-section, about-section, etc.) */
-section {
-  background: #f8f8f8;
-  text-align: center;
-  padding: 40px;
-  padding-top: 3rem !important;
-  padding-bottom: 3rem !important;
-  margin: 0;
-}
-
-/* Estilos para la sección de hero */
 .hero-section {
-  background: linear-gradient(rgba(133, 160, 221, 0.6), rgba(98, 49, 124, 0.8)),
-  url("../../data/img/MainBackground.jpg");
+  /*background: linear-gradient(135deg, rgba(133, 160, 221, 0.2), rgba(98, 49, 124, 0.3)),
+  url("../../data/img/prueba-2.png");*/
+  font-family: Arial, sans-serif;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3)),
+    url("../../data/img/prueba-3.png");
   background-size: cover;
   background-position: center;
   color: #f2f2f2;
-  min-height: 94vh;
+  min-height: 88.2vh;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -36,46 +30,8 @@ section {
   background: #0056b3;
 }
 
-/* Estilos para la sección "Acerca de" */
-.about-section {
-  background: #f2f2f2;
-  min-height: 100vh;
-  display: flex;
-  margin: 0;
-  flex-direction: column;
-  justify-content: center;
-  flex-grow: 1;
-}
-
-/* Estilos para la sección de características */
-.features-section {
-  background: #fff;
-  min-height: 45vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.feature-icon {
-  font-size: 3rem;
-  color: #007bff;
-  margin-bottom: 2rem;
-}
-
-/* Estilos para la sección de testimonios */
-.testimonials-section {
-  background: #f8f8f8;
-  min-height: 45vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
 /* Estilos para todos los textos*/
-.hero-text,
-.about-text,
-.feature-text,
-.testimonial-text {
+.hero-text {
   font-weight: 300 !important;
 }
 
@@ -86,9 +42,11 @@ section {
     font-size: 1rem;
   }
 
-  .about-title,
-  .feature-title,
-  .testimonial-title {
-    font-size: 1.8rem !important;
+  .hero-title{
+    font-size: 2rem !important;
+  }
+
+  .hero-text{
+    font-size: 1rem !important;
   }
 }

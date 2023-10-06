@@ -47,6 +47,17 @@
   justify-self: center;
 }
 
+@media (max-width: 400px) {
+  .navbar-toolbar {
+    width: 80% !important;
+    align-self: center;
+  }
+
+  .navbar-logo {
+    min-width: 25px;
+  }
+}
+
 @media (max-width: 500px) {
   .button-holder {
     padding-left: 0;

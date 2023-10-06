@@ -9,7 +9,7 @@ import "./ItemStyles.css";
 
 /* Se colocan los estilos utilizando styled */
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#F5F5F5",
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#e6e6e6",
   ...theme.typography.body2,
   padding: theme.spacing(2),
   textAlign: "center",

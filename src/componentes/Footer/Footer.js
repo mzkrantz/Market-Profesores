@@ -8,7 +8,6 @@ const FooterContainer = styled("footer")`
   background-color: #333;
   color: #fff;
   padding: 1rem 0;
-  margin-top: 1vh;
   text-align: center;
 `;
 const FooterText = styled(Typography)`

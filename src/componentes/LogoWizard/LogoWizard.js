@@ -11,6 +11,7 @@ class LogoWizard extends React.Component {
         alt={"Logo EduWizard"}
         width={width}
         height={height}
+        style={{ maxWidth: "100%", height:"auto" }}
       />
     );
   }

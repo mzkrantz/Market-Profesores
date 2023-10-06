@@ -1,0 +1,96 @@
+/* Estilos para cada sección (hero-section, about-section, etc.) */
+section {
+  background: #f8f8f8;
+  text-align: center;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  padding-top: 3rem !important;
+  padding-bottom: 3rem !important;
+  margin: 0;
+}
+
+/* Estilos para la sección de hero */
+.hero-section {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+  /*url("imagen-de-fondo.jpg");*/
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  min-height: 94vh;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cursos-button {
+  font-size: 1.25rem;
+  padding: 1.5rem 4rem;
+  background: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.cursos-button:hover {
+  background: #0056b3;
+}
+
+/* Estilos para la sección "Acerca de" */
+.about-section {
+  background: #f8f8f8;
+  min-height: 100vh;
+  display: flex;
+  margin: 0;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+/* Estilos para la sección de características */
+.features-section {
+  background: #fff;
+  min-height: 47vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.feature-icon {
+  font-size: 3rem;
+  color: #007bff;
+  margin-bottom: 2rem;
+}
+
+/* Estilos para la sección de testimonios */
+.testimonials-section {
+  background: #f8f8f8;
+  min-height: 47vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Estilos para todos los textos*/
+.hero-text,
+.about-text,
+.feature-text,
+.testimonial-text {
+  font-weight: 300 !important;
+}
+
+/* Estilos para pantallas pequeñas (menos de 600px) */
+@media (max-width: 600px) {
+  .cursos-button {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+  }
+
+  .about-title,
+  .feature-title,
+  .testimonial-title {
+    font-size: 1.8rem !important;
+  }
+}

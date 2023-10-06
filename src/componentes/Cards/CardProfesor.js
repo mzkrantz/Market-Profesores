@@ -55,15 +55,15 @@ export default function CardProfesor(props) {
               flexDirection="column"
               alignItems="center"
               justifyContent="center"
-              marginBottom={1} 
+              marginBottom={1}
             >
               <Button
                 variant="contained"
                 color="primary"
                 onClick={handleOpenDialog}
-                open={isDialogOpen}             
+                open={isDialogOpen}
                 className="card-modal"
-                style={{ maxWidth: "100%" }} 
+                style={{ maxWidth: "100%" }}
               >
                 Contactar
               </Button>
@@ -75,7 +75,7 @@ export default function CardProfesor(props) {
               className="card-modal"
               professorName={name}
               description={description}
-              style={{ maxWidth: "100%" }} 
+              style={{ maxWidth: "100%" }}
             />
           </Grid>
         </Grid>

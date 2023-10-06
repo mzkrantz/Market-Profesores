@@ -12,8 +12,8 @@ section {
 
 /* Estilos para la sección de hero */
 .hero-section {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
-  /*url("imagen-de-fondo.jpg");*/
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
+  url("../../data/img/MainBackground.jpg");
   background-size: cover;
   background-position: center;
   color: #fff;

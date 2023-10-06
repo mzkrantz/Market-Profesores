@@ -2,7 +2,7 @@
   "cursos": [
     {
       "id": 1,
-      "image": "curso-programacion.jpg",
+      "image": "img/cursos/desarrollo.png",
       "title": "Desarrollo Web Avanzado",
       "description": "Domina el desarrollo web con tecnologías modernas.",
       "duration": "12",
@@ -19,7 +19,7 @@
     },
     {
       "id": 2,
-      "image": "curso-marketing.jpg",
+      "image": "img/cursos/marketing.png",
       "title": "Marketing Digital Estratégico",
       "description": "Aprende a crear campañas de marketing efectivas.",
       "duration": "8",
@@ -36,7 +36,7 @@
     },
     {
       "id": 3,
-      "image": "curso-diseño.jpg",
+      "image": "img/cursos/diseño.png",
       "title": "Diseño Gráfico Profesional",
       "description": "Crea diseños impactantes con herramientas de diseño.",
       "duration": "10",
@@ -57,7 +57,7 @@
     },
     {
       "id": 4,
-      "image": "curso-ingles.jpg",
+      "image": "img/cursos/ingles.png",
       "title": "Inglés Avanzado",
       "description": "Perfecciona tu inglés con clases prácticas.",
       "duration": "6",
@@ -74,7 +74,7 @@
     },
     {
       "id": 5,
-      "image": "curso-fotografia.jpg",
+      "image": "img/cursos/naturaleza.png",
       "title": "Fotografía de Naturaleza",
       "description": "Captura la belleza de la naturaleza con tu cámara.",
       "duration": "8",
@@ -95,7 +95,7 @@
     },
     {
       "id": 6,
-      "image": "curso-cocina.jpg",
+      "image": "img/cursos/cocina.png",
       "title": "Cocina Internacional",
       "description": "Aprende a cocinar platos del mundo entero.",
       "duration": "4",
@@ -116,7 +116,7 @@
     },
     {
       "id": 7,
-      "image": "curso-negocios.jpg",
+      "image": "img/cursos/empresa.png",
       "title": "Gestión Empresarial",
       "description": "Domina las estrategias de gestión empresarial.",
       "duration": "6",
@@ -136,7 +136,7 @@
     },
     {
       "id": 8,
-      "image": "curso-yoga.jpg",
+      "image": "img/cursos/yoga.png",
       "title": "Yoga y Meditación",
       "description": "Encuentra la paz interior y la salud con el yoga.",
       "duration": "3",
@@ -157,7 +157,7 @@
     },
     {
       "id": 9,
-      "image": "curso-yoga2.jpg",
+      "image": "img/cursos/yoga2.png",
       "title": "Yoga y Meditación 2",
       "description": "Encuentra la paz interior y la salud con el yoga.",
       "duration": "4",

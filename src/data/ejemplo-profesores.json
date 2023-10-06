@@ -7,7 +7,7 @@
       "age": 40,
       "email": "luisa.rodriguez@example.com",
       "phone": "123456789",
-      "image": "https://ejemplo.com/imagenes/luisa_rodriguez.jpg",
+      "image": "/img/profesores/teacher-female-1.png",
       "description": "Instructora de Yoga con más de 15 años de experiencia en la enseñanza de técnicas de relajación y bienestar.",
       "background": "Certificación en Yoga Alliance y formación en varias escuelas de yoga reconocidas."
     },
@@ -18,7 +18,7 @@
       "age": 45,
       "email": "carlos.perez@example.com",
       "phone": "123456789",
-      "image": "https://ejemplo.com/imagenes/carlos_perez.jpg",
+      "image": "/img/profesores/teacher-male-1.png",
       "description": "Experto en Gestión Empresarial con enfoque en estrategias de negocios y liderazgo corporativo.",
       "background": "MBA en Administración de Empresas y consultoría para empresas multinacionales."
     },
@@ -29,7 +29,7 @@
       "age": 35,
       "email": "ana.martinez@example.com",
       "phone": "123456789",
-      "image": "https://ejemplo.com/imagenes/ana_martinez.jpg",
+      "image": "img/profesores/teacher-female-2.png",
       "description": "Chef profesional con pasión por la cocina internacional y la enseñanza de técnicas culinarias.",
       "background": "Carrera en Gastronomía y experiencia en restaurantes de renombre."
     },
@@ -40,7 +40,7 @@
       "age": 38,
       "email": "david.gonzalez@example.com",
       "phone": "123456789",
-      "image": "https://ejemplo.com/imagenes/david_gonzalez.jpg",
+      "image": "img/profesores/teacher-male-2.png",
       "description": "Fotógrafo creativo con amplia experiencia en la captura de momentos únicos y la enseñanza de técnicas fotográficas.",
       "background": "Formación en Fotografía Artística y trabajo en estudios de renombre."
     },
@@ -51,7 +51,7 @@
       "age": 42,
       "email": "olivia.smith@example.com",
       "phone": "123456789",
-      "image": "https://ejemplo.com/imagenes/olivia_smith.jpg",
+      "image": "img/profesores/teacher-female-3.png",
       "description": "Profesora de Inglés con un enfoque comunicativo y experiencia en la enseñanza de habilidades lingüísticas.",
       "background": "Certificación en Enseñanza de Inglés como Segundo Idioma y años de enseñanza en escuelas internacionales."
     },
@@ -61,7 +61,7 @@
       "subject": "Diseño Gráfico",
       "age": 35,
       "email": "gabriel.lopez@example.com",
-      "image": "https://ejemplo.com/imagenes/gabriel_lopez.jpg",
+      "image": "img/profesores/teacher-male-4.png",
       "description": "Diseñador gráfico con creatividad y pasión por el diseño digital y la comunicación visual.",
       "background": "Diploma en Diseño Gráfico y experiencia en agencias de publicidad."
     },
@@ -72,7 +72,7 @@
       "age": 40,
       "email": "laura.ramirez@example.com",
       "phone": "123456789",
-      "image": "https://ejemplo.com/imagenes/laura_ramirez.jpg",
+      "image": "img/profesores/teacher-female-4.png",
       "description": "Especialista en Marketing con enfoque en estrategias digitales y marketing de contenidos.",
       "background": "Máster en Marketing Digital y consultoría para empresas de diversos sectores."
     },
@@ -83,7 +83,7 @@
       "age": 30,
       "email": "andres.torres@example.com",
       "phone": "123456789",
-      "image": "https://ejemplo.com/imagenes/andres_torres.jpg",
+      "image": "img/profesores/teacher-male-5.png",
       "description": "Desarrollador de software con experiencia en programación web y móvil.",
       "background": "Grado en Ciencias de la Computación y trabajo en startups tecnológicas."
     },
@@ -94,7 +94,7 @@
       "age": 36,
       "email": "maria.fernandez@example.com",
       "phone": "123456789",
-      "image": "https://ejemplo.com/imagenes/maria_fernandez.jpg",
+      "image": "img/profesores/teacher-female-5.png",
       "description": "Instructora de Yoga con enfoque en la salud mental y el bienestar físico.",
       "background": "Certificación en Yoga Terapéutico y experiencia en clases individuales y grupales."
     }

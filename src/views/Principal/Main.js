@@ -57,7 +57,7 @@ function Main() {
         <Container>
           <LogoWizard width={300} height={300} className="logo" />
           <HeroTitle variant="h1" className="hero-title">
-            Bienvenido a EDUWIZARD
+            BIENVENIDO A EDUWIZARD
           </HeroTitle>
           <HeroText variant="body1" className="hero-text">
             Como expertos en la educación, ofrecemos clases particulares de

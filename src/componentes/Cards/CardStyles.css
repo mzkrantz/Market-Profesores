@@ -10,17 +10,17 @@
 
 .card-image {
   /* Estilos para la imagen dentro del Card */
-  height: 10rem;
+  height: 15rem;
 }
 
 .infoBox {
   /* Estilos para la caja de información */
-  min-height: 10rem;
+  min-height: 8rem;
 }
 
 .infoBox2 {
   /* Estilos para la segunda caja de información */
-  min-height: 10rem;
+  min-height: 7rem;
 }
 
 .card-modal {
@@ -28,4 +28,15 @@
   margin-bottom: 12px; /* Espacio entre los botones */
 }
 
-/* Agregar estilos adicionales según sea necesario */
+@media (max-width: 1080px){
+  .card-image {
+    /* Estilos para la imagen dentro del Card */
+    height: 12rem;
+  }
+
+  .infoBox {
+    /* Estilos para la caja de información */
+    min-height: 10rem;
+  }
+}
+  

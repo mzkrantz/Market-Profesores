@@ -15,7 +15,7 @@ const teacherData = {
   age: 35,
   email: "ana.martinez@example.com",
   phone: "123456789",
-  image: "https://ejemplo.com/imagenes/ana_martinez.jpg",
+  image: "/img/profesores/teacher-female-1.png",
   description:
     "Chef profesional con pasión por la cocina internacional y la enseñanza de técnicas culinarias.",
   background:

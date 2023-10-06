@@ -116,26 +116,6 @@
     },
     {
       "id": 7,
-      "image": "img/cursos/empresa.png",
-      "title": "Gestión Empresarial",
-      "description": "Domina las estrategias de gestión empresarial.",
-      "duration": "6",
-      "frequency": "2",
-      "price": "399.99",
-      "buttonLink": "https://ejemplo.com/curso-gestion-empresarial",
-      "category": "Negocios",
-      "extendedDescription": "Domina las estrategias de gestión empresarial y lleva tu carrera al siguiente nivel.",
-      "subjects": [
-        "Planificación estratégica",
-        "Finanzas empresariales",
-        "Gestión de proyectos"
-      ],
-      "stars": "2.3",
-      "type": "Grupal",
-      "published": true
-    },
-    {
-      "id": 8,
       "image": "img/cursos/yoga.png",
       "title": "Yoga y Meditación",
       "description": "Encuentra la paz interior y la salud con el yoga.",
@@ -156,7 +136,7 @@
       "published": true
     },
     {
-      "id": 9,
+      "id": 8,
       "image": "img/cursos/yoga2.png",
       "title": "Yoga y Meditación 2",
       "description": "Encuentra la paz interior y la salud con el yoga.",

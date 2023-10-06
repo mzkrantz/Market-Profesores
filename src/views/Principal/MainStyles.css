@@ -3,8 +3,6 @@ section {
   background: #f8f8f8;
   text-align: center;
   padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   padding-top: 3rem !important;
   padding-bottom: 3rem !important;
   margin: 0;
@@ -12,11 +10,11 @@ section {
 
 /* Estilos para la sección de hero */
 .hero-section {
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
+  background: linear-gradient(rgba(133, 160, 221, 0.6), rgba(98, 49, 124, 0.8)),
   url("../../data/img/MainBackground.jpg");
   background-size: cover;
   background-position: center;
-  color: #fff;
+  color: #f2f2f2;
   min-height: 94vh;
   text-align: center;
   display: flex;
@@ -40,7 +38,7 @@ section {
 
 /* Estilos para la sección "Acerca de" */
 .about-section {
-  background: #f8f8f8;
+  background: #f2f2f2;
   min-height: 100vh;
   display: flex;
   margin: 0;

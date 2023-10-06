@@ -47,11 +47,30 @@ const comments = [
 
 //Creacion del tema, header e infobox
 const theme = createTheme();
-const HeaderImage = styled("div")({
+
+const HeaderImage = {
+  width: "100%",
+  height: "250px",
+  marginBottom: "1rem",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  boxShadow: (theme) => theme.shadows[1],
+};
+
+const ImageContainer = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: '100%',
+  height: '100%',
+  overflow: 'hidden',
+};
+
+const Image = {
   width: "100%",
   height: "auto",
-  boxShadow: (theme) => theme.shadows[1],
-});
+};
 
 const InfoBox = styled(Card)(({ theme }) => ({
   padding: theme.spacing(3),
@@ -105,6 +124,18 @@ export default function CursoIndividual() {
     (profesor) => profesor.id === teacher
   );
 
+  const imgFullURL = image;
+  const imgSlices = imgFullURL.split("/");
+  const imageName = imgSlices[imgSlices.length - 1];
+
+  const imageUrl = `/img/cursos/${imageName}`;
+
+  const docenteIMGFullURL = docente.image;
+  const docenteIMGSlices = docenteIMGFullURL.split("/");
+  const docenteIMGName = docenteIMGSlices[docenteIMGSlices.length - 1];
+
+  const docenteImageUrl = `/img/profesores/${docenteIMGName}`;
+
   const breadcrumbItems = [
     { label: "EDUWIZARD", link: "/" },
     { label: "Cursos", link: "/Cursos" },
@@ -119,10 +150,15 @@ export default function CursoIndividual() {
         <Container maxWidth="xl">
           <Paper
             elevation={3}
-            className={HeaderImage}
-            style={{ minHeight: "200px", marginBottom: "1rem" }}
+            style={HeaderImage}
           >
-            <img src={image} alt="Curso Imagen" width="100%" />
+            <div style={ImageContainer}>
+              <img
+                src={imageUrl}
+                alt="Curso Imagen"
+                style={Image}
+              />
+            </div>
           </Paper>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6} className="info-square">
@@ -134,7 +170,9 @@ export default function CursoIndividual() {
                   <Typography variant="body1" gutterBottom>
                     {description}
                   </Typography>
-                  <Typography variant="body2">Duración: {duration} semanas</Typography>
+                  <Typography variant="body2">
+                    Duración: {duration} semanas
+                  </Typography>
                   <Typography variant="body2" gutterBottom>
                     {frequency === "1"
                       ? "1 vez por semana"
@@ -157,7 +195,11 @@ export default function CursoIndividual() {
                     handleClose={handleCloseDialog}
                   />
                   <Divider style={{ padding: "2rem" }} />
-                  <Typography variant="subtitle1" gutterBottom textAlign={"center"}>
+                  <Typography
+                    variant="subtitle1"
+                    gutterBottom
+                    textAlign={"center"}
+                  >
                     Valoración del Curso
                   </Typography>
                   <RatingStars rating={parseFloat(curso.stars)} />
@@ -172,9 +214,9 @@ export default function CursoIndividual() {
                   <CardMedia
                     component="img"
                     className="card-image"
-                    src={image}
+                    src={docenteImageUrl}
                     alt="Profesor Imagen"
-                    style={{ width: "100%", minHeight: "15rem" }}
+                    style={{ width: "100%", minHeight: "20rem", marginBottom: "1rem" }}
                   />
                   <Typography variant="body1">
                     {docente ? docente.name : "No se encontró el docente"}
@@ -223,7 +265,7 @@ export default function CursoIndividual() {
             <Grid item xs={12}>
               <InfoBox>
                 <CardContent>
-                <CommentTextArea handleClose={handleCloseComments} />
+                  <CommentTextArea handleClose={handleCloseComments} />
                   <Typography variant="h5" style={{ paddingTop: "2rem" }}>
                     Comentarios
                   </Typography>

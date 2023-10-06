@@ -18,7 +18,7 @@
       "age": 45,
       "email": "carlos.perez@example.com",
       "phone": "123456789",
-      "image": "/img/profesores/teacher-male-1.png",
+      "image": "/img/profesores/teacher-male-5.png",
       "description": "Experto en Gestión Empresarial con enfoque en estrategias de negocios y liderazgo corporativo.",
       "background": "MBA en Administración de Empresas y consultoría para empresas multinacionales."
     },
@@ -72,7 +72,7 @@
       "age": 40,
       "email": "laura.ramirez@example.com",
       "phone": "123456789",
-      "image": "img/profesores/teacher-female-4.png",
+      "image": "img/profesores/teacher-female-3.png",
       "description": "Especialista en Marketing con enfoque en estrategias digitales y marketing de contenidos.",
       "background": "Máster en Marketing Digital y consultoría para empresas de diversos sectores."
     },
@@ -83,7 +83,7 @@
       "age": 30,
       "email": "andres.torres@example.com",
       "phone": "123456789",
-      "image": "img/profesores/teacher-male-5.png",
+      "image": "img/profesores/teacher-male-1.png",
       "description": "Desarrollador de software con experiencia en programación web y móvil.",
       "background": "Grado en Ciencias de la Computación y trabajo en startups tecnológicas."
     },

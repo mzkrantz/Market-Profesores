@@ -51,7 +51,62 @@ const mockCourses = [
     teacher: 7,
     published: false,
   },
+  {
+    id: 3,
+    image: "curso-diseno-grafico.jpg",
+    title: "Diseño Gráfico Creativo",
+    description: "Crea diseños impactantes y creativos.",
+    duration: "10",
+    frequency: "2",
+    price: "179.99",
+    buttonLink: "https://ejemplo.com/curso-diseno-grafico",
+    category: "Diseño Gráfico",
+    extendedDescription:
+      "Desarrolla tus habilidades de diseño gráfico y crea proyectos visualmente atractivos.",
+    subjects: ["Adobe Photoshop", "Ilustración digital", "Diseño de logotipos"],
+    stars: "4.2",
+    type: "Grupal",
+    teacher: 5,
+    published: true,
+  },
+  {
+    id: 4,
+    image: "curso-fotografia.jpg",
+    title: "Fotografía Profesional",
+    description: "Captura momentos inolvidables con tu cámara.",
+    duration: "6",
+    frequency: "1",
+    price: "99.99",
+    buttonLink: "https://ejemplo.com/curso-fotografia-profesional",
+    category: "Fotografía",
+    extendedDescription:
+      "Aprende las técnicas esenciales de la fotografía y mejora tus habilidades como fotógrafo.",
+    subjects: ["Composición", "Iluminación", "Edición de fotos"],
+    stars: "4.7",
+    type: "Individual",
+    teacher: 10,
+    published: true,
+  },
+  {
+    id: 5,
+    image: "curso-idiomas.jpg",
+    title: "Aprende un Nuevo Idioma",
+    description: "Domina un idioma extranjero y amplía tus horizontes.",
+    duration: "16",
+    frequency: "4",
+    price: "249.99",
+    buttonLink: "https://ejemplo.com/curso-aprender-idiomas",
+    category: "Idiomas",
+    extendedDescription:
+      "Sumérgete en una nueva cultura aprendiendo un idioma extranjero de manera efectiva.",
+    subjects: ["Inglés", "Francés", "Español", "Alemán"],
+    stars: "4.9",
+    type: "Grupal",
+    teacher: 12,
+    published: true,
+  },
 ];
+
 
 const CourseList = styled(TableContainer)`
   margin-top: ${({ theme }) => theme.spacing(2)};

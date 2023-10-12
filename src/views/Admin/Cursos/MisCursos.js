@@ -23,15 +23,13 @@ const mockCourses = [
     id: 1,
     image: "curso-programacion.jpg",
     title: "Desarrollo Web Avanzado",
-    description:
-      "Domina el desarrollo web con tecnologías modernas. Aprende las mejores prácticas y las últimas tendencias en desarrollo web para construir aplicaciones web impresionantes. Este curso te proporcionará las habilidades necesarias para destacarte en la industria del desarrollo web, cubriendo temas como HTML, CSS, JavaScript, frameworks modernos y metodologías de desarrollo ágiles.",
+    description: "Domina el desarrollo web con tecnologías modernas y conviértete en un experto en el campo.",
     duration: "12",
     frequency: "2",
     price: "199.99",
     buttonLink: "https://ejemplo.com/curso-desarrollo-web-avanzado",
     category: "Desarrollo Web",
-    extendedDescription:
-      "Domina el desarrollo web con tecnologías modernas y conviértete en un experto en el campo.",
+    extendedDescription: "Domina el desarrollo web con tecnologías modernas y conviértete en un experto en el campo.",
     subjects: ["HTML", "CSS", "JavaScript"],
     stars: "4.5",
     type: "Grupal",
@@ -42,15 +40,13 @@ const mockCourses = [
     id: 2,
     image: "curso-marketing.jpg",
     title: "Marketing Digital Estratégico",
-    description:
-      "Aprende a crear campañas de marketing efectivas. Adquiere conocimientos en estrategias de marketing digital que te permitirán diseñar y ejecutar campañas exitosas. Conviértete en un especialista en marketing digital y maximiza el impacto de tu estrategia, explorando las últimas tendencias en marketing digital, incluyendo SEO, publicidad en línea, marketing en redes sociales y más.",
+    description: "Aprende a crear campañas de marketing efectivas y maximiza el impacto de tu estrategia.",
     duration: "8",
     frequency: "3",
     price: "149.99",
     buttonLink: "https://ejemplo.com/curso-marketing-digital",
     category: "Marketing Digital",
-    extendedDescription:
-      "Aprende a crear campañas de marketing efectivas y maximiza el impacto de tu estrategia.",
+    extendedDescription: "Aprende a crear campañas de marketing efectivas y maximiza el impacto de tu estrategia.",
     subjects: ["Marketing en redes sociales", "SEO", "Publicidad en línea"],
     stars: "4",
     type: "Individual",
@@ -61,15 +57,13 @@ const mockCourses = [
     id: 3,
     image: "curso-diseno-grafico.jpg",
     title: "Diseño Gráfico Creativo",
-    description:
-      "Crea diseños impactantes y creativos. Desarrolla tus habilidades de diseño gráfico y descubre tu creatividad. Aprende a diseñar logotipos, ilustraciones y proyectos visualmente atractivos, explorando las técnicas de diseño gráfico, trabajando con herramientas como Adobe Photoshop e Illustrator, y aprendiendo a crear logotipos, ilustraciones y diseños únicos.",
+    description: "Desarrolla tus habilidades de diseño gráfico y crea proyectos visualmente atractivos.",
     duration: "10",
     frequency: "2",
     price: "179.99",
     buttonLink: "https://ejemplo.com/curso-diseno-grafico",
     category: "Diseño Gráfico",
-    extendedDescription:
-      "Desarrolla tus habilidades de diseño gráfico y crea proyectos visualmente atractivos.",
+    extendedDescription: "Desarrolla tus habilidades de diseño gráfico y crea proyectos visualmente atractivos.",
     subjects: ["Adobe Photoshop", "Ilustración digital", "Diseño de logotipos"],
     stars: "4.2",
     type: "Grupal",
@@ -80,15 +74,13 @@ const mockCourses = [
     id: 4,
     image: "curso-fotografia.jpg",
     title: "Fotografía Profesional",
-    description:
-      "Captura momentos inolvidables con tu cámara. Aprende las técnicas esenciales de la fotografía y mejora tus habilidades como fotógrafo, sumergiéndote en el mundo de la fotografía profesional, cubriendo temas como composición, iluminación, edición de fotos y más.",
+    description: "Aprende las técnicas esenciales de la fotografía y mejora tus habilidades como fotógrafo.",
     duration: "6",
     frequency: "1",
     price: "99.99",
     buttonLink: "https://ejemplo.com/curso-fotografia-profesional",
     category: "Fotografía",
-    extendedDescription:
-      "Aprende las técnicas esenciales de la fotografía y mejora tus habilidades como fotógrafo.",
+    extendedDescription: "Aprende las técnicas esenciales de la fotografía y mejora tus habilidades como fotógrafo.",
     subjects: ["Composición", "Iluminación", "Edición de fotos"],
     stars: "4.7",
     type: "Individual",
@@ -99,15 +91,13 @@ const mockCourses = [
     id: 5,
     image: "curso-idiomas.jpg",
     title: "Aprende un Nuevo Idioma",
-    description:
-      "Domina un idioma extranjero y amplía tus horizontes, sumérgete en una nueva cultura aprendiendo un idioma extranjero de manera efectiva, aprendiendo a dominar idiomas como inglés, francés, español y alemán.",
+    description: "Sumérgete en una nueva cultura aprendiendo un idioma extranjero de manera efectiva.",
     duration: "16",
     frequency: "4",
     price: "249.99",
     buttonLink: "https://ejemplo.com/curso-aprender-idiomas",
     category: "Idiomas",
-    extendedDescription:
-      "Sumérgete en una nueva cultura aprendiendo un idioma extranjero de manera efectiva.",
+    extendedDescription: "Sumérgete en una nueva cultura aprendiendo un idioma extranjero de manera efectiva.",
     subjects: ["Inglés", "Francés", "Español", "Alemán"],
     stars: "4.9",
     type: "Grupal",
@@ -118,15 +108,13 @@ const mockCourses = [
     id: 6,
     image: "curso-marketing2.jpg",
     title: "Marketing en Redes Sociales",
-    description:
-      "Conviértete en un experto en marketing en redes sociales. Aprende las estrategias más efectivas para promocionar productos y servicios en plataformas como Facebook, Instagram, Twitter y más. Descubre cómo aumentar la visibilidad de tu negocio y llegar a una audiencia más amplia a través de las redes sociales.",
+    description: "Domina las estrategias de marketing en redes sociales y promociona tus productos de manera efectiva.",
     duration: "8",
     frequency: "3",
     price: "129.99",
     buttonLink: "https://ejemplo.com/curso-marketing-redes-sociales",
     category: "Marketing Digital",
-    extendedDescription:
-      "Domina las estrategias de marketing en redes sociales y promociona tus productos de manera efectiva.",
+    extendedDescription: "Domina las estrategias de marketing en redes sociales y promociona tus productos de manera efectiva.",
     subjects: ["Publicidad en redes sociales", "Estrategias de contenido"],
     stars: "4.4",
     type: "Individual",
@@ -137,15 +125,13 @@ const mockCourses = [
     id: 7,
     image: "curso-programacion2.jpg",
     title: "Introducción a la Programación",
-    description:
-      "Inicia tu viaje en el mundo de la programación. Aprende los conceptos básicos de la programación y adquiere habilidades en lenguajes como Python y Java. Este curso es perfecto para principiantes que desean comprender cómo funcionan las aplicaciones y sitios web.",
+    description: "Comienza tu viaje en la programación y construye una base sólida en el desarrollo de software.",
     duration: "6",
     frequency: "2",
     price: "79.99",
     buttonLink: "https://ejemplo.com/curso-intro-programacion",
     category: "Desarrollo Web",
-    extendedDescription:
-      "Comienza tu viaje en la programación y construye una base sólida en el desarrollo de software.",
+    extendedDescription: "Comienza tu viaje en la programación y construye una base sólida en el desarrollo de software.",
     subjects: ["Lógica de programación", "Python", "Java"],
     stars: "4.1",
     type: "Grupal",
@@ -156,15 +142,13 @@ const mockCourses = [
     id: 8,
     image: "curso-dibujo.jpg",
     title: "Dibujo Creativo",
-    description:
-      "Desarrolla tus habilidades artísticas y conviértete en un experto en dibujo creativo. Aprende a crear ilustraciones, personajes y obras de arte únicas. Descubre diferentes técnicas de dibujo y métodos para liberar tu creatividad artística.",
+    description: "Desarrolla tus habilidades artísticas y conviértete en un experto en dibujo creativo.",
     duration: "10",
     frequency: "2",
     price: "149.99",
     buttonLink: "https://ejemplo.com/curso-dibujo-creativo",
     category: "Arte y Diseño",
-    extendedDescription:
-      "Desarrolla tus habilidades artísticas y conviértete en un experto en dibujo creativo.",
+    extendedDescription: "Desarrolla tus habilidades artísticas y conviértete en un experto en dibujo creativo.",
     subjects: ["Técnicas de dibujo", "Ilustración creativa", "Diseño de personajes"],
     stars: "4.6",
     type: "Grupal",
@@ -175,15 +159,13 @@ const mockCourses = [
     id: 9,
     image: "curso-fotografia2.jpg",
     title: "Fotografía de Naturaleza",
-    description:
-      "Explora la belleza de la naturaleza a través de la fotografía. Aprende a capturar paisajes impresionantes, vida silvestre y momentos únicos en la naturaleza. Mejora tus habilidades fotográficas y comparte tu amor por el entorno natural.",
+    description: "Explora la belleza de la naturaleza a través de la fotografía y captura momentos inolvidables.",
     duration: "8",
     frequency: "1",
     price: "119.99",
     buttonLink: "https://ejemplo.com/curso-fotografia-naturaleza",
     category: "Fotografía",
-    extendedDescription:
-      "Explora la belleza de la naturaleza a través de la fotografía y captura momentos inolvidables.",
+    extendedDescription: "Explora la belleza de la naturaleza a través de la fotografía y captura momentos inolvidables.",
     subjects: ["Fotografía de paisajes", "Vida silvestre", "Edición de fotos naturales"],
     stars: "4.8",
     type: "Individual",
@@ -194,15 +176,13 @@ const mockCourses = [
     id: 10,
     image: "curso-programacion3.jpg",
     title: "Desarrollo de Aplicaciones Móviles",
-    description:
-      "Crea aplicaciones móviles increíbles. Aprende a desarrollar aplicaciones para dispositivos móviles en plataformas iOS y Android. Domina los conceptos de desarrollo de aplicaciones y crea tus propias aplicaciones desde cero.",
+    description: "Crea aplicaciones móviles increíbles en plataformas iOS y Android.",
     duration: "12",
     frequency: "3",
     price: "199.99",
     buttonLink: "https://ejemplo.com/curso-desarrollo-aplicaciones-moviles",
     category: "Desarrollo Web",
-    extendedDescription:
-      "Crea aplicaciones móviles increíbles en plataformas iOS y Android.",
+    extendedDescription: "Crea aplicaciones móviles increíbles en plataformas iOS y Android.",
     subjects: ["Desarrollo para iOS", "Desarrollo para Android", "Diseño de aplicaciones"],
     stars: "4.7",
     type: "Grupal",
@@ -213,21 +193,19 @@ const mockCourses = [
     id: 11,
     image: "curso-cocina.jpg",
     title: "Cocina Gourmet",
-    description:
-      "Conviértete en un chef gourmet. Aprende a cocinar platos exquisitos y sorprende a tus amigos y familiares con tus habilidades culinarias. Descubre secretos de la cocina gourmet y prepara comidas de alta calidad.",
+    description: "Conviértete en un chef gourmet y sorprende a todos con tus deliciosas creaciones culinarias.",
     duration: "10",
     frequency: "2",
     price: "169.99",
     buttonLink: "https://ejemplo.com/curso-cocina-gourmet",
     category: "Cocina",
-    extendedDescription:
-      "Conviértete en un chef gourmet y sorprende a todos con tus deliciosas creaciones culinarias.",
+    extendedDescription: "Conviértete en un chef gourmet y sorprende a todos con tus deliciosas creaciones culinarias.",
     subjects: ["Técnicas de cocina", "Platos gourmet", "Presentación de platos"],
     stars: "4.9",
     type: "Individual",
     teacher: 6,
     published: true,
-  }
+  },
 ];
 
 const CourseList = styled(TableContainer)`
@@ -261,7 +239,7 @@ const ButtonContainer = styled("div")`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 5px;
+  padding: 2px;
   align-items: center; // Centramos los botones
 `;
 
@@ -272,7 +250,7 @@ const MisCursos = () => {
 
   // Agregar estados para el paginador
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(3);
 
   useEffect(() => {
     setCourses(mockCourses);

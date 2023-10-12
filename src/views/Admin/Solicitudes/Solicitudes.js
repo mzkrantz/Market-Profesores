@@ -19,6 +19,8 @@ import { styled } from "@mui/system";
 import PopupMessageInfo from "../../../componentes/Popup/PopupMessageInfo";
 import ModalCustom from "../../../componentes/Modal/ModalCustom";
 import SpacerTop from "../../../componentes/Spacer/SpacerTop";
+import TablePagination from "@mui/material/TablePagination";
+
 import "../TableStyles.css";
 
 const mockSolicitudes = [
@@ -43,10 +45,10 @@ const mockSolicitudes = [
       telefono: "123456789",
       mail: "maria@example.com",
       horario: "Mañana",
-      mensaje:
-        "Me gustaría hacer la compra sobre el curso de Marketing Digital",
+      mensaje: "Me gustaría hacer la compra sobre el curso de Marketing Digital",
     },
   },
+  // Agrega más datos de ejemplo según tus necesidades
 ];
 
 const mockMensajes = [
@@ -65,6 +67,7 @@ const mockMensajes = [
     mensaje:
       "¿Puedes proporcionarme más información sobre el curso de Fotografía de Naturaleza?",
   },
+  // Agrega más datos de ejemplo según tus necesidades
 ];
 
 const CommentList = styled(TableContainer)`
@@ -103,11 +106,19 @@ const ResponsiveTable = styled(Table)`
   }
 `;
 
+const TableWrapper = styled("div")`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+`;
+
 const Solicitudes = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
   const [activeTab, setActiveTab] = useState(0); // 0 para "Solicitudes", 1 para "Mensajes"
+  const [page, setPage] = useState(0); // Página actual
+  const [rowsPerPage, setRowsPerPage] = useState(3); // Elementos por página
 
   const openCommentModal = () => {
     setIsCommentModalOpen(true);
@@ -120,6 +131,15 @@ const Solicitudes = () => {
   const openPopup = (user) => {
     setSelectedUser(user);
     setIsPopupOpen(true);
+  };
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0); // Cuando cambias la cantidad de elementos por página, vuelves a la primera página.
   };
 
   const handleTabChange = (event, newValue) => {
@@ -140,104 +160,122 @@ const Solicitudes = () => {
           </Tabs>
         </SpacerTop>
 
-        {activeTab === 0 && (
-          <CommentList component={TableContainer}>
-            <ResponsiveTable>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Curso</TableCell>
-                  <TableCell>Usuario</TableCell>
-                  <TableCell>Estado</TableCell>
-                  <TableCell>Acciones</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {mockSolicitudes.map((curso) => (
-                  <TableRow key={curso.id}>
-                    <TableCell>{curso.title}</TableCell>
-                    <TableCell>{curso.solicitud.nombre}</TableCell>
-                    <TableCell>{curso.solicitud.status}</TableCell>
-                    <TableCell>
-                      <IconButton
-                        className="boton-tabla"
-                        onClick={() =>
-                          openCommentModal(openPopup(curso.solicitud))
-                        }
-                      >
-                        <VisibilityIcon />
-                      </IconButton>
-                      <IconButton
-                        className="boton-tabla"
-                        onClick={() => {
-                          alert("Implementar la lógica de Aceptado");
-                        }}
-                      >
-                        <CheckCircleIcon />
-                      </IconButton>
-                      <IconButton
-                        className="boton-tabla"
-                        color="error"
-                        onClick={() => {
-                          alert("Implementar la lógica de Cancelacion");
-                        }}
-                      >
-                        <CancelIcon />
-                      </IconButton>
-                    </TableCell>
+        <TableWrapper>
+          {activeTab === 0 && (
+            <CommentList component={TableContainer}>
+              <ResponsiveTable>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Curso</TableCell>
+                    <TableCell>Usuario</TableCell>
+                    <TableCell>Estado</TableCell>
+                    <TableCell>Acciones</TableCell>
                   </TableRow>
-                ))}
-              </TableBody>
-            </ResponsiveTable>
-          </CommentList>
-        )}
+                </TableHead>
+                <TableBody>
+                  {mockSolicitudes
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((curso) => (
+                      <TableRow key={curso.id}>
+                        <TableCell>{curso.title}</TableCell>
+                        <TableCell>{curso.solicitud.nombre}</TableCell>
+                        <TableCell>{curso.solicitud.status}</TableCell>
+                        <TableCell>
+                          <IconButton
+                            className="boton-tabla"
+                            onClick={() =>
+                              openCommentModal(openPopup(curso.solicitud))
+                            }
+                          >
+                            <VisibilityIcon />
+                          </IconButton>
+                          <IconButton
+                            className="boton-tabla"
+                            onClick={() => {
+                              alert("Implementar la lógica de Aceptado");
+                            }}
+                          >
+                            <CheckCircleIcon />
+                          </IconButton>
+                          <IconButton
+                            className="boton-tabla"
+                            color="error"
+                            onClick={() => {
+                              alert("Implementar la lógica de Cancelacion");
+                            }}
+                          >
+                            <CancelIcon />
+                          </IconButton>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                </TableBody>
+              </ResponsiveTable>
+            </CommentList>
+          )}
 
-        {activeTab === 1 && (
-          <CommentList component={TableContainer}>
-            <ResponsiveTable>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Usuario</TableCell>
-                  <TableCell>Mail</TableCell>
-                  <TableCell>Telefono</TableCell>
-                  <TableCell>Acciones</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {mockMensajes.map((mensaje) => (
-                  <TableRow key={mensaje.id}>
-                    <TableCell>{mensaje.nombre}</TableCell>
-                    <TableCell>{mensaje.mail}</TableCell>
-                    <TableCell>{mensaje.telefono}</TableCell>
-                    <TableCell>
-                      <IconButton
-                        className="boton-tabla"
-                        onClick={() => openCommentModal(openPopup(mensaje))}
-                      >
-                        <VisibilityIcon />
-                      </IconButton>
-                      <IconButton
-                        className="boton-tabla"
-                        onClick={() => {
-                          alert("Implementar la lógica de Envio de Mail");
-                        }}
-                      >
-                        <MailOutlineIcon />
-                      </IconButton>
-                      <IconButton
-                        className="boton-tabla"
-                        onClick={() => {
-                          alert("Implementar la lógica de Eliminado");
-                        }}
-                      >
-                        <DeleteIcon />
-                      </IconButton>
-                    </TableCell>
+          {activeTab === 1 && (
+            <CommentList component={TableContainer}>
+              <ResponsiveTable>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Usuario</TableCell>
+                    <TableCell>Mail</TableCell>
+                    <TableCell>Telefono</TableCell>
+                    <TableCell>Acciones</TableCell>
                   </TableRow>
-                ))}
-              </TableBody>
-            </ResponsiveTable>
-          </CommentList>
-        )}
+                </TableHead>
+                <TableBody>
+                  {mockMensajes
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((mensaje) => (
+                      <TableRow key={mensaje.id}>
+                        <TableCell>{mensaje.nombre}</TableCell>
+                        <TableCell>{mensaje.mail}</TableCell>
+                        <TableCell>{mensaje.telefono}</TableCell>
+                        <TableCell>
+                          <IconButton
+                            className="boton-tabla"
+                            onClick={() => openCommentModal(openPopup(mensaje))}
+                          >
+                            <VisibilityIcon />
+                          </IconButton>
+                          <IconButton
+                            className="boton-tabla"
+                            onClick={() => {
+                              alert("Implementar la lógica de Envio de Mail");
+                            }}
+                          >
+                            <MailOutlineIcon />
+                          </IconButton>
+                          <IconButton
+                            className="boton-tabla"
+                            onClick={() => {
+                              alert("Implementar la lógica de Eliminado");
+                            }}
+                          >
+                            <DeleteIcon />
+                          </IconButton>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                </TableBody>
+              </ResponsiveTable>
+            </CommentList>
+          )}
+
+          <TablePagination
+            component="div"
+            count={
+              activeTab === 0 ? mockSolicitudes.length : mockMensajes.length
+            }
+            page={page}
+            onPageChange={handleChangePage}
+            rowsPerPage={rowsPerPage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+            style={{ justifyContent: "center" }}
+          />
+        </TableWrapper>
       </Container>
 
       {isPopupOpen && (

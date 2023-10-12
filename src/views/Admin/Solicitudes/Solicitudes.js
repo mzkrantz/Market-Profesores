@@ -3,13 +3,18 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Button from "@mui/material/Button";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import IconButton from "@mui/material/IconButton";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CancelIcon from "@mui/icons-material/Cancel";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { styled } from "@mui/system";
 import PopupMessageInfo from "../../../componentes/Popup/PopupMessageInfo";
 import ModalCustom from "../../../componentes/Modal/ModalCustom";
@@ -69,6 +74,7 @@ const CommentList = styled(TableContainer)`
 `;
 
 const ResponsiveTable = styled(Table)`
+  background-color: #fff;
   @media (max-width: 600px) {
     font-size: 12px;
     table {
@@ -152,34 +158,31 @@ const Solicitudes = () => {
                     <TableCell>{curso.solicitud.nombre}</TableCell>
                     <TableCell>{curso.solicitud.status}</TableCell>
                     <TableCell>
-                      <Button
+                      <IconButton
                         className="boton-tabla"
-                        variant="outlined"
                         onClick={() =>
                           openCommentModal(openPopup(curso.solicitud))
                         }
                       >
-                        Ver
-                      </Button>
-                      <Button
+                        <VisibilityIcon />
+                      </IconButton>
+                      <IconButton
                         className="boton-tabla"
-                        variant="outlined"
                         onClick={() => {
                           alert("Implementar la lógica de Aceptado");
                         }}
                       >
-                        Aceptar
-                      </Button>
-                      <Button
+                        <CheckCircleIcon />
+                      </IconButton>
+                      <IconButton
                         className="boton-tabla"
-                        variant="outlined"
                         color="error"
                         onClick={() => {
                           alert("Implementar la lógica de Cancelacion");
                         }}
                       >
-                        Rechazar
-                      </Button>
+                        <CancelIcon />
+                      </IconButton>
                     </TableCell>
                   </TableRow>
                 ))}
@@ -206,32 +209,28 @@ const Solicitudes = () => {
                     <TableCell>{mensaje.mail}</TableCell>
                     <TableCell>{mensaje.telefono}</TableCell>
                     <TableCell>
-                      <Button
+                      <IconButton
                         className="boton-tabla"
-                        variant="outlined"
                         onClick={() => openCommentModal(openPopup(mensaje))}
                       >
-                        Ver
-                      </Button>
-                      <Button
+                        <VisibilityIcon />
+                      </IconButton>
+                      <IconButton
                         className="boton-tabla"
-                        variant="outlined"
                         onClick={() => {
                           alert("Implementar la lógica de Envio de Mail");
                         }}
                       >
-                        Enviar Mail
-                      </Button>
-                      <Button
+                        <MailOutlineIcon />
+                      </IconButton>
+                      <IconButton
                         className="boton-tabla"
-                        variant="outlined"
-                        color="error"
                         onClick={() => {
                           alert("Implementar la lógica de Eliminado");
                         }}
                       >
-                        Eliminar
-                      </Button>
+                        <DeleteIcon />
+                      </IconButton>
                     </TableCell>
                   </TableRow>
                 ))}

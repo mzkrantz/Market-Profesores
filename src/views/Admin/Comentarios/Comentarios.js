@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -13,6 +12,10 @@ import PopupCommentInfo from "../../../componentes/Popup/PopupCommentInfo";
 import ModalCustom from "../../../componentes/Modal/ModalCustom";
 import SpacerTop from "../../../componentes/Spacer/SpacerTop";
 import RatingStars from "../../../componentes/RatingStars/RatingStars";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CancelIcon from "@mui/icons-material/Cancel";
+import IconButton from "@mui/material/IconButton";
 import "../TableStyles.css";
 
 const mockComments = [
@@ -84,8 +87,6 @@ const mockComments = [
   },
 ];
 
-
-
 const CommentList = styled(TableContainer)`
   margin-top: ${({ theme }) => theme.spacing(2)};
   overflow-x: auto;
@@ -93,30 +94,31 @@ const CommentList = styled(TableContainer)`
 `;
 
 const ResponsiveTable = styled(Table)`
+background-color: #fff;
   @media (max-width: 600px) {
-    font-size: 12px; // Reducir el tamaño del texto en las celdas para pantallas pequeñas
+    font-size: 12px;
     table {
-      width: 100%; /* Asegurar que la tabla ocupe todo el ancho disponible */
+      width: 100%;
     }
 
     th,
     td {
-      display: flex; /* Convertir celdas en elementos flex (apilados) */
+      display: flex;
       flex-direction: column;
-      text-align: center; /* Alinear el texto a la izquierda */
-      margin-bottom: 10px; /* Agregar un espacio entre las celdas */
+      text-align: center;
+      margin-bottom: 10px;
     }
 
     td {
-      border-bottom: 1px solid #ddd; /* Agregar separadores entre las filas */
-      padding: 8px; /* Espaciado interno para las celdas */
+      border-bottom: 1px solid #ddd;
+      padding: 8px;
     }
 
     td:last-child {
-      border-bottom: 1px solid #ddd; /* Agregar separadores entre las filas */
-      margin-bottom: 1rem; /* Agregar un espacio entre las celdas */
-      padding-bottom: 2rem; /* Agregar un espacio entre las celdas */
-      border-bottom: 2px solid grey; /* Agregar separadores entre las filas */
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 1rem;
+      padding-bottom: 2rem;
+      border-bottom: 2px solid grey;
     }
   }
 `;
@@ -129,6 +131,7 @@ const Comentarios = () => {
   const openCommentModal = () => {
     setIsCommentModalOpen(true);
   };
+
   const closeCommentModal = () => {
     setIsCommentModalOpen(false);
   };
@@ -165,32 +168,29 @@ const Comentarios = () => {
                     <RatingStars rating={parseFloat(comment.user.score)} />
                   </TableCell>
                   <TableCell>
-                    <Button
+                    <IconButton
                       className="boton-tabla"
-                      variant="outlined"
                       onClick={() => openCommentModal(openPopup(comment.user))}
                     >
-                      Ver
-                    </Button>
-                    <Button
+                      <VisibilityIcon />
+                    </IconButton>
+                    <IconButton
                       className="boton-tabla"
-                      variant="outlined"
                       onClick={() => {
                         alert("Implementar la lógica de Aceptado");
                       }}
                     >
-                      Aceptar
-                    </Button>
-                    <Button
+                      <CheckCircleIcon />
+                    </IconButton>
+                    <IconButton
                       className="boton-tabla"
-                      variant="outlined"
                       color="error"
                       onClick={() => {
-                        alert("Implementar la lógica de Bloqueo");
+                        alert("Implementar la lógica de Rechazo");
                       }}
                     >
-                      Rechazar
-                    </Button>
+                      <CancelIcon />
+                    </IconButton>
                   </TableCell>
                 </TableRow>
               ))}
@@ -209,4 +209,5 @@ const Comentarios = () => {
     </>
   );
 };
+
 export default Comentarios;

@@ -215,31 +215,35 @@ const CourseList = styled(TableContainer)`
 `;
 
 const ResponsiveTable = styled(Table)`
-  background-color: #fff;
-
-  @media (max-width: 600px) {
-    font-size: 20px;
-    table {
-      width: 100%;
-    }
-
-    th,
-    td {
-      text-align: center;
-    }
-
-    td {
-      padding: 8px;
-      border: none; // Quitamos el borde
-    }
+background-color: #fff;
+@media (max-width: 600px) {
+  font-size: 12px;
+  table {
+    width: 100%;
   }
+  
+  th,
+  td {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  td:last-child {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 1rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid grey;
+  }
+}
 `;
 
 const ButtonContainer = styled("div")`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 2px;
+  padding: 0px;
   align-items: center; // Centramos los botones
 `;
 
@@ -248,7 +252,7 @@ const MisCursos = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingCourse, setEditingCourse] = useState(null);
 
-  // Agregar estados para el paginador
+  
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(3);
 

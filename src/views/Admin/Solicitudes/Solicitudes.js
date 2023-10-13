@@ -48,7 +48,7 @@ const mockSolicitudes = [
       mensaje: "Me gustaría hacer la compra sobre el curso de Marketing Digital",
     },
   },
-  // Agrega más datos de ejemplo según tus necesidades
+  
 ];
 
 const mockMensajes = [
@@ -67,7 +67,7 @@ const mockMensajes = [
     mensaje:
       "¿Puedes proporcionarme más información sobre el curso de Fotografía de Naturaleza?",
   },
-  // Agrega más datos de ejemplo según tus necesidades
+  
 ];
 
 const CommentList = styled(TableContainer)`
@@ -117,7 +117,7 @@ const Solicitudes = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
   const [activeTab, setActiveTab] = useState(0); // 0 para "Solicitudes", 1 para "Mensajes"
-  const [page, setPage] = useState(0); // Página actual
+  const [page, setPage] = useState(0); 
   const [rowsPerPage, setRowsPerPage] = useState(3); // Elementos por página
 
   const openCommentModal = () => {

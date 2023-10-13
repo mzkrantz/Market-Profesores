@@ -16,7 +16,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import IconButton from "@mui/material/IconButton";
-import "../TableStyles.css";
+import TablePagination from "@mui/material/TablePagination";
 
 const mockComments = [
   {
@@ -37,7 +37,7 @@ const mockComments = [
     title: "Curso de Marketing Digital",
     user: {
       id: 2,
-      nombre: "María Gonzalez",
+      nombre: "María González",
       apellido: "González",
       telefono: "987-654-3210",
       mail: "maria@example.com",
@@ -47,11 +47,11 @@ const mockComments = [
     },
   },
   {
-    id: 10,
+    id: 3,
     title: "Curso de Diseño Gráfico",
     user: {
       id: 3,
-      nombre: "Luis Ramirez",
+      nombre: "Luis Ramírez",
       telefono: "555-555-5555",
       mail: "luis@example.com",
       horario: "Tarde",
@@ -60,7 +60,7 @@ const mockComments = [
     },
   },
   {
-    id: 11,
+    id: 4,
     title: "Curso de Programación Avanzada",
     user: {
       id: 4,
@@ -73,11 +73,11 @@ const mockComments = [
     },
   },
   {
-    id: 12,
+    id: 5,
     title: "Curso de Fotografía Digital",
     user: {
       id: 5,
-      nombre: "Carlos Rodriguez",
+      nombre: "Carlos Rodríguez",
       telefono: "888-888-8888",
       mail: "carlos@example.com",
       horario: "Tarde",
@@ -85,7 +85,73 @@ const mockComments = [
       score: 4,
     },
   },
+  {
+    id: 6,
+    title: "Curso de Diseño de Interiores",
+    user: {
+      id: 6,
+      nombre: "Lorena Pérez",
+      telefono: "333-333-3333",
+      mail: "lorena@example.com",
+      horario: "Tarde",
+      mensaje: "¿Qué materiales se necesitan para este curso?",
+      score: 5,
+    },
+  },
+  {
+    id: 7,
+    title: "Curso de Cocina Gourmet",
+    user: {
+      id: 7,
+      nombre: "Roberto Mendoza",
+      telefono: "444-444-4444",
+      mail: "roberto@example.com",
+      horario: "Noche",
+      mensaje: "¿Cuál es el menú del primer día de clases?",
+      score: 4,
+    },
+  },
+  {
+    id: 8,
+    title: "Curso de Pintura al Óleo",
+    user: {
+      id: 8,
+      nombre: "Isabel López",
+      telefono: "555-555-5555",
+      mail: "isabel@example.com",
+      horario: "Mañana",
+      mensaje: "¿Dónde se pueden comprar los materiales de pintura?",
+      score: 4,
+    },
+  },
+  {
+    id: 9,
+    title: "Curso de Fotografía de Naturaleza",
+    user: {
+      id: 9,
+      nombre: "Sofía Ramos",
+      telefono: "666-666-6666",
+      mail: "sofia@example.com",
+      horario: "Tarde",
+      mensaje: "¿Habrá excursiones fotográficas en este curso?",
+      score: 5,
+    },
+  },
+  {
+    id: 10,
+    title: "Curso de Jardinería",
+    user: {
+      id: 10,
+      nombre: "Pedro Fernández",
+      telefono: "777-777-7777",
+      mail: "pedro@example.com",
+      horario: "Tarde",
+      mensaje: "¿Qué tipo de plantas se enseñarán en este curso?",
+      score: 3,
+    },
+  },
 ];
+
 
 const CommentList = styled(TableContainer)`
   margin-top: ${({ theme }) => theme.spacing(2)};
@@ -94,7 +160,7 @@ const CommentList = styled(TableContainer)`
 `;
 
 const ResponsiveTable = styled(Table)`
-background-color: #fff;
+  background-color: #fff;
   @media (max-width: 600px) {
     font-size: 12px;
     table {
@@ -127,6 +193,8 @@ const Comentarios = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
+  const [page, setPage] = useState(0); 
+  const [rowsPerPage, setRowsPerPage] = useState(3); // Estado de filas por página
 
   const openCommentModal = () => {
     setIsCommentModalOpen(true);
@@ -140,6 +208,20 @@ const Comentarios = () => {
     setSelectedUser(user);
     setIsPopupOpen(true);
   };
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  const paginatedComments = mockComments.slice(
+    page * rowsPerPage,
+    page * rowsPerPage + rowsPerPage
+  );
 
   return (
     <>
@@ -160,7 +242,7 @@ const Comentarios = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {mockComments.map((comment) => (
+              {paginatedComments.map((comment) => (
                 <TableRow key={comment.id}>
                   <TableCell>{comment.title}</TableCell>
                   <TableCell>{comment.user.nombre}</TableCell>
@@ -197,6 +279,15 @@ const Comentarios = () => {
             </TableBody>
           </ResponsiveTable>
         </CommentList>
+        <TablePagination
+          component="div"
+          count={mockComments.length}
+          page={page}
+          onPageChange={handleChangePage}
+          rowsPerPage={rowsPerPage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+          style={{ justifyContent: "flex-end" }}
+        />
       </Container>
       {isPopupOpen && (
         <ModalCustom open={isCommentModalOpen} onClose={closeCommentModal}>

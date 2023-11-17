@@ -8,7 +8,13 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
+import { Navigate } from "react-router-dom";
+import {registration} from "../../controller/miApp.controller";
+
 export default function Registrate() {
+
+  const [redirect, setRedirect] = React.useState(false);
+
   const [formData, setFormData] = React.useState({
     nombre: "",
     apellido: "",
@@ -28,10 +34,32 @@ export default function Registrate() {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (validateForm()) {
-      console.log(formData);
-      // Aquí puedes enviar los datos del formulario al servidor o realizar otras acciones.
+      registerUser(formData)
+        .then((data) => {
+          console.log('Usuario registrado:', data);
+          setRedirect(true); 
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
     }
   };
+
+  if (redirect) {
+    return <Navigate to="/" />; // reemplaza '/ruta-deseada' con la ruta a la que deseas navegar
+  }
+
+  const registerUser = async (formData) => {
+      
+    let getRegistration = await registration(formData)
+  
+    if (getRegistration===0) {
+      alert("El usuario se registró de manera exitosa");
+    } else {
+      console.log("Hubo un error al registrar al usuario");
+    }
+  
+  }
 
   const validateForm = () => {
     const errors = {};

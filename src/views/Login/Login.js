@@ -15,8 +15,10 @@ import { Navigate } from "react-router-dom";
 import PasswordRecoveryForm from "../../componentes/PasswordRecoveryForm/PasswordRecoveryForm";
 import ModalCustom from "../../componentes/Modal/ModalCustom";
 import { Alert } from "@mui/material";
-import usersData from "../../data/ejemplo-usuarios.json";
 import Snackbar from "@mui/material/Snackbar";
+
+//importo llamada a endpoint
+import {login} from "../../controller/miApp.controller";
 
 
 export default function Login() {
@@ -35,6 +37,26 @@ export default function Login() {
     setIsPasswordRecoveryModalOpen(false);
   };
 
+    //Ejecuto el endopoint para validar login
+    const validarLogin= async function(a,b )
+    {
+      let datos = {
+          email: a,
+          password:b
+        }
+      let getLogin = await login(datos);
+
+      if (getLogin.rdo===0 )
+      {
+        setUser(true);
+        setLoggedIn(true);
+      }
+      if (getLogin.rdo===1)
+      {
+        alert("El usuario no es valido")
+      }      
+    }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -44,13 +66,10 @@ export default function Login() {
     if (loggedIn) {
       // Lógica de recuperación de contraseña
     } else {
-      // Buscar el usuario en la lista de usuarios registrados
-      const user = usersData.users.find((user) => user.user === email);
 
-      if (user && user.pass === password) {
-        // Acceso concedido, guarda el usuario en el contexto y redirige a la home
-        setUser(true);
-        setLoggedIn(true);
+      if (email!=="" && password!=="") {
+        validarLogin(email,password);        
+        
       } else {
         // Acceso denegado, muestra un mensaje de error
         alert("Usuario o contraseña incorrectos");

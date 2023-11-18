@@ -17,196 +17,7 @@ import TablePagination from "@mui/material/TablePagination";
 import "../TableStyles.css";
 import SpacerTop from "../../../componentes/Spacer/SpacerTop";
 import EditCursoForm from "../../../componentes/Forms/EditCursoForm";
-
-const mockCourses = [
-  {
-    id: 1,
-    image: "curso-programacion.jpg",
-    title: "Desarrollo Web Avanzado",
-    description: "Domina el desarrollo web con tecnologías modernas y conviértete en un experto en el campo.",
-    duration: "12",
-    frequency: "2",
-    price: "199.99",
-    buttonLink: "https://ejemplo.com/curso-desarrollo-web-avanzado",
-    category: "Desarrollo Web",
-    extendedDescription: "Domina el desarrollo web con tecnologías modernas y conviértete en un experto en el campo.",
-    subjects: ["HTML", "CSS", "JavaScript"],
-    stars: "4.5",
-    type: "Grupal",
-    teacher: 8,
-    published: true,
-  },
-  {
-    id: 2,
-    image: "curso-marketing.jpg",
-    title: "Marketing Digital Estratégico",
-    description: "Aprende a crear campañas de marketing efectivas y maximiza el impacto de tu estrategia.",
-    duration: "8",
-    frequency: "3",
-    price: "149.99",
-    buttonLink: "https://ejemplo.com/curso-marketing-digital",
-    category: "Marketing Digital",
-    extendedDescription: "Aprende a crear campañas de marketing efectivas y maximiza el impacto de tu estrategia.",
-    subjects: ["Marketing en redes sociales", "SEO", "Publicidad en línea"],
-    stars: "4",
-    type: "Individual",
-    teacher: 7,
-    published: false,
-  },
-  {
-    id: 3,
-    image: "curso-diseno-grafico.jpg",
-    title: "Diseño Gráfico Creativo",
-    description: "Desarrolla tus habilidades de diseño gráfico y crea proyectos visualmente atractivos.",
-    duration: "10",
-    frequency: "2",
-    price: "179.99",
-    buttonLink: "https://ejemplo.com/curso-diseno-grafico",
-    category: "Diseño Gráfico",
-    extendedDescription: "Desarrolla tus habilidades de diseño gráfico y crea proyectos visualmente atractivos.",
-    subjects: ["Adobe Photoshop", "Ilustración digital", "Diseño de logotipos"],
-    stars: "4.2",
-    type: "Grupal",
-    teacher: 5,
-    published: true,
-  },
-  {
-    id: 4,
-    image: "curso-fotografia.jpg",
-    title: "Fotografía Profesional",
-    description: "Aprende las técnicas esenciales de la fotografía y mejora tus habilidades como fotógrafo.",
-    duration: "6",
-    frequency: "1",
-    price: "99.99",
-    buttonLink: "https://ejemplo.com/curso-fotografia-profesional",
-    category: "Fotografía",
-    extendedDescription: "Aprende las técnicas esenciales de la fotografía y mejora tus habilidades como fotógrafo.",
-    subjects: ["Composición", "Iluminación", "Edición de fotos"],
-    stars: "4.7",
-    type: "Individual",
-    teacher: 10,
-    published: true,
-  },
-  {
-    id: 5,
-    image: "curso-idiomas.jpg",
-    title: "Aprende un Nuevo Idioma",
-    description: "Sumérgete en una nueva cultura aprendiendo un idioma extranjero de manera efectiva.",
-    duration: "16",
-    frequency: "4",
-    price: "249.99",
-    buttonLink: "https://ejemplo.com/curso-aprender-idiomas",
-    category: "Idiomas",
-    extendedDescription: "Sumérgete en una nueva cultura aprendiendo un idioma extranjero de manera efectiva.",
-    subjects: ["Inglés", "Francés", "Español", "Alemán"],
-    stars: "4.9",
-    type: "Grupal",
-    teacher: 12,
-    published: true,
-  },
-  {
-    id: 6,
-    image: "curso-marketing2.jpg",
-    title: "Marketing en Redes Sociales",
-    description: "Domina las estrategias de marketing en redes sociales y promociona tus productos de manera efectiva.",
-    duration: "8",
-    frequency: "3",
-    price: "129.99",
-    buttonLink: "https://ejemplo.com/curso-marketing-redes-sociales",
-    category: "Marketing Digital",
-    extendedDescription: "Domina las estrategias de marketing en redes sociales y promociona tus productos de manera efectiva.",
-    subjects: ["Publicidad en redes sociales", "Estrategias de contenido"],
-    stars: "4.4",
-    type: "Individual",
-    teacher: 6,
-    published: true,
-  },
-  {
-    id: 7,
-    image: "curso-programacion2.jpg",
-    title: "Introducción a la Programación",
-    description: "Comienza tu viaje en la programación y construye una base sólida en el desarrollo de software.",
-    duration: "6",
-    frequency: "2",
-    price: "79.99",
-    buttonLink: "https://ejemplo.com/curso-intro-programacion",
-    category: "Desarrollo Web",
-    extendedDescription: "Comienza tu viaje en la programación y construye una base sólida en el desarrollo de software.",
-    subjects: ["Lógica de programación", "Python", "Java"],
-    stars: "4.1",
-    type: "Grupal",
-    teacher: 4,
-    published: true,
-  },
-  {
-    id: 8,
-    image: "curso-dibujo.jpg",
-    title: "Dibujo Creativo",
-    description: "Desarrolla tus habilidades artísticas y conviértete en un experto en dibujo creativo.",
-    duration: "10",
-    frequency: "2",
-    price: "149.99",
-    buttonLink: "https://ejemplo.com/curso-dibujo-creativo",
-    category: "Arte y Diseño",
-    extendedDescription: "Desarrolla tus habilidades artísticas y conviértete en un experto en dibujo creativo.",
-    subjects: ["Técnicas de dibujo", "Ilustración creativa", "Diseño de personajes"],
-    stars: "4.6",
-    type: "Grupal",
-    teacher: 7,
-    published: true,
-  },
-  {
-    id: 9,
-    image: "curso-fotografia2.jpg",
-    title: "Fotografía de Naturaleza",
-    description: "Explora la belleza de la naturaleza a través de la fotografía y captura momentos inolvidables.",
-    duration: "8",
-    frequency: "1",
-    price: "119.99",
-    buttonLink: "https://ejemplo.com/curso-fotografia-naturaleza",
-    category: "Fotografía",
-    extendedDescription: "Explora la belleza de la naturaleza a través de la fotografía y captura momentos inolvidables.",
-    subjects: ["Fotografía de paisajes", "Vida silvestre", "Edición de fotos naturales"],
-    stars: "4.8",
-    type: "Individual",
-    teacher: 5,
-    published: true,
-  },
-  {
-    id: 10,
-    image: "curso-programacion3.jpg",
-    title: "Desarrollo de Aplicaciones Móviles",
-    description: "Crea aplicaciones móviles increíbles en plataformas iOS y Android.",
-    duration: "12",
-    frequency: "3",
-    price: "199.99",
-    buttonLink: "https://ejemplo.com/curso-desarrollo-aplicaciones-moviles",
-    category: "Desarrollo Web",
-    extendedDescription: "Crea aplicaciones móviles increíbles en plataformas iOS y Android.",
-    subjects: ["Desarrollo para iOS", "Desarrollo para Android", "Diseño de aplicaciones"],
-    stars: "4.7",
-    type: "Grupal",
-    teacher: 9,
-    published: true,
-  },
-  {
-    id: 11,
-    image: "curso-cocina.jpg",
-    title: "Cocina Gourmet",
-    description: "Conviértete en un chef gourmet y sorprende a todos con tus deliciosas creaciones culinarias.",
-    duration: "10",
-    frequency: "2",
-    price: "169.99",
-    buttonLink: "https://ejemplo.com/curso-cocina-gourmet",
-    category: "Cocina",
-    extendedDescription: "Conviértete en un chef gourmet y sorprende a todos con tus deliciosas creaciones culinarias.",
-    subjects: ["Técnicas de cocina", "Platos gourmet", "Presentación de platos"],
-    stars: "4.9",
-    type: "Individual",
-    teacher: 6,
-    published: true,
-  },
-];
+import { misCursos, eliminarCurso } from "../../../controller/miApp.controller";
 
 const CourseList = styled(TableContainer)`
   margin-top: ${({ theme }) => theme.spacing(2)};
@@ -215,28 +26,28 @@ const CourseList = styled(TableContainer)`
 `;
 
 const ResponsiveTable = styled(Table)`
-background-color: #fff;
-@media (max-width: 600px) {
-  font-size: 12px;
-  table {
-    width: 100%;
-  }
-  
-  th,
-  td {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    margin-bottom: 10px;
-  }
+  background-color: #fff;
+  @media (max-width: 600px) {
+    font-size: 12px;
+    table {
+      width: 100%;
+    }
 
-  td:last-child {
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 1rem;
-    padding-bottom: 2rem;
-    border-bottom: 2px solid grey;
+    th,
+    td {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    td:last-child {
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 1rem;
+      padding-bottom: 2rem;
+      border-bottom: 2px solid grey;
+    }
   }
-}
 `;
 
 const ButtonContainer = styled("div")`
@@ -248,16 +59,26 @@ const ButtonContainer = styled("div")`
 `;
 
 const MisCursos = () => {
-  const [courses, setCourses] = useState([]);
+  const [cursos, setCursos] = useState([]);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingCourse, setEditingCourse] = useState(null);
 
-  
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(3);
 
   useEffect(() => {
-    setCourses(mockCourses);
+    const fetchCursos = async () => {
+      const response = await misCursos();
+      if (response && response.rdo === 0) {
+        setCursos(response.cursos || []); // Si response.cursos es null, se establecerá un array vacío
+      } else {
+        console.error(
+          response ? response.mensaje : "Error al obtener los cursos"
+        );
+      }
+    };
+
+    fetchCursos();
   }, []);
 
   const openForm = () => {
@@ -277,6 +98,25 @@ const MisCursos = () => {
     setPage(0);
   };
 
+  const handlePublish = (curso) => {
+    // Aquí va la lógica para publicar/despublicar el curso
+    console.log(`Publicar/Despublicar curso: ${curso._id}`);
+  };
+
+  const handleDelete = async (curso) => {
+    if (curso) {
+      // Aquí va la lógica para eliminar el curso
+      const response = await eliminarCurso(curso._id);
+      if (response && response.rdo === 0) {
+        console.log(`Curso ${curso._id} eliminado correctamente`);
+        // Aquí puedes actualizar tu estado `cursos` para reflejar que el curso ha sido eliminado
+      } else {
+        console.error(response ? response.mensaje : 'Error al eliminar el curso');
+      }
+    } else {
+      console.log('Curso es undefined');
+    }
+  };
   return (
     <>
       <Container>
@@ -306,21 +146,21 @@ const MisCursos = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {courses
+              {cursos
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((course) => (
-                  <TableRow key={course.id}>
-                    <TableCell>{course.title}</TableCell>
-                    <TableCell>{course.description}</TableCell>
+                .map((curso) => (
+                  <TableRow key={curso.id}>
+                    <TableCell>{curso.title}</TableCell>
+                    <TableCell>{curso.description}</TableCell>
                     <TableCell>
-                      {course.published ? "Publicado" : "No Publicado"}
+                      {curso.published ? "Publicado" : "No Publicado"}
                     </TableCell>
                     <TableCell>
                       <ButtonContainer>
                         <IconButton
                           className="boton-tabla"
                           onClick={() => {
-                            setEditingCourse(course);
+                            setEditingCourse(curso);
                             openForm();
                           }}
                         >
@@ -330,9 +170,7 @@ const MisCursos = () => {
                       <ButtonContainer>
                         <IconButton
                           className="boton-tabla"
-                          onClick={() => {
-                            alert("Implementar la lógica de publicación/despublicación");
-                          }}
+                          onClick={() => handlePublish(curso)}
                         >
                           <VisibilityIcon />
                         </IconButton>
@@ -340,9 +178,7 @@ const MisCursos = () => {
                       <ButtonContainer>
                         <IconButton
                           className="boton-tabla"
-                          onClick={() => {
-                            alert("Implementar la lógica de eliminación");
-                          }}
+                          onClick={() => handleDelete(curso)}
                         >
                           <DeleteIcon />
                         </IconButton>
@@ -355,7 +191,7 @@ const MisCursos = () => {
         </CourseList>
         <TablePagination
           component="div"
-          count={courses.length}
+          count={cursos.length}
           page={page}
           onPageChange={handleChangePage}
           rowsPerPage={rowsPerPage}

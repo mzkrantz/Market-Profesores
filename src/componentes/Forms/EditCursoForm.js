@@ -43,6 +43,7 @@ export default function EditCursoForm({
   });
   
   const [isSnackbarOpen, setSnackbarOpen] = useState(false);
+  const [dialogOpen, setDialogOpen] = React.useState(false);
 
   useEffect(() => {
     if (cursoToEdit) {
@@ -50,7 +51,7 @@ export default function EditCursoForm({
     } else {
       setCursoData({
         id: 0,
-        image: null,
+        image: " ",
         title: "",
         description: "",
         duration: "",
@@ -126,26 +127,27 @@ export default function EditCursoForm({
 
   const handleSubmit = async () => {
     // Convertir el objeto cursoData a FormData para poder enviar el archivo de imagen
-    const formData = new FormData();
+    {/*const formData = new FormData();
     Object.keys(cursoData).forEach(key => {
       formData.append(key, cursoData[key]);
     });
+    */}
 
-    // Imprimir los datos que se van a enviar
-    for (var pair of formData.entries()) {
-      console.log(pair[0]+ ', ' + pair[1]); 
-    }
-
+    
     try {
       // Llamar a la función crearCurso
-      console.log('Llamando a crearCurso...'); // Agregar un registro de consola aquí
-      const response = await crearCurso(formData);
-      console.log('Respuesta de crearCurso:', response); // Agregar un registro de consola aquí
+      console.log('Llamando a crearCurso...'); 
+      const response = await crearCurso(cursoData);
+      console.log('Respuesta de crearCurso:', response); 
 
       // Comprobar si la respuesta es exitosa
       if (response.rdo === 0) {
+        
         // Si es exitosa, mostrar el Snackbar
         setSnackbarOpen(true);
+
+        // Cerrar la ventana de diálogo
+        setDialogOpen(false);
       } else {
         // Si no es exitosa, mostrar el mensaje de error
         console.error(response.mensaje);

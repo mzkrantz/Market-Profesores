@@ -63,6 +63,7 @@ const Perfil = () => {
       if (response.rdo === 0) {
         setTeacherData({
           name: response.profesor.data.name,
+          lastName: response.profesor.data.lastName,  
           subject: response.profesor.data.subject,
           age: response.profesor.data.age,
           email: response.profesor.data.email,
@@ -71,7 +72,6 @@ const Perfil = () => {
           description: response.profesor.data.description,
           background: response.profesor.data.background,
         });
-        console.log("leyo", teacherData);
       } else {
         // Maneja el error aquí
         console.log(response.mensaje);
@@ -110,7 +110,7 @@ const Perfil = () => {
     ) : (
       <>
         <ProfileImage src={teacherData.image} alt={teacherData.name} /> 
-        <ProfileTitle variant="h1">{teacherData.name}</ProfileTitle>
+        <ProfileTitle variant="h1">{teacherData.name + " " + teacherData.lastName}</ProfileTitle>
         <ProfileSubtitle variant="h2">
           {teacherData.subject}
         </ProfileSubtitle>

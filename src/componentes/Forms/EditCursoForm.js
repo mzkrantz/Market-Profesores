@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+
+import { crearCurso } from '../../controller/miApp.controller';
+
 import {
   Dialog,
   DialogTitle,
@@ -121,11 +124,36 @@ export default function EditCursoForm({
     }
   };
 
-  const handleSubmit = () => {
-    // Agregar la lógica para enviar el formulario aquí
+  const handleSubmit = async () => {
+    // Convertir el objeto cursoData a FormData para poder enviar el archivo de imagen
+    const formData = new FormData();
+    Object.keys(cursoData).forEach(key => {
+      formData.append(key, cursoData[key]);
+    });
 
-    // Simulación de éxito
-    setSnackbarOpen(true);
+    // Imprimir los datos que se van a enviar
+    for (var pair of formData.entries()) {
+      console.log(pair[0]+ ', ' + pair[1]); 
+    }
+
+    try {
+      // Llamar a la función crearCurso
+      console.log('Llamando a crearCurso...'); // Agregar un registro de consola aquí
+      const response = await crearCurso(formData);
+      console.log('Respuesta de crearCurso:', response); // Agregar un registro de consola aquí
+
+      // Comprobar si la respuesta es exitosa
+      if (response.rdo === 0) {
+        // Si es exitosa, mostrar el Snackbar
+        setSnackbarOpen(true);
+      } else {
+        // Si no es exitosa, mostrar el mensaje de error
+        console.error(response.mensaje);
+      }
+    } catch (error) {
+      // Manejar cualquier error que pueda ocurrir
+      console.error('Hubo un error al crear el curso:', error);
+    }
   };
 
   const handleFileUpload = (acceptedFiles) => {

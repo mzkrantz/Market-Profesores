@@ -145,7 +145,9 @@ export const profesorPorMail = async function() {
         console.log("jsonresponse", data);
         switch (rdo) {
             case 200: {
-                // Procesa los datos aquí
+                
+                
+                localStorage.setItem('profesorId', data.data._id);
                 return ({ rdo: 0, mensaje: "Ok", profesor: data }); // correcto
             }
             case 404: {
@@ -204,3 +206,50 @@ export const actualizar = async function(formData) {
         console.log("error", error);
     };
 }
+
+export const crearCurso = async function(formData) {
+
+    // url webservices
+    let url = urlWebServices.crearCurso; // Reemplaza con la ruta de tu endpoint
+    
+    let token = localStorage.getItem('x');
+    let profesorId = localStorage.getItem('profesorId');
+
+    formData.teacher = profesorId;
+
+    try {
+        let response = await fetch(url, {
+            method: 'POST',
+            mode: "cors",
+            headers: {
+                'x-access-token': token,
+                'Accept': '*/*',
+                'Origin': 'http://localhost:3000',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        });
+
+        let rdo = response.status;
+        console.log("response", response);
+        let data = await response.json();
+        console.log("jsonresponse", data);
+        switch (rdo) {
+            case 200: {
+                // Procesa los datos aquí
+                return ({ rdo: 0, mensaje: "Ok", curso: data }); // correcto
+            }
+            case 404: {
+                // No se encontró el curso
+                return ({ rdo: 1, mensaje: "No se encontró el curso con ese ID." });
+            }
+            default: {
+                // otro error
+                return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+            }
+        }
+    } catch (error) {
+        console.log("error", error);
+    };
+}
+

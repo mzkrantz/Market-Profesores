@@ -13,8 +13,8 @@ import {
   DialogActions,
   Hidden,
 } from "@mui/material";
-import { NavLink } from "react-router-dom";
-import { useContext, useState } from "react";
+import { NavLink, Navigate, useLocation } from "react-router-dom";
+import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../context/userProvider";
 import LogoWizard from "../LogoWizard/LogoWizard";
 import UserMenu from "./UserMenu";
@@ -33,6 +33,13 @@ export default function NavBar() {
   const { user, setUser } = useContext(UserContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const [isLogoutDialogOpen, setLogoutDialogOpen] = useState(false);
+  const [shouldNavigate, setShouldNavigate] = useState(false);  
+  const location = useLocation();
+
+  useEffect(() => {
+    setShouldNavigate(false);
+  }, [location.pathname]);
+  
 
   const isMenuOpen = Boolean(anchorEl);
 
@@ -51,6 +58,7 @@ export default function NavBar() {
 
   const handleLogout = () => {
     setLogoutDialogOpen(true);
+    setShouldNavigate(true);
   };
 
   const handleConfirmLogout = () => {
@@ -128,20 +136,22 @@ export default function NavBar() {
         handleLogout={handleLogout}
       />
 
-      <Dialog open={isLogoutDialogOpen} onClose={handleCancelLogout}>
-        <DialogTitle>Cerrar sesión:</DialogTitle>
-        <DialogContent>
-          <Typography>¿Estás seguro de que deseas cerrar sesión?</Typography>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCancelLogout} color="primary">
-            Cancelar
-          </Button>
-          <Button onClick={handleConfirmLogout} color="primary">
-            Cerrar Sesión
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </Box>
+<Dialog open={isLogoutDialogOpen} onClose={handleCancelLogout}>
+      <DialogTitle>Cerrar sesión:</DialogTitle>
+      <DialogContent>
+        <Typography>¿Estás seguro de que deseas cerrar sesión?</Typography>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleCancelLogout} color="primary">
+          Cancelar
+        </Button>
+        <Button onClick={handleConfirmLogout} color="primary">
+          Cerrar Sesión
+        </Button>
+      </DialogActions>
+    </Dialog>
+
+    {shouldNavigate && <Navigate to="/" />}
+  </Box>
   );
 }

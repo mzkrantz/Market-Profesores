@@ -6,6 +6,7 @@ const urlWebServices = {
     registration: urlApi +"api/users/registration",
     profesorPorCorreo: urlApi +"api/profesores/profesorPorCorreo",
     actualizar: urlApi +"api/profesores/actualizar",
+    crearCurso: urlApi +"api/cursos/",
    
 }
 

@@ -38,7 +38,6 @@ export const login= async function(login)
                     let user = data.loginUser.user;
                     localStorage.setItem("nombre",user.name);
                     localStorage.setItem("email",user.email);
-                    localStorage.setItem("id", user.id)
                     
                     return ({rdo:0,mensaje:"Ok"});//correcto
                 }
@@ -119,5 +118,89 @@ export const registration = async function(user) {
     };
 }
 
+export const profesorPorMail = async function() {
+    // url webservices
+    let url = urlWebServices.profesorPorCorreo; // Reemplaza con la ruta de tu endpoint
+    
+    let token = localStorage.getItem('x');
+    let email = localStorage.getItem('email');
 
+    
+    try {
+        let response = await fetch(url, {
+            method: 'GET',
+            mode: "cors",
+            headers: {
+                'x-access-token': token,
+                'email': email,
+                'Accept': '*/*',
+                'Origin': 'http://localhost:3000',
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        });
 
+        let rdo = response.status;
+        console.log("response", response);
+        let data = await response.json();
+        console.log("jsonresponse", data);
+        switch (rdo) {
+            case 200: {
+                // Procesa los datos aquí
+                return ({ rdo: 0, mensaje: "Ok", profesor: data }); // correcto
+            }
+            case 404: {
+                // No se encontró el profesor
+                return ({ rdo: 1, mensaje: "No se encontró el profesor con ese correo electrónico." });
+            }
+            default: {
+                // otro error
+                return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+            }
+        }
+    } catch (error) {
+        console.log("error", error);
+    };
+
+};
+
+export const actualizar = async function(formData) {
+    // url webservices
+    let url = urlWebServices.actualizar; // Reemplaza con la ruta de tu endpoint
+    
+    let token = localStorage.getItem('x');
+
+    try {
+        let response = await fetch(url, {
+            method: 'PUT',
+            mode: "cors",
+            headers: {
+                'x-access-token': token,
+                'Accept': '*/*',
+                'Origin': 'http://localhost:3000',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        });
+
+        let rdo = response.status;
+        console.log("response", response);
+        let data = await response.json();
+        console.log("jsonresponse", data);
+        switch (rdo) {
+            case 200: {
+                // Procesa los datos aquí
+                return ({ rdo: 0, mensaje: "Ok", profesor: data }); // correcto
+            }
+            case 404: {
+                // No se encontró el profesor
+                return ({ rdo: 1, mensaje: "No se encontró el profesor con ese correo electrónico." });
+            }
+            default: {
+                // otro error
+                return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+            }
+        }
+    } catch (error) {
+        console.log("error", error);
+    };
+}

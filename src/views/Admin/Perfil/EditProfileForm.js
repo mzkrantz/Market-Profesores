@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { actualizar } from '../../../controller/miApp.controller';
 import {
   Dialog,
   DialogContent,
@@ -10,6 +11,8 @@ import {
 
 import MuiAlert from "@mui/material/Alert";
 const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+
 
 export default function EditProfileForm({ open, teacherData, handleClose }) {
   const [isSnackbarOpen, setSnackbarOpen] = useState(false);
@@ -42,9 +45,9 @@ export default function EditProfileForm({ open, teacherData, handleClose }) {
     });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const newErrors = {};
-
+  
     if (formData.name.trim() === "") {
       newErrors.name = "Nombre es obligatorio";
     }
@@ -66,13 +69,21 @@ export default function EditProfileForm({ open, teacherData, handleClose }) {
     if (formData.background.trim() === "") {
       newErrors.background = "Experiencia es obligatoria";
     }
-
+  
     setErrors(newErrors);
-
+  
+    // Si no hay errores, envía los datos del formulario a la API
     if (Object.values(newErrors).every((error) => error === "")) {
-      // Lógica para enviar el formulario
-      setSnackbarOpen(true);
-      handleClose();
+      const response = await actualizar(formData);
+
+      if (response && response.rdo !== 0) {
+        // Maneja cualquier error de la respuesta aquí
+        console.error('Error al actualizar el profesor');
+      } else {
+        // Aquí puedes manejar la respuesta exitosa (por ejemplo, cerrar el formulario)
+        setSnackbarOpen(true);
+        handleClose();
+      }
     }
   };
 

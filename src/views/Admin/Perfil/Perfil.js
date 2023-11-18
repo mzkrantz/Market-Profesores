@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
@@ -9,18 +9,8 @@ import Grid from "@mui/material/Grid";
 import EditProfileForm from "./EditProfileForm";
 import { styled } from "@mui/system";
 
-const teacherData = {
-  name: "Ana Martínez",
-  subject: "Cocina",
-  age: 35,
-  email: "ana.martinez@example.com",
-  phone: "123456789",
-  image: "/img/profesores/teacher-female-1.png",
-  description:
-    "Chef profesional con pasión por la cocina internacional y la enseñanza de técnicas culinarias.",
-  background:
-    "Carrera en Gastronomía y experiencia en restaurantes de renombre.",
-};
+import { profesorPorMail } from '../../../controller/miApp.controller';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const ProfileContainer = styled(Container)`
   display: flex;
@@ -61,6 +51,41 @@ const EditButton = styled(Button)`
 const Perfil = () => {
   const [editing, setEditing] = useState(false);
   const [isDialogOpen, setDialogOpen] = useState(false);
+  const [teacherData, setTeacherData] = useState(null);
+
+
+
+  useEffect(() => {
+    const fetchTeacherData = async () => {
+      let response = await profesorPorMail();
+      console.log("response", response);
+
+      if (response.rdo === 0) {
+        setTeacherData({
+          name: response.profesor.data.name,
+          subject: response.profesor.data.subject,
+          age: response.profesor.data.age,
+          email: response.profesor.data.email,
+          phone: response.profesor.data.phone,
+          image: " ",
+          description: response.profesor.data.description,
+          background: response.profesor.data.background,
+        });
+        console.log("leyo", teacherData);
+      } else {
+        // Maneja el error aquí
+        console.log(response.mensaje);
+      }
+    };
+
+    fetchTeacherData();
+  }, []);
+
+  if (!teacherData) {
+    return <CircularProgress />; // Muestra el indicador de carga si teacherData es null
+  }
+
+  
 
   const handleOpenDialog = () => {
     setDialogOpen(true);
@@ -75,45 +100,44 @@ const Perfil = () => {
     setEditing(false); // Cierra el formulario después de enviar los datos
   };
   return (
-    <>
-      <ProfileContainer>
-        <Paper elevation={3} style={{ padding: "32px" }}>
-          {editing ? (
-            <EditProfileForm
-              initialData={teacherData} // Pasa los datos del perfil como propiedades
-              onSubmit={handleFormSubmit}
-            />
-          ) : (
-            <>
-              <ProfileImage src={teacherData.image} alt={teacherData.name} />
-              <ProfileTitle variant="h1">{teacherData.name}</ProfileTitle>
-              <ProfileSubtitle variant="h2">
-                {teacherData.subject}
-              </ProfileSubtitle>
-              <ProfileInfo>{teacherData.age} años</ProfileInfo>
-              <ProfileInfo>Email: {teacherData.email}</ProfileInfo>
-              <ProfileInfo>Teléfono: {teacherData.phone}</ProfileInfo>
-              <ProfileInfo>Experiencia: {teacherData.background}</ProfileInfo>
-              <ProfileInfo>Descripción: {teacherData.description}</ProfileInfo>
-              <ProfileButtonContainer>
-                <EditButton
-                  variant="contained"
-                  onClick={handleOpenDialog}
-                  open={isDialogOpen}
-                >
-                  <EditIcon />
-                  Cambiar Datos
-                </EditButton>
-              </ProfileButtonContainer>
-              <EditProfileForm
-                open={isDialogOpen}
-                handleClose={handleCloseDialog}
-                teacherData={teacherData}
-              />
-            </>
-          )}
-        </Paper>
-      </ProfileContainer>
+    <><ProfileContainer>
+  <Paper elevation={3} style={{ padding: "32px" }}>
+    {editing ? (
+      <EditProfileForm
+        initialData={teacherData} // Pasa los datos del perfil como propiedades
+        onSubmit={handleFormSubmit}
+      />
+    ) : (
+      <>
+        <ProfileImage src={teacherData.image} alt={teacherData.name} /> 
+        <ProfileTitle variant="h1">{teacherData.name}</ProfileTitle>
+        <ProfileSubtitle variant="h2">
+          {teacherData.subject}
+        </ProfileSubtitle>
+        {teacherData.age && <ProfileInfo>{teacherData.age} años</ProfileInfo>}
+        {teacherData.email && <ProfileInfo>Email: {teacherData.email}</ProfileInfo>}
+        {teacherData.phone && <ProfileInfo>Teléfono: {teacherData.phone}</ProfileInfo>}
+        {teacherData.background && <ProfileInfo>Experiencia: {teacherData.background}</ProfileInfo>}
+        {teacherData.description && <ProfileInfo>Descripción: {teacherData.description}</ProfileInfo>}
+        <ProfileButtonContainer>
+          <EditButton
+            variant="contained"
+            onClick={handleOpenDialog}
+            open={isDialogOpen}
+          >
+            <EditIcon />
+            Cambiar Datos
+          </EditButton>
+        </ProfileButtonContainer>
+        <EditProfileForm
+          open={isDialogOpen}
+          handleClose={handleCloseDialog}
+          teacherData={teacherData}
+        />
+      </>
+    )}
+  </Paper>
+</ProfileContainer>
     </>
   );
 };

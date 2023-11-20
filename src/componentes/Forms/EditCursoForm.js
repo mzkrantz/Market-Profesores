@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { crearCurso } from '../../controller/miApp.controller';
+import { crearCurso, actualizarCurso } from '../../controller/miApp.controller';
 
 import {
   Dialog,
@@ -133,14 +133,22 @@ export default function EditCursoForm({
     });
     */}
 
-    
     try {
-      // Llamar a la función crearCurso
-      console.log('Llamando a crearCurso...'); 
-      const response = await crearCurso(cursoData);
-      console.log('Respuesta de crearCurso:', response); 
-
-      // Comprobar si la respuesta es exitosa
+      let response;
+  
+      // Verificar si el título es "Editar Curso"
+      if (title === "Editar Curso") {
+        // Si es así, llamar a actualizarCurso
+        console.log('Llamando a actualizarCurso...');
+        response = await actualizarCurso(cursoData._id, cursoData);
+      } else {
+        // Si no, llamar a crearCurso
+        console.log('Llamando a crearCurso...');
+        response = await crearCurso(cursoData);
+      }
+  
+      console.log('Respuesta:', response);
+  
       if (response.rdo === 0) {
         
         // Si es exitosa, mostrar el Snackbar
@@ -153,11 +161,10 @@ export default function EditCursoForm({
         console.error(response.mensaje);
       }
     } catch (error) {
-      // Manejar cualquier error que pueda ocurrir
       console.error('Hubo un error al crear el curso:', error);
     }
   };
-
+  
   const handleFileUpload = (acceptedFiles) => {
     const file = acceptedFiles[0];
     setCursoData({ ...cursoData, image: file });

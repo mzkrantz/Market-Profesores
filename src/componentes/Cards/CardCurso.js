@@ -9,7 +9,8 @@ import RatingStars from "../RatingStars/RatingStars";
 import "./CardStyles.css";
 
 function CardCurso(props) {
-  const { id, image, title, description, frequency, price, type, stars } =
+  console.log("card", props)
+  const { _id, image, title, description, frequency, price, type, stars } =
     props;
 
   return (
@@ -51,7 +52,7 @@ function CardCurso(props) {
           </Typography>
 
           <Link
-            to={`/Cursos/CursoIndividual/${id}`}
+            to={`/Cursos/CursoIndividual/${_id}`}
             style={{ textDecoration: "none", color: "white" }}
           >
             <Button

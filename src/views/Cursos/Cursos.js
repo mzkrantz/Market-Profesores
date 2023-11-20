@@ -3,9 +3,10 @@ import Breadcrumb from "../../componentes/Breadcrumb/Breadcrumb";
 import ResponsiveGrid from "../../componentes/Grid/ResponsiveGrid";
 import FilterBar from "../../componentes/FilterBar/FilterBar";
 import CardCurso from "../../componentes/Cards/CardCurso";
-import ejemploCursos from "../../data/ejemplo-cursos.json"; // Ruta al archivo JSON
 import SpacerTop from "../../componentes/Spacer/SpacerTop";
 import { Pagination, Container } from "@mui/material";
+import { obtenerTodosLosCursos } from '../../controller/miApp.controller';
+
 
 export default function Cursos() {
   const [courseData, setCourseData] = useState([]);
@@ -19,8 +20,20 @@ export default function Cursos() {
   const [itemsPerPage, setItemsPerPage] = useState(6);
 
   useEffect(() => {
-    setCourseData(ejemploCursos.cursos);
-  }, []);
+    const fetchCursos = async () => {
+      const response = await obtenerTodosLosCursos(page, itemsPerPage);
+      
+      if (response.rdo === 0) {
+        setCourseData(response.data.docs);
+      
+      } else {
+        console.error(response.mensaje);
+      }
+    };
+
+    fetchCursos();
+  }, [page, itemsPerPage]);
+
 
   useEffect(() => {
     const updateItemsPerPage = () => {
@@ -65,17 +78,24 @@ export default function Cursos() {
     return true;
   });
 
+  console.log(filteredCourses);
+
+  
+
   // Ordena los cursos según el campo de ordenamiento y la dirección de ordenamiento de las estrellas
   const sortedCourses = filteredCourses.slice().sort((a, b) => {
     if (sortField === "stars") {
-      const aStars = parseFloat(a.stars);
-      const bStars = parseFloat(b.stars);
+      const aStars = parseFloat(a.stars) || 0;
+      const bStars = parseFloat(b.stars) || 0;
       return sortOrder === "asc" ? aStars - bStars : bStars - aStars;
     }
     return 0;
   });
 
   const currentCourses = sortedCourses.slice(startIndex, endIndex);
+
+  console.log("currentCourses: ",currentCourses);
+  
   const totalPages = Math.ceil(filteredCourses.length / itemsPerPage);
 
   // Maneja el cambio de página

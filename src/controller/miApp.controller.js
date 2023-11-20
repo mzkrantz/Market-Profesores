@@ -336,3 +336,106 @@ export const eliminarCurso = async function(idCurso) {
     }
 };
 
+export const actualizarCurso = async function (id, cursoData) {
+
+    let url = urlWebServices.misCursos;
+    let token = localStorage.getItem('x');
+
+    try {
+        let response = await fetch(url+id, {
+            method: 'PATCH', 
+            mode: "cors",
+            headers: {
+                'Accept': 'application/json',
+                 'x-access-token':token, 
+                'Origin': 'http://localhost:3000',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(cursoData),
+        });
+
+        let rdo = response.status;
+
+        switch(rdo) {
+            case 200: { // Asumiendo que el servidor devuelve 200 cuando la actualización es exitosa
+                console.log("cursoData:", cursoData);
+                return ({rdo: 0, mensaje: "Curso actualizado correctamente"});
+            }
+            case 404: { // Asumiendo que el servidor devuelve 404 cuando el curso no se encuentra
+                return ({rdo: 1, mensaje: "El curso no existe"});
+            }
+            default: {
+                return ({rdo: 1, mensaje: "Error al actualizar el curso"});
+            }
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        return ({rdo: 1, mensaje: "Error al actualizar el curso"});
+    }
+}
+
+export const obtenerTodosLosCursos = async function (page = 1, limit = 10) {
+    let url = urlWebServices.misCursos;
+
+    try {
+        let response = await fetch(url, {
+            method: 'GET', 
+            headers: {
+                'Accept': 'application/json',
+            },
+        });
+
+        let rdo = response.status;
+
+        switch(rdo) {
+            case 200: { // Asumiendo que el servidor devuelve 200 cuando la solicitud es exitosa
+                let data = await response.json();
+                return ({rdo: 0, data: data.data, mensaje: "Cursos recibidos exitosamente"});
+            }
+            default: {
+                return ({rdo: 1, mensaje: "Error al obtener los cursos"});
+            }
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        return ({rdo: 1, mensaje: "Error al obtener los cursos"});
+    }
+}
+
+export const obtenerProfesorPorId = async function(profesorId) {
+    // url del servicio web
+    let url = urlWebServices.obtenerProfesorPorId; // Reemplaza con la ruta de tu endpoint
+
+    try {
+        let response = await fetch(url + profesorId, {
+            method: 'GET',
+            mode: "cors",
+            headers: {
+                'Accept': '*/*',
+                'Origin': 'http://localhost:3000',
+                'Content-Type': 'application/json'
+            }
+        });
+
+        console.log("response", response);
+        let data = await response.json();
+        console.log("jsonresponse", data);
+
+        switch (response.status) {
+            case 200: {
+                // Procesa los datos aquí
+                return ({ rdo: 0, mensaje: "Ok", profesor: data }); // correcto
+            }
+            case 404: {
+                // No se encontró el profesor
+                return ({ rdo: 1, mensaje: "No se encontró el profesor con ese ID." });
+            }
+            default: {
+                // otro error
+                return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+            }
+        }
+    } catch (error) {
+        console.log("error", error);
+    };
+}

@@ -17,7 +17,7 @@ import TablePagination from "@mui/material/TablePagination";
 import "../TableStyles.css";
 import SpacerTop from "../../../componentes/Spacer/SpacerTop";
 import EditCursoForm from "../../../componentes/Forms/EditCursoForm";
-import { misCursos, eliminarCurso } from "../../../controller/miApp.controller";
+import { misCursos, eliminarCurso, actualizarCurso } from "../../../controller/miApp.controller";
 
 const CourseList = styled(TableContainer)`
   margin-top: ${({ theme }) => theme.spacing(2)};
@@ -98,9 +98,21 @@ const MisCursos = () => {
     setPage(0);
   };
 
-  const handlePublish = (curso) => {
-    // Aquí va la lógica para publicar/despublicar el curso
-    console.log(`Publicar/Despublicar curso: ${curso._id}`);
+  const handlePublish = async (curso) => {
+    if (curso && 'published' in curso) {
+      
+      // Aquí va la lógica para publicar/despublicar el curso
+      const updatedCursoData = { published: !curso.published }; // Cambia el estado de 'published'
+      const response = await actualizarCurso(curso._id, updatedCursoData);
+      if (response && response.rdo === 0) {
+        console.log(`Curso ${curso._id} publicado/despublicado correctamente`);
+        // Aquí puedes actualizar tu estado `cursos` para reflejar que el estado de 'published' ha cambiado
+      } else {
+        console.error(response ? response.mensaje : 'Error al publicar/despublicar el curso');
+      }
+    } else {
+      console.log('Curso es undefined o no tiene una propiedad published');
+    }
   };
 
   const handleDelete = async (curso) => {

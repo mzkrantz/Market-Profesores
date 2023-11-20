@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Breadcrumb from "../../componentes/Breadcrumb/Breadcrumb";
-import cursosData from "../../data/ejemplo-cursos.json";
 import profesoresData from "../../data/ejemplo-profesores.json"; // Importa los datos de profesores
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
@@ -23,6 +22,7 @@ import "./CursoIndividualStyles.css";
 import CommentGrid from "../../componentes/Comments/CommentGrid";
 import CommentTextArea from "../../componentes/Comments/CommentTextArea";
 import CompraForm from "../../componentes/Forms/CompraForm";
+import { obtenerTodosLosCursos,obtenerProfesorPorId } from '../../controller/miApp.controller';
 
 //Mock de comentarios
 const comments = [
@@ -81,8 +81,28 @@ const InfoBox = styled(Card)(({ theme }) => ({
 }));
 
 export default function CursoIndividual() {
+
+  const [cursos, setCursos] = useState([]);
+  const [docente, setDocente] = useState([]);
+
+  useEffect(() => {
+    const fetchCursos = async () => {
+      const response = await obtenerTodosLosCursos();
+      if (response.rdo === 0) {
+        setCursos(response.data.docs);
+        console.log("cursos: ",response.data.docs);
+      } else {
+        console.error(response.mensaje);
+      }
+    };
+
+    fetchCursos();
+  }, []);
+  
   const { id } = useParams(); // Obtiene el id de los parámetros de la URL
   const [isDialogOpen, setDialogOpen] = useState(false);
+
+  
 
   const handleOpenDialog = () => {
     setDialogOpen(true);
@@ -96,9 +116,11 @@ export default function CursoIndividual() {
     // Lógica para cerrar la snackbar
   };
 
-  const curso = cursosData.cursos.find(
-    (curso) => curso.id === parseInt(id, 10)
-  ); // Busca el curso por id
+  
+
+  const curso = cursos.find((curso) => curso._id === id); // Busca el curso por id
+
+  console.log("id: ", curso);
 
   if (!curso) {
     // Manejo de caso en el que el curso no se encuentra
@@ -118,11 +140,19 @@ export default function CursoIndividual() {
     frequency,
     type,
   } = curso;
+  
+  
 
   // Busca al docente utilizando el ID del curso
-  const docente = profesoresData.profesores.find(
+  const docente1 = profesoresData.profesores.find(
     (profesor) => profesor.id === teacher
   );
+  
+
+  if (!docente1) {
+    // Manejo de caso en el que el docente no se encuentra
+    return <div>Docente no encontrado</div>;
+  }
 
   const imgFullURL = image;
   const imgSlices = imgFullURL.split("/");
@@ -130,7 +160,7 @@ export default function CursoIndividual() {
 
   const imageUrl = `/img/cursos/${imageName}`;
 
-  const docenteIMGFullURL = docente.image;
+  const docenteIMGFullURL = docente1.image;
   const docenteIMGSlices = docenteIMGFullURL.split("/");
   const docenteIMGName = docenteIMGSlices[docenteIMGSlices.length - 1];
 
@@ -219,10 +249,10 @@ export default function CursoIndividual() {
                     style={{ width: "100%", minHeight: "20rem", marginBottom: "1rem" }}
                   />
                   <Typography variant="body1">
-                    {docente ? docente.name : "No se encontró el docente"}
+                    {docente1 ? docente1.name : "No se encontró el docente"}
                   </Typography>
                   <Typography variant="body1">
-                    {docente ? docente.background : "No se encontró el docente"}
+                    {docente1 ? docente1.background : "No se encontró el docente"}
                   </Typography>
                 </CardContent>
               </InfoBox>

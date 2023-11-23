@@ -406,6 +406,8 @@ export const obtenerProfesorPorId = async function(profesorId) {
     // url del servicio web
     let url = urlWebServices.obtenerProfesorPorId; // Reemplaza con la ruta de tu endpoint
 
+    console.log("url:", url+profesorId)
+
     try {
         let response = await fetch(url + profesorId, {
             method: 'GET',

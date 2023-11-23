@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Breadcrumb from "../../componentes/Breadcrumb/Breadcrumb";
-import profesoresData from "../../data/ejemplo-profesores.json"; // Importa los datos de profesores
+import profesoresData from "../../data/ejemplo-profesores.json";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -15,16 +15,19 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Divider from "@mui/material/Divider";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/system";
-import { ThemeProvider, createTheme } from "@mui/material/styles"; // Importa ThemeProvider y createTheme
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import RatingStars from "../../componentes/RatingStars/RatingStars";
 import { CardMedia } from "@mui/material";
 import "./CursoIndividualStyles.css";
 import CommentGrid from "../../componentes/Comments/CommentGrid";
 import CommentTextArea from "../../componentes/Comments/CommentTextArea";
 import CompraForm from "../../componentes/Forms/CompraForm";
-import { obtenerTodosLosCursos,obtenerProfesorPorId } from '../../controller/miApp.controller';
+import {
+  obtenerTodosLosCursos,
+  obtenerProfesorPorId,
+} from "../../controller/miApp.controller";
 
-//Mock de comentarios
+// Mock de comentarios
 const comments = [
   {
     name: "Juan Gomez",
@@ -45,7 +48,6 @@ const comments = [
   { name: "Juan Manuel", score: 5, comment: "¡Me encantó este producto!" },
 ];
 
-//Creacion del tema, header e infobox
 const theme = createTheme();
 
 const HeaderImage = {
@@ -59,12 +61,12 @@ const HeaderImage = {
 };
 
 const ImageContainer = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  width: '100%',
-  height: '100%',
-  overflow: 'hidden',
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  width: "100%",
+  height: "100%",
+  overflow: "hidden",
 };
 
 const Image = {
@@ -81,16 +83,15 @@ const InfoBox = styled(Card)(({ theme }) => ({
 }));
 
 export default function CursoIndividual() {
-
   const [cursos, setCursos] = useState([]);
-  const [docente, setDocente] = useState([]);
+  const [profesor, setProfesor] = useState(null);
 
   useEffect(() => {
     const fetchCursos = async () => {
       const response = await obtenerTodosLosCursos();
       if (response.rdo === 0) {
         setCursos(response.data.docs);
-        console.log("cursos: ",response.data.docs);
+        console.log("cursos: ", response.data.docs);
       } else {
         console.error(response.mensaje);
       }
@@ -98,11 +99,9 @@ export default function CursoIndividual() {
 
     fetchCursos();
   }, []);
-  
-  const { id } = useParams(); // Obtiene el id de los parámetros de la URL
-  const [isDialogOpen, setDialogOpen] = useState(false);
 
-  
+  const { id } = useParams();
+  const [isDialogOpen, setDialogOpen] = useState(false);
 
   const handleOpenDialog = () => {
     setDialogOpen(true);
@@ -116,14 +115,23 @@ export default function CursoIndividual() {
     // Lógica para cerrar la snackbar
   };
 
-  
+  const curso = cursos.find((curso) => curso._id === id);
 
-  const curso = cursos.find((curso) => curso._id === id); // Busca el curso por id
-
-  console.log("id: ", curso);
+  useEffect(() => {
+    const fetchProfesor = async () => {
+      if (curso && curso.teacher) {
+        const idProfesor = curso.teacher;
+        const profesorData = await obtenerProfesorPorId(idProfesor);
+        console.log("profesorData: ", profesorData);
+        if (profesorData) {
+          setProfesor(profesorData.profesor.data);
+        }
+      }
+    };
+    fetchProfesor();
+  }, [curso]);
 
   if (!curso) {
-    // Manejo de caso en el que el curso no se encuentra
     return <div>Curso no encontrado</div>;
   }
 
@@ -135,36 +143,22 @@ export default function CursoIndividual() {
     price,
     extendedDescription,
     subjects,
-    teacher,
+    teacher ,
     category,
     frequency,
     type,
   } = curso;
-  
-  
 
-  // Busca al docente utilizando el ID del curso
-  const docente1 = profesoresData.profesores.find(
-    (profesor) => profesor.id === teacher
-  );
-  
+  const imgSlices = image ? image.split("/") : [];
+  const imageName = imgSlices.length > 0 ? imgSlices[imgSlices.length - 1] : null;
 
-  if (!docente1) {
-    // Manejo de caso en el que el docente no se encuentra
-    return <div>Docente no encontrado</div>;
-  }
+  const imageUrl = imageName ? `/img/cursos/${imageName}` : null;
 
-  const imgFullURL = image;
-  const imgSlices = imgFullURL.split("/");
-  const imageName = imgSlices[imgSlices.length - 1];
+  const docenteIMGFullURL = profesor ? profesor.image : null;
+  const docenteIMGSlices = docenteIMGFullURL ? docenteIMGFullURL.split("/") : [];
+  const docenteIMGName = docenteIMGSlices.length > 0 ? docenteIMGSlices[docenteIMGSlices.length - 1] : null;
 
-  const imageUrl = `/img/cursos/${imageName}`;
-
-  const docenteIMGFullURL = docente1.image;
-  const docenteIMGSlices = docenteIMGFullURL.split("/");
-  const docenteIMGName = docenteIMGSlices[docenteIMGSlices.length - 1];
-
-  const docenteImageUrl = `/img/profesores/${docenteIMGName}`;
+  const docenteImageUrl = docenteIMGName ? `/img/profesores/${docenteIMGName}` : null;
 
   const breadcrumbItems = [
     { label: "EDUWIZARD", link: "/" },
@@ -178,136 +172,103 @@ export default function CursoIndividual() {
         <Breadcrumb items={breadcrumbItems} />
 
         <Container maxWidth="xl">
-          <Paper
-            elevation={3}
-            style={HeaderImage}
-          >
+          <Paper elevation={3} style={HeaderImage}>
             <div style={ImageContainer}>
-              <img
-                src={imageUrl}
-                alt="Curso Imagen"
-                style={Image}
-              />
+              <img src={imageUrl} alt="Curso Imagen" style={Image} />
             </div>
           </Paper>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6} className="info-square">
-              <InfoBox className="info-square">
-                <CardContent>
-                  <Typography variant="h4" gutterBottom>
-                    {title}
-                  </Typography>
-                  <Typography variant="body1" gutterBottom>
-                    {description}
-                  </Typography>
-                  <Typography variant="body2">
-                    Duración: {duration} semanas
-                  </Typography>
-                  <Typography variant="body2" gutterBottom>
-                    {frequency === "1"
-                      ? "1 vez por semana"
-                      : `${frequency} veces por semana`}
-                  </Typography>
-                  <Typography variant="body2" gutterBottom>
-                    Precio: ${price}
-                  </Typography>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    startIcon={<ShoppingCartIcon />}
-                    onClick={handleOpenDialog}
-                  >
-                    Comprar
-                  </Button>
-
-                  <CompraForm
-                    open={isDialogOpen}
-                    handleClose={handleCloseDialog}
-                  />
-                  <Divider style={{ padding: "2rem" }} />
-                  <Typography
-                    variant="subtitle1"
-                    gutterBottom
-                    textAlign={"center"}
-                  >
-                    Valoración del Curso
-                  </Typography>
-                  <RatingStars rating={parseFloat(curso.stars)} />
-                </CardContent>
+              <InfoBox className="info-container">
+                <Typography variant="h5" gutterBottom>
+                  {title}
+                </Typography>
+                <Typography variant="body1" paragraph>
+                  {description}
+                </Typography>
+                <Typography variant="body2" paragraph>
+                  <strong>Profesor:</strong> {teacher}
+                </Typography>
+                <Typography variant="body2" paragraph>
+                  <strong>Categoría:</strong> {category}
+                </Typography>
+                <Typography variant="body2" paragraph>
+                  <strong>Duración:</strong> {duration} horas
+                </Typography>
+                <Typography variant="body2" paragraph>
+                  <strong>Precio:</strong> ${price}
+                </Typography>
+                <Typography variant="body2" paragraph>
+                  <strong>Frecuencia:</strong> {frequency}
+                </Typography>
+                <Typography variant="body2" paragraph>
+                  <strong>Tipo:</strong> {type}
+                </Typography>
+                <Typography variant="body2" paragraph>
+                  <strong>Materias:</strong> {subjects.join(", ")}
+                </Typography>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  startIcon={<ShoppingCartIcon />}
+                  onClick={handleOpenDialog}
+                >
+                  Comprar Curso
+                </Button>
               </InfoBox>
             </Grid>
-
-            <Grid item xs={12} sm={6} className="info-square">
-              <InfoBox className="info-square">
+            <Grid item xs={12} sm={6}>
+              <Card style={{ height: "100%" }}>
                 <CardContent>
-                  <Typography variant="h5">Docente a Cargo</Typography>
-                  <CardMedia
-                    component="img"
-                    className="card-image"
-                    src={docenteImageUrl}
-                    alt="Profesor Imagen"
-                    style={{ width: "100%", minHeight: "20rem", marginBottom: "1rem" }}
-                  />
-                  <Typography variant="body1">
-                    {docente1 ? docente1.name : "No se encontró el docente"}
+                  <Typography variant="h6" gutterBottom>
+                    Descripción Extendida
                   </Typography>
-                  <Typography variant="body1">
-                    {docente1 ? docente1.background : "No se encontró el docente"}
+                  <Typography variant="body1" paragraph>
+                    {extendedDescription}
                   </Typography>
                 </CardContent>
-              </InfoBox>
+              </Card>
             </Grid>
-
-            <Grid item xs={12} sm={6} className="info-square2">
-              <InfoBox className="info-square2">
-                <CardContent>
-                  <Typography variant="h5">Descripción</Typography>
-                  <Typography variant="body1">{extendedDescription}</Typography>
-                </CardContent>
-
-                <CardContent>
-                  <Typography variant="h5">Categoria</Typography>
-                  <Typography variant="body1">{category}</Typography>
-                </CardContent>
-
-                <CardContent>
-                  <Typography variant="h5">Modo de Clases</Typography>
-                  <Typography variant="body1">{type}</Typography>
-                </CardContent>
-              </InfoBox>
-            </Grid>
-
-            <Grid item xs={12} sm={6} className="info-square2">
-              <InfoBox className="info-square2">
-                <CardContent>
-                  <Typography variant="h5">Temas del Curso</Typography>
-                  <List>
-                    {subjects.map((subject, index) => (
-                      <ListItem key={index}>
-                        <ListItemText primary={subject} />
-                      </ListItem>
-                    ))}
-                  </List>
-                </CardContent>
-              </InfoBox>
-            </Grid>
-
+          </Grid>
+          <Grid container spacing={3} style={{ marginTop: "1rem" }}>
             <Grid item xs={12}>
-              <InfoBox>
+              <Card>
                 <CardContent>
-                  <CommentTextArea handleClose={handleCloseComments} />
-                  <Typography variant="h5" style={{ paddingTop: "2rem" }}>
+                  <Typography variant="h6" gutterBottom>
+                    Docente
+                  </Typography>
+                  {profesor && (
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <img src={docenteImageUrl} alt="Docente Imagen" style={{ width: "80px", marginRight: "1rem" }} />
+                      <div>
+                        <Typography variant="body1">{profesor.name}</Typography>
+                        <Typography variant="body2" paragraph>
+                          {profesor.bio}
+                        </Typography>
+                      </div>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            </Grid>
+          </Grid>
+          <Grid container spacing={3} style={{ marginTop: "1rem" }}>
+            <Grid item xs={12}>
+              <Card>
+                <CardContent>
+                  <Typography variant="h6" gutterBottom>
                     Comentarios
                   </Typography>
-                  <div>
-                    <CommentGrid comments={comments} />
-                  </div>
+                  <CommentTextArea />
+                  <CommentGrid comments={comments} handleClose={handleCloseComments} />
                 </CardContent>
-              </InfoBox>
+              </Card>
             </Grid>
           </Grid>
         </Container>
       </ThemeProvider>
+
+      <CompraForm isOpen={isDialogOpen} handleClose={handleCloseDialog} curso={curso} />
     </>
   );
 }

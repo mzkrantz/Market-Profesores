@@ -74,6 +74,10 @@ export const registration = async function(user) {
     formData.append('email', user.email);
     formData.append('telefono', user.phone);
     formData.append('password', user.password);
+    formData.append('materia', user.materia);
+    formData.append('edad', user.edad);
+    formData.append('descripcion', user.descripcion);
+    formData.append('experiencia', user.experiencia);
     console.log("dato", formData);
     console.log("url", url);
     try {

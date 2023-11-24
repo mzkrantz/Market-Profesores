@@ -9,10 +9,9 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
 import { Navigate } from "react-router-dom";
-import {registration} from "../../controller/miApp.controller";
+import { registration } from "../../controller/miApp.controller";
 
 export default function Registrate() {
-
   const [redirect, setRedirect] = React.useState(false);
 
   const [formData, setFormData] = React.useState({
@@ -21,6 +20,10 @@ export default function Registrate() {
     email: "",
     phone: "",
     password: "",
+    materia: "",
+    edad: "",
+    descripcion: "",
+    experiencia: "",
   });
 
   const [formErrors, setFormErrors] = React.useState({
@@ -29,6 +32,10 @@ export default function Registrate() {
     email: "",
     phone: "",
     password: "",
+    materia: "",
+    edad: "",
+    descripcion: "",
+    experiencia: "",
   });
 
   const handleSubmit = (event) => {
@@ -36,11 +43,11 @@ export default function Registrate() {
     if (validateForm()) {
       registerUser(formData)
         .then((data) => {
-          console.log('Usuario registrado:', data);
-          setRedirect(true); 
+          console.log("Usuario registrado:", data);
+          setRedirect(true);
         })
         .catch((error) => {
-          console.error('Error:', error);
+          console.error("Error:", error);
         });
     }
   };
@@ -50,16 +57,14 @@ export default function Registrate() {
   }
 
   const registerUser = async (formData) => {
-      
-    let getRegistration = await registration(formData)
-  
-    if (getRegistration===0) {
+    let getRegistration = await registration(formData);
+
+    if (getRegistration === 0) {
       alert("El usuario se registró de manera exitosa");
     } else {
       console.log("Hubo un error al registrar al usuario");
     }
-  
-  }
+  };
 
   const validateForm = () => {
     const errors = {};
@@ -87,6 +92,26 @@ export default function Registrate() {
 
     if (formData.password.length < 8) {
       errors.password = "La contraseña debe tener al menos 8 caracteres.";
+      isValid = false;
+    }
+
+    if (formData.materia.trim() === "") {
+      errors.materia = "La materia es obligatoria.";
+      isValid = false;
+    }
+
+    if (!formData.edad.match(/^\d+$/)) {
+      errors.edad = "La edad debe contener solo números.";
+      isValid = false;
+    }
+
+    if (formData.descripcion.trim() === "") {
+      errors.descripcion = "La descripcion es obligatoria.";
+      isValid = false;
+    }
+
+    if (formData.experiencia.trim() === "") {
+      errors.experiencia = "La experiencia es obligatoria.";
       isValid = false;
     }
 
@@ -206,6 +231,68 @@ export default function Registrate() {
                   helperText={
                     <span style={{ color: "#d32f2f" }}>
                       {formErrors.password}
+                    </span>
+                  }
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  required
+                  fullWidth
+                  name="materia"
+                  label="Materia"
+                  id="materia"
+                  value={formData.materia}
+                  onChange={handleInputChange}
+                  helperText={
+                    <span style={{ color: "#d32f2f" }}>
+                      {formErrors.materia}
+                    </span>
+                  }
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  required
+                  fullWidth
+                  name="edad"
+                  label="Edad"
+                  id="edad"
+                  value={formData.edad}
+                  onChange={handleInputChange}
+                  helperText={
+                    <span style={{ color: "#d32f2f" }}>{formErrors.edad}</span>
+                  }
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="descripcion"
+                  label="Descripción"
+                  id="descripcion"
+                  value={formData.descripcion}
+                  onChange={handleInputChange}
+                  helperText={
+                    <span style={{ color: "#d32f2f" }}>
+                      {formErrors.descripcion}
+                    </span>
+                  }
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="experiencia"
+                  label="Experiencia"
+                  id="experiencia"
+                  value={formData.experiencia}
+                  onChange={handleInputChange}
+                  helperText={
+                    <span style={{ color: "#d32f2f" }}>
+                      {formErrors.experiencia}
                     </span>
                   }
                 />

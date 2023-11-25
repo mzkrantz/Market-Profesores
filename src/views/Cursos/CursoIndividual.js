@@ -121,10 +121,10 @@ export default function CursoIndividual() {
     const fetchProfesor = async () => {
       if (curso && curso.teacher) {
         const idProfesor = curso.teacher;
-        const profesorData = await obtenerProfesorPorId(idProfesor);
-        console.log("profesorData: ", profesorData);
-        if (profesorData) {
-          setProfesor(profesorData.profesor.data);
+        const respuesta = await obtenerProfesorPorId(idProfesor);
+        
+        if (respuesta) {
+          setProfesor(respuesta.profesor.data);
         }
       }
     };
@@ -187,7 +187,13 @@ export default function CursoIndividual() {
                   {description}
                 </Typography>
                 <Typography variant="body2" paragraph>
-                  <strong>Profesor:</strong> {teacher}
+                  {profesor ? (
+                    <Typography variant="body2" paragraph>
+                      <strong>Profesor:</strong> {profesor.name}
+                    </Typography>
+                  ) : (
+                    <div>Cargando...</div>
+                  )}
                 </Typography>
                 <Typography variant="body2" paragraph>
                   <strong>Categoría:</strong> {category}
@@ -259,7 +265,7 @@ export default function CursoIndividual() {
                   <Typography variant="h6" gutterBottom>
                     Comentarios
                   </Typography>
-                  <CommentTextArea />
+                  <CommentTextArea courseId={curso._id} /> 
                   <CommentGrid comments={comments} handleClose={handleCloseComments} />
                 </CardContent>
               </Card>

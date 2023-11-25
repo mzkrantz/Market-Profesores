@@ -127,11 +127,11 @@ export default function EditCursoForm({
 
   const handleSubmit = async () => {
     // Convertir el objeto cursoData a FormData para poder enviar el archivo de imagen
-    {/*const formData = new FormData();
+    const formData = new FormData();
     Object.keys(cursoData).forEach(key => {
       formData.append(key, cursoData[key]);
     });
-    */}
+    
 
     try {
       let response;
@@ -167,12 +167,18 @@ export default function EditCursoForm({
   
   const handleFileUpload = (acceptedFiles) => {
     const file = acceptedFiles[0];
+    console.log("que pasa antes", cursoData.image);
     setCursoData({ ...cursoData, image: file });
+    console.log("que pasa antes", cursoData.image);
+
   };
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
+    
     onDrop: handleFileUpload,
+
+    
   });
 
   const handleCloseSnackbar = () => {

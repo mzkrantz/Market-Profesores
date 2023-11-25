@@ -445,3 +445,49 @@ export const obtenerProfesorPorId = async function(profesorId) {
         console.log("error", error);
     };
 }
+
+export const enviarComentario = async function(data) {
+    // url del servicio web
+    let url = urlWebServices.enviarComentario; // Reemplaza con la ruta de tu endpoint
+
+    try {
+        let response = await fetch(url , {
+            method: 'POST',
+            mode: "cors",
+            headers: {
+                'Accept': '*/*',
+                'Origin': 'http://localhost:3000',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                nombre: data.nombre,
+                comentario: data.comentario,
+                idCurso: data.idCurso
+            })
+        });
+
+        console.log("response", response);
+        let responseData = await response.json();
+        console.log("jsonresponse", responseData);
+
+        switch (response.status) {
+            case 200: {
+                // Procesa los datos aquí
+                return ({ rdo: 0, mensaje: "Comentario enviado correctamente" }); // correcto
+            }
+            case 404: {
+                // No se encontró el curso
+                return ({ rdo: 1, mensaje: "No se encontró el curso con ese ID." });
+            }
+            default: {
+                // otro error
+                return ({ rdo: 1, mensaje: "Ha ocurrido un error" });
+            }
+        }
+    } catch (error) {
+        console.log("error", error);
+    };
+}
+
+
+

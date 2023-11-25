@@ -9,6 +9,7 @@ const urlWebServices = {
     crearCurso: urlApi +"api/cursos/",
     misCursos: urlApi +"api/cursos/",
     obtenerProfesorPorId: urlApi +"api/profesores/profesor/",
+    enviarComentario : urlApi +"api/comentarios/",
 
    
 }

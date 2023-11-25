@@ -53,7 +53,7 @@ export default function Registrate() {
   };
 
   if (redirect) {
-    return <Navigate to="/" />; // reemplaza '/ruta-deseada' con la ruta a la que deseas navegar
+    return <Navigate to="/" />; 
   }
 
   const registerUser = async (formData) => {

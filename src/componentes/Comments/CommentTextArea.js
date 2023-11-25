@@ -8,8 +8,10 @@ import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import RatingStarsDynamic from "../RatingStars/RatingStarsDynamic";
 import TextField from "@mui/material/TextField";
+import {enviarComentario} from "../../controller/miApp.controller";
 
-export default function CommentTextArea({ handleClose }) {
+export default function CommentTextArea({ handleClose, courseId }) { 
+  
   const [name, setName] = useState(""); // Estado para el nombre
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
@@ -17,13 +19,31 @@ export default function CommentTextArea({ handleClose }) {
   const [isSnackbarOpen, setSnackbarOpen] = useState(false);
   const [isErrorSnackbarOpen, setErrorSnackbarOpen] = useState(false);
 
+  const enviarInformacion = async (nombre, comentario) => {
+    const data = {
+      idCurso: courseId,
+      nombre: nombre,
+      comentario: comentario,
+    };
+
+    const respuesta = await enviarComentario(data);
+
+    if (respuesta.status === 200) {
+      setSnackbarOpen(true);
+   
+        
+      }
+
+  };
+
+  // Llama a la función handleSubmit en tu componente CommentTextArea
   const handleSubmit = () => {
     if (name.trim() !== "" && comment.trim() !== "") {
-      // Agregar la lógica para enviar el comentario
+      enviarInformacion(name, comment);
       setSnackbarOpen(true);
       handleClose();
     } else {
-      setErrorSnackbarOpen(true); // Mostrar alerta de error si no se cumplen las condiciones
+      setErrorSnackbarOpen(true);
     }
   };
 
@@ -38,6 +58,8 @@ export default function CommentTextArea({ handleClose }) {
       setComment(inputText);
     }
   };
+
+  console.log("Course ID:", courseId); // Agregar este console.log para mostrar el ID del curso
 
   return (
     <FormControl style={{ width: "100%" }}>

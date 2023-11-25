@@ -68,7 +68,7 @@ const Perfil = () => {
           age: response.profesor.data.age,
           email: response.profesor.data.email,
           phone: response.profesor.data.phone,
-          image: " ",
+          image: response.profesor.data.image,
           description: response.profesor.data.description,
           background: response.profesor.data.background,
         });

@@ -174,7 +174,7 @@ export default function CursoIndividual() {
         <Container maxWidth="xl">
           <Paper elevation={3} style={HeaderImage}>
             <div style={ImageContainer}>
-              <img src={imageUrl} alt="Curso Imagen" style={Image} />
+              <img src={curso.image} alt="Curso Imagen" style={Image} />
             </div>
           </Paper>
           <Grid container spacing={3}>
@@ -245,7 +245,7 @@ export default function CursoIndividual() {
                   </Typography>
                   {profesor && (
                     <div style={{ display: "flex", alignItems: "center" }}>
-                      <img src={docenteImageUrl} alt="Docente Imagen" style={{ width: "80px", marginRight: "1rem" }} />
+                      <img src={profesor.image} alt="Docente Imagen" style={{ width: "80px", marginRight: "1rem" }} />
                       <div>
                         <Typography variant="body1">{profesor.name}</Typography>
                         <Typography variant="body2" paragraph>

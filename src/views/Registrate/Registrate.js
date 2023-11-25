@@ -10,9 +10,12 @@ import Container from "@mui/material/Container";
 
 import { Navigate } from "react-router-dom";
 import { registration } from "../../controller/miApp.controller";
+import { useDropzone } from "react-dropzone";
 
 export default function Registrate() {
   const [redirect, setRedirect] = React.useState(false);
+
+  
 
   const [formData, setFormData] = React.useState({
     nombre: "",
@@ -24,7 +27,7 @@ export default function Registrate() {
     edad: "",
     descripcion: "",
     experiencia: "",
-    imagen: " ",
+    image: null,
   });
 
   const [formErrors, setFormErrors] = React.useState({
@@ -37,8 +40,17 @@ export default function Registrate() {
     edad: "",
     descripcion: "",
     experiencia: "",
-    imagen: "",
+    image: null,
   });
+
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: "image/*",
+    onDrop: (acceptedFiles) => {
+      setFormData(prevState => ({ ...prevState, image: acceptedFiles[0] }));
+    },
+  });
+
+  
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -58,7 +70,26 @@ export default function Registrate() {
     return <Navigate to="/" />;
   }
 
-  const registerUser = async (formData) => {
+  
+  const registerUser = async (registedData) => {
+    console.log("registed data: ",registedData);
+    const formData = new FormData();
+
+    for (let key in registedData) {
+      if (registedData.hasOwnProperty(key) && registedData[key] !== null) {
+        formData.append(key, registedData[key]);
+      }
+    }
+
+    // Imprimir el contenido de formData
+    for (var pair of formData.entries()) {
+      if (pair[1] instanceof File) {
+        console.log(pair[0] + ', ' + pair[1].name + ', ' + pair[1].size + ', ' + pair[1].type);
+      } else {
+        console.log(pair[0] + ', ' + pair[1]);
+      }
+    }
+
     let getRegistration = await registration(formData);
 
     if (getRegistration === 0) {
@@ -117,8 +148,8 @@ export default function Registrate() {
       isValid = false;
     }
 
-    if (!formData.imagen) {
-      errors.imagen = "Seleccione una imagen.";
+    if (!formData.image) {
+      errors.image = "Seleccione una imagen.";
       isValid = false;
     }
 
@@ -132,6 +163,14 @@ export default function Registrate() {
       ...formData,
       [name]: value,
     });
+  };
+
+  const dropzoneStyle = {
+    border: "2px dashed #ccc",
+    borderRadius: "4px",
+    padding: "20px",
+    textAlign: "center",
+    cursor: "pointer",
   };
 
   return (
@@ -306,31 +345,13 @@ export default function Registrate() {
               </Grid>
 
               <Grid item xs={12}>
-                <input
-                  accept="image/*"
-                  style={{ display: "none" }}
-                  id="imagen"
-                  type="file"
-                  onChange={(e) => {
-                    if (e.target.files.length > 0) {
-                      setFormData({ ...formData, imagen: e.target.files[0] });
-                      setFormErrors({ ...formErrors, imagen: "" });
-                    } else {
-                      setFormErrors({
-                        ...formErrors,
-                        imagen: "Seleccione una imagen válida.",
-                      });
-                    }
-                  }}
-                />
-                <label htmlFor="imagen">
-                  <Button variant="contained" component="span" fullWidth>
-                    Subir Imagen
-                  </Button>
-                </label>
-                {formErrors.imagen && (
-                  <span style={{ color: "#d32f2f" }}>{formErrors.imagen}</span>
-                )}
+              <div {...getRootProps()} style={dropzoneStyle}>
+            <input {...getInputProps()} />
+            <p>
+              Arrastra y suelta una imagen aquí, o haz clic para seleccionar
+              una.
+            </p>
+          </div>
               </Grid>
             </Grid>
             <Button

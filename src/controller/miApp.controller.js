@@ -68,19 +68,7 @@ export const registration = async function(user) {
     // url webservices
     let url = urlWebServices.registration;
     // armo json con datos
-    const formData = new URLSearchParams();
-    formData.append('nombre', user.nombre);
-    formData.append('apellido', user.apellido);
-    formData.append('email', user.email);
-    formData.append('telefono', user.phone);
-    formData.append('password', user.password);
-    formData.append('materia', user.materia);
-    formData.append('edad', user.edad);
-    formData.append('descripcion', user.descripcion);
-    formData.append('experiencia', user.experiencia);
-    formData.append('imagen', user.imagen);
-    console.log("dato", formData);
-    console.log("url", url);
+    
     try {
         let response = await fetch(url, {
             method: 'POST',
@@ -88,9 +76,8 @@ export const registration = async function(user) {
             headers: {
                 'Accept': 'application/x-www-form-urlencoded',
                 'Origin': 'http://localhost:3000',
-                'Content-Type': 'application/x-www-form-urlencoded'
             },
-            body: formData,
+            body: user,
         });
 
         let rdo = response.status;

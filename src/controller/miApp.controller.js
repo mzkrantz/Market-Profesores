@@ -219,7 +219,7 @@ export const crearCurso = async function(formData) {
     let token = localStorage.getItem('x');
     let profesorId = localStorage.getItem('profesorId');
 
-    formData.teacher = profesorId;
+    formData.set('teacher', profesorId);
 
     try {
         let response = await fetch(url, {
@@ -229,9 +229,8 @@ export const crearCurso = async function(formData) {
                 'x-access-token': token,
                 'Accept': '*/*',
                 'Origin': 'http://localhost:3000',
-                'Content-Type': 'application/json'
             },
-            body: JSON.stringify(formData)
+            body: formData
         });
 
         let rdo = response.status;
@@ -256,6 +255,8 @@ export const crearCurso = async function(formData) {
         console.log("error", error);
     };
 }
+
+
 export const misCursos = async function() {
     // url webservices
     let url = urlWebServices.misCursos; // Reemplaza con la ruta de tu endpoint

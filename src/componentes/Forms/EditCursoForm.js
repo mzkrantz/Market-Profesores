@@ -128,32 +128,37 @@ export default function EditCursoForm({
   const handleSubmit = async () => {
     // Convertir el objeto cursoData a FormData para poder enviar el archivo de imagen
     const formData = new FormData();
-    Object.keys(cursoData).forEach(key => {
-      formData.append(key, cursoData[key]);
-    });
-    
-
+  
+    for (let key in cursoData) {
+      if (cursoData.hasOwnProperty(key)) {
+        if (cursoData[key] instanceof File) {
+          formData.append(key, cursoData[key]);
+        } else {
+          formData.append(key, JSON.stringify(cursoData[key]));
+        }
+      }
+    }
+  
     try {
       let response;
   
       // Verificar si el título es "Editar Curso"
       if (title === "Editar Curso") {
         // Si es así, llamar a actualizarCurso
-        console.log('Llamando a actualizarCurso...');
-        response = await actualizarCurso(cursoData._id, cursoData);
+        console.log('Llamando a actualizarCurso...', formData);
+        response = await actualizarCurso(cursoData._id, formData);
       } else {
         // Si no, llamar a crearCurso
-        console.log('Llamando a crearCurso...');
-        response = await crearCurso(cursoData);
+        console.log('Llamando a crearCurso...', formData);
+        response = await crearCurso(formData);
       }
   
       console.log('Respuesta:', response);
   
       if (response.rdo === 0) {
-        
         // Si es exitosa, mostrar el Snackbar
         setSnackbarOpen(true);
-
+  
         // Cerrar la ventana de diálogo
         setDialogOpen(false);
       } else {
@@ -165,20 +170,13 @@ export default function EditCursoForm({
     }
   };
   
-  const handleFileUpload = (acceptedFiles) => {
-    const file = acceptedFiles[0];
-    console.log("que pasa antes", cursoData.image);
-    setCursoData({ ...cursoData, image: file });
-    console.log("que pasa antes", cursoData.image);
-
-  };
+  
 
   const { getRootProps, getInputProps } = useDropzone({
-    accept: "image/*",
-    
-    onDrop: handleFileUpload,
-
-    
+      accept: 'image/*',
+      onDrop: (acceptedFiles) => {
+        setCursoData({ ...cursoData, image: acceptedFiles[0] });
+      },
   });
 
   const handleCloseSnackbar = () => {

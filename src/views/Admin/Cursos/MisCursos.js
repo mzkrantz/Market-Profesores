@@ -17,7 +17,13 @@ import TablePagination from "@mui/material/TablePagination";
 import "../TableStyles.css";
 import SpacerTop from "../../../componentes/Spacer/SpacerTop";
 import EditCursoForm from "../../../componentes/Forms/EditCursoForm";
-import { misCursos, eliminarCurso, actualizarCurso } from "../../../controller/miApp.controller";
+import {
+  misCursos,
+  eliminarCurso,
+  actualizarCurso,
+} from "../../../controller/miApp.controller";
+
+import Refresher from "../../../componentes/Refresher/Refresher";
 
 const CourseList = styled(TableContainer)`
   margin-top: ${({ theme }) => theme.spacing(2)};
@@ -62,9 +68,10 @@ const MisCursos = () => {
   const [cursos, setCursos] = useState([]);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingCourse, setEditingCourse] = useState(null);
-
+  const [formClosed, setFormClosed] = useState(false);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(3);
+  const [refresher, setRefresher] = useState(false); // Nuevo estado para el refrescador
 
   useEffect(() => {
     const fetchCursos = async () => {
@@ -79,7 +86,7 @@ const MisCursos = () => {
     };
 
     fetchCursos();
-  }, []);
+  }, [refresher]);
 
   const openForm = () => {
     setIsFormOpen(true);
@@ -87,6 +94,7 @@ const MisCursos = () => {
 
   const closeForm = () => {
     setIsFormOpen(false);
+    setFormClosed(true);
   };
 
   const handleChangePage = (event, newPage) => {
@@ -99,19 +107,20 @@ const MisCursos = () => {
   };
 
   const handlePublish = async (curso) => {
-    if (curso && 'published' in curso) {
-      
+    if (curso && "published" in curso) {
       // Aquí va la lógica para publicar/despublicar el curso
       const updatedCursoData = { published: !curso.published }; // Cambia el estado de 'published'
       const response = await actualizarCurso(curso._id, updatedCursoData);
       if (response && response.rdo === 0) {
         console.log(`Curso ${curso._id} publicado/despublicado correctamente`);
-        // Aquí puedes actualizar tu estado `cursos` para reflejar que el estado de 'published' ha cambiado
+        setRefresher((prev) => !prev); // Actualiza el estado del refrescador
       } else {
-        console.error(response ? response.mensaje : 'Error al publicar/despublicar el curso');
+        console.error(
+          response ? response.mensaje : "Error al publicar/despublicar el curso"
+        );
       }
     } else {
-      console.log('Curso es undefined o no tiene una propiedad published');
+      console.log("Curso es undefined o no tiene una propiedad published");
     }
   };
 
@@ -121,95 +130,125 @@ const MisCursos = () => {
       const response = await eliminarCurso(curso._id);
       if (response && response.rdo === 0) {
         console.log(`Curso ${curso._id} eliminado correctamente`);
-        // Aquí puedes actualizar tu estado `cursos` para reflejar que el curso ha sido eliminado
+        setRefresher((prev) => !prev); // Actualiza el estado del refrescador
       } else {
-        console.error(response ? response.mensaje : 'Error al eliminar el curso');
+        console.error(
+          response ? response.mensaje : "Error al eliminar el curso"
+        );
       }
     } else {
-      console.log('Curso es undefined');
+      console.log("Curso es undefined");
     }
   };
+
+  useEffect(() => {
+    if (formClosed) {
+      console.log(
+        "El formulario se cerró. Actualizar el componente si es necesario."
+      );
+
+      const fetchCursos = async () => {
+        const response = await misCursos();
+        if (response && response.rdo === 0) {
+          setCursos(response.cursos || []);
+        } else {
+          console.error(
+            response ? response.mensaje : "Error al obtener los cursos"
+          );
+        }
+      };
+
+      fetchCursos();
+
+      setFormClosed(false);
+    }
+  }, [formClosed, refresher]);
+
   return (
     <>
-      <Container>
-        <SpacerTop>
-          <Typography variant="h4" component="h1" gutterBottom>
-            Mis Cursos
-          </Typography>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => {
-              setEditingCourse();
-              openForm();
-            }}
-          >
-            Crear Nuevo Curso
-          </Button>
-        </SpacerTop>
-        <CourseList component={TableContainer}>
-          <ResponsiveTable className="responsive-table">
-            <TableHead>
-              <TableRow>
-                <TableCell>Curso</TableCell>
-                <TableCell>Descripción</TableCell>
-                <TableCell>Estado</TableCell>
-                <TableCell>Acciones</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {cursos
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((curso) => (
-                  <TableRow key={curso.id}>
-                    <TableCell>{curso.title}</TableCell>
-                    <TableCell>{curso.description}</TableCell>
-                    <TableCell>
-                      {curso.published ? "Publicado" : "No Publicado"}
-                    </TableCell>
-                    <TableCell>
-                      <ButtonContainer>
-                        <IconButton
-                          className="boton-tabla"
-                          onClick={() => {
-                            setEditingCourse(curso);
-                            openForm();
-                          }}
-                        >
-                          <EditIcon />
-                        </IconButton>
-                      </ButtonContainer>
-                      <ButtonContainer>
-                        <IconButton
-                          className="boton-tabla"
-                          onClick={() => handlePublish(curso)}
-                        >
-                          <VisibilityIcon />
-                        </IconButton>
-                      </ButtonContainer>
-                      <ButtonContainer>
-                        <IconButton
-                          className="boton-tabla"
-                          onClick={() => handleDelete(curso)}
-                        >
-                          <DeleteIcon />
-                        </IconButton>
-                      </ButtonContainer>
-                    </TableCell>
+      <Refresher>
+        {({ refrescar }) => (
+          <Container>
+            <SpacerTop>
+              <Typography variant="h4" component="h1" gutterBottom>
+                Mis Cursos
+              </Typography>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => {
+                  setEditingCourse();
+                  openForm();
+                }}
+              >
+                Crear Nuevo Curso
+              </Button>
+            </SpacerTop>
+            <CourseList component={TableContainer}>
+              <ResponsiveTable className="responsive-table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Curso</TableCell>
+                    <TableCell>Descripción</TableCell>
+                    <TableCell>Estado</TableCell>
+                    <TableCell>Acciones</TableCell>
                   </TableRow>
-                ))}
-            </TableBody>
-          </ResponsiveTable>
-        </CourseList>
-        <TablePagination
-          component="div"
-          count={cursos.length}
-          page={page}
-          onPageChange={handleChangePage}
-          rowsPerPage={rowsPerPage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Container>
+                </TableHead>
+                <TableBody>
+                  {cursos
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((curso) => (
+                      <TableRow key={curso.id}>
+                        <TableCell>{curso.title}</TableCell>
+                        <TableCell>{curso.description}</TableCell>
+                        <TableCell>
+                          {curso.published ? "Publicado" : "No Publicado"}
+                        </TableCell>
+                        <TableCell>
+                          <ButtonContainer>
+                            <IconButton
+                              className="boton-tabla"
+                              onClick={() => {
+                                setEditingCourse(curso);
+                                openForm();
+                              }}
+                            >
+                              <EditIcon />
+                            </IconButton>
+                          </ButtonContainer>
+                          <ButtonContainer>
+                            <IconButton
+                              className="boton-tabla"
+                              onClick={() => handlePublish(curso)}
+                            >
+                              <VisibilityIcon />
+                            </IconButton>
+                          </ButtonContainer>
+                          <ButtonContainer>
+                            <IconButton
+                              className="boton-tabla"
+                              onClick={() => handleDelete(curso)}
+                            >
+                              <DeleteIcon />
+                            </IconButton>
+                          </ButtonContainer>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                </TableBody>
+              </ResponsiveTable>
+            </CourseList>
+            <TablePagination
+              component="div"
+              count={cursos.length}
+              page={page}
+              onPageChange={handleChangePage}
+              rowsPerPage={rowsPerPage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+          </Container>
+        )}
+      </Refresher>
       {isFormOpen && (
         <EditCursoForm
           open={isFormOpen}

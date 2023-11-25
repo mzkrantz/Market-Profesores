@@ -239,7 +239,7 @@ export const crearCurso = async function(formData) {
         let data = await response.json();
         console.log("jsonresponse", data);
         switch (rdo) {
-            case 200: {
+            case 201: {
                 // Procesa los datos aquí
                 return ({ rdo: 0, mensaje: "Ok", curso: data }); // correcto
             }
@@ -326,7 +326,7 @@ export const eliminarCurso = async function(idCurso) {
         let rdo = response.status;
 
         switch(rdo) {
-            case 200: { // Asumiendo que el servidor devuelve 200 cuando la eliminación es exitosa
+            case 204: { // Asumiendo que el servidor devuelve 200 cuando la eliminación es exitosa
                 return ({rdo: 0, mensaje: "Curso eliminado correctamente"});
             }
             case 404: { // Asumiendo que el servidor devuelve 404 cuando el curso no se encuentra

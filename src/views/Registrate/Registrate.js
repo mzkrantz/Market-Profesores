@@ -24,6 +24,7 @@ export default function Registrate() {
     edad: "",
     descripcion: "",
     experiencia: "",
+    imagen: " ",
   });
 
   const [formErrors, setFormErrors] = React.useState({
@@ -36,6 +37,7 @@ export default function Registrate() {
     edad: "",
     descripcion: "",
     experiencia: "",
+    imagen: "",
   });
 
   const handleSubmit = (event) => {
@@ -53,7 +55,7 @@ export default function Registrate() {
   };
 
   if (redirect) {
-    return <Navigate to="/" />; 
+    return <Navigate to="/" />;
   }
 
   const registerUser = async (formData) => {
@@ -112,6 +114,11 @@ export default function Registrate() {
 
     if (formData.experiencia.trim() === "") {
       errors.experiencia = "La experiencia es obligatoria.";
+      isValid = false;
+    }
+
+    if (!formData.imagen) {
+      errors.imagen = "Seleccione una imagen.";
       isValid = false;
     }
 
@@ -296,6 +303,34 @@ export default function Registrate() {
                     </span>
                   }
                 />
+              </Grid>
+
+              <Grid item xs={12}>
+                <input
+                  accept="image/*"
+                  style={{ display: "none" }}
+                  id="imagen"
+                  type="file"
+                  onChange={(e) => {
+                    if (e.target.files.length > 0) {
+                      setFormData({ ...formData, imagen: e.target.files[0] });
+                      setFormErrors({ ...formErrors, imagen: "" });
+                    } else {
+                      setFormErrors({
+                        ...formErrors,
+                        imagen: "Seleccione una imagen válida.",
+                      });
+                    }
+                  }}
+                />
+                <label htmlFor="imagen">
+                  <Button variant="contained" component="span" fullWidth>
+                    Subir Imagen
+                  </Button>
+                </label>
+                {formErrors.imagen && (
+                  <span style={{ color: "#d32f2f" }}>{formErrors.imagen}</span>
+                )}
               </Grid>
             </Grid>
             <Button

@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -13,8 +11,6 @@ import IconButton from "@mui/material/IconButton";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
-import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { styled } from "@mui/system";
 import PopupMessageInfo from "../../../componentes/Popup/PopupMessageInfo";
 import ModalCustom from "../../../componentes/Modal/ModalCustom";
@@ -45,29 +41,10 @@ const mockSolicitudes = [
       telefono: "123456789",
       mail: "maria@example.com",
       horario: "Mañana",
-      mensaje: "Me gustaría hacer la compra sobre el curso de Marketing Digital",
+      mensaje:
+        "Me gustaría hacer la compra sobre el curso de Marketing Digital",
     },
   },
-  
-];
-
-const mockMensajes = [
-  {
-    id: 1,
-    nombre: "Juan Ramirez",
-    telefono: "123456789",
-    mail: "juan@example.com",
-    mensaje: "Estoy interesado en tus cursos, ¿cómo puedo hacerlo?",
-  },
-  {
-    id: 2,
-    nombre: "María Mariani",
-    telefono: "123456789",
-    mail: "maria@example.com",
-    mensaje:
-      "¿Puedes proporcionarme más información sobre el curso de Fotografía de Naturaleza?",
-  },
-  
 ];
 
 const CommentList = styled(TableContainer)`
@@ -116,8 +93,7 @@ const Solicitudes = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState(0); // 0 para "Solicitudes", 1 para "Mensajes"
-  const [page, setPage] = useState(0); 
+  const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(3); // Elementos por página
 
   const openCommentModal = () => {
@@ -142,26 +118,17 @@ const Solicitudes = () => {
     setPage(0); // Cuando cambias la cantidad de elementos por página, vuelves a la primera página.
   };
 
-  const handleTabChange = (event, newValue) => {
-    setActiveTab(newValue);
-  };
-
   return (
     <>
       <Container>
         <SpacerTop>
           <Typography variant="h4" component="h1" gutterBottom>
-            Solicitudes y Mensajes
+            Solicitudes
           </Typography>
-
-          <Tabs value={activeTab} onChange={handleTabChange}>
-            <Tab label="Solicitudes" />
-            <Tab label="Mensajes" />
-          </Tabs>
         </SpacerTop>
 
         <TableWrapper>
-          {activeTab === 0 && (
+        
             <CommentList component={TableContainer}>
               <ResponsiveTable>
                 <TableHead>
@@ -212,68 +179,13 @@ const Solicitudes = () => {
                 </TableBody>
               </ResponsiveTable>
             </CommentList>
-          )}
-
-          {activeTab === 1 && (
-            <CommentList component={TableContainer}>
-              <ResponsiveTable>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Usuario</TableCell>
-                    <TableCell>Mail</TableCell>
-                    <TableCell>Telefono</TableCell>
-                    <TableCell>Acciones</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {mockMensajes
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((mensaje) => (
-                      <TableRow key={mensaje.id}>
-                        <TableCell>{mensaje.nombre}</TableCell>
-                        <TableCell>{mensaje.mail}</TableCell>
-                        <TableCell>{mensaje.telefono}</TableCell>
-                        <TableCell>
-                          <IconButton
-                            className="boton-tabla"
-                            onClick={() => openCommentModal(openPopup(mensaje))}
-                          >
-                            <VisibilityIcon />
-                          </IconButton>
-                          <IconButton
-                            className="boton-tabla"
-                            onClick={() => {
-                              alert("Implementar la lógica de Envio de Mail");
-                            }}
-                          >
-                            <MailOutlineIcon />
-                          </IconButton>
-                          <IconButton
-                            className="boton-tabla"
-                            onClick={() => {
-                              alert("Implementar la lógica de Eliminado");
-                            }}
-                          >
-                            <DeleteIcon />
-                          </IconButton>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                </TableBody>
-              </ResponsiveTable>
-            </CommentList>
-          )}
-
           <TablePagination
-            component="div"
-            count={
-              activeTab === 0 ? mockSolicitudes.length : mockMensajes.length
-            }
-            page={page}
-            onPageChange={handleChangePage}
-            rowsPerPage={rowsPerPage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-            style={{ justifyContent: "center" }}
+             component="div"
+             count={mockSolicitudes.length}
+             page={page}
+             onPageChange={handleChangePage}
+             rowsPerPage={rowsPerPage}
+             onRowsPerPageChange={handleChangeRowsPerPage}
           />
         </TableWrapper>
       </Container>

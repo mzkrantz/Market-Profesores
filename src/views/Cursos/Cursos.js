@@ -5,8 +5,7 @@ import FilterBar from "../../componentes/FilterBar/FilterBar";
 import CardCurso from "../../componentes/Cards/CardCurso";
 import SpacerTop from "../../componentes/Spacer/SpacerTop";
 import { Pagination, Container } from "@mui/material";
-import { obtenerTodosLosCursos } from '../../controller/miApp.controller';
-
+import { obtenerTodosLosCursos } from "../../controller/miApp.controller";
 
 export default function Cursos() {
   const [courseData, setCourseData] = useState([]);
@@ -22,10 +21,9 @@ export default function Cursos() {
   useEffect(() => {
     const fetchCursos = async () => {
       const response = await obtenerTodosLosCursos(page, itemsPerPage);
-      
+
       if (response.rdo === 0) {
         setCourseData(response.data.docs);
-      
       } else {
         console.error(response.mensaje);
       }
@@ -33,7 +31,6 @@ export default function Cursos() {
 
     fetchCursos();
   }, [page, itemsPerPage]);
-
 
   useEffect(() => {
     const updateItemsPerPage = () => {
@@ -80,8 +77,6 @@ export default function Cursos() {
 
   console.log(filteredCourses);
 
-  
-
   // Ordena los cursos según el campo de ordenamiento y la dirección de ordenamiento de las estrellas
   const sortedCourses = filteredCourses.slice().sort((a, b) => {
     if (sortField === "stars") {
@@ -94,8 +89,8 @@ export default function Cursos() {
 
   const currentCourses = sortedCourses.slice(startIndex, endIndex);
 
-  console.log("currentCourses: ",currentCourses);
-  
+  console.log("currentCourses: ", currentCourses);
+
   const totalPages = Math.ceil(filteredCourses.length / itemsPerPage);
 
   // Maneja el cambio de página
@@ -117,21 +112,25 @@ export default function Cursos() {
     setSortOrder(newOrder);
   };
 
-    // Función para limpiar los filtros
-    const clearFilters = () => {
-      setFilterCategory("");
-      setFilterText("");
-      setFilterFrequency("");
-      setFilterType("");
-      setSortOrder("desc");
-    };
-    
+  // Función para limpiar los filtros
+  const clearFilters = () => {
+    setFilterCategory("");
+    setFilterText("");
+    setFilterFrequency("");
+    setFilterType("");
+    setSortOrder("desc");
+  };
+
   return (
     <>
       <Breadcrumb />
       <Container maxWidth="xl">
         <SpacerTop>
-          <FilterBar onFilter={handleTextFilter} onSortChange={handleSortChange} onClearFilters={clearFilters}/>
+          <FilterBar
+            onFilter={handleTextFilter}
+            onSortChange={handleSortChange}
+            onClearFilters={clearFilters}
+          />
         </SpacerTop>
 
         <ResponsiveGrid cardComponent={CardCurso} cards={currentCourses} />
@@ -143,7 +142,7 @@ export default function Cursos() {
             display: "flex",
             justifyContent: "center",
             marginTop: "20px",
-            marginBottom: "20px"
+            marginBottom: "20px",
           }}
           boundaryCount={0}
         />

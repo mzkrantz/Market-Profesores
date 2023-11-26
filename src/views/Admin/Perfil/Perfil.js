@@ -9,8 +9,10 @@ import Grid from "@mui/material/Grid";
 import EditProfileForm from "./EditProfileForm";
 import { styled } from "@mui/system";
 
-import { profesorPorMail } from '../../../controller/miApp.controller';
-import CircularProgress from '@mui/material/CircularProgress';
+import { profesorPorMail } from "../../../controller/miApp.controller";
+import CircularProgress from "@mui/material/CircularProgress";
+
+import Refresher from "../../../componentes/Refresher/Refresher";
 
 const ProfileContainer = styled(Container)`
   display: flex;
@@ -52,8 +54,7 @@ const Perfil = () => {
   const [editing, setEditing] = useState(false);
   const [isDialogOpen, setDialogOpen] = useState(false);
   const [teacherData, setTeacherData] = useState(null);
-
-
+  const [refresher, setRefresher] = useState(false); // Nuevo estado para el refrescador
 
   useEffect(() => {
     const fetchTeacherData = async () => {
@@ -63,7 +64,7 @@ const Perfil = () => {
       if (response.rdo === 0) {
         setTeacherData({
           name: response.profesor.data.name,
-          lastName: response.profesor.data.lastName,  
+          lastName: response.profesor.data.lastName,
           subject: response.profesor.data.subject,
           age: response.profesor.data.age,
           email: response.profesor.data.email,
@@ -79,13 +80,11 @@ const Perfil = () => {
     };
 
     fetchTeacherData();
-  }, []);
+  }, [refresher]);
 
   if (!teacherData) {
     return <CircularProgress />; // Muestra el indicador de carga si teacherData es null
   }
-
-  
 
   const handleOpenDialog = () => {
     setDialogOpen(true);
@@ -93,6 +92,7 @@ const Perfil = () => {
 
   const handleCloseDialog = () => {
     setDialogOpen(false);
+    setRefresher((prev) => !prev);
   };
 
   const handleFormSubmit = (formData) => {
@@ -100,44 +100,68 @@ const Perfil = () => {
     setEditing(false); // Cierra el formulario después de enviar los datos
   };
   return (
-    <><ProfileContainer>
-  <Paper elevation={3} style={{ padding: "32px" }}>
-    {editing ? (
-      <EditProfileForm
-        initialData={teacherData} // Pasa los datos del perfil como propiedades
-        onSubmit={handleFormSubmit}
-      />
-    ) : (
-      <>
-        <ProfileImage src={teacherData.image} alt={teacherData.name} /> 
-        <ProfileTitle variant="h1">{teacherData.name + " " + teacherData.lastName}</ProfileTitle>
-        <ProfileSubtitle variant="h2">
-          {teacherData.subject}
-        </ProfileSubtitle>
-        {teacherData.age && <ProfileInfo>{teacherData.age} años</ProfileInfo>}
-        {teacherData.email && <ProfileInfo>Email: {teacherData.email}</ProfileInfo>}
-        {teacherData.phone && <ProfileInfo>Teléfono: {teacherData.phone}</ProfileInfo>}
-        {teacherData.background && <ProfileInfo>Experiencia: {teacherData.background}</ProfileInfo>}
-        {teacherData.description && <ProfileInfo>Descripción: {teacherData.description}</ProfileInfo>}
-        <ProfileButtonContainer>
-          <EditButton
-            variant="contained"
-            onClick={handleOpenDialog}
-            open={isDialogOpen}
-          >
-            <EditIcon />
-            Cambiar Datos
-          </EditButton>
-        </ProfileButtonContainer>
-        <EditProfileForm
-          open={isDialogOpen}
-          handleClose={handleCloseDialog}
-          teacherData={teacherData}
-        />
-      </>
-    )}
-  </Paper>
-</ProfileContainer>
+    <>
+      <Refresher>
+        {({ refrescar }) => (
+          <ProfileContainer>
+            <Paper elevation={3} style={{ padding: "32px" }}>
+              {editing ? (
+                <EditProfileForm
+                  initialData={teacherData} // Pasa los datos del perfil como propiedades
+                  onSubmit={handleFormSubmit}
+                />
+              ) : (
+                <>
+                  <ProfileImage
+                    src={teacherData.image}
+                    alt={teacherData.name}
+                  />
+                  <ProfileTitle variant="h1">
+                    {teacherData.name + " " + teacherData.lastName}
+                  </ProfileTitle>
+                  <ProfileSubtitle variant="h2">
+                    {teacherData.subject}
+                  </ProfileSubtitle>
+                  {teacherData.age && (
+                    <ProfileInfo>{teacherData.age} años</ProfileInfo>
+                  )}
+                  {teacherData.email && (
+                    <ProfileInfo>Email: {teacherData.email}</ProfileInfo>
+                  )}
+                  {teacherData.phone && (
+                    <ProfileInfo>Teléfono: {teacherData.phone}</ProfileInfo>
+                  )}
+                  {teacherData.background && (
+                    <ProfileInfo>
+                      Experiencia: {teacherData.background}
+                    </ProfileInfo>
+                  )}
+                  {teacherData.description && (
+                    <ProfileInfo>
+                      Descripción: {teacherData.description}
+                    </ProfileInfo>
+                  )}
+                  <ProfileButtonContainer>
+                    <EditButton
+                      variant="contained"
+                      onClick={handleOpenDialog}
+                      open={isDialogOpen}
+                    >
+                      <EditIcon />
+                      Cambiar Datos
+                    </EditButton>
+                  </ProfileButtonContainer>
+                  <EditProfileForm
+                    open={isDialogOpen}
+                    handleClose={handleCloseDialog}
+                    teacherData={teacherData}
+                  />
+                </>
+              )}
+            </Paper>
+          </ProfileContainer>
+        )}
+      </Refresher>
     </>
   );
 };

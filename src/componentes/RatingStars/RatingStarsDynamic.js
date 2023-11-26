@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import StarIcon from "@mui/icons-material/Star";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
@@ -7,8 +7,7 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import "./RatingStarsDynamic.css"; // Importa un archivo CSS para estilos personalizados
 
-function RatingStars() {
-  const [rating, setRating] = useState(0);
+function RatingStars({ rating, setRating }) { // Recibe rating y setRating como props
 
   const handleIncrement = () => {
     if (rating < 5) {

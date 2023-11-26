@@ -10,7 +10,7 @@ import RatingStarsDynamic from "../RatingStars/RatingStarsDynamic";
 import TextField from "@mui/material/TextField";
 import {enviarComentario} from "../../controller/miApp.controller";
 
-export default function CommentTextArea({ handleClose, courseId }) { 
+export default function CommentTextArea({ handleClose, courseId, idTeacher, cursoTitle }) { 
   
   const [name, setName] = useState(""); // Estado para el nombre
   const [comment, setComment] = useState("");
@@ -19,29 +19,34 @@ export default function CommentTextArea({ handleClose, courseId }) {
   const [isSnackbarOpen, setSnackbarOpen] = useState(false);
   const [isErrorSnackbarOpen, setErrorSnackbarOpen] = useState(false);
 
-  const enviarInformacion = async (nombre, comentario) => {
+  const enviarInformacion = async (nombre, comentario, calificacion) => {
     const data = {
+      nombreCurso: cursoTitle,
       idCurso: courseId,
+      idProfesor: idTeacher,
       nombre: nombre,
       comentario: comentario,
+      calificacion: calificacion, // Agregar el puntaje al objeto data
     };
-
+  
     const respuesta = await enviarComentario(data);
-
+  
     if (respuesta.status === 200) {
       setSnackbarOpen(true);
-   
-        
-      }
-
+    }
   };
 
   // Llama a la función handleSubmit en tu componente CommentTextArea
   const handleSubmit = () => {
     if (name.trim() !== "" && comment.trim() !== "") {
-      enviarInformacion(name, comment);
+      enviarInformacion(name, comment, rating);
       setSnackbarOpen(true);
       handleClose();
+  
+      // Resetear los campos de entrada
+      setName("");
+      setComment("");
+      setRating(0);
     } else {
       setErrorSnackbarOpen(true);
     }
@@ -59,7 +64,7 @@ export default function CommentTextArea({ handleClose, courseId }) {
     }
   };
 
-  console.log("Course ID:", courseId); // Agregar este console.log para mostrar el ID del curso
+
 
   return (
     <FormControl style={{ width: "100%" }}>

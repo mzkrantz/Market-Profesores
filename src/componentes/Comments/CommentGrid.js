@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid, Button } from "@mui/material";
 import Comment from "./Comment";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
@@ -6,15 +6,19 @@ import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import "./CommentStyles.css";
 
 const CommentGrid = ({ comments }) => {
-  const [sortedComments, setSortedComments] = useState([...comments]);
+  const [sortedComments, setSortedComments] = useState([]);
   const [sortOrder, setSortOrder] = useState("asc");
+
+  useEffect(() => {
+    setSortedComments([...comments]);
+  }, [comments]);
 
   const handleSortByScore = () => {
     const sorted = [...sortedComments].sort((a, b) => {
       if (sortOrder === "desc") {
-        return a.score - b.score;
+        return a.calificacion - b.calificacion;
       } else {
-        return b.score - a.score;
+        return b.calificacion - a.calificacion;
       }
     });
     setSortedComments(sorted);
@@ -61,9 +65,9 @@ const CommentGrid = ({ comments }) => {
         {sortedComments.map((comment, index) => (
           <Grid item xs={12} key={index}>
             <Comment
-              name={comment.name}
-              comment={comment.comment}
-              score={comment.score}
+              name={comment.nombre}
+              comment={comment.comentario}
+              score={comment.calificacion}
             />
           </Grid>
         ))}

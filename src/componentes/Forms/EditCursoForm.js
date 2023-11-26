@@ -25,22 +25,22 @@ export default function EditCursoForm({
   title,
 }) {
   const [cursoData, setCursoData] = useState({
-    id: 0,
+    id: null,
     image: null,
-    title: "",
-    description: "",
-    duration: "",
-    frequency: "",
-    price: "",
-    buttonLink: "",
-    category: "",
-    extendedDescription: "",
-    subjects: [],
-    stars: "0",
-    type: "",
-    teacher: 0,
+    title: null,
+    description: null,
+    duration: null,
+    frequency: null,
+    price: null,
+    buttonLink: null,
+    category: null,
+    extendedDescription: null,
+    subjects: null,
+    stars: null,
+    type: null,
+    teacher: null,
     published: false,
-  });
+});
 
   const [isSnackbarOpen, setSnackbarOpen] = useState(false);
   const [dialogOpen, setDialogOpen] = React.useState(false);
@@ -132,6 +132,8 @@ export default function EditCursoForm({
       if (cursoData.hasOwnProperty(key)) {
         if (cursoData[key] instanceof File) {
           formData.append(key, cursoData[key]);
+        } else if (typeof cursoData[key] === 'string') {
+          formData.append(key, cursoData[key]);
         } else {
           formData.append(key, JSON.stringify(cursoData[key]));
         }
@@ -144,15 +146,15 @@ export default function EditCursoForm({
       // Verificar si el título es "Editar Curso"
       if (title === "Editar Curso") {
         // Si es así, llamar a actualizarCurso
-        console.log("Llamando a actualizarCurso...", formData);
+        
         response = await actualizarCurso(cursoData._id, formData);
       } else {
         // Si no, llamar a crearCurso
-        console.log("Llamando a crearCurso...", formData);
+        
         response = await crearCurso(formData);
       }
 
-      console.log("Respuesta:", response);
+      
 
       if (response.rdo === 0) {
         // Si es exitosa, mostrar el Snackbar

@@ -10,9 +10,10 @@ const urlWebServices = {
     misCursos: urlApi +"api/cursos/",
     obtenerProfesorPorId: urlApi +"api/profesores/profesor/",
     enviarComentario : urlApi +"api/comentarios/",
-
-   
+    getComentariosByCursoId : urlApi +"api/comentarios/curso/",
+    getComentariosByProfesorId : urlApi +"api/comentarios/profesor/",
+    updateEstadoPublicacion: urlApi +"api/comentarios/",
+    eliminarComentario : urlApi +"api/comentarios/",   
 }
-
 
 export default urlWebServices;

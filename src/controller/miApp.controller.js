@@ -8,8 +8,6 @@ export const login= async function(login)
     const formData = new URLSearchParams();
     formData.append('email', login.email);
     formData.append('password', login.password);
-    console.log("dato",formData);
-    console.log("url",url);
     try
     {
         let response = await fetch(url,{
@@ -25,9 +23,7 @@ export const login= async function(login)
         });
         
         let rdo = response.status;
-        console.log("response",response);
         let data = await response.json();
-        console.log("jsonresponse",data);
             switch(rdo)
             {
                 case 201:
@@ -81,9 +77,7 @@ export const registration = async function(user) {
         });
 
         let rdo = response.status;
-        console.log("response", response);
         let data = await response.json();
-        console.log("jsonresponse", data);
         switch (rdo) {
             case 201: {
                 // guardo token
@@ -132,9 +126,7 @@ export const profesorPorMail = async function() {
         });
 
         let rdo = response.status;
-        console.log("response", response);
         let data = await response.json();
-        console.log("jsonresponse", data);
         switch (rdo) {
             case 200: {
                 
@@ -451,7 +443,10 @@ export const enviarComentario = async function(data) {
             body: JSON.stringify({
                 nombre: data.nombre,
                 comentario: data.comentario,
-                idCurso: data.idCurso
+                idCurso: data.idCurso,
+                nombreCurso: data.nombreCurso,
+                idProfesor: data.idProfesor,
+                calificacion: data.calificacion,
             })
         });
 
@@ -477,6 +472,166 @@ export const enviarComentario = async function(data) {
         console.log("error", error);
     };
 }
+
+export const getComentariosByCursoId = async function(cursoId) {
+    // url del servicio web
+    let url = urlWebServices.getComentariosByCursoId; // Reemplaza con la ruta de tu endpoint
+
+    console.log("url:", url+cursoId)
+
+    try {
+        let response = await fetch(url+cursoId, {
+            method: 'GET',
+            mode: "cors",
+            headers: {
+                'Accept': '*/*',
+                'Origin': 'http://localhost:3000',
+                'Content-Type': 'application/json'
+            }
+        });
+
+        
+        let responseData = await response.json();
+
+        switch (response.status) {
+            case 200: {
+                // Procesa los datos aquí
+                return responseData; // Retorna los comentarios obtenidos correctamente
+            }
+            case 404: {
+                // No se encontró el curso
+                throw new Error("No se encontró el curso con ese ID.");
+            }
+            default: {
+                // otro error
+                throw new Error("Ha ocurrido un error");
+            }
+        }
+    } catch (error) {
+        console.log("error", error);
+        throw error;
+    };
+}
+
+export const getComentariosByProfesorId = async function() {
+        
+    let profesorId = localStorage.getItem('profesorId');
+    // URL del servicio web
+    let url = urlWebServices.getComentariosByProfesorId;    
+
+    try {
+        let response = await fetch(url + profesorId, {
+            method: 'GET',
+            mode: "cors",
+            headers: {
+                'Accept': '*/*',
+                'Origin': 'http://localhost:3000',
+                'Content-Type': 'application/json'
+            }
+        });
+
+        let responseData = await response.json();
+
+        switch (response.status) {
+            case 200: {
+                return responseData; 
+            }
+            case 404: {
+                throw new Error("No se encontró el profesor con ese ID.");
+            }
+            default: {
+                // Otro error
+                throw new Error("Ha ocurrido un error");
+            }
+        }
+    } catch (error) {
+        console.log("error", error);
+        throw error;
+    }
+}
+
+
+export const updateEstadoPublicacion = async function(comentarioId) {
+    // URL del servicio web
+    let url = urlWebServices.updateEstadoPublicacion;
+    let token = localStorage.getItem('x');
+
+    try {
+        let response = await fetch(url + comentarioId, {
+            method: 'PUT',
+            mode: "cors",
+            headers: {
+                'Accept': '*/*',
+                'Origin': 'http://localhost:3000',
+                'Content-Type': 'application/json',
+                'x-access-token': token,
+            }
+        });
+
+        let responseData = await response.json();
+
+        switch (response.status) {
+            case 200: {
+                return responseData; 
+            }
+            case 404: {
+                throw new Error("No se encontró el comentario con ese ID.");
+            }
+            default: {
+                // Otro error
+                throw new Error("Ha ocurrido un error");
+            }
+        }
+    } catch (error) {
+        console.log("error", error);
+        throw error;
+    }
+}
+
+export const eliminarComentario = async function(comentarioId) {
+
+    let url = urlWebServices.eliminarComentario;
+    let token = localStorage.getItem('x');
+
+    try {
+        let response = await fetch(url + comentarioId, {
+            method: 'DELETE',
+            mode: "cors",
+            headers: {
+                'Accept': '*/*',
+                'Origin': 'http://localhost:3000',
+                'Content-Type': 'application/json',
+                'x-access-token': token,
+            }
+        });
+
+        let responseData = await response.json();
+
+        switch (response.status) {
+            case 200: {
+                return responseData; 
+            }
+            case 404: {
+                throw new Error("No se encontró el comentario con ese ID.");
+            }
+            default: {
+                // Otro error
+                throw new Error("Ha ocurrido un error");
+            }
+        }
+    } catch (error) {
+        console.log("error", error);
+        throw error;
+    }
+}
+
+
+
+
+
+
+
+
 
 
 

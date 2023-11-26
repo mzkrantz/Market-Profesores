@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Breadcrumb from "../../componentes/Breadcrumb/Breadcrumb";
-import profesoresData from "../../data/ejemplo-profesores.json";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -25,28 +24,10 @@ import CompraForm from "../../componentes/Forms/CompraForm";
 import {
   obtenerTodosLosCursos,
   obtenerProfesorPorId,
+  getComentariosByCursoId,
 } from "../../controller/miApp.controller";
 
-// Mock de comentarios
-const comments = [
-  {
-    name: "Juan Gomez",
-    score: 4,
-    comment: "Este es un comentario de ejemplo.",
-  },
-  {
-    name: "Juan Juanes",
-    score: 3,
-    comment: "Este es un comentario de ejemplo.",
-  },
-  {
-    name: "Juan Garcia",
-    score: 5,
-    comment: "Este es un comentario de ejemplo.",
-  },
-  { name: "Juan Cito", score: 2, comment: "Este es un comentario de ejemplo." },
-  { name: "Juan Manuel", score: 5, comment: "¡Me encantó este producto!" },
-];
+
 
 const theme = createTheme();
 
@@ -84,14 +65,27 @@ const InfoBox = styled(Card)(({ theme }) => ({
 
 export default function CursoIndividual() {
   const [cursos, setCursos] = useState([]);
+  const [cursoId, setCursoId] = useState(null);
   const [profesor, setProfesor] = useState(null);
+  const [comentarios, setComentarios] = useState([]);
 
   useEffect(() => {
     const fetchCursos = async () => {
       const response = await obtenerTodosLosCursos();
       if (response.rdo === 0) {
         setCursos(response.data.docs);
-        console.log("cursos: ", response.data.docs);
+        const cursoId = response.data.docs[0]._id;
+        setCursoId(cursoId);
+
+        // Obtén los comentarios aquí, después de obtener el ID del curso
+        console.log("cursoId", cursoId);
+        try {
+          const result = await getComentariosByCursoId(cursoId);
+          setComentarios(result);
+          console.log("Comentarios:", result);
+        } catch (error) {
+          console.error('Error al obtener comentarios:', error);
+        }
       } else {
         console.error(response.mensaje);
       }
@@ -99,7 +93,6 @@ export default function CursoIndividual() {
 
     fetchCursos();
   }, []);
-
   const { id } = useParams();
   const [isDialogOpen, setDialogOpen] = useState(false);
 
@@ -112,7 +105,7 @@ export default function CursoIndividual() {
   };
 
   const handleCloseComments = () => {
-    // Lógica para cerrar la snackbar
+    
   };
 
   const curso = cursos.find((curso) => curso._id === id);
@@ -131,9 +124,11 @@ export default function CursoIndividual() {
     fetchProfesor();
   }, [curso]);
 
+  
+
   if (!curso) {
     return <div>Curso no encontrado</div>;
-  }
+  }  
 
   const {
     image,
@@ -149,16 +144,9 @@ export default function CursoIndividual() {
     type,
   } = curso;
 
-  const imgSlices = image ? image.split("/") : [];
-  const imageName = imgSlices.length > 0 ? imgSlices[imgSlices.length - 1] : null;
+  
 
-  const imageUrl = imageName ? `/img/cursos/${imageName}` : null;
-
-  const docenteIMGFullURL = profesor ? profesor.image : null;
-  const docenteIMGSlices = docenteIMGFullURL ? docenteIMGFullURL.split("/") : [];
-  const docenteIMGName = docenteIMGSlices.length > 0 ? docenteIMGSlices[docenteIMGSlices.length - 1] : null;
-
-  const docenteImageUrl = docenteIMGName ? `/img/profesores/${docenteIMGName}` : null;
+  
 
   const breadcrumbItems = [
     { label: "EDUWIZARD", link: "/" },
@@ -247,9 +235,11 @@ export default function CursoIndividual() {
                     <div style={{ display: "flex", alignItems: "center" }}>
                       <img src={profesor.image} alt="Docente Imagen" style={{ width: "80px", marginRight: "1rem" }} />
                       <div>
-                        <Typography variant="body1">{profesor.name}</Typography>
+                        <Typography variant="body1">{profesor.name} {profesor.lastName}</Typography>
                         <Typography variant="body2" paragraph>
-                          {profesor.bio}
+                        <span style={{marginRight: '2rem'}}>
+                          {profesor.age} años</span>
+                          <span>{profesor.email}</span>
                         </Typography>
                       </div>
                     </div>
@@ -265,8 +255,8 @@ export default function CursoIndividual() {
                   <Typography variant="h6" gutterBottom>
                     Comentarios
                   </Typography>
-                  <CommentTextArea courseId={curso._id} /> 
-                  <CommentGrid comments={comments} handleClose={handleCloseComments} />
+                  <CommentTextArea cursoTitle={curso.title } courseId={curso._id} idTeacher={curso.teacher} handleClose={handleCloseComments} /> 
+                  <CommentGrid comments={comentarios}  />
                 </CardContent>
               </Card>
             </Grid>

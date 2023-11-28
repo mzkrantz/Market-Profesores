@@ -1,3 +1,4 @@
+import { json } from "react-router-dom";
 import urlWebServices from "../controller/webServices.js";
 
 export const login = async function (login) {
@@ -388,10 +389,20 @@ export const obtenerTodosLosCursos = async function (page = 1, limit = 10) {
     switch (rdo) {
       case 200: {
         // Asumiendo que el servidor devuelve 200 cuando la solicitud es exitosa
-        let data = await response.json();
+        let responseData = await response.json();
+
+        // Inicializar un array para almacenar los cursos con published en true
+        let cursosPublicados = [];
+
+        for (const curso of responseData.data.docs) {
+          if (curso.published === true) {
+            cursosPublicados.push(curso);
+          }
+        }
+
         return {
           rdo: 0,
-          data: data.data,
+          data: cursosPublicados,
           mensaje: "Cursos recibidos exitosamente",
         };
       }

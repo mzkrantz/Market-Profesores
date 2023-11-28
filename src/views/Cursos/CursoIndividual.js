@@ -27,8 +27,6 @@ import {
   getComentariosByCursoId,
 } from "../../controller/miApp.controller";
 
-
-
 const theme = createTheme();
 
 const HeaderImage = {
@@ -84,7 +82,7 @@ export default function CursoIndividual() {
           setComentarios(result);
           console.log("Comentarios:", result);
         } catch (error) {
-          console.error('Error al obtener comentarios:', error);
+          console.error("Error al obtener comentarios:", error);
         }
       } else {
         console.error(response.mensaje);
@@ -104,9 +102,7 @@ export default function CursoIndividual() {
     setDialogOpen(false);
   };
 
-  const handleCloseComments = () => {
-    
-  };
+  const handleCloseComments = () => {};
 
   const curso = cursos.find((curso) => curso._id === id);
 
@@ -115,7 +111,7 @@ export default function CursoIndividual() {
       if (curso && curso.teacher) {
         const idProfesor = curso.teacher;
         const respuesta = await obtenerProfesorPorId(idProfesor);
-        
+
         if (respuesta) {
           setProfesor(respuesta.profesor.data);
         }
@@ -124,11 +120,9 @@ export default function CursoIndividual() {
     fetchProfesor();
   }, [curso]);
 
-  
-
   if (!curso) {
     return <div>Curso no encontrado</div>;
-  }  
+  }
 
   const {
     image,
@@ -138,15 +132,11 @@ export default function CursoIndividual() {
     price,
     extendedDescription,
     subjects,
-    teacher ,
+    teacher,
     category,
     frequency,
     type,
   } = curso;
-
-  
-
-  
 
   const breadcrumbItems = [
     { label: "EDUWIZARD", link: "/" },
@@ -165,89 +155,134 @@ export default function CursoIndividual() {
               <img src={curso.image} alt="Curso Imagen" style={Image} />
             </div>
           </Paper>
+
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6} className="info-square">
-              <InfoBox className="info-container">
-                <Typography variant="h5" gutterBottom>
-                  {title}
-                </Typography>
-                <Typography variant="body1" paragraph>
-                  {description}
-                </Typography>
-                <Typography variant="body2" paragraph>
-                  {profesor ? (
-                    <Typography variant="body2" paragraph>
-                      <strong>Profesor:</strong> {profesor.name}
-                    </Typography>
-                  ) : (
-                    <div>Cargando...</div>
-                  )}
-                </Typography>
-                <Typography variant="body2" paragraph>
-                  <strong>Categoría:</strong> {category}
-                </Typography>
-                <Typography variant="body2" paragraph>
-                  <strong>Duración:</strong> {duration} horas
-                </Typography>
-                <Typography variant="body2" paragraph>
-                  <strong>Precio:</strong> ${price}
-                </Typography>
-                <Typography variant="body2" paragraph>
-                  <strong>Frecuencia:</strong> {frequency}
-                </Typography>
-                <Typography variant="body2" paragraph>
-                  <strong>Tipo:</strong> {type}
-                </Typography>
-                <Typography variant="body2" paragraph>
-                  <strong>Materias:</strong> {subjects.join(", ")}
-                </Typography>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  startIcon={<ShoppingCartIcon />}
-                  onClick={handleOpenDialog}
-                >
-                  Comprar Curso
-                </Button>
+              <InfoBox className="info-square">
+                <CardContent>
+                  <Typography variant="h4" gutterBottom>
+                    {title}
+                  </Typography>
+                  <Typography variant="body1" gutterBottom>
+                    {description}
+                  </Typography>
+                  <Typography variant="body2" gutterBottom>
+                    <strong>Duración:</strong> {duration} horas
+                  </Typography>
+                  <Typography variant="body2" gutterBottom>
+                    <strong>Frecuencia:</strong> {frequency}
+                  </Typography>
+                  <Typography variant="body2" gutterBottom>
+                    <strong>Precio:</strong> ${price}
+                  </Typography>
+
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    startIcon={<ShoppingCartIcon />}
+                    onClick={handleOpenDialog}
+                  >
+                    Comprar Curso
+                  </Button>
+
+                  <CompraForm
+                    open={isDialogOpen}
+                    handleClose={handleCloseDialog}
+                  />
+
+                  <Divider style={{ padding: "2rem" }} />
+                  <Typography
+                    variant="subtitle1"
+                    gutterBottom
+                    textAlign={"center"}
+                  >
+                    Valoración del Curso
+                  </Typography>
+                  <RatingStars rating={parseFloat(curso.stars)} />
+                </CardContent>
               </InfoBox>
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <Card style={{ height: "100%" }}>
-                <CardContent>
-                  <Typography variant="h6" gutterBottom>
-                    Descripción Extendida
-                  </Typography>
-                  <Typography variant="body1" paragraph>
-                    {extendedDescription}
-                  </Typography>
-                </CardContent>
-              </Card>
+
+            <Grid item xs={12} sm={6} className="info-square">
+              <InfoBox className="info-square">
+                {profesor && (
+                  <CardContent
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Typography variant="h4">Docente a Cargo</Typography>
+
+                    <CardMedia
+                      component="img"
+                      className="card-image"
+                      src={profesor.image}
+                      alt="Profesor Imagen"
+                      style={{
+                        height: "150px",
+                        width: "150px",
+                        borderRadius: "50%",
+                        margin: "1rem",
+                        boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+                      }}
+                    />
+                    <Typography variant="body1">
+                      {profesor ? profesor.name : "No se encontró el docente"}{" "}
+                      {profesor.lastName}
+                    </Typography>
+                    <Typography variant="body1" gutterBottom>
+                      {profesor.age} años
+                    </Typography>
+                    <Typography variant="body2" gutterBottom>
+                      {profesor.email}
+                    </Typography>
+                    <Typography variant="body1">
+                      {profesor
+                        ? profesor.background
+                        : "No se encontró experiencia cargada"}
+                    </Typography>
+                  </CardContent>
+                )}
+              </InfoBox>
             </Grid>
           </Grid>
-          <Grid container spacing={3} style={{ marginTop: "1rem" }}>
-            <Grid item xs={12}>
-              <Card>
-                <CardContent>
-                  <Typography variant="h6" gutterBottom>
-                    Docente
-                  </Typography>
-                  {profesor && (
-                    <div style={{ display: "flex", alignItems: "center" }}>
-                      <img src={profesor.image} alt="Docente Imagen" style={{ width: "80px", marginRight: "1rem" }} />
-                      <div>
-                        <Typography variant="body1">{profesor.name} {profesor.lastName}</Typography>
-                        <Typography variant="body2" paragraph>
-                        <span style={{marginRight: '2rem'}}>
-                          {profesor.age} años</span>
-                          <span>{profesor.email}</span>
-                        </Typography>
-                      </div>
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
-            </Grid>
+
+          <Grid item xs={12} sm={6} className="info-square2">
+            <InfoBox className="info-square2">
+              <CardContent>
+                <Typography variant="h5">Descripción</Typography>
+                <Typography variant="body1">{extendedDescription}</Typography>
+              </CardContent>
+
+              <CardContent>
+                <Typography variant="h5">Categoria</Typography>
+                <Typography variant="body1">{category}</Typography>
+              </CardContent>
+
+              <CardContent>
+                <Typography variant="h5">Modo de Clases</Typography>
+                <Typography variant="body1">{type}</Typography>
+              </CardContent>
+            </InfoBox>
           </Grid>
+
+          <Grid item xs={12} sm={6} className="info-square2">
+            <InfoBox className="info-square2">
+              <CardContent>
+                <Typography variant="h5">Temas del Curso</Typography>
+                <List>
+                  {subjects.map((subject, index) => (
+                    <ListItem key={index}>
+                      <ListItemText primary={subject} />
+                    </ListItem>
+                  ))}
+                </List>
+              </CardContent>
+            </InfoBox>
+          </Grid>
+
           <Grid container spacing={3} style={{ marginTop: "1rem" }}>
             <Grid item xs={12}>
               <Card>
@@ -255,8 +290,13 @@ export default function CursoIndividual() {
                   <Typography variant="h6" gutterBottom>
                     Comentarios
                   </Typography>
-                  <CommentTextArea cursoTitle={curso.title } courseId={curso._id} idTeacher={curso.teacher} handleClose={handleCloseComments} /> 
-                  <CommentGrid comments={comentarios}  />
+                  <CommentTextArea
+                    cursoTitle={curso.title}
+                    courseId={curso._id}
+                    idTeacher={curso.teacher}
+                    handleClose={handleCloseComments}
+                  />
+                  <CommentGrid comments={comentarios} />
                 </CardContent>
               </Card>
             </Grid>
@@ -264,7 +304,11 @@ export default function CursoIndividual() {
         </Container>
       </ThemeProvider>
 
-      <CompraForm isOpen={isDialogOpen} handleClose={handleCloseDialog} curso={curso} />
+      <CompraForm
+        isOpen={isDialogOpen}
+        handleClose={handleCloseDialog}
+        curso={curso}
+      />
     </>
   );
 }

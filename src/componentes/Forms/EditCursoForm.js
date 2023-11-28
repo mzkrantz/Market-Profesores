@@ -40,7 +40,7 @@ export default function EditCursoForm({
     type: null,
     teacher: null,
     published: false,
-});
+  });
 
   const [isSnackbarOpen, setSnackbarOpen] = useState(false);
   const [dialogOpen, setDialogOpen] = React.useState(false);
@@ -51,7 +51,7 @@ export default function EditCursoForm({
     } else {
       setCursoData({
         id: 0,
-        image: " ",
+        image: null,
         title: "",
         description: "",
         duration: "",
@@ -61,7 +61,7 @@ export default function EditCursoForm({
         category: "",
         extendedDescription: "",
         subjects: [],
-        stars: "0",
+        stars: 0,
         type: "",
         teacher: 0,
         published: false,
@@ -118,21 +118,29 @@ export default function EditCursoForm({
     setErrors(newErrors);
     // Si no hay errores, enviar el formulario
     if (
-      Object.values(newErrors).every((error) => error === "") // Comprueba si todos los valores en el objeto de errores son cadenas vacías
+      Object.values(newErrors).every((error) => error === "") &&
+      cursoData.subjects.length <= 5 // Nueva verificación para el campo subjects
     ) {
+      console.log(cursoData.title, cursoData.id);
       handleSubmit();
+    } else {
+      // Si hay un error en el campo subjects, mostrar el mensaje de error
+      if (cursoData.subjects.length > 5) {
+        newErrors.subjects = "No se permiten más de 5 materias.";
+      }
+
+      setErrors(newErrors);
     }
   };
 
   const handleSubmit = async () => {
     // Convertir el objeto cursoData a FormData para poder enviar el archivo de imagen
     const formData = new FormData();
-
     for (let key in cursoData) {
       if (cursoData.hasOwnProperty(key)) {
         if (cursoData[key] instanceof File) {
           formData.append(key, cursoData[key]);
-        } else if (typeof cursoData[key] === 'string') {
+        } else if (typeof cursoData[key] === "string") {
           formData.append(key, cursoData[key]);
         } else {
           formData.append(key, JSON.stringify(cursoData[key]));
@@ -146,23 +154,19 @@ export default function EditCursoForm({
       // Verificar si el título es "Editar Curso"
       if (title === "Editar Curso") {
         // Si es así, llamar a actualizarCurso
-        
         response = await actualizarCurso(cursoData._id, formData);
       } else {
         // Si no, llamar a crearCurso
-        
+
         response = await crearCurso(formData);
       }
-
-      
 
       if (response.rdo === 0) {
         // Si es exitosa, mostrar el Snackbar
         setSnackbarOpen(true);
 
         // Cerrar la ventana de diálogo
-        setDialogOpen(false);
-        
+        setDialogOpen(!dialogOpen);
       } else {
         // Si no es exitosa, mostrar el mensaje de error
         console.error(response.mensaje);
@@ -280,21 +284,29 @@ export default function EditCursoForm({
               </span>
             }
           />
+
           <TextField
             label="Materias (hasta 5, separadas por comas)"
             variant="outlined"
             fullWidth
             margin="normal"
             value={cursoData.subjects ? cursoData.subjects.join(", ") : ""}
-            onChange={(e) =>
+            onChange={(e) => {
+              const subjectsArray = e.target.value
+                .split(",")
+                .map((subject) => subject.trim());
+
+              // Limitar la longitud del array a 5
+              const limitedSubjectsArray = subjectsArray.slice(0, 5);
+
               setCursoData({
                 ...cursoData,
-                subjects: e.target.value
-                  .split(",")
-                  .map((subject) => subject.trim()),
-              })
-            }
+                subjects: limitedSubjectsArray,
+              });
+            }}
           />
+          <span style={{ color: "#d32f2f" }}>{errors.subjects}</span>
+
           <FormControl fullWidth margin="normal">
             <InputLabel label="Categoría">Categoría</InputLabel>
             <Select

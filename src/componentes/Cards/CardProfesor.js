@@ -4,7 +4,6 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import ContactModal from "../Forms/ContactForm";
 import BasicModal from "../Modal/ModalProfesor";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -56,20 +55,9 @@ export default function CardProfesor(props) {
               alignItems="center"
               justifyContent="center"
               marginBottom={1}
-            >
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleOpenDialog}
-                open={isDialogOpen}
-                className="card-modal"
-                style={{ maxWidth: "100%" }}
-              >
-                Contactar
-              </Button>
-            </Box>
+            ></Box>
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12}>
             <BasicModal
               buttonName="Conóceme"
               className="card-modal"
@@ -80,11 +68,6 @@ export default function CardProfesor(props) {
           </Grid>
         </Grid>
       </div>
-      <ContactModal
-        open={isDialogOpen}
-        handleClose={handleCloseDialog}
-        professorName={name}
-      />
     </Card>
   );
 }

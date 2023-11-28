@@ -24,6 +24,8 @@ import {
 } from "../../../controller/miApp.controller";
 
 import Refresher from "../../../componentes/Refresher/Refresher";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 
 const CourseList = styled(TableContainer)`
   margin-top: ${({ theme }) => theme.spacing(2)};
@@ -72,6 +74,8 @@ const MisCursos = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(3);
   const [refresher, setRefresher] = useState(false); // Nuevo estado para el refrescador
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
 
   useEffect(() => {
     const fetchCursos = async () => {
@@ -97,6 +101,11 @@ const MisCursos = () => {
     setFormClosed(true);
   };
 
+  const openSnackbar = (message) => {
+    setSnackbarMessage(message);
+    setSnackbarOpen(true);
+  };
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -108,11 +117,14 @@ const MisCursos = () => {
 
   const handlePublish = async (curso) => {
     if (curso && "published" in curso) {
-      // Aquí va la lógica para publicar/despublicar el curso
       const updatedCursoData = { published: !curso.published }; // Cambia el estado de 'published'
       const response = await actualizarCurso(curso._id, updatedCursoData);
       if (response && response.rdo === 0) {
-        console.log(`Curso ${curso._id} publicado/despublicado correctamente`);
+        const message = curso.published
+          ? "Curso despublicado correctamente."
+          : "Curso publicado correctamente.";
+        openSnackbar(message);
+        console.log(`Curso ${curso._id}. ${message}}`);
         setRefresher((prev) => !prev); // Actualiza el estado del refrescador
       } else {
         console.error(
@@ -130,6 +142,7 @@ const MisCursos = () => {
       const response = await eliminarCurso(curso._id);
       if (response && response.rdo === 0) {
         console.log(`Curso ${curso._id} eliminado correctamente`);
+        openSnackbar("Curso eliminado correctamente.");
         setRefresher((prev) => !prev); // Actualiza el estado del refrescador
       } else {
         console.error(
@@ -257,6 +270,20 @@ const MisCursos = () => {
           title={editingCourse ? "Editar Curso" : "Crear Nuevo Curso"}
         />
       )}
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={3000} // Puedes ajustar la duración según tus preferencias
+        onClose={() => setSnackbarOpen(false)}
+      >
+        <MuiAlert
+          elevation={6}
+          variant="filled"
+          onClose={() => setSnackbarOpen(false)}
+          severity="success" // Puedes cambiar a "error" para mostrar un mensaje de error
+        >
+          {snackbarMessage}
+        </MuiAlert>
+      </Snackbar>
     </>
   );
 };

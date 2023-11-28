@@ -15,8 +15,6 @@ import { useDropzone } from "react-dropzone";
 export default function Registrate() {
   const [redirect, setRedirect] = React.useState(false);
 
-  
-
   const [formData, setFormData] = React.useState({
     nombre: "",
     apellido: "",
@@ -46,11 +44,9 @@ export default function Registrate() {
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
     onDrop: (acceptedFiles) => {
-      setFormData(prevState => ({ ...prevState, image: acceptedFiles[0] }));
+      setFormData((prevState) => ({ ...prevState, image: acceptedFiles[0] }));
     },
   });
-
-  
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -70,9 +66,8 @@ export default function Registrate() {
     return <Navigate to="/" />;
   }
 
-  
   const registerUser = async (registedData) => {
-    console.log("registed data: ",registedData);
+    console.log("registed data: ", registedData);
     const formData = new FormData();
 
     for (let key in registedData) {
@@ -84,18 +79,26 @@ export default function Registrate() {
     // Imprimir el contenido de formData
     for (var pair of formData.entries()) {
       if (pair[1] instanceof File) {
-        console.log(pair[0] + ', ' + pair[1].name + ', ' + pair[1].size + ', ' + pair[1].type);
+        console.log(
+          pair[0] +
+            ", " +
+            pair[1].name +
+            ", " +
+            pair[1].size +
+            ", " +
+            pair[1].type
+        );
       } else {
-        console.log(pair[0] + ', ' + pair[1]);
+        console.log(pair[0] + ", " + pair[1]);
       }
     }
 
     let getRegistration = await registration(formData);
 
-    if (getRegistration === 0) {
+    if (getRegistration.rdo === 0) {
       alert("El usuario se registró de manera exitosa");
     } else {
-      console.log("Hubo un error al registrar al usuario");
+      alert("El mail ingresado ya existe en nuestra base de datos");
     }
   };
 
@@ -345,13 +348,13 @@ export default function Registrate() {
               </Grid>
 
               <Grid item xs={12}>
-              <div {...getRootProps()} style={dropzoneStyle}>
-            <input {...getInputProps()} />
-            <p>
-              Arrastra y suelta una imagen aquí, o haz clic para seleccionar
-              una.
-            </p>
-          </div>
+                <div {...getRootProps()} style={dropzoneStyle}>
+                  <input {...getInputProps()} />
+                  <p>
+                    Arrastra y suelta una imagen aquí, o haz clic para
+                    seleccionar una.
+                  </p>
+                </div>
               </Grid>
             </Grid>
             <Button

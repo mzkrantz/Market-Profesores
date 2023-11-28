@@ -64,25 +64,37 @@ export const registration = async function (user) {
       method: "POST",
       mode: "cors",
       headers: {
-        Accept: "application/x-www-form-urlencoded",
+        Accept: "application/json",
         Origin: "http://localhost:3000",
       },
       body: user,
     });
 
     let rdo = response.status;
+    console.log(rdo);
+    console.log("Controller");
     let data = await response.json();
+
+    // Imprime toda la respuesta del servidor
+    console.log("Server response:", data);
+
     switch (rdo) {
       case 201: {
-        // guardo token
-        localStorage.setItem("x", data.registerUser.token);
-        // guardo usuario registrado
-        let user = data.registerUser.user;
-        localStorage.setItem("nombre", user.name);
-        localStorage.setItem("email", user.email);
+        if (data && data.token) {
+          // guardo token
+          localStorage.setItem("x", data.token);
+
+          // guardo usuario registrado
+          let user = data.user;
+          if (user) {
+            localStorage.setItem("nombre", user.name);
+            localStorage.setItem("email", user.email);
+          }
+        }
+        console.log("Response 201:", { rdo: 0, mensaje: "Ok" });
         return { rdo: 0, mensaje: "Ok" }; // correcto
       }
-      case 202: {
+      case 400: {
         // error mail
         return {
           rdo: 1,
@@ -97,6 +109,9 @@ export const registration = async function (user) {
   } catch (error) {
     console.log("error", error);
   }
+
+  // Asegúrate de manejar la lógica de retorno para todos los casos
+  return { rdo: 1, mensaje: "Ha ocurrido un error inesperado" };
 };
 
 export const profesorPorMail = async function () {

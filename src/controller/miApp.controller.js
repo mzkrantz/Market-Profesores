@@ -1,4 +1,3 @@
-import { json } from "react-router-dom";
 import urlWebServices from "../controller/webServices.js";
 
 export const login = async function (login) {
@@ -373,7 +372,7 @@ export const actualizarCurso = async function (id, cursoData) {
   }
 };
 
-export const obtenerTodosLosCursos = async function (page = 1, limit = 10) {
+export const obtenerTodosLosCursosPublicados = async function (page = 1, limit = 10) {
   let url = urlWebServices.misCursos;
 
   try {

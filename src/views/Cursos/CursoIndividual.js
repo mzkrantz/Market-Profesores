@@ -22,7 +22,7 @@ import CommentGrid from "../../componentes/Comments/CommentGrid";
 import CommentTextArea from "../../componentes/Comments/CommentTextArea";
 import CompraForm from "../../componentes/Forms/CompraForm";
 import {
-  obtenerTodosLosCursos,
+  obtenerTodosLosCursosPublicados,
   obtenerProfesorPorId,
   getComentariosByCursoId,
 } from "../../controller/miApp.controller";
@@ -69,10 +69,10 @@ export default function CursoIndividual() {
 
   useEffect(() => {
     const fetchCursos = async () => {
-      const response = await obtenerTodosLosCursos();
+      const response = await obtenerTodosLosCursosPublicados();
       if (response.rdo === 0) {
-        setCursos(response.data.docs);
-        const cursoId = response.data.docs[0]._id;
+        setCursos(response.data);
+        const cursoId = response.data[0]._id;
         setCursoId(cursoId);
 
         // Obtén los comentarios aquí, después de obtener el ID del curso

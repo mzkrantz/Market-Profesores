@@ -12,6 +12,7 @@ import { styled } from "@mui/system";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import ImageIcon from "@mui/icons-material/Image";
 import DeleteIcon from "@mui/icons-material/Delete";
 import TablePagination from "@mui/material/TablePagination";
 import "../TableStyles.css";
@@ -73,7 +74,7 @@ const MisCursos = () => {
   const [formClosed, setFormClosed] = useState(false);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(3);
-  const [refresher, setRefresher] = useState(false); // Nuevo estado para el refrescador
+  const [refresher, setRefresher] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
 
@@ -81,7 +82,7 @@ const MisCursos = () => {
     const fetchCursos = async () => {
       const response = await misCursos();
       if (response && response.rdo === 0) {
-        setCursos(response.cursos || []); // Si response.cursos es null, se establecerá un array vacío
+        setCursos(response.cursos || []);
       } else {
         console.error(
           response ? response.mensaje : "Error al obtener los cursos"
@@ -117,7 +118,7 @@ const MisCursos = () => {
 
   const handlePublish = async (curso) => {
     if (curso && "published" in curso) {
-      const updatedCursoData = { published: !curso.published }; // Cambia el estado de 'published'
+      const updatedCursoData = { published: !curso.published };
       const response = await actualizarCurso(curso._id, updatedCursoData);
       if (response && response.rdo === 0) {
         const message = curso.published
@@ -125,7 +126,7 @@ const MisCursos = () => {
           : "Curso publicado correctamente.";
         openSnackbar(message);
         console.log(`Curso ${curso._id}. ${message}}`);
-        setRefresher((prev) => !prev); // Actualiza el estado del refrescador
+        setRefresher((prev) => !prev);
       } else {
         console.error(
           response ? response.mensaje : "Error al publicar/despublicar el curso"
@@ -143,7 +144,7 @@ const MisCursos = () => {
       if (response && response.rdo === 0) {
         console.log(`Curso ${curso._id} eliminado correctamente`);
         openSnackbar("Curso eliminado correctamente.");
-        setRefresher((prev) => !prev); // Actualiza el estado del refrescador
+        setRefresher((prev) => !prev);
       } else {
         console.error(
           response ? response.mensaje : "Error al eliminar el curso"
@@ -230,6 +231,11 @@ const MisCursos = () => {
                             </IconButton>
                           </ButtonContainer>
                           <ButtonContainer>
+                            <IconButton className="boton-tabla">
+                              <ImageIcon />
+                            </IconButton>
+                          </ButtonContainer>
+                          <ButtonContainer>
                             <IconButton
                               className="boton-tabla"
                               onClick={() => handlePublish(curso)}
@@ -270,16 +276,17 @@ const MisCursos = () => {
           title={editingCourse ? "Editar Curso" : "Crear Nuevo Curso"}
         />
       )}
+
       <Snackbar
         open={snackbarOpen}
-        autoHideDuration={3000} // Puedes ajustar la duración según tus preferencias
+        autoHideDuration={3000}
         onClose={() => setSnackbarOpen(false)}
       >
         <MuiAlert
           elevation={6}
           variant="filled"
           onClose={() => setSnackbarOpen(false)}
-          severity="success" // Puedes cambiar a "error" para mostrar un mensaje de error
+          severity="success"
         >
           {snackbarMessage}
         </MuiAlert>

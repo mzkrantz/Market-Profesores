@@ -372,6 +372,8 @@ export const actualizarCurso = async function (id, cursoData) {
   }
 };
 
+//HASTA ACA FUNCIONABA BIEN ACTUALIZAR CURSO
+
 export const obtenerTodosLosCursosPublicados = async function (
   page = 1,
   limit = 10

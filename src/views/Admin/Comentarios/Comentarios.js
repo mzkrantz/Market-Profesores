@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Container from "@mui/material/Container";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 import Typography from "@mui/material/Typography";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -17,7 +19,11 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import IconButton from "@mui/material/IconButton";
 import TablePagination from "@mui/material/TablePagination";
-import { getComentariosByProfesorId, updateEstadoPublicacion, eliminarComentario } from "../../../controller/miApp.controller";
+import {
+  getComentariosByProfesorId,
+  updateEstadoPublicacion,
+  eliminarComentario,
+} from "../../../controller/miApp.controller";
 
 const CommentList = styled(TableContainer)`
   margin-top: ${({ theme }) => theme.spacing(2)};
@@ -54,7 +60,6 @@ const ResponsiveTable = styled(Table)`
     }
   }
 `;
-
 const Comentarios = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
@@ -62,27 +67,50 @@ const Comentarios = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(3);
   const [comentarios, setComentarios] = useState([]);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarSeverity, setSnackbarSeverity] = useState("success");
 
   const fetchComentarios = async () => {
     const result = await getComentariosByProfesorId();
     setComentarios(result);
-    console.log("comentarios: ", result);
   };
 
   useEffect(() => {
     fetchComentarios();
   }, []);
 
+  const showSnackbar = (message, severity) => {
+    setSnackbarMessage(message);
+    setSnackbarSeverity(severity);
+    setSnackbarOpen(true);
+  };
+
+  const handleCloseSnackbar = () => {
+    setSnackbarOpen(false);
+  };
+
   const handleCheckClick = async (comentarioId) => {
-    await updateEstadoPublicacion(comentarioId);
-    fetchComentarios();
+    try {
+      await updateEstadoPublicacion(comentarioId);
+      fetchComentarios();
+      showSnackbar("Publicación actualizada correctamente", "success");
+    } catch (error) {
+      console.error("Error updating publicacion:", error.message);
+      showSnackbar("Error al actualizar la publicación", "error");
+    }
   };
 
   const handleDeleteClick = async (comentarioId) => {
-    await eliminarComentario(comentarioId);
-    fetchComentarios();
+    try {
+      await eliminarComentario(comentarioId);
+      fetchComentarios();
+      showSnackbar("Comentario eliminado correctamente", "success");
+    } catch (error) {
+      console.error("Error deleting comentario:", error.message);
+      showSnackbar("Error al eliminar el comentario", "error");
+    }
   };
-
 
   const openCommentModal = () => {
     setIsCommentModalOpen(true);
@@ -92,8 +120,8 @@ const Comentarios = () => {
     setIsCommentModalOpen(false);
   };
 
-  const openPopup = (user) => {
-    setSelectedUser(user);
+  const openPopup = (comentario) => {
+    setSelectedUser(comentario);
     setIsPopupOpen(true);
   };
 
@@ -105,11 +133,6 @@ const Comentarios = () => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-
-  const paginatedComments = comentarios.slice(
-    page * rowsPerPage,
-    page * rowsPerPage + rowsPerPage
-  );
 
   return (
     <>
@@ -144,9 +167,7 @@ const Comentarios = () => {
                     <TableCell>
                       <IconButton
                         className="boton-tabla"
-                        onClick={() =>
-                          openCommentModal(openPopup(comentario.nombre))
-                        }
+                        onClick={() => openCommentModal(openPopup(comentario))}
                       >
                         <VisibilityIcon />
                       </IconButton>
@@ -184,11 +205,26 @@ const Comentarios = () => {
       {isPopupOpen && (
         <ModalCustom open={isCommentModalOpen} onClose={closeCommentModal}>
           <PopupCommentInfo
-            user={selectedUser}
+            comment={selectedUser}
             onClose={() => setIsPopupOpen(false)}
           />
         </ModalCustom>
       )}
+
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={3000}
+        onClose={handleCloseSnackbar}
+      >
+        <MuiAlert
+          elevation={6}
+          variant="filled"
+          onClose={handleCloseSnackbar}
+          severity={snackbarSeverity}
+        >
+          {snackbarMessage}
+        </MuiAlert>
+      </Snackbar>
     </>
   );
 };

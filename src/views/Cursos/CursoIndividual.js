@@ -22,7 +22,7 @@ import CommentGrid from "../../componentes/Comments/CommentGrid";
 import CommentTextArea from "../../componentes/Comments/CommentTextArea";
 import CompraForm from "../../componentes/Forms/CompraForm";
 import {
-  obtenerTodosLosCursos,
+  obtenerTodosLosCursosPublicados,
   obtenerProfesorPorId,
   getComentariosByCursoId,
 } from "../../controller/miApp.controller";
@@ -61,38 +61,55 @@ const InfoBox = styled(Card)(({ theme }) => ({
   minHeight: "21rem",
 }));
 
-export default function CursoIndividual() {
+const CursoIndividual = () => {
+  const { id } = useParams();
   const [cursos, setCursos] = useState([]);
-  const [cursoId, setCursoId] = useState(null);
+  const [curso, setCurso] = useState(null);
   const [profesor, setProfesor] = useState(null);
   const [comentarios, setComentarios] = useState([]);
+  const [isDialogOpen, setDialogOpen] = useState(false);
 
   useEffect(() => {
     const fetchCursos = async () => {
-      const response = await obtenerTodosLosCursos();
-      if (response.rdo === 0) {
-        setCursos(response.data.docs);
-        const cursoId = response.data.docs[0]._id;
-        setCursoId(cursoId);
+      try {
+        const response = await obtenerTodosLosCursosPublicados();
+        if (response.rdo === 0) {
+          setCursos(response.data);
+          const cursoEncontrado = response.data.find((c) => c._id.toString() === id);
+          setCurso(cursoEncontrado);
 
-        // Obtén los comentarios aquí, después de obtener el ID del curso
-        console.log("cursoId", cursoId);
-        try {
-          const result = await getComentariosByCursoId(cursoId);
-          setComentarios(result);
-          console.log("Comentarios:", result);
-        } catch (error) {
-          console.error("Error al obtener comentarios:", error);
+          if (cursoEncontrado) {
+            const result = await getComentariosByCursoId(cursoEncontrado._id);
+            setComentarios(result);
+          }
+        } else {
+          console.error(response.mensaje);
         }
-      } else {
-        console.error(response.mensaje);
+      } catch (error) {
+        console.error("Error al obtener cursos:", error);
       }
     };
 
     fetchCursos();
-  }, []);
-  const { id } = useParams();
-  const [isDialogOpen, setDialogOpen] = useState(false);
+  }, [id]);
+
+  useEffect(() => {
+    const fetchProfesor = async () => {
+      try {
+        if (curso && curso.teacher) {
+          const idProfesor = curso.teacher;
+          const respuesta = await obtenerProfesorPorId(idProfesor);
+
+          if (respuesta) {
+            setProfesor(respuesta.profesor.data);
+          }
+        }
+      } catch (error) {
+        console.error("Error al obtener profesor:", error);
+      }
+    };
+    fetchProfesor();
+  }, [curso]);
 
   const handleOpenDialog = () => {
     setDialogOpen(true);
@@ -103,22 +120,6 @@ export default function CursoIndividual() {
   };
 
   const handleCloseComments = () => {};
-
-  const curso = cursos.find((curso) => curso._id === id);
-
-  useEffect(() => {
-    const fetchProfesor = async () => {
-      if (curso && curso.teacher) {
-        const idProfesor = curso.teacher;
-        const respuesta = await obtenerProfesorPorId(idProfesor);
-
-        if (respuesta) {
-          setProfesor(respuesta.profesor.data);
-        }
-      }
-    };
-    fetchProfesor();
-  }, [curso]);
 
   if (!curso) {
     return <div>Curso no encontrado</div>;
@@ -132,10 +133,10 @@ export default function CursoIndividual() {
     price,
     extendedDescription,
     subjects,
-    teacher,
     category,
     frequency,
     type,
+    stars,
   } = curso;
 
   const breadcrumbItems = [
@@ -152,7 +153,7 @@ export default function CursoIndividual() {
         <Container maxWidth="xl">
           <Paper elevation={3} style={HeaderImage}>
             <div style={ImageContainer}>
-              <img src={curso.image} alt="Curso Imagen" style={Image} />
+              <img src={image} alt="Curso Imagen" style={Image} />
             </div>
           </Paper>
 
@@ -198,7 +199,7 @@ export default function CursoIndividual() {
                   >
                     Valoración del Curso
                   </Typography>
-                  <RatingStars rating={parseFloat(curso.stars)} />
+                  <RatingStars rating={parseFloat(stars)} />
                 </CardContent>
               </InfoBox>
             </Grid>
@@ -291,8 +292,8 @@ export default function CursoIndividual() {
                     Comentarios
                   </Typography>
                   <CommentTextArea
-                    cursoTitle={curso.title}
-                    courseId={curso._id}
+                    cursoTitle={title}
+                    courseId={id}
                     idTeacher={curso.teacher}
                     handleClose={handleCloseComments}
                   />
@@ -311,4 +312,6 @@ export default function CursoIndividual() {
       />
     </>
   );
-}
+};
+
+export default CursoIndividual;

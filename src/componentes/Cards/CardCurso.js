@@ -9,7 +9,6 @@ import RatingStars from "../RatingStars/RatingStars";
 import "./CardStyles.css";
 
 function CardCurso(props) {
-  console.log("card", props)
   const { _id, image, title, description, frequency, price, type, stars } =
     props;
 

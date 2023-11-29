@@ -5,7 +5,7 @@ import FilterBar from "../../componentes/FilterBar/FilterBar";
 import CardCurso from "../../componentes/Cards/CardCurso";
 import SpacerTop from "../../componentes/Spacer/SpacerTop";
 import { Pagination, Container } from "@mui/material";
-import { obtenerTodosLosCursos } from "../../controller/miApp.controller";
+import { obtenerTodosLosCursosPublicados } from "../../controller/miApp.controller";
 
 export default function Cursos() {
   const [courseData, setCourseData] = useState([]);
@@ -20,10 +20,10 @@ export default function Cursos() {
 
   useEffect(() => {
     const fetchCursos = async () => {
-      const response = await obtenerTodosLosCursos(page, itemsPerPage);
+      const response = await obtenerTodosLosCursosPublicados(page, itemsPerPage);
 
       if (response.rdo === 0) {
-        setCourseData(response.data.docs);
+        setCourseData(response.data);
       } else {
         console.error(response.mensaje);
       }
@@ -75,8 +75,6 @@ export default function Cursos() {
     return true;
   });
 
-  console.log(filteredCourses);
-
   // Ordena los cursos según el campo de ordenamiento y la dirección de ordenamiento de las estrellas
   const sortedCourses = filteredCourses.slice().sort((a, b) => {
     if (sortField === "stars") {
@@ -88,8 +86,6 @@ export default function Cursos() {
   });
 
   const currentCourses = sortedCourses.slice(startIndex, endIndex);
-
-  console.log("currentCourses: ", currentCourses);
 
   const totalPages = Math.ceil(filteredCourses.length / itemsPerPage);
 

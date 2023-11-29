@@ -372,7 +372,10 @@ export const actualizarCurso = async function (id, cursoData) {
   }
 };
 
-export const obtenerTodosLosCursos = async function (page = 1, limit = 10) {
+export const obtenerTodosLosCursosPublicados = async function (
+  page = 1,
+  limit = 10
+) {
   let url = urlWebServices.misCursos;
 
   try {
@@ -388,10 +391,20 @@ export const obtenerTodosLosCursos = async function (page = 1, limit = 10) {
     switch (rdo) {
       case 200: {
         // Asumiendo que el servidor devuelve 200 cuando la solicitud es exitosa
-        let data = await response.json();
+        let responseData = await response.json();
+
+        // Inicializar un array para almacenar los cursos con published en true
+        let cursosPublicados = [];
+
+        for (const curso of responseData.data.docs) {
+          if (curso.published === true) {
+            cursosPublicados.push(curso);
+          }
+        }
+
         return {
           rdo: 0,
-          data: data.data,
+          data: cursosPublicados,
           mensaje: "Cursos recibidos exitosamente",
         };
       }
@@ -421,10 +434,7 @@ export const obtenerProfesorPorId = async function (profesorId) {
         "Content-Type": "application/json",
       },
     });
-
-    console.log("response", response);
     let data = await response.json();
-    console.log("jsonresponse", data);
 
     switch (response.status) {
       case 200: {
@@ -493,9 +503,7 @@ export const enviarComentario = async function (data) {
 
 export const getComentariosByCursoId = async function (cursoId) {
   // url del servicio web
-  let url = urlWebServices.getComentariosByCursoId; // Reemplaza con la ruta de tu endpoint
-
-  console.log("url:", url + cursoId);
+  let url = urlWebServices.getComentariosByCursoId;
 
   try {
     let response = await fetch(url + cursoId, {
@@ -509,6 +517,7 @@ export const getComentariosByCursoId = async function (cursoId) {
     });
 
     let responseData = await response.json();
+    console.log("jsonresponse", responseData);
 
     switch (response.status) {
       case 200: {

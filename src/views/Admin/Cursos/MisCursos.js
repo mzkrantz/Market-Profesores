@@ -28,6 +28,8 @@ import Refresher from "../../../componentes/Refresher/Refresher";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 
+import PopupCambiarImagenCurso from "../../../componentes/Popup/PopupCambiarImagenCurso";
+
 const CourseList = styled(TableContainer)`
   margin-top: ${({ theme }) => theme.spacing(2)};
   overflow-x: auto;
@@ -77,6 +79,8 @@ const MisCursos = () => {
   const [refresher, setRefresher] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [selectedCurso, setSelectedCurso] = useState(null);
 
   useEffect(() => {
     const fetchCursos = async () => {
@@ -231,7 +235,13 @@ const MisCursos = () => {
                             </IconButton>
                           </ButtonContainer>
                           <ButtonContainer>
-                            <IconButton className="boton-tabla">
+                            <IconButton
+                              className="boton-tabla"
+                              onClick={() => {
+                                setSelectedCurso(curso);
+                                setIsPopupOpen(true);
+                              }}
+                            >
                               <ImageIcon />
                             </IconButton>
                           </ButtonContainer>
@@ -274,6 +284,17 @@ const MisCursos = () => {
           handleClose={closeForm}
           cursoToEdit={editingCourse}
           title={editingCourse ? "Editar Curso" : "Crear Nuevo Curso"}
+        />
+      )}
+      {isPopupOpen && (
+        <PopupCambiarImagenCurso
+          open={isPopupOpen}
+          handleClose={() => {
+            setIsPopupOpen(false);
+            setSelectedCurso(null);
+          }}
+          cursoToEdit={selectedCurso}
+          title={"Editar imagen del curso"}
         />
       )}
 

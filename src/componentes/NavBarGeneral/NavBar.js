@@ -63,6 +63,7 @@ export default function NavBar() {
 
   const handleConfirmLogout = () => {
     setUser(null);
+    localStorage.clear();
     setLogoutDialogOpen(false);
   };
 

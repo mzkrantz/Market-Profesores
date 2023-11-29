@@ -28,8 +28,9 @@ export const login = async function (login) {
         localStorage.setItem("x", data.loginUser.token);
         //guardo usuario logueado
         let user = data.loginUser.user;
-        localStorage.setItem("nombre", user.name);
+        localStorage.setItem("nombre", user.nombre);
         localStorage.setItem("email", user.email);
+        localStorage.setItem("profesorId", profesorPorMail().idProfesor);
 
         return { rdo: 0, mensaje: "Ok" }; //correcto
       }
@@ -417,6 +418,47 @@ export const obtenerTodosLosCursosPublicados = async function (
   } catch (error) {
     console.error("Error:", error);
     return { rdo: 1, mensaje: "Error al obtener los cursos" };
+  }
+};
+
+export const obtenerTodosLosProfesores = async function (page = 1, limit = 10) {
+  let url = urlWebServices.obtenerTodosProfesores;
+
+  try {
+    let response = await fetch(url, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+      },
+    });
+
+    let rdo = response.status;
+
+    switch (rdo) {
+      case 200: {
+        // Asumiendo que el servidor devuelve 200 cuando la solicitud es exitosa
+        let responseData = await response.json();
+
+        // Inicializar un array para almacenar los cursos con published en true
+        let profesores = [];
+
+        for (const profesor of responseData.data.docs) {
+          profesores.push(profesor);
+        }
+
+        return {
+          rdo: 0,
+          data: profesores,
+          mensaje: "Profesores recibidos exitosamente",
+        };
+      }
+      default: {
+        return { rdo: 1, mensaje: "Error al obtener los Profesores" };
+      }
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    return { rdo: 1, mensaje: "Error al obtener los Profesores" };
   }
 };
 

@@ -691,3 +691,43 @@ export const eliminarComentario = async function (comentarioId) {
     throw error;
   }
 };
+
+export const actualizarImagenCurso = async function (id, imagen) {
+  let url = urlWebServices.actualizarImagenCurso;
+  let token = localStorage.getItem("x");
+
+  let formData = new FormData();
+  formData.append('image', imagen);
+
+  try {
+    let response = await fetch(url + id +'/image', {
+      method: "PATCH",
+      mode: "cors",
+      headers: {
+        Accept: "*/*",
+        Origin: "http://localhost:3000",
+        "x-access-token": token,
+      },
+      body: formData,
+    });
+
+    let responseData = await response.json();
+
+    switch (response.status) {
+      case 200: {
+        return responseData;
+      }
+      case 404: {
+        throw new Error("No se encontró el curso con ese ID.");
+      }
+      default: {
+        // Otro error
+        throw new Error("Ha ocurrido un error");
+      }
+    }
+  } catch (error) {
+    console.log("error", error);
+    throw error;
+  }
+}
+

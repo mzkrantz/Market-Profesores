@@ -15,6 +15,7 @@ const urlWebServices = {
   getComentariosByProfesorId: urlApi + "api/comentarios/profesor/",
   updateEstadoPublicacion: urlApi + "api/comentarios/",
   eliminarComentario: urlApi + "api/comentarios/",
+  actualizarImagenCurso: urlApi + "api/cursos/",
 };
 
 export default urlWebServices;

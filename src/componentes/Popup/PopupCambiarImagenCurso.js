@@ -8,21 +8,22 @@ import {
 } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import { useDropzone } from "react-dropzone";
+import { actualizarImagenCurso } from '../../controller/miApp.controller';
 
 const PopupCambiarImagenCurso = ({ open, handleClose, cursoToEdit, title }) => {
   const [image, setImage] = useState(null);
   const [isSnackbarOpen, setSnackbarOpen] = useState(false);
 
   const handleSubmit = async () => {
+    
     if (!image) {
       console.error("No se ha seleccionado ninguna imagen.");
       return;
     }
-
-    const formData = new FormData();
-    formData.append("image", image);
-
     try {
+      console.log("id del curso: ", cursoToEdit._id);
+      await actualizarImagenCurso(cursoToEdit._id, image);
+      setSnackbarOpen(true);
       handleClose();
     } catch (error) {
       console.error("Error al actualizar la imagen del curso:", error.message);

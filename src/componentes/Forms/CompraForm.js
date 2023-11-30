@@ -103,7 +103,7 @@ export default function CompraForm({ open, handleClose }) {
             label="Nombre y Apellido"
             variant="outlined"
             fullWidth
-            margin="normal"
+            margin="dense"
             value={nombre}
             onChange={(e) => {
               const value = e.target.value;
@@ -118,7 +118,7 @@ export default function CompraForm({ open, handleClose }) {
             label="Teléfono"
             variant="outlined"
             fullWidth
-            margin="normal"
+            margin="dense"
             value={telefono}
             onChange={(e) => {
               const value = e.target.value;
@@ -133,7 +133,7 @@ export default function CompraForm({ open, handleClose }) {
             label="Mail"
             variant="outlined"
             fullWidth
-            margin="normal"
+            margin="dense"
             value={mail}
             onChange={(e) => {
               const value = e.target.value;
@@ -143,14 +143,14 @@ export default function CompraForm({ open, handleClose }) {
             helperText={<span style={{ color: "#d32f2f" }}>{errors.mail}</span>}
           />
 
-          <FormControl margin="normal" variant="outlined" fullWidth>
+          <FormControl margin="dense" variant="outlined" fullWidth>
             <InputLabel id="horario-preferencia">
               Horario de Preferencia
             </InputLabel>
             <Select
               label="Horario de Preferencia"
               fullWidth
-              margin="normal"
+              margin="dense"
               value={horario}
               onChange={(e) => setHorario(e.target.value)}
             >
@@ -167,7 +167,7 @@ export default function CompraForm({ open, handleClose }) {
             fullWidth
             multiline
             rows={4}
-            margin="normal"
+            margin="dense"
             value={mensaje}
             onChange={(e) => {
               const value = e.target.value;

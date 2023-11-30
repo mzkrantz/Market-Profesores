@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import Breadcrumb from "../../componentes/Breadcrumb/Breadcrumb";
 import ResponsiveGrid from "../../componentes/Grid/ResponsiveGrid";
 import CardProfesor from "../../componentes/Cards/CardProfesor";
-import ejemploProfesores from "../../data/ejemplo-profesores.json";
 import SpacerTop from "../../componentes/Spacer/SpacerTop";
 import { Pagination } from "@mui/material";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
+import { obtenerTodosLosProfesores } from "../../controller/miApp.controller";
 
 export default function Profesores() {
   const [professorsData, setProfessorsData] = useState([]);
@@ -14,9 +14,18 @@ export default function Profesores() {
   const [itemsPerPage, setItemsPerPage] = useState(3); // Cantidad de profesores por página y valor predeterminado para escritorio
 
   useEffect(() => {
-    // Usar ejemploProfesores directamente en lugar de hacer una solicitud fetch
-    setProfessorsData(ejemploProfesores.profesores);
-  }, []);
+    const fetchProfesores = async () => {
+      const response = await obtenerTodosLosProfesores(page, itemsPerPage);
+
+      if (response.rdo === 0) {
+        setProfessorsData(response.data);
+      } else {
+        console.error(response.mensaje);
+      }
+    };
+
+    fetchProfesores();
+  }, [page, itemsPerPage]);
 
   useEffect(() => {
     // Funcion para actualizar el numero de elementos por pagina segun el ancho de la ventana

@@ -1,5 +1,6 @@
 .boton-tabla {
   min-width: 100% !important;
+  border-radius: 0 !important;
 }
 
 th {

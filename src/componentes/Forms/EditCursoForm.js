@@ -50,7 +50,7 @@ export default function EditCursoForm({
       setCursoData(cursoToEdit);
     } else {
       setCursoData({
-        id: 0,
+        id: null,
         image: null,
         title: "",
         description: "",
@@ -154,7 +154,7 @@ export default function EditCursoForm({
       // Verificar si el título es "Editar Curso"
       if (title === "Editar Curso") {
         // Si es así, llamar a actualizarCurso
-        response = await actualizarCurso(cursoData._id, formData);
+        response = await actualizarCurso(cursoData._id, cursoData);
       } else {
         // Si no, llamar a crearCurso
 
@@ -342,13 +342,15 @@ export default function EditCursoForm({
             </Select>
             <span style={{ color: "#d32f2f" }}>{errors.type}</span>
           </FormControl>
-          <div {...getRootProps()} style={dropzoneStyle}>
-            <input {...getInputProps()} />
-            <p>
-              Arrastra y suelta una imagen aquí, o haz clic para seleccionar
-              una.
-            </p>
-          </div>
+          {title === "Crear Nuevo Curso" && (
+            <div {...getRootProps()} style={dropzoneStyle}>
+              <input {...getInputProps()} />
+              <p>
+                Arrastra y suelta una imagen aquí, o haz clic para seleccionar
+                una.
+              </p>
+            </div>
+          )}
           <Button variant="contained" color="primary" onClick={handleSend}>
             Enviar
           </Button>

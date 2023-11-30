@@ -12,6 +12,7 @@ import { styled } from "@mui/system";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import ImageIcon from "@mui/icons-material/Image";
 import DeleteIcon from "@mui/icons-material/Delete";
 import TablePagination from "@mui/material/TablePagination";
 import "../TableStyles.css";
@@ -26,6 +27,8 @@ import {
 import Refresher from "../../../componentes/Refresher/Refresher";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+
+import PopupCambiarImagenCurso from "../../../componentes/Popup/PopupCambiarImagenCurso";
 
 const CourseList = styled(TableContainer)`
   margin-top: ${({ theme }) => theme.spacing(2)};
@@ -72,16 +75,18 @@ const MisCursos = () => {
   const [editingCourse, setEditingCourse] = useState(null);
   const [formClosed, setFormClosed] = useState(false);
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(3);
-  const [refresher, setRefresher] = useState(false); // Nuevo estado para el refrescador
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [refresher, setRefresher] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [selectedCurso, setSelectedCurso] = useState(null);
 
   useEffect(() => {
     const fetchCursos = async () => {
       const response = await misCursos();
       if (response && response.rdo === 0) {
-        setCursos(response.cursos || []); // Si response.cursos es null, se establecerá un array vacío
+        setCursos(response.cursos || []);
       } else {
         console.error(
           response ? response.mensaje : "Error al obtener los cursos"
@@ -111,13 +116,14 @@ const MisCursos = () => {
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
+    const newRowsPerPage = parseInt(event.target.value, 10);
+    setRowsPerPage(newRowsPerPage > 0 ? newRowsPerPage : 10); // Aseguramos que sea un valor permitido
     setPage(0);
   };
 
   const handlePublish = async (curso) => {
     if (curso && "published" in curso) {
-      const updatedCursoData = { published: !curso.published }; // Cambia el estado de 'published'
+      const updatedCursoData = { published: !curso.published };
       const response = await actualizarCurso(curso._id, updatedCursoData);
       if (response && response.rdo === 0) {
         const message = curso.published
@@ -125,7 +131,7 @@ const MisCursos = () => {
           : "Curso publicado correctamente.";
         openSnackbar(message);
         console.log(`Curso ${curso._id}. ${message}}`);
-        setRefresher((prev) => !prev); // Actualiza el estado del refrescador
+        setRefresher((prev) => !prev);
       } else {
         console.error(
           response ? response.mensaje : "Error al publicar/despublicar el curso"
@@ -143,7 +149,7 @@ const MisCursos = () => {
       if (response && response.rdo === 0) {
         console.log(`Curso ${curso._id} eliminado correctamente`);
         openSnackbar("Curso eliminado correctamente.");
-        setRefresher((prev) => !prev); // Actualiza el estado del refrescador
+        setRefresher((prev) => !prev);
       } else {
         console.error(
           response ? response.mensaje : "Error al eliminar el curso"
@@ -232,6 +238,17 @@ const MisCursos = () => {
                           <ButtonContainer>
                             <IconButton
                               className="boton-tabla"
+                              onClick={() => {
+                                setSelectedCurso(curso);
+                                setIsPopupOpen(true);
+                              }}
+                            >
+                              <ImageIcon />
+                            </IconButton>
+                          </ButtonContainer>
+                          <ButtonContainer>
+                            <IconButton
+                              className="boton-tabla"
                               onClick={() => handlePublish(curso)}
                             >
                               <VisibilityIcon />
@@ -270,16 +287,28 @@ const MisCursos = () => {
           title={editingCourse ? "Editar Curso" : "Crear Nuevo Curso"}
         />
       )}
+      {isPopupOpen && (
+        <PopupCambiarImagenCurso
+          open={isPopupOpen}
+          handleClose={() => {
+            setIsPopupOpen(false);
+            setSelectedCurso(null);
+          }}
+          cursoToEdit={selectedCurso}
+          title={"Editar imagen del curso"}
+        />
+      )}
+
       <Snackbar
         open={snackbarOpen}
-        autoHideDuration={3000} // Puedes ajustar la duración según tus preferencias
+        autoHideDuration={3000}
         onClose={() => setSnackbarOpen(false)}
       >
         <MuiAlert
           elevation={6}
           variant="filled"
           onClose={() => setSnackbarOpen(false)}
-          severity="success" // Puedes cambiar a "error" para mostrar un mensaje de error
+          severity="success"
         >
           {snackbarMessage}
         </MuiAlert>

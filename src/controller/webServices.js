@@ -20,6 +20,7 @@ const urlWebServices = {
   obtenerSolicitudes: urlApi + "api/solicitudes/",
   actualizarEstadoSolicitud: urlApi + "api/solicitudes/",
   obtenerImagenUsuario: urlApi + "api/users/obtenerImagenUsuario",
+  mail: urlApi + "api/mail",
 };
 
 export default urlWebServices;

@@ -20,6 +20,7 @@ import { UserContext } from "../../context/userProvider";
 import LogoWizard from "../LogoWizard/LogoWizard";
 import UserMenu from "./UserMenu";
 import MoreVertIcon from "@mui/icons-material/MoreVert"; // Importa el ícono de tres puntos
+import {obtenerImagenUsuario} from '../../controller/miApp.controller';
 
 import "./NavBarStyles.css";
 
@@ -35,11 +36,30 @@ const NavBar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isLogoutDialogOpen, setLogoutDialogOpen] = useState(false);
   const [shouldNavigate, setShouldNavigate] = useState(false);
+  const [userImage, setUserImage] = useState(null);
   const location = useLocation();
 
   useEffect(() => {
     setShouldNavigate(false);
   }, [location.pathname]);
+
+  useEffect(() => {
+    const fetchUserImage = async () => {
+      if (user) {
+        try {
+          const response = await obtenerImagenUsuario();
+          console.log('response', response);
+          setUserImage(response.imagen);
+        } catch (error) {
+          console.error('Error obteniendo la imagen del usuario:', error);
+        }
+      } else {
+        setUserImage(null);
+      }
+    };
+
+    fetchUserImage();
+  }, [user]);
 
   const isMenuOpen = Boolean(anchorEl);
 
@@ -125,9 +145,9 @@ const NavBar = () => {
             </Hidden>
             <Hidden smDown>
               {user ? (
-                <StyledAvatar onClick={handleProfileMenuOpen}>
-                  {user.name ? user.name.charAt(0) : "U"}
-                </StyledAvatar>
+                <StyledAvatar onClick={handleProfileMenuOpen} src={userImage}>
+                {user && user.name ? user.name.charAt(0) : "U"}
+              </StyledAvatar>
               ) : (
                 <StyledAvatar onClick={handleProfileMenuOpen} />
               )}

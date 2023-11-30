@@ -819,3 +819,33 @@ export const actualizarEstadoSolicitud = async function (solicitudId, estado) {
     return { rdo: 1, mensaje: "Error al actualizar el estado de la solicitud" };
   }
 };
+
+export const obtenerImagenUsuario = async function () {
+  let email = localStorage.getItem("email");
+  let url = `${urlWebServices.obtenerImagenUsuario}/${email}`;
+  let token = localStorage.getItem("x");
+
+  try {
+    let response = await fetch(url, {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': token
+      }
+    });
+
+    switch (response.status) {
+      case 200: {
+        let data = await response.json();
+        return { rdo: 0, imagen: data.image };
+      }
+      default: {
+        // otro error
+        return { rdo: 1, mensaje: "Error al obtener la imagen del usuario" };
+      }
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    return { rdo: 1, mensaje: "Error al obtener la imagen del usuario" };
+  }
+};

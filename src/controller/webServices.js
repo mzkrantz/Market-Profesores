@@ -19,6 +19,7 @@ const urlWebServices = {
   enviarSolicitud: urlApi + "api/solicitudes/",
   obtenerSolicitudes: urlApi + "api/solicitudes/",
   actualizarEstadoSolicitud: urlApi + "api/solicitudes/",
+  obtenerImagenUsuario: urlApi + "api/users/obtenerImagenUsuario",
 };
 
 export default urlWebServices;

@@ -13,6 +13,7 @@ import MisCursos from "./views/Admin/Cursos/MisCursos";
 import Solicitudes from "./views/Admin/Solicitudes/Solicitudes";
 import Perfil from "./views/Admin/Perfil/Perfil";
 import Comentarios from "./views/Admin/Comentarios/Comentarios";
+import ResetPassword from "./views/Login/ResetPassword";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path="/Solicitudes" element={<Solicitudes />} />
           <Route path="/Perfil" element={<Perfil />} />
           <Route path="/Comentarios" element={<Comentarios />} />
+          <Route path="/ResetPassword/" element={<ResetPassword />} /> {/*path="/ResetPassword/:token"*/}
         </Routes>
       </div>
       <Footer />

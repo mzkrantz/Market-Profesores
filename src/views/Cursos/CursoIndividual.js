@@ -191,6 +191,7 @@ const CursoIndividual = () => {
                   <CompraForm
                     open={isDialogOpen} 
                     handleClose={handleCloseDialog}
+                    curso={curso}
                   />
 
                   <Divider style={{ padding: "2rem" }} />

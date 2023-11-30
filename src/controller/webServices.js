@@ -16,6 +16,9 @@ const urlWebServices = {
   updateEstadoPublicacion: urlApi + "api/comentarios/",
   eliminarComentario: urlApi + "api/comentarios/",
   actualizarImagenCurso: urlApi + "api/cursos/",
+  enviarSolicitud: urlApi + "api/solicitudes/",
+  obtenerSolicitudes: urlApi + "api/solicitudes/",
+  actualizarEstadoSolicitud: urlApi + "api/solicitudes/",
 };
 
 export default urlWebServices;

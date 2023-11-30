@@ -730,4 +730,92 @@ export const actualizarImagenCurso = async function (id, imagen) {
     throw error;
   }
 }
+export const enviarSolicitud = async function (formData) {
+  let url = urlWebServices.enviarSolicitud;
 
+  try {
+    let response = await fetch(url, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    });
+
+    switch (response.status) {
+      case 200: {
+        // Asumiendo que el servidor devuelve 200 cuando la solicitud es exitosa
+        return { rdo: 0, mensaje: "Solicitud enviada exitosamente" };
+      }
+      default: {
+        // otro error
+        return { rdo: 1, mensaje: "Error al enviar la solicitud" };
+      }
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    return { rdo: 1, mensaje: "Error al enviar la solicitud" };
+  }
+};
+
+export const obtenerSolicitudesPorProfesorId = async function () {
+  let url = urlWebServices.obtenerSolicitudes ;
+  let token = localStorage.getItem("x");
+
+  const profesorId = localStorage.getItem("profesorId");
+
+  try {
+    let response = await fetch(url+profesorId , {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': token
+      }
+    });
+
+    switch (response.status) {
+      case 200: {
+        let data = await response.json();
+        return { rdo: 0, solicitudes: data };
+      }
+      default: {
+        // otro error
+        return { rdo: 1, mensaje: "Error al obtener las solicitudes" };
+      }
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    return { rdo: 1, mensaje: "Error al obtener las solicitudes" };
+  }
+};
+
+export const actualizarEstadoSolicitud = async function (solicitudId, estado) {
+  let url = urlWebServices.actualizarEstadoSolicitud;
+  let token = localStorage.getItem("x");
+
+  try {
+    let response = await fetch(url+solicitudId, {
+      method: "PUT",
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': token
+      },
+      body: JSON.stringify({
+        aceptado: estado
+      })
+    });
+
+    switch (response.status) {
+      case 200: {
+        return { rdo: 0, mensaje: "Estado de solicitud actualizado correctamente" };
+      }
+      default: {
+        // otro error
+        return { rdo: 1, mensaje: "Error al actualizar el estado de la solicitud" };
+      }
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    return { rdo: 1, mensaje: "Error al actualizar el estado de la solicitud" };
+  }
+};

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Table from "@mui/material/Table";
@@ -16,36 +16,12 @@ import PopupMessageInfo from "../../../componentes/Popup/PopupMessageInfo";
 import ModalCustom from "../../../componentes/Modal/ModalCustom";
 import SpacerTop from "../../../componentes/Spacer/SpacerTop";
 import TablePagination from "@mui/material/TablePagination";
+import {
+  obtenerSolicitudesPorProfesorId,
+  actualizarEstadoSolicitud,
+} from "../../../controller/miApp.controller";
 
 import "../TableStyles.css";
-
-const mockSolicitudes = [
-  {
-    id: 1,
-    title: "Curso de Desarrollo Web",
-    solicitud: {
-      status: "Finalizada",
-      nombre: "Juan Perez",
-      telefono: "123456789",
-      mail: "juan@example.com",
-      horario: "Tarde",
-      mensaje: "Quisiera realizar la compra del Curso de Desarrollo Web",
-    },
-  },
-  {
-    id: 2,
-    title: "Curso de Marketing Digital",
-    solicitud: {
-      status: "Solicitada",
-      nombre: "María Perez",
-      telefono: "123456789",
-      mail: "maria@example.com",
-      horario: "Mañana",
-      mensaje:
-        "Me gustaría hacer la compra sobre el curso de Marketing Digital",
-    },
-  },
-];
 
 const CommentList = styled(TableContainer)`
   margin-top: ${({ theme }) => theme.spacing(2)};
@@ -96,6 +72,22 @@ const Solicitudes = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10); // Elementos por página
 
+  const [solicitudes, setSolicitudes] = useState([]);
+
+  const fetchSolicitudes = async () => {
+    const profesorId = "tuProfesorId"; // Reemplaza esto con el id del profesor que necesitas
+    const result = await obtenerSolicitudesPorProfesorId(profesorId);
+    if (result.rdo === 0) {
+      setSolicitudes(result.solicitudes);
+    } else {
+      console.error(result.mensaje);
+    }
+  };
+
+  useEffect(() => {
+    fetchSolicitudes();
+  }, []);
+
   const openCommentModal = () => {
     setIsCommentModalOpen(true);
   };
@@ -119,6 +111,17 @@ const Solicitudes = () => {
     setPage(0);
   };
 
+  const handleAccept = async (solicitudId) => {
+    const result = await actualizarEstadoSolicitud(solicitudId, true);
+    if (result.rdo === 0) {
+      console.log(result.mensaje);
+      fetchSolicitudes();
+      
+    } else {
+      console.error(result.mensaje);
+    }
+  };
+
   return (
     <>
       <Container>
@@ -129,64 +132,61 @@ const Solicitudes = () => {
         </SpacerTop>
 
         <TableWrapper>
-        
-            <CommentList component={TableContainer}>
-              <ResponsiveTable>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Curso</TableCell>
-                    <TableCell>Usuario</TableCell>
-                    <TableCell>Estado</TableCell>
-                    <TableCell>Acciones</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {mockSolicitudes
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((curso) => (
-                      <TableRow key={curso.id}>
-                        <TableCell>{curso.title}</TableCell>
-                        <TableCell>{curso.solicitud.nombre}</TableCell>
-                        <TableCell>{curso.solicitud.status}</TableCell>
-                        <TableCell>
-                          <IconButton
-                            className="boton-tabla"
-                            onClick={() =>
-                              openCommentModal(openPopup(curso.solicitud))
-                            }
-                          >
-                            <VisibilityIcon />
-                          </IconButton>
-                          <IconButton
-                            className="boton-tabla"
-                            onClick={() => {
-                              alert("Implementar la lógica de Aceptado");
-                            }}
-                          >
-                            <CheckCircleIcon />
-                          </IconButton>
-                          <IconButton
-                            className="boton-tabla"
-                            color="error"
-                            onClick={() => {
-                              alert("Implementar la lógica de Cancelacion");
-                            }}
-                          >
-                            <CancelIcon />
-                          </IconButton>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                </TableBody>
-              </ResponsiveTable>
-            </CommentList>
+          <CommentList component={TableContainer}>
+            <ResponsiveTable>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Curso</TableCell>
+                  <TableCell>Usuario</TableCell>
+                  <TableCell>Estado</TableCell>
+                  <TableCell>Acciones</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {solicitudes
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((solicitud) => (
+                    <TableRow key={solicitud._id}>
+                      <TableCell>{solicitud.cursoNombre}</TableCell>
+                      <TableCell>{solicitud.nombre}</TableCell>
+                      <TableCell>
+                        {solicitud.aceptado ? "Aceptado" : "Pendiente"}
+                      </TableCell>
+                      <TableCell>
+                        <IconButton
+                          className="boton-tabla"
+                          onClick={() => openCommentModal(openPopup(solicitud))}
+                        >
+                          <VisibilityIcon />
+                        </IconButton>
+                        <IconButton
+                          className="boton-tabla"
+                          onClick={() => handleAccept(solicitud._id)}
+                        >
+                          <CheckCircleIcon />
+                        </IconButton>
+                        <IconButton
+                          className="boton-tabla"
+                          color="error"
+                          onClick={() => {
+                            alert("Implementar la lógica de Cancelacion");
+                          }}
+                        >
+                          <CancelIcon />
+                        </IconButton>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </ResponsiveTable>
+          </CommentList>
           <TablePagination
-             component="div"
-             count={mockSolicitudes.length}
-             page={page}
-             onPageChange={handleChangePage}
-             rowsPerPage={rowsPerPage}
-             onRowsPerPageChange={handleChangeRowsPerPage}
+            component="div"
+            count={solicitudes.length}
+            page={page}
+            onPageChange={handleChangePage}
+            rowsPerPage={rowsPerPage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
           />
         </TableWrapper>
       </Container>

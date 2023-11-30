@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import {enviarSolicitud} from '../../controller/miApp.controller'; 
+
 import {
   Dialog,
   DialogTitle,
@@ -14,7 +16,8 @@ import {
 import MuiAlert from "@mui/material/Alert";
 const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
-export default function CompraForm({ open, handleClose }) {
+
+export default function CompraForm({ open, handleClose, curso }) {
   const [nombre, setNombre] = useState("");
   const [telefono, setTelefono] = useState("");
   const [mail, setMail] = useState("");
@@ -70,12 +73,31 @@ export default function CompraForm({ open, handleClose }) {
   };
 
   const handleSubmit = () => {
-    // Agregar la lógica real para enviar la solicitud de compra
-    resetForm();
-    setSnackbarOpen(true);
-    handleClose();
+  // Crear el objeto de datos del formulario
+  const formData = {
+    nombre: nombre,
+    telefono: telefono,
+    mail: mail,
+    horario: horario,
+    mensaje: mensaje,
+    curso: curso._id,
+    cursoNombre: curso.title,
+    profesor: curso.teacher,
   };
 
+  // Llamar a enviarSolicitud
+  enviarSolicitud(formData)
+    .then(() => {
+      // Si la solicitud fue exitosa, resetear el formulario y mostrar el Snackbar
+      resetForm();
+      setSnackbarOpen(true);
+      handleClose();
+    })
+    .catch((error) => {
+      // Si hubo un error, puedes manejarlo aquí
+      console.error('Hubo un error al enviar la solicitud:', error);
+    });
+};
   const resetForm = () => {
     setNombre("");
     setTelefono("");

@@ -1,10 +1,6 @@
 import React from "react";
-import {
-  Menu,
-  MenuItem,
-} from "@mui/material";
+import { Menu, MenuItem } from "@mui/material";
 import { Link, NavLink } from "react-router-dom";
-
 
 export default function UserMenu(props) {
   const { anchorEl, isMenuOpen, user, handleMenuClose, handleLogout } = props;
@@ -26,41 +22,33 @@ export default function UserMenu(props) {
       onClose={handleMenuClose}
     >
       {user ? (
-        <>
-          <Link to="/Perfil" style={{ textDecoration: "none", color: "black" }}>
-            <MenuItem>Mi Perfil</MenuItem>
-          </Link>
-          <Link
-            to="/MisCursos"
-            style={{ textDecoration: "none", color: "black" }}
-          >
-            <MenuItem>Mis Cursos</MenuItem>
-          </Link>
-          <Link
-            to="/Solicitudes"
-            style={{ textDecoration: "none", color: "black" }}
-          >
-            <MenuItem>Solicitudes</MenuItem>
-          </Link>
-          <Link
-            to="/Comentarios"
-            style={{ textDecoration: "none", color: "black" }}
-          >
-            <MenuItem>Comentarios</MenuItem>
-          </Link>
-          <MenuItem onClick={handleLogout}>Cerrar Sesión</MenuItem>
-        </>
+        [
+          <MenuItem key="profile" component={Link} to="/Perfil" style={{ textDecoration: "none", color: "black" }}>
+            Mi Perfil
+          </MenuItem>,
+          <MenuItem key="courses" component={Link} to="/MisCursos" style={{ textDecoration: "none", color: "black" }}>
+            Mis Cursos
+          </MenuItem>,
+          <MenuItem key="requests" component={Link} to="/Solicitudes" style={{ textDecoration: "none", color: "black" }}>
+            Solicitudes
+          </MenuItem>,
+          <MenuItem key="comments" component={Link} to="/Comentarios" style={{ textDecoration: "none", color: "black" }}>
+            Comentarios
+          </MenuItem>,
+          <MenuItem key="logout" onClick={handleLogout}>
+            Cerrar Sesión
+          </MenuItem>,
+        ]
       ) : (
-        <>
-          <NavLink to="/Login" style={{ textDecoration: "none", color: "black" }}>
-            <MenuItem onClick={handleMenuClose}>Ingresá</MenuItem>
-          </NavLink>
-          <NavLink to="/Registrate" style={{ textDecoration: "none", color: "black" }}>
-            <MenuItem onClick={handleMenuClose}>Registrate</MenuItem>
-          </NavLink>
-        </>
+        [
+          <MenuItem key="login" component={NavLink} to="/Login" style={{ textDecoration: "none", color: "black" }}>
+            Ingresá
+          </MenuItem>,
+          <MenuItem key="register" component={NavLink} to="/Registrate" style={{ textDecoration: "none", color: "black" }}>
+            Registrate
+          </MenuItem>,
+        ]
       )}
     </Menu>
   );
 }
-

@@ -12,6 +12,7 @@ import {
   DialogContent,
   DialogActions,
   Hidden,
+  IconButton,
 } from "@mui/material";
 import { NavLink, Navigate, useLocation } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
@@ -22,24 +23,23 @@ import MoreVertIcon from "@mui/icons-material/MoreVert"; // Importa el ícono de
 
 import "./NavBarStyles.css";
 
-const StyledAvatar = styled(Avatar)`
-  cursor: pointer;
-  width: 40px;
-  height: 40px;
-  font-size: 16px;
-`;
+const StyledAvatar = styled(Avatar)({
+  cursor: "pointer",
+  width: 40,
+  height: 40,
+  fontSize: 16,
+});
 
-export default function NavBar() {
+const NavBar = () => {
   const { user, setUser } = useContext(UserContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const [isLogoutDialogOpen, setLogoutDialogOpen] = useState(false);
-  const [shouldNavigate, setShouldNavigate] = useState(false);  
+  const [shouldNavigate, setShouldNavigate] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
     setShouldNavigate(false);
   }, [location.pathname]);
-  
 
   const isMenuOpen = Boolean(anchorEl);
 
@@ -77,7 +77,7 @@ export default function NavBar() {
         <Toolbar className="navbar-toolbar">
           <NavLink to="/" style={{ textDecoration: "none", color: "white" }}>
             <div className="navbar-logo">
-              <LogoWizard width={50} height={50}/>
+              <LogoWizard width={50} height={50} />
               <Typography
                 variant="h6"
                 noWrap
@@ -91,30 +91,37 @@ export default function NavBar() {
           </NavLink>
 
           <div className="button-holder">
-            <NavLink
+            <Button
+              color="inherit"
+              component={NavLink}
               to="/Cursos"
               style={{ textDecoration: "none", color: "white" }}
               className="navbar-button"
             >
-              <Button color="inherit">Cursos</Button>
-            </NavLink>
+              Cursos
+            </Button>
 
-            <NavLink
+            <Button
+              color="inherit"
+              component={NavLink}
               to="/Profesores"
               style={{ textDecoration: "none", color: "white" }}
               className="navbar-button"
             >
-              <Button color="inherit">Profesores</Button>
-            </NavLink>
+              Profesores
+            </Button>
           </div>
 
           <Box className="navbar-avatar">
             <Hidden smUp>
-              {" "}
-              <MoreVertIcon
-                className="vertIcon-avatar"
+              <IconButton
+                edge="end"
+                color="inherit"
+                aria-label="menu"
                 onClick={handleProfileMenuOpen}
-              />{" "}
+              >
+                <MoreVertIcon />
+              </IconButton>
             </Hidden>
             <Hidden smDown>
               {user ? (
@@ -137,22 +144,24 @@ export default function NavBar() {
         handleLogout={handleLogout}
       />
 
-<Dialog open={isLogoutDialogOpen} onClose={handleCancelLogout}>
-      <DialogTitle>Cerrar sesión:</DialogTitle>
-      <DialogContent>
-        <Typography>¿Estás seguro de que deseas cerrar sesión?</Typography>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleCancelLogout} color="primary">
-          Cancelar
-        </Button>
-        <Button onClick={handleConfirmLogout} color="primary">
-          Cerrar Sesión
-        </Button>
-      </DialogActions>
-    </Dialog>
+      <Dialog open={isLogoutDialogOpen} onClose={handleCancelLogout}>
+        <DialogTitle>Cerrar sesión:</DialogTitle>
+        <DialogContent>
+          <Typography>¿Estás seguro de que deseas cerrar sesión?</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCancelLogout} color="primary">
+            Cancelar
+          </Button>
+          <Button onClick={handleConfirmLogout} color="primary">
+            Cerrar Sesión
+          </Button>
+        </DialogActions>
+      </Dialog>
 
-    {shouldNavigate && <Navigate to="/" />}
-  </Box>
+      {shouldNavigate && <Navigate to="/" />}
+    </Box>
   );
-}
+};
+
+export default NavBar;

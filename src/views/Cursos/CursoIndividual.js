@@ -75,7 +75,9 @@ const CursoIndividual = () => {
         const response = await obtenerTodosLosCursosPublicados();
         if (response.rdo === 0) {
           setCursos(response.data);
-          const cursoEncontrado = response.data.find((c) => c._id.toString() === id);
+          const cursoEncontrado = response.data.find(
+            (c) => c._id.toString() === id
+          );
           setCurso(cursoEncontrado);
 
           if (cursoEncontrado) {
@@ -187,7 +189,7 @@ const CursoIndividual = () => {
                   </Button>
 
                   <CompraForm
-                    open={isDialogOpen}
+                    open={isDialogOpen} 
                     handleClose={handleCloseDialog}
                   />
 
@@ -306,7 +308,7 @@ const CursoIndividual = () => {
       </ThemeProvider>
 
       <CompraForm
-        isOpen={isDialogOpen}
+        open={isDialogOpen}
         handleClose={handleCloseDialog}
         curso={curso}
       />

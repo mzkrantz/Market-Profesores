@@ -94,7 +94,7 @@ const Solicitudes = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(3); // Elementos por página
+  const [rowsPerPage, setRowsPerPage] = useState(10); // Elementos por página
 
   const openCommentModal = () => {
     setIsCommentModalOpen(true);
@@ -114,8 +114,9 @@ const Solicitudes = () => {
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0); // Cuando cambias la cantidad de elementos por página, vuelves a la primera página.
+    const newRowsPerPage = parseInt(event.target.value, 10);
+    setRowsPerPage(newRowsPerPage > 0 ? newRowsPerPage : 10); // Aseguramos que sea un valor permitido
+    setPage(0);
   };
 
   return (

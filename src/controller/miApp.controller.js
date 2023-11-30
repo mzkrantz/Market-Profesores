@@ -957,3 +957,34 @@ export const sendPasswordResetEmail = async (email) => {
     throw error;
   }
 };
+
+export const resetPassword = async (email, resetToken, newPassword) => {
+
+  const token = resetToken;
+
+  const url = urlWebServices.mail + "/reset-password/";
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        Origin: "http://localhost:3000",
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email,
+        resetToken: resetToken,
+        newPassword: newPassword,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Error al reiniciar la contraseña');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error al reiniciar la contraseña:', error);
+    throw error;
+  }
+};

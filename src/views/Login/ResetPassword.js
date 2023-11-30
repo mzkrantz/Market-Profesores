@@ -7,6 +7,8 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import { resetPassword } from "../../controller/miApp.controller";
+import { useParams } from "react-router-dom";
 
 export default function ResetPassword({ match }) {
   const [formData, setFormData] = React.useState({
@@ -21,14 +23,26 @@ export default function ResetPassword({ match }) {
     confirmPassword: '',
   });
 
+  const { token: resetToken } = useParams();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (validateForm()) {
       try {
-        /**/
-        console.log('Contraseña restablecida con éxito');
+        const response = await resetPassword(formData.email, resetToken, formData.newPassword);
+        console.log('Contraseña restablecida con éxito:', response);
+        // Restablecer el formulario
+        setFormData({
+          email: '',
+          newPassword: '',
+          confirmPassword: '',
+        });
+        setFormErrors({
+          email: '',
+          newPassword: '',
+          confirmPassword: '',
+        });
       } catch (error) {
-        // Puedes manejar el error aquí, por ejemplo, mostrar un mensaje al usuario
         console.error('Error al restablecer la contraseña:', error);
       }
     }

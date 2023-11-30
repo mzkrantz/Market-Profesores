@@ -1,7 +1,11 @@
 # EDUWIZARD
 
 Este proyecto fue creado con [Create React App](https://github.com/facebook/create-react-app).
+
 Integrantes:
+Mendez Ferrin, Santiago Andres - LU 1138454
+
+Petcoff, Nicolas Emanuel - LU 1100533
 
 ## Scripts disponibles para el inicio
 
@@ -18,11 +22,11 @@ La consola da devoluciones de ciertos comportamientos importantes para entender 
 ## Instalación
 
 Asegúrate de tener [Node.js](https://nodejs.org/) instalado en tu máquina. Luego, ejecuta el siguiente comando para instalar las dependencias:
-````
 
-npm install
 
-````
+### `npm install`
+
+
 ## Dependencias
 
 A continuación se enumeran las principales dependencias de este proyecto.

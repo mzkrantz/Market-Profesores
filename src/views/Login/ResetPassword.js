@@ -10,19 +10,27 @@ import Container from "@mui/material/Container";
 
 export default function ResetPassword({ match }) {
   const [formData, setFormData] = React.useState({
-    newPassword: "",
-    confirmPassword: "",
+    email: '',
+    newPassword: '',
+    confirmPassword: '',
   });
 
   const [formErrors, setFormErrors] = React.useState({
-    newPassword: "",
-    confirmPassword: "",
+    email: '',
+    newPassword: '',
+    confirmPassword: '',
   });
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (validateForm()) {
-      //LOGICA PARA LLAMAR AL CONTROLADOR
+      try {
+        /**/
+        console.log('Contraseña restablecida con éxito');
+      } catch (error) {
+        // Puedes manejar el error aquí, por ejemplo, mostrar un mensaje al usuario
+        console.error('Error al restablecer la contraseña:', error);
+      }
     }
   };
 
@@ -30,13 +38,18 @@ export default function ResetPassword({ match }) {
     const errors = {};
     let isValid = true;
 
+    if (!formData.email.trim()) {
+      errors.email = 'El correo electrónico es requerido.';
+      isValid = false;
+    }
+
     if (formData.newPassword.length < 8) {
-      errors.newPassword = "La contraseña debe tener al menos 8 caracteres.";
+      errors.newPassword = 'La contraseña debe tener al menos 8 caracteres.';
       isValid = false;
     }
 
     if (formData.confirmPassword !== formData.newPassword) {
-      errors.confirmPassword = "Las contraseñas no coinciden.";
+      errors.confirmPassword = 'Las contraseñas no coinciden.';
       isValid = false;
     }
 
@@ -77,6 +90,22 @@ export default function ResetPassword({ match }) {
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="email"
+                  label="Correo Electrónico"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  helperText={
+                    <span style={{ color: "#d32f2f" }}>
+                      {formErrors.email}
+                    </span>
+                  }
+                />
+              </Grid>
               <Grid item xs={12}>
                 <TextField
                   required

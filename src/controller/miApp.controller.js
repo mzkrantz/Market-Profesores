@@ -697,10 +697,10 @@ export const actualizarImagenCurso = async function (id, imagen) {
   let token = localStorage.getItem("x");
 
   let formData = new FormData();
-  formData.append('image', imagen);
+  formData.append("image", imagen);
 
   try {
-    let response = await fetch(url + id +'/image', {
+    let response = await fetch(url + id + "/image", {
       method: "PATCH",
       mode: "cors",
       headers: {
@@ -729,7 +729,8 @@ export const actualizarImagenCurso = async function (id, imagen) {
     console.log("error", error);
     throw error;
   }
-}
+};
+
 export const enviarSolicitud = async function (formData) {
   let url = urlWebServices.enviarSolicitud;
 
@@ -737,18 +738,50 @@ export const enviarSolicitud = async function (formData) {
     let response = await fetch(url, {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData)
+      body: JSON.stringify(formData),
     });
 
     switch (response.status) {
-      case 200: {
-        // Asumiendo que el servidor devuelve 200 cuando la solicitud es exitosa
-        return { rdo: 0, mensaje: "Solicitud enviada exitosamente" };
+      case 201: {
+        // Obtener el profesor por ID
+        const profesorResult = await obtenerProfesorPorId(formData.profesor);
+
+        // Verificar si se obtuvo el profesor correctamente
+        if (profesorResult.rdo === 0) {
+          const profesor = profesorResult.profesor;
+
+          // Luego, proceder con el envío de la solicitud
+          const sendEmailResult = await sendEmailSolicitud(
+            profesor.data.email,
+            formData
+          );
+
+          // Verificamos si sendEmailSolicitud fue exitoso
+          if (sendEmailResult.rdo === 0) {
+            return {
+              rdo: 0,
+              mensaje: "Solicitud enviada exitosamente y correo enviado",
+            };
+          } else {
+            // Si hay un error en sendEmailSolicitud
+            return {
+              rdo: 1,
+              mensaje:
+                "Solicitud enviada, pero hubo un error al enviar el correo",
+            };
+          }
+        } else {
+          // Manejar el caso en el que no se pudo obtener el profesor
+          return {
+            rdo: 1,
+            mensaje: "Error al obtener información del profesor",
+          };
+        }
       }
       default: {
-        // otro error
+        // Otro error
         return { rdo: 1, mensaje: "Error al enviar la solicitud" };
       }
     }
@@ -759,18 +792,18 @@ export const enviarSolicitud = async function (formData) {
 };
 
 export const obtenerSolicitudesPorProfesorId = async function () {
-  let url = urlWebServices.obtenerSolicitudes ;
+  let url = urlWebServices.obtenerSolicitudes;
   let token = localStorage.getItem("x");
 
   const profesorId = localStorage.getItem("profesorId");
 
   try {
-    let response = await fetch(url+profesorId , {
+    let response = await fetch(url + profesorId, {
       method: "GET",
       headers: {
-        'Content-Type': 'application/json',
-        'x-access-token': token
-      }
+        "Content-Type": "application/json",
+        "x-access-token": token,
+      },
     });
 
     switch (response.status) {
@@ -794,24 +827,30 @@ export const actualizarEstadoSolicitud = async function (solicitudId, estado) {
   let token = localStorage.getItem("x");
 
   try {
-    let response = await fetch(url+solicitudId, {
+    let response = await fetch(url + solicitudId, {
       method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
-        'x-access-token': token
+        "Content-Type": "application/json",
+        "x-access-token": token,
       },
       body: JSON.stringify({
-        aceptado: estado
-      })
+        aceptado: estado,
+      }),
     });
 
     switch (response.status) {
       case 200: {
-        return { rdo: 0, mensaje: "Estado de solicitud actualizado correctamente" };
+        return {
+          rdo: 0,
+          mensaje: "Estado de solicitud actualizado correctamente",
+        };
       }
       default: {
         // otro error
-        return { rdo: 1, mensaje: "Error al actualizar el estado de la solicitud" };
+        return {
+          rdo: 1,
+          mensaje: "Error al actualizar el estado de la solicitud",
+        };
       }
     }
   } catch (error) {
@@ -829,9 +868,9 @@ export const obtenerImagenUsuario = async function () {
     let response = await fetch(url, {
       method: "GET",
       headers: {
-        'Content-Type': 'application/json',
-        'x-access-token': token
-      }
+        "Content-Type": "application/json",
+        "x-access-token": token,
+      },
     });
 
     switch (response.status) {
@@ -847,5 +886,74 @@ export const obtenerImagenUsuario = async function () {
   } catch (error) {
     console.error("Error:", error);
     return { rdo: 1, mensaje: "Error al obtener la imagen del usuario" };
+  }
+};
+
+export const sendEmailSolicitud = async (to, formData) => {
+  let url = urlWebServices.mail;
+  console.log(formData);
+
+  let emailData = {
+    to: to,
+    subject: "Nueva solicitud para el curso " + formData.cursoNombre,
+    text: `
+    Hemos recibido una nueva solicitud para el curso "${formData.cursoNombre}".<br>
+    Nombre del solicitante: ${formData.nombre}.<br>
+    Horario de contacto: ${formData.horario}.<br>
+    Mensaje: ${formData.mensaje}.<br>
+    <br><br>
+    Para comunicarse con el solicitante, puede enviar un correo electrónico a:
+    <a href="mailto:${formData.mail}">${formData.mail}</a>,
+    o llamar al siguiente número: ${formData.telefono}.
+  `,
+  };
+  try {
+    let response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(emailData),
+    });
+
+    if (response.ok) {
+      const result = await response.json();
+      console.log(result);
+      return { rdo: 0 };
+    } else {
+      console.error("Error al enviar el correo. Estado:", response.status);
+      return { rdo: 1 };
+    }
+  } catch (error) {
+    console.error("Error al enviar el correo:", error);
+    return { rdo: 1 };
+  }
+};
+
+export const sendPasswordResetEmail = async (email) => {
+  try {
+    const response = await fetch(
+      urlWebServices.mail + "/send-password-reset-email",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+        }),
+      }
+    );
+
+    if (!response.ok) {
+      console.error("Error in request:", response);
+      throw new Error(`Error en la solicitud: ${response.status}`);
+    }
+
+    const responseData = await response.json();
+    return responseData;
+  } catch (error) {
+    console.error("Error al enviar el correo electrónico:", error);
+    throw error;
   }
 };

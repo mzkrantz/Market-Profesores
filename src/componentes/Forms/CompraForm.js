@@ -224,7 +224,7 @@ export default function CompraForm({ open, handleClose, curso }) {
           severity="success"
           onClose={handleCloseSnackbar}
         >
-          Solicitud enviada correctamente
+          Solicitud enviada correctamente. El profesor se pondrá en contacto con usted a la brevedad.
         </MuiAlert>
       </Snackbar>
     </div>

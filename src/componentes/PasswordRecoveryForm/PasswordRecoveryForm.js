@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { TextField, Button, Typography, Container } from '@mui/material';
+import { sendPasswordResetEmail } from '../../controller/miApp.controller';
 
 const PasswordRecoveryForm = ({ onSubmit }) => {
   const [email, setEmail] = useState('');
@@ -8,7 +9,7 @@ const PasswordRecoveryForm = ({ onSubmit }) => {
     e.preventDefault();
 
     try {
-      // Lógica para enviar el correo.
+      await sendPasswordResetEmail(email);
       onSubmit('Se ha enviado un correo de recuperación de contraseña.');
     } catch (error) {
       console.error('Error al enviar el correo:', error);

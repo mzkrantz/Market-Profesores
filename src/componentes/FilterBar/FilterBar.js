@@ -81,6 +81,8 @@ export default function FilterBar({ onFilter, onSortChange, onClearFilters }) {
               <MenuItem value={"Negocios"}>Negocios</MenuItem>
               <MenuItem value={"Salud y Bienestar"}>Salud y Bienestar</MenuItem>
               <MenuItem value={"Tecnología"}>Tecnología</MenuItem>
+              <MenuItem value={"Ciencias Sociales"}>Ciencias Sociales</MenuItem>
+              <MenuItem value={"Ciencias Naturales"}>Ciencias Naturales</MenuItem>
             </Select>
           </FormControl>
         </Grid>

@@ -20,7 +20,8 @@ export const login = async function (login) {
     let rdo = response.status;
     let data = await response.json();
     switch (rdo) {
-      case 201: {
+      case 200: {
+        console.log("ACA ENTRO POR 200");
         localStorage.setItem("x", data.loginUser.token);
         let user = data.loginUser.user;
         localStorage.setItem("nombre", user.nombre);
@@ -325,7 +326,7 @@ export const actualizarCurso = async function (id, cursoData) {
 
 export const obtenerTodosLosCursosPublicados = async function (
   page = 1,
-  limit = 10
+  limit = 100
 ) {
   let url = urlWebServices.misCursos;
 
@@ -367,7 +368,10 @@ export const obtenerTodosLosCursosPublicados = async function (
   }
 };
 
-export const obtenerTodosLosProfesores = async function (page = 1, limit = 10) {
+export const obtenerTodosLosProfesores = async function (
+  page = 1,
+  limit = 100
+) {
   let url = urlWebServices.obtenerTodosProfesores;
 
   try {

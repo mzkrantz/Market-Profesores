@@ -324,6 +324,8 @@ export default function EditCursoForm({
               <MenuItem value={"Negocios"}>Negocios</MenuItem>
               <MenuItem value={"Salud y Bienestar"}>Salud y Bienestar</MenuItem>
               <MenuItem value={"Tecnología"}>Tecnología</MenuItem>
+              <MenuItem value={"Ciencias Sociales"}>Ciencias Sociales</MenuItem>
+              <MenuItem value={"Ciencias Naturales"}>Ciencias Naturales</MenuItem>
             </Select>
             <span style={{ color: "#d32f2f" }}>{errors.category}</span>
           </FormControl>

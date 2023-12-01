@@ -21,7 +21,6 @@ export const login = async function (login) {
     let data = await response.json();
     switch (rdo) {
       case 200: {
-        console.log("ACA ENTRO POR 200");
         localStorage.setItem("x", data.loginUser.token);
         let user = data.loginUser.user;
         localStorage.setItem("nombre", user.nombre);

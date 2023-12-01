@@ -94,10 +94,10 @@ const Comentarios = () => {
     try {
       await updateEstadoPublicacion(comentarioId);
       fetchComentarios();
-      showSnackbar("Publicación actualizada correctamente", "success");
+      showSnackbar("Comentario actualizado correctamente", "success");
     } catch (error) {
-      console.error("Error updating publicacion:", error.message);
-      showSnackbar("Error al actualizar la publicación", "error");
+      console.error("Error updating comentario:", error.message);
+      showSnackbar("Error al actualizar el comentario", "error");
     }
   };
 

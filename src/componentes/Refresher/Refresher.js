@@ -10,7 +10,7 @@ const Refresher = ({ children }) => {
 
   // Efecto secundario para detectar cambios en el estado 'actualizador'
   useEffect(() => {
-    console.log("Se ha solicitado una actualización de componentes. Puedes realizar acciones adicionales aquí.");
+    console.log("Se ha solicitado una actualización de componentes");
   }, [actualizador]);
 
   return (

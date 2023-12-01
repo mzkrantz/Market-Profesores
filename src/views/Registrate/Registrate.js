@@ -53,7 +53,6 @@ export default function Registrate() {
     if (validateForm()) {
       registerUser(formData)
         .then((data) => {
-          console.log("Usuario registrado:", data);
           setRedirect(true);
         })
         .catch((error) => {
@@ -67,7 +66,6 @@ export default function Registrate() {
   }
 
   const registerUser = async (registedData) => {
-    console.log("registed data: ", registedData);
     const formData = new FormData();
 
     for (let key in registedData) {

@@ -1,70 +1,96 @@
-# Getting Started with Create React App
+# EDUWIZARD
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este proyecto fue creado con [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
+## Integrantes:
+
+Mendez Ferrin, Santiago Andres - LU 1138454
+
+Petcoff, Nicolas Emanuel - LU 1100533
+
+
+## Instalación
+
+Asegúrate de tener [Node.js](https://nodejs.org/) instalado en tu máquina. Luego, ejecuta el siguiente comando para instalar las dependencias:
+
+
+### `npm install`
+
+
+## Scripts disponibles para el inicio
+
+En la consola del proyecto debes ingresar
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Se abre desde el explorador [http://localhost:3000](http://localhost:3000) para verlo en el navegador
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Es importante asegurarse de que todas las dependencias esten instaladas antes de iniciar el proyecto.
 
-### `npm test`
+La consola da devoluciones de ciertos comportamientos importantes para entender el funcionamiento.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Dependencias
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+A continuación se enumeran las principales dependencias de este proyecto.
+Las instrucciones específicas de instalación para cada dependencia se incluyen junto a la lista de dependencias.
+Esto se adjunta en caso de que haya algun inconveniente con las dependencias y deban ser instaladas nuevamente.
+````
+- **@emotion/react** (`^11.11.1`): Biblioteca para estilos en React con JavaScript.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  npm install @emotion/react@11.11.1
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+  
+- **@emotion/styled** (`^11.11.0`): Extensión de @emotion/react para escribir componentes estilizados.
 
-### `npm run eject`
+npm install @emotion/styled@11.11.0
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- **@mui/icons-material** (`^5.14.11`): Iconos de Material-UI para React.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+npm install @mui/icons-material@5.14.11
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+- **@mui/joy** (`^5.0.0-beta.8`): Conjunto de herramientas y utilidades para mejorar la productividad en Material-UI.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+npm install @mui/joy@5.0.0-beta.8
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+- **@mui/material** (`^5.14.11`): Componentes de interfaz de usuario de Material-UI.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+npm install @mui/material@5.14.11
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- **react** (`^18.2.0`): Biblioteca principal de React.
 
-### Making a Progressive Web App
+npm install react@18.2.0
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+- **react-dom** (`^18.2.0`): Herramientas específicas del DOM para React.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+npm install react-dom@18.2.0
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- **react-dropzone** (`^14.2.3`): Biblioteca para crear áreas de arrastre de archivos en React.
 
-### `npm run build` fails to minify
+npm install react-dropzone@14.2.3
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+- **react-router-dom** (`^6.16.0`): Enrutamiento para aplicaciones React de una sola página.
+
+npm install react-router-dom@6.16.0
+
+
+- **react-scripts** (`5.0.1`): Scripts y configuraciones preconfiguradas para proyectos de React creados con Create React App.
+
+npm install react-scripts@5.0.1
+
+
+- **styled-components** (`^6.0.8`): Biblioteca para estilos en React con sintaxis de plantillas de cadena de texto.
+
+npm install styled-components@6.0.8
+
+
+
+````

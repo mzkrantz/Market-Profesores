@@ -59,7 +59,6 @@ const Perfil = () => {
   useEffect(() => {
     const fetchTeacherData = async () => {
       let response = await profesorPorMail();
-      console.log("response", response);
 
       if (response.rdo === 0) {
         setTeacherData({

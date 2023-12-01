@@ -1,5 +1,5 @@
-import React from 'react';
-import ImagenOriginal from "../../data/img/LogoWizard.png"
+import React from "react";
+import ImagenOriginal from "../../data/img/LogoWizard.png";
 
 class LogoWizard extends React.Component {
   render() {
@@ -11,7 +11,7 @@ class LogoWizard extends React.Component {
         alt={"Logo EduWizard"}
         width={width}
         height={height}
-        style={{ maxWidth: "100%", height:"auto" }}
+        style={{ maxWidth: "100%", height: "auto" }}
       />
     );
   }

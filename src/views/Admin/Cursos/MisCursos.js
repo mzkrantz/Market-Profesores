@@ -117,7 +117,7 @@ const MisCursos = () => {
 
   const handleChangeRowsPerPage = (event) => {
     const newRowsPerPage = parseInt(event.target.value, 10);
-    setRowsPerPage(newRowsPerPage > 0 ? newRowsPerPage : 10); // Aseguramos que sea un valor permitido
+    setRowsPerPage(newRowsPerPage > 0 ? newRowsPerPage : 10);
     setPage(0);
   };
 
@@ -143,7 +143,6 @@ const MisCursos = () => {
 
   const handleDelete = async (curso) => {
     if (curso) {
-      // Aquí va la lógica para eliminar el curso
       const response = await eliminarCurso(curso._id);
       if (response && response.rdo === 0) {
         openSnackbar("Curso eliminado correctamente.");

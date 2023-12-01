@@ -3,7 +3,6 @@ import { styled } from "@mui/system";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 
-/* Se colocan los estilos utilizando styled */
 const FooterContainer = styled("footer")`
   background-color: #333;
   color: #fff;

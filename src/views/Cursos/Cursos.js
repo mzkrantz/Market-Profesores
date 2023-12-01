@@ -14,13 +14,16 @@ export default function Cursos() {
   const [filterText, setFilterText] = useState("");
   const [filterFrequency, setFilterFrequency] = useState("");
   const [filterType, setFilterType] = useState("");
-  const [sortOrder, setSortOrder] = useState("asc"); // Estado para el orden ascendente/descendente
-  const [sortField] = useState("stars"); // Campo de ordenamiento inicial
+  const [sortOrder, setSortOrder] = useState("asc");
+  const [sortField] = useState("stars");
   const [itemsPerPage, setItemsPerPage] = useState(6);
 
   useEffect(() => {
     const fetchCursos = async () => {
-      const response = await obtenerTodosLosCursosPublicados(page, itemsPerPage);
+      const response = await obtenerTodosLosCursosPublicados(
+        page,
+        itemsPerPage
+      );
 
       if (response.rdo === 0) {
         setCourseData(response.data);
@@ -55,7 +58,6 @@ export default function Cursos() {
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
-  // Filtra los cursos según la categoría, la palabra clave, la frecuencia y el tipo
   const filteredCourses = courseData.filter((curso) => {
     if (filterCategory && curso.category !== filterCategory) {
       return false;
@@ -75,7 +77,6 @@ export default function Cursos() {
     return true;
   });
 
-  // Ordena los cursos según el campo de ordenamiento y la dirección de ordenamiento de las estrellas
   const sortedCourses = filteredCourses.slice().sort((a, b) => {
     if (sortField === "stars") {
       const aStars = parseFloat(a.stars) || 0;
@@ -89,26 +90,22 @@ export default function Cursos() {
 
   const totalPages = Math.ceil(filteredCourses.length / itemsPerPage);
 
-  // Maneja el cambio de página
   const handlePageChange = (event, newPage) => {
     setPage(newPage);
   };
 
-  // Maneja el cambio de texto, frecuencia, tipo y puntaje
   const handleTextFilter = ({ category, text, frequency, type, sortOrder }) => {
     setFilterCategory(category);
     setFilterText(text);
     setFilterFrequency(frequency);
     setFilterType(type);
-    setSortOrder(sortOrder); // Actualiza el estado del orden ascendente/descendente
+    setSortOrder(sortOrder);
   };
 
-  // Maneja el cambio de orden ascendente/descendente
   const handleSortChange = (newOrder) => {
     setSortOrder(newOrder);
   };
 
-  // Función para limpiar los filtros
   const clearFilters = () => {
     setFilterCategory("");
     setFilterText("");

@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal, Box, Button } from "@mui/material";
-import "./ModalCustomStyles.css"
+import "./ModalCustomStyles.css";
 
 const style = {
   bgcolor: "background.paper",

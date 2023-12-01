@@ -1,7 +1,4 @@
-/* CardStyles.css */
-
 .card {
-  /* Estilos generales del componente Card */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -9,34 +6,27 @@
 }
 
 .card-image {
-  /* Estilos para la imagen dentro del Card */
   height: 13rem;
 }
 
 .infoBox {
-  /* Estilos para la caja de información */
   min-height: 10rem;
 }
 
 .infoBox2 {
-  /* Estilos para la segunda caja de información */
   min-height: 7rem;
 }
 
 .card-modal {
-  /* Estilos para los botones modales */
-  margin-bottom: 12px; /* Espacio entre los botones */
+  margin-bottom: 12px;
 }
 
-@media (max-width: 1080px){
+@media (max-width: 1080px) {
   .card-image {
-    /* Estilos para la imagen dentro del Card */
     height: 12rem;
   }
 
   .infoBox {
-    /* Estilos para la caja de información */
     min-height: 10rem;
   }
 }
-  

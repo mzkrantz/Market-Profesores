@@ -11,7 +11,7 @@ import { obtenerTodosLosProfesores } from "../../controller/miApp.controller";
 export default function Profesores() {
   const [professorsData, setProfessorsData] = useState([]);
   const [page, setPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(3); // Cantidad de profesores por página y valor predeterminado para escritorio
+  const [itemsPerPage, setItemsPerPage] = useState(3);
 
   useEffect(() => {
     const fetchProfesores = async () => {
@@ -28,7 +28,6 @@ export default function Profesores() {
   }, [page, itemsPerPage]);
 
   useEffect(() => {
-    // Funcion para actualizar el numero de elementos por pagina segun el ancho de la ventana
     const updateItemsPerPage = () => {
       const windowWidth = window.innerWidth;
       if (windowWidth < 600) {
@@ -40,11 +39,9 @@ export default function Profesores() {
       }
     };
 
-    // Llama a la funcion inicialmente y se actualiza segun cambios en el tamaño de la ventana
     updateItemsPerPage();
     window.addEventListener("resize", updateItemsPerPage);
 
-    // Limpia el evento de cambio de tamaño cuando el componente se desmonta
     return () => {
       window.removeEventListener("resize", updateItemsPerPage);
     };
@@ -59,7 +56,6 @@ export default function Profesores() {
   // Calcula la cantidad total de páginas
   const totalPages = Math.ceil(professorsData.length / itemsPerPage);
 
-  // Manejador del cambio de página
   const handlePageChange = (event, newPage) => {
     setPage(newPage);
   };
@@ -95,7 +91,7 @@ export default function Profesores() {
             display: "flex",
             justifyContent: "center",
             marginTop: "20px",
-            marginBottom: "20px"
+            marginBottom: "20px",
           }}
           boundaryCount={0}
         />

@@ -5,10 +5,9 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 import IconButton from "@mui/material/IconButton";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
-import "./RatingStarsDynamic.css"; // Importa un archivo CSS para estilos personalizados
+import "./RatingStarsDynamic.css";
 
-function RatingStars({ rating, setRating }) { // Recibe rating y setRating como props
-
+function RatingStars({ rating, setRating }) {
   const handleIncrement = () => {
     if (rating < 5) {
       setRating(Math.min(5, rating + 0.5));

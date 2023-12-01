@@ -5,9 +5,6 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import "./ItemStyles.css";
 
-/* Elemento Grid Responsive para poder ubicar las card y personalizarlo */
-
-/* Se colocan los estilos utilizando styled */
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#e6e6e6",
   ...theme.typography.body2,

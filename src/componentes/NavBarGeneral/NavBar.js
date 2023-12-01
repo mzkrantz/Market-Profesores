@@ -19,8 +19,8 @@ import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../context/userProvider";
 import LogoWizard from "../LogoWizard/LogoWizard";
 import UserMenu from "./UserMenu";
-import MoreVertIcon from "@mui/icons-material/MoreVert"; // Importa el ícono de tres puntos
-import {obtenerImagenUsuario} from '../../controller/miApp.controller';
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { obtenerImagenUsuario } from "../../controller/miApp.controller";
 
 import "./NavBarStyles.css";
 
@@ -50,7 +50,7 @@ const NavBar = () => {
           const response = await obtenerImagenUsuario();
           setUserImage(response.imagen);
         } catch (error) {
-          console.error('Error obteniendo la imagen del usuario:', error);
+          console.error("Error obteniendo la imagen del usuario:", error);
         }
       } else {
         setUserImage(null);
@@ -145,8 +145,8 @@ const NavBar = () => {
             <Hidden smDown>
               {user ? (
                 <StyledAvatar onClick={handleProfileMenuOpen} src={userImage}>
-                {user && user.name ? user.name.charAt(0) : "U"}
-              </StyledAvatar>
+                  {user && user.name ? user.name.charAt(0) : "U"}
+                </StyledAvatar>
               ) : (
                 <StyledAvatar onClick={handleProfileMenuOpen} />
               )}

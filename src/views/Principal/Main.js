@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import { styled } from "@mui/system";
 import LogoWizard from "../../componentes/LogoWizard/LogoWizard";
-import "./MainStyles.css"; // Importa los estilos CSS
+import "./MainStyles.css";
 
 function Main() {
   const HeroTitle = styled(Typography)`

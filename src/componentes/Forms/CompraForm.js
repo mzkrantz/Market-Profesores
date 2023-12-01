@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {enviarSolicitud} from '../../controller/miApp.controller'; 
+import { enviarSolicitud } from "../../controller/miApp.controller";
 
 import {
   Dialog,
@@ -15,7 +15,6 @@ import {
 } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-
 
 export default function CompraForm({ open, handleClose, curso }) {
   const [nombre, setNombre] = useState("");
@@ -64,40 +63,33 @@ export default function CompraForm({ open, handleClose, curso }) {
 
     setErrors(newErrors);
 
-    // Si no hay errores, enviar el formulario
-    if (
-      Object.values(newErrors).every((error) => error === "") // Comprueba si todos los valores en el objeto de errores son cadenas vacías
-    ) {
+    if (Object.values(newErrors).every((error) => error === "")) {
       handleSubmit();
     }
   };
 
   const handleSubmit = () => {
-  // Crear el objeto de datos del formulario
-  const formData = {
-    nombre: nombre,
-    telefono: telefono,
-    mail: mail,
-    horario: horario,
-    mensaje: mensaje,
-    curso: curso._id,
-    cursoNombre: curso.title,
-    profesor: curso.teacher,
-  };
+    const formData = {
+      nombre: nombre,
+      telefono: telefono,
+      mail: mail,
+      horario: horario,
+      mensaje: mensaje,
+      curso: curso._id,
+      cursoNombre: curso.title,
+      profesor: curso.teacher,
+    };
 
-  // Llamar a enviarSolicitud
-  enviarSolicitud(formData)
-    .then(() => {
-      // Si la solicitud fue exitosa, resetear el formulario y mostrar el Snackbar
-      resetForm();
-      setSnackbarOpen(true);
-      handleClose();
-    })
-    .catch((error) => {
-      // Si hubo un error, puedes manejarlo aquí
-      console.error('Hubo un error al enviar la solicitud:', error);
-    });
-};
+    enviarSolicitud(formData)
+      .then(() => {
+        resetForm();
+        setSnackbarOpen(true);
+        handleClose();
+      })
+      .catch((error) => {
+        console.error("Hubo un error al enviar la solicitud:", error);
+      });
+  };
   const resetForm = () => {
     setNombre("");
     setTelefono("");
@@ -224,7 +216,8 @@ export default function CompraForm({ open, handleClose, curso }) {
           severity="success"
           onClose={handleCloseSnackbar}
         >
-          Solicitud enviada correctamente. El profesor se pondrá en contacto con usted a la brevedad.
+          Solicitud enviada correctamente. El profesor se pondrá en contacto con
+          usted a la brevedad.
         </MuiAlert>
       </Snackbar>
     </div>

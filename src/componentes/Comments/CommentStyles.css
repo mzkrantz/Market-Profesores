@@ -1,33 +1,32 @@
 .character-count-error {
-  color: red; /* Estilo del contador de caracteres cuando se excede el límite */
+  color: red;
 }
 
-.responsive-comment{
+.responsive-comment {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
-/* Estilo para pantallas más grandes (mas de 600px de ancho) */
 @media (min-width: 600px) {
-    .responsive-button{
-      margin-right: 1rem !important;
-    }
+  .responsive-button {
+    margin-right: 1rem !important;
   }
-/* Estilo para pantallas más pequeñas (menos de 600px de ancho) */
+}
+
 @media (max-width: 600px) {
   .responsive-container {
     display: flex;
     flex-direction: column;
     width: 100%;
-    text-align: center; /* Para centrar los botones */
+    text-align: center;
   }
-  .responsive-button{
+  .responsive-button {
     width: 100%;
     margin-top: 1rem !important;
   }
 
-  .responsive-comment{
+  .responsive-comment {
     align-items: center;
   }
 }

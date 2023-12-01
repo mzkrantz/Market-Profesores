@@ -17,9 +17,7 @@ import ModalCustom from "../../componentes/Modal/ModalCustom";
 import { Alert } from "@mui/material";
 import Snackbar from "@mui/material/Snackbar";
 
-//importo llamada a endpoint
-import {login} from "../../controller/miApp.controller";
-
+import { login } from "../../controller/miApp.controller";
 
 export default function Login() {
   const { setUser } = useContext(UserContext);
@@ -37,25 +35,21 @@ export default function Login() {
     setIsPasswordRecoveryModalOpen(false);
   };
 
-    //Ejecuto el endopoint para validar login
-    const validarLogin= async function(a,b )
-    {
-      let datos = {
-          email: a,
-          password:b
-        }
-      let getLogin = await login(datos);
+  const validarLogin = async function (a, b) {
+    let datos = {
+      email: a,
+      password: b,
+    };
+    let getLogin = await login(datos);
 
-      if (getLogin.rdo===0 )
-      {
-        setUser(true);
-        setLoggedIn(true);
-      }
-      if (getLogin.rdo===1)
-      {
-        alert("El usuario no es valido")
-      }      
+    if (getLogin.rdo === 0) {
+      setUser(true);
+      setLoggedIn(true);
     }
+    if (getLogin.rdo === 1) {
+      alert("El usuario no es valido");
+    }
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -64,14 +58,11 @@ export default function Login() {
     const password = data.get("password");
 
     if (loggedIn) {
-      // Lógica de recuperación de contraseña
+      // Logica
     } else {
-
-      if (email!=="" && password!=="") {
-        validarLogin(email,password);        
-        
+      if (email !== "" && password !== "") {
+        validarLogin(email, password);
       } else {
-        // Acceso denegado, muestra un mensaje de error
         alert("Usuario o contraseña incorrectos");
       }
     }
@@ -80,7 +71,7 @@ export default function Login() {
   const handleSnackbarOpen = (message) => {
     setSnackbarMessage(message);
     setSnackbarOpen(true);
-    closePasswordRecoveryModal(); // Cierra el modal cuando se muestra el Snackbar
+    closePasswordRecoveryModal();
   };
 
   const handleSnackbarClose = () => {

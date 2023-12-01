@@ -27,12 +27,12 @@ const CommentGrid = ({ comments }) => {
   const toggleSortOrder = () => {
     const newOrder = sortOrder === "asc" ? "desc" : "asc";
     setSortOrder(newOrder);
-    handleSortByScore(); // Llama a la función de ordenamiento cuando se cambia el orden
+    handleSortByScore(); 
   };
 
   const handleResetSort = () => {
     setSortedComments([...comments]);
-    setSortOrder("asc"); // Restablece el orden a ascendente cuando se reinicia
+    setSortOrder("asc"); 
   };
 
   return (

@@ -74,7 +74,6 @@ export default function Registrate() {
       }
     }
 
-    // Imprimir el contenido de formData
     for (var pair of formData.entries()) {
       if (pair[1] instanceof File) {
         console.log(

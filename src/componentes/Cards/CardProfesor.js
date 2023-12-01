@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import BasicModal from "../Modal/ModalProfesor";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -11,15 +10,6 @@ import "./CardStyles.css";
 
 export default function CardProfesor(props) {
   const { image, name, description, background } = props;
-  const [isDialogOpen, setDialogOpen] = useState(false);
-
-  const handleOpenDialog = () => {
-    setDialogOpen(true);
-  };
-
-  const handleCloseDialog = () => {
-    setDialogOpen(false);
-  };
 
   return (
     <Card

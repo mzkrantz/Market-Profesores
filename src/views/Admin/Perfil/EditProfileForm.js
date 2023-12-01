@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { actualizar } from '../../../controller/miApp.controller';
+import { actualizar } from "../../../controller/miApp.controller";
 import {
   Dialog,
   DialogContent,
@@ -10,7 +10,6 @@ import {
 } from "@mui/material";
 
 import MuiAlert from "@mui/material/Alert";
-
 
 export default function EditProfileForm({ open, teacherData, handleClose }) {
   const [isSnackbarOpen, setSnackbarOpen] = useState(false);
@@ -44,7 +43,7 @@ export default function EditProfileForm({ open, teacherData, handleClose }) {
 
   const handleSubmit = async () => {
     const newErrors = {};
-  
+
     if (formData.name.trim() === "") {
       newErrors.name = "Nombre es obligatorio";
     }
@@ -63,18 +62,15 @@ export default function EditProfileForm({ open, teacherData, handleClose }) {
     if (formData.background.trim() === "") {
       newErrors.background = "Experiencia es obligatoria";
     }
-  
+
     setErrors(newErrors);
-  
-    // Si no hay errores, envía los datos del formulario a la API
+
     if (Object.values(newErrors).every((error) => error === "")) {
       const response = await actualizar(formData);
 
       if (response && response.rdo !== 0) {
-        // Maneja cualquier error de la respuesta aquí
-        console.error('Error al actualizar el profesor');
+        console.error("Error al actualizar el profesor");
       } else {
-        // Aquí puedes manejar la respuesta exitosa (por ejemplo, cerrar el formulario)
         setSnackbarOpen(true);
         handleClose();
       }
@@ -96,7 +92,6 @@ export default function EditProfileForm({ open, teacherData, handleClose }) {
       background: teacherData.background,
     });
 
-    // También debes restablecer los errores a valores iniciales si es necesario
     setErrors({
       name: "",
       subject: "",

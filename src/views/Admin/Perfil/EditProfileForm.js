@@ -10,8 +10,6 @@ import {
 } from "@mui/material";
 
 import MuiAlert from "@mui/material/Alert";
-const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-
 
 
 export default function EditProfileForm({ open, teacherData, handleClose }) {
@@ -31,7 +29,6 @@ export default function EditProfileForm({ open, teacherData, handleClose }) {
     name: "",
     subject: "",
     age: "",
-    email: "",
     phone: "",
     description: "",
     background: "",
@@ -56,9 +53,6 @@ export default function EditProfileForm({ open, teacherData, handleClose }) {
     }
     if (!/^\d+$/.test(formData.age)) {
       newErrors.age = "Ingrese un número entero";
-    }
-    if (!emailRegex.test(formData.email)) {
-      newErrors.email = "Ingrese un mail Valido";
     }
     if (formData.phone.trim() === "") {
       newErrors.phone = "Teléfono es obligatorio";
@@ -107,7 +101,6 @@ export default function EditProfileForm({ open, teacherData, handleClose }) {
       name: "",
       subject: "",
       age: "",
-      email: "",
       phone: "",
       description: "",
       background: "",
@@ -150,17 +143,7 @@ export default function EditProfileForm({ open, teacherData, handleClose }) {
             margin="normal"
             helperText={<span style={{ color: "#d32f2f" }}>{errors.age}</span>}
           />
-          <TextField
-            label="Email"
-            name="email"
-            value={formData.email}
-            onChange={handleFormChange}
-            fullWidth
-            margin="normal"
-            helperText={
-              <span style={{ color: "#d32f2f" }}>{errors.email}</span>
-            }
-          />
+
           <TextField
             label="Teléfono"
             name="phone"

@@ -130,7 +130,6 @@ const MisCursos = () => {
           ? "Curso despublicado correctamente."
           : "Curso publicado correctamente.";
         openSnackbar(message);
-        console.log(`Curso ${curso._id}. ${message}}`);
         setRefresher((prev) => !prev);
       } else {
         console.error(
@@ -147,7 +146,6 @@ const MisCursos = () => {
       // Aquí va la lógica para eliminar el curso
       const response = await eliminarCurso(curso._id);
       if (response && response.rdo === 0) {
-        console.log(`Curso ${curso._id} eliminado correctamente`);
         openSnackbar("Curso eliminado correctamente.");
         setRefresher((prev) => !prev);
       } else {
@@ -162,10 +160,6 @@ const MisCursos = () => {
 
   useEffect(() => {
     if (formClosed) {
-      console.log(
-        "El formulario se cerró. Actualizar el componente si es necesario."
-      );
-
       const fetchCursos = async () => {
         const response = await misCursos();
         if (response && response.rdo === 0) {

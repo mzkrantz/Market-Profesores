@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -16,6 +18,8 @@ import PopupMessageInfo from "../../../componentes/Popup/PopupMessageInfo";
 import ModalCustom from "../../../componentes/Modal/ModalCustom";
 import SpacerTop from "../../../componentes/Spacer/SpacerTop";
 import TablePagination from "@mui/material/TablePagination";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 import {
   obtenerSolicitudesPorProfesorId,
   actualizarEstadoSolicitud,
@@ -73,6 +77,10 @@ const Solicitudes = () => {
   const [rowsPerPage, setRowsPerPage] = useState(10); // Elementos por página
 
   const [solicitudes, setSolicitudes] = useState([]);
+  const [tabValue, setTabValue] = useState(0);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarSeverity, setSnackbarSeverity] = useState("success");
 
   const fetchSolicitudes = async () => {
     const profesorId = "tuProfesorId"; // Reemplaza esto con el id del profesor que necesitas
@@ -96,6 +104,16 @@ const Solicitudes = () => {
     setIsCommentModalOpen(false);
   };
 
+  const showSnackbar = (message, severity) => {
+    setSnackbarMessage(message);
+    setSnackbarSeverity(severity);
+    setSnackbarOpen(true);
+  };
+
+  const handleCloseSnackbar = () => {
+    setSnackbarOpen(false);
+  };
+
   const openPopup = (user) => {
     setSelectedUser(user);
     setIsPopupOpen(true);
@@ -111,16 +129,64 @@ const Solicitudes = () => {
     setPage(0);
   };
 
-  const handleAccept = async (solicitudId) => {
-    const result = await actualizarEstadoSolicitud(solicitudId, true);
-    if (result.rdo === 0) {
-      console.log(result.mensaje);
-      fetchSolicitudes();
-      
+  const handleAccept = async (solicitud, solicitudId) => {
+    if (solicitud.estado === 0) {
+      const nuevoEstado = 1;
+      const result = await actualizarEstadoSolicitud(solicitudId, nuevoEstado);
+      if (result.rdo === 0) {
+        showSnackbar("Estado actualizado correctamente", "success");
+        fetchSolicitudes();
+      } else {
+        showSnackbar(result.mensaje, "error");
+      }
     } else {
-      console.error(result.mensaje);
+      handleFinalize(solicitud, solicitudId);
     }
   };
+
+  const handleFinalize = async (solicitud, solicitudId) => {
+    if (solicitud.estado === 1) {
+      const nuevoEstado = 2;
+      const result = await actualizarEstadoSolicitud(solicitudId, nuevoEstado);
+      if (result.rdo === 0) {
+        showSnackbar("Estado actualizado correctamente", "success");
+        fetchSolicitudes();
+      } else {
+        showSnackbar(result.mensaje, "error");
+      }
+    } else if (solicitud.estado === 2) {
+      showSnackbar("La solicitud ya está finalizada", "error");
+    } else {
+      showSnackbar("La solicitud ya está cancelada", "error");
+    }
+  };
+
+  const handleCancel = async (solicitud, solicitudId) => {
+    if (solicitud.estado === 0 || solicitud.estado === 1) {
+      const nuevoEstado = 3;
+      const result = await actualizarEstadoSolicitud(solicitudId, nuevoEstado);
+      if (result.rdo === 0) {
+        showSnackbar("Estado actualizado correctamente", "success");
+        fetchSolicitudes();
+      } else {
+        showSnackbar(result.mensaje, "error");
+      }
+    } else if (solicitud.estado === 2) {
+      showSnackbar("La solicitud ya está finalizada", "error");
+    } else {
+      showSnackbar("La solicitud ya está cancelada", "error");
+    }
+  };
+
+  const filteredSolicitudes = solicitudes.filter((solicitud) => {
+    if (tabValue === 0) {
+      return solicitud.estado === 0; // Pendientes
+    } else if (tabValue === 1) {
+      return solicitud.estado === 1; // Aceptadas
+    } else {
+      return solicitud.estado === 2 || solicitud.estado === 3; // Finalizadas/Canceladas
+    }
+  });
 
   return (
     <>
@@ -130,6 +196,18 @@ const Solicitudes = () => {
             Solicitudes
           </Typography>
         </SpacerTop>
+
+        <Tabs
+          value={tabValue}
+          onChange={(event, newValue) => setTabValue(newValue)}
+          variant="fullWidth"
+          indicatorColor="primary"
+          textColor="primary"
+        >
+          <Tab label="Pendientes" />
+          <Tab label="Aceptadas" />
+          <Tab label="Finalizadas/Canceladas" />
+        </Tabs>
 
         <TableWrapper>
           <CommentList component={TableContainer}>
@@ -143,15 +221,19 @@ const Solicitudes = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {solicitudes
+                {filteredSolicitudes
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((solicitud) => (
                     <TableRow key={solicitud._id}>
                       <TableCell>{solicitud.cursoNombre}</TableCell>
                       <TableCell>{solicitud.nombre}</TableCell>
                       <TableCell>
-                        {solicitud.aceptado ? "Aceptado" : "Pendiente"}
+                        {solicitud.estado === 0 && "Pendiente"}
+                        {solicitud.estado === 1 && "Aceptada"}
+                        {solicitud.estado === 2 && "Finalizada"}
+                        {solicitud.estado === 3 && "Cancelada"}
                       </TableCell>
+
                       <TableCell>
                         <IconButton
                           className="boton-tabla"
@@ -161,7 +243,7 @@ const Solicitudes = () => {
                         </IconButton>
                         <IconButton
                           className="boton-tabla"
-                          onClick={() => handleAccept(solicitud._id)}
+                          onClick={() => handleAccept(solicitud, solicitud._id)}
                         >
                           <CheckCircleIcon />
                         </IconButton>
@@ -169,7 +251,7 @@ const Solicitudes = () => {
                           className="boton-tabla"
                           color="error"
                           onClick={() => {
-                            alert("Implementar la lógica de Cancelacion");
+                            handleCancel(solicitud, solicitud._id);
                           }}
                         >
                           <CancelIcon />
@@ -182,7 +264,7 @@ const Solicitudes = () => {
           </CommentList>
           <TablePagination
             component="div"
-            count={solicitudes.length}
+            count={filteredSolicitudes.length}
             page={page}
             onPageChange={handleChangePage}
             rowsPerPage={rowsPerPage}
@@ -199,6 +281,20 @@ const Solicitudes = () => {
           />
         </ModalCustom>
       )}
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={3000}
+        onClose={handleCloseSnackbar}
+      >
+        <MuiAlert
+          elevation={6}
+          variant="filled"
+          onClose={handleCloseSnackbar}
+          severity={snackbarSeverity}
+        >
+          {snackbarMessage}
+        </MuiAlert>
+      </Snackbar>
     </>
   );
 };

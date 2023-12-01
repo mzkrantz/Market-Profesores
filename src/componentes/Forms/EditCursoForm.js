@@ -33,11 +33,11 @@ export default function EditCursoForm({
     frequency: null,
     price: null,
     buttonLink: null,
-    category: null,
+    category: String,
     extendedDescription: null,
     subjects: null,
     stars: null,
-    type: null,
+    type: String,
     teacher: null,
     published: false,
   });
@@ -121,7 +121,6 @@ export default function EditCursoForm({
       Object.values(newErrors).every((error) => error === "") &&
       cursoData.subjects.length <= 5 // Nueva verificación para el campo subjects
     ) {
-      console.log(cursoData.title, cursoData.id);
       handleSubmit();
     } else {
       // Si hay un error en el campo subjects, mostrar el mensaje de error

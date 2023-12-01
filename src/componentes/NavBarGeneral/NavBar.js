@@ -48,7 +48,6 @@ const NavBar = () => {
       if (user) {
         try {
           const response = await obtenerImagenUsuario();
-          console.log('response', response);
           setUserImage(response.imagen);
         } catch (error) {
           console.error('Error obteniendo la imagen del usuario:', error);

@@ -29,8 +29,8 @@ export default function ResetPassword({ match }) {
     event.preventDefault();
     if (validateForm()) {
       try {
-        const response = await resetPassword(formData.email, resetToken, formData.newPassword);
-        console.log('Contraseña restablecida con éxito:', response);
+        await resetPassword(formData.email, resetToken, formData.newPassword);
+        alert('Contraseña restablecida con éxito');
         // Restablecer el formulario
         setFormData({
           email: '',
@@ -43,7 +43,7 @@ export default function ResetPassword({ match }) {
           confirmPassword: '',
         });
       } catch (error) {
-        console.error('Error al restablecer la contraseña:', error);
+        alert('Error al restablecer la contraseña.');
       }
     }
   };

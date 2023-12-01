@@ -51,7 +51,7 @@ export const login = async function (login) {
       }
     }
   } catch (error) {
-    console.log("error", error);
+    console.error("error", error);
   }
 };
 
@@ -72,12 +72,7 @@ export const registration = async function (user) {
     });
 
     let rdo = response.status;
-    console.log(rdo);
-    console.log("Controller");
     let data = await response.json();
-
-    // Imprime toda la respuesta del servidor
-    console.log("Server response:", data);
 
     switch (rdo) {
       case 201: {
@@ -92,7 +87,6 @@ export const registration = async function (user) {
             localStorage.setItem("email", user.email);
           }
         }
-        console.log("Response 201:", { rdo: 0, mensaje: "Ok" });
         return { rdo: 0, mensaje: "Ok" }; // correcto
       }
       case 400: {
@@ -179,9 +173,7 @@ export const actualizar = async function (formData) {
     });
 
     let rdo = response.status;
-    console.log("response", response);
     let data = await response.json();
-    console.log("jsonresponse", data);
     switch (rdo) {
       case 200: {
         // Procesa los datos aquí
@@ -226,9 +218,7 @@ export const crearCurso = async function (formData) {
     });
 
     let rdo = response.status;
-    console.log("response", response);
     let data = await response.json();
-    console.log("jsonresponse", data);
     switch (rdo) {
       case 201: {
         // Procesa los datos aquí
@@ -256,7 +246,6 @@ export const misCursos = async function () {
   let profesorId = localStorage.getItem("profesorId");
 
   try {
-    console.log("profesorId", profesorId);
     let response = await fetch(url + profesorId, {
       method: "GET",
       mode: "cors",
@@ -269,9 +258,7 @@ export const misCursos = async function () {
     });
 
     let rdo = response.status;
-    console.log("response", response);
     let data = await response.json();
-    console.log("jsonresponse", data);
     switch (rdo) {
       case 200: {
         // Procesa los datos aquí
@@ -356,7 +343,6 @@ export const actualizarCurso = async function (id, cursoData) {
     switch (rdo) {
       case 200: {
         // Asumiendo que el servidor devuelve 200 cuando la actualización es exitosa
-        console.log("cursoData:", cursoData);
         return { rdo: 0, mensaje: "Curso actualizado correctamente" };
       }
       case 404: {
@@ -466,8 +452,6 @@ export const obtenerProfesorPorId = async function (profesorId) {
   // url del servicio web
   let url = urlWebServices.obtenerProfesorPorId; // Reemplaza con la ruta de tu endpoint
 
-  console.log("url:", url + profesorId);
-
   try {
     let response = await fetch(url + profesorId, {
       method: "GET",
@@ -522,9 +506,7 @@ export const enviarComentario = async function (data) {
       }),
     });
 
-    console.log("response", response);
-    let responseData = await response.json();
-    console.log("jsonresponse", responseData);
+    await response.json();
 
     switch (response.status) {
       case 200: {
@@ -561,7 +543,6 @@ export const getComentariosByCursoId = async function (cursoId) {
     });
 
     let responseData = await response.json();
-    console.log("jsonresponse", responseData);
 
     switch (response.status) {
       case 200: {
@@ -822,7 +803,10 @@ export const obtenerSolicitudesPorProfesorId = async function () {
   }
 };
 
-export const actualizarEstadoSolicitud = async function (solicitudId, estado) {
+export const actualizarEstadoSolicitud = async function (
+  solicitudId,
+  nuevoEstado
+) {
   let url = urlWebServices.actualizarEstadoSolicitud;
   let token = localStorage.getItem("x");
 
@@ -834,7 +818,7 @@ export const actualizarEstadoSolicitud = async function (solicitudId, estado) {
         "x-access-token": token,
       },
       body: JSON.stringify({
-        aceptado: estado,
+        estado: nuevoEstado, // Cambiado de 'aceptado' a 'estado'
       }),
     });
 
@@ -891,7 +875,6 @@ export const obtenerImagenUsuario = async function () {
 
 export const sendEmailSolicitud = async (to, formData) => {
   let url = urlWebServices.mail;
-  console.log(formData);
 
   let emailData = {
     to: to,
@@ -917,8 +900,7 @@ export const sendEmailSolicitud = async (to, formData) => {
     });
 
     if (response.ok) {
-      const result = await response.json();
-      console.log(result);
+      await response.json();
       return { rdo: 0 };
     } else {
       console.error("Error al enviar el correo. Estado:", response.status);
@@ -959,16 +941,15 @@ export const sendPasswordResetEmail = async (email) => {
 };
 
 export const resetPassword = async (email, resetToken, newPassword) => {
-
-  const token = resetToken;
+  /*const token = resetToken;*/
 
   const url = urlWebServices.mail + "/reset-password/";
   try {
     const response = await fetch(url, {
-      method: 'POST',
+      method: "POST",
       headers: {
         Origin: "http://localhost:3000",
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         email: email,
@@ -978,13 +959,13 @@ export const resetPassword = async (email, resetToken, newPassword) => {
     });
 
     if (!response.ok) {
-      throw new Error('Error al reiniciar la contraseña');
+      throw new Error("Error al reiniciar la contraseña");
     }
 
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error al reiniciar la contraseña:', error);
+    console.error("Error al reiniciar la contraseña:", error);
     throw error;
   }
 };

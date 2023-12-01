@@ -2,10 +2,21 @@
 
 Este proyecto fue creado con [Create React App](https://github.com/facebook/create-react-app).
 
-Integrantes:
+
+## Integrantes:
+
 Mendez Ferrin, Santiago Andres - LU 1138454
 
 Petcoff, Nicolas Emanuel - LU 1100533
+
+
+## Instalación
+
+Asegúrate de tener [Node.js](https://nodejs.org/) instalado en tu máquina. Luego, ejecuta el siguiente comando para instalar las dependencias:
+
+
+### `npm install`
+
 
 ## Scripts disponibles para el inicio
 
@@ -18,13 +29,6 @@ Se abre desde el explorador [http://localhost:3000](http://localhost:3000) para 
 Es importante asegurarse de que todas las dependencias esten instaladas antes de iniciar el proyecto.
 
 La consola da devoluciones de ciertos comportamientos importantes para entender el funcionamiento.
-
-## Instalación
-
-Asegúrate de tener [Node.js](https://nodejs.org/) instalado en tu máquina. Luego, ejecuta el siguiente comando para instalar las dependencias:
-
-
-### `npm install`
 
 
 ## Dependencias

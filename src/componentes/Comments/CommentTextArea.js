@@ -8,11 +8,15 @@ import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import RatingStarsDynamic from "../RatingStars/RatingStarsDynamic";
 import TextField from "@mui/material/TextField";
-import {enviarComentario} from "../../controller/miApp.controller";
+import { enviarComentario } from "../../controller/miApp.controller";
 
-export default function CommentTextArea({ handleClose, courseId, idTeacher, cursoTitle }) { 
-  
-  const [name, setName] = useState(""); // Estado para el nombre
+export default function CommentTextArea({
+  handleClose,
+  courseId,
+  idTeacher,
+  cursoTitle,
+}) {
+  const [name, setName] = useState("");
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
   const maxCharacters = 100;
@@ -26,24 +30,22 @@ export default function CommentTextArea({ handleClose, courseId, idTeacher, curs
       idProfesor: idTeacher,
       nombre: nombre,
       comentario: comentario,
-      calificacion: calificacion, // Agregar el puntaje al objeto data
+      calificacion: calificacion,
     };
-  
+
     const respuesta = await enviarComentario(data);
-  
+
     if (respuesta.status === 200) {
       setSnackbarOpen(true);
     }
   };
 
-  // Llama a la función handleSubmit en tu componente CommentTextArea
   const handleSubmit = () => {
     if (name.trim() !== "" && comment.trim() !== "") {
       enviarInformacion(name, comment, rating);
       setSnackbarOpen(true);
       handleClose();
-  
-      // Resetear los campos de entrada
+
       setName("");
       setComment("");
       setRating(0);
@@ -63,8 +65,6 @@ export default function CommentTextArea({ handleClose, courseId, idTeacher, curs
       setComment(inputText);
     }
   };
-
-
 
   return (
     <FormControl style={{ width: "100%" }}>
@@ -86,12 +86,9 @@ export default function CommentTextArea({ handleClose, courseId, idTeacher, curs
           variant="outlined"
           margin="normal"
           value={name}
-          onChange={(e) => setName(e.target.value)} // Actualizar el estado del nombre
+          onChange={(e) => setName(e.target.value)}
         />
-        <RatingStarsDynamic
-          rating={rating}
-          setRating={setRating} // Pasar el estado del puntaje y la función para actualizarlo
-        />
+        <RatingStarsDynamic rating={rating} setRating={setRating} />
         <TextareaAutosize
           placeholder="Escribe algo aquí..."
           minRows={8}

@@ -1,6 +1,4 @@
 .hero-section {
-  /*background: linear-gradient(135deg, rgba(133, 160, 221, 0.2), rgba(98, 49, 124, 0.3)),
-  url("../../data/img/prueba-2.png");*/
   font-family: Arial, sans-serif;
   color: #fff;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -30,23 +28,21 @@
   background: #0056b3;
 }
 
-/* Estilos para todos los textos*/
 .hero-text {
   font-weight: 300 !important;
 }
 
-/* Estilos para pantallas pequeñas (menos de 600px) */
 @media (max-width: 600px) {
   .cursos-button {
     padding: 1rem 2rem;
     font-size: 1rem;
   }
 
-  .hero-title{
+  .hero-title {
     font-size: 2rem !important;
   }
 
-  .hero-text{
+  .hero-text {
     font-size: 1rem !important;
   }
 }

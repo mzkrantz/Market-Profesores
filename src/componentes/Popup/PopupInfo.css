@@ -21,18 +21,16 @@
   color: #666;
 }
 
-/* Estilos para RatingStars (ajusta según tu componente) */
 .rating-stars {
   display: inline-block;
   font-size: 24px;
-  color: #ffcc00; /* Color para estrellas activas */
+  color: #ffcc00;
 }
 
 .rating-stars-inactive {
-  color: #ccc; /* Color para estrellas inactivas */
+  color: #ccc;
 }
 
-/* Cierra el popup cuando se haga clic fuera de él */
 .popup-background {
   position: absolute;
   top: 0;

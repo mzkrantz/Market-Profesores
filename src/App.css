@@ -24,7 +24,7 @@
   color: white;
 }
 
-body{
+body {
   background-color: #e6e6e6;
 }
 
@@ -46,13 +46,11 @@ body{
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  flex:1;
-
+  flex: 1;
 }
 
 #root {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-
 }

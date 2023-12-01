@@ -74,7 +74,7 @@ const Solicitudes = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10); // Elementos por página
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const [solicitudes, setSolicitudes] = useState([]);
   const [tabValue, setTabValue] = useState(0);
@@ -83,7 +83,7 @@ const Solicitudes = () => {
   const [snackbarSeverity, setSnackbarSeverity] = useState("success");
 
   const fetchSolicitudes = async () => {
-    const profesorId = "tuProfesorId"; // Reemplaza esto con el id del profesor que necesitas
+    const profesorId = "tuProfesorId";
     const result = await obtenerSolicitudesPorProfesorId(profesorId);
     if (result.rdo === 0) {
       setSolicitudes(result.solicitudes);
@@ -125,7 +125,7 @@ const Solicitudes = () => {
 
   const handleChangeRowsPerPage = (event) => {
     const newRowsPerPage = parseInt(event.target.value, 10);
-    setRowsPerPage(newRowsPerPage > 0 ? newRowsPerPage : 10); // Aseguramos que sea un valor permitido
+    setRowsPerPage(newRowsPerPage > 0 ? newRowsPerPage : 10);
     setPage(0);
   };
 
@@ -180,11 +180,11 @@ const Solicitudes = () => {
 
   const filteredSolicitudes = solicitudes.filter((solicitud) => {
     if (tabValue === 0) {
-      return solicitud.estado === 0; // Pendientes
+      return solicitud.estado === 0;
     } else if (tabValue === 1) {
-      return solicitud.estado === 1; // Aceptadas
+      return solicitud.estado === 1;
     } else {
-      return solicitud.estado === 2 || solicitud.estado === 3; // Finalizadas/Canceladas
+      return solicitud.estado === 2 || solicitud.estado === 3;
     }
   });
 

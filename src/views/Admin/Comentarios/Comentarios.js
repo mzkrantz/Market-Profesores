@@ -131,7 +131,7 @@ const Comentarios = () => {
 
   const handleChangeRowsPerPage = (event) => {
     const newRowsPerPage = parseInt(event.target.value, 10);
-    setRowsPerPage(newRowsPerPage > 0 ? newRowsPerPage : 10); // Aseguramos que sea un valor permitido
+    setRowsPerPage(newRowsPerPage > 0 ? newRowsPerPage : 10);
     setPage(0);
   };
 

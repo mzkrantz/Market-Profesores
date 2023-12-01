@@ -12,15 +12,15 @@ import { useParams } from "react-router-dom";
 
 export default function ResetPassword({ match }) {
   const [formData, setFormData] = React.useState({
-    email: '',
-    newPassword: '',
-    confirmPassword: '',
+    email: "",
+    newPassword: "",
+    confirmPassword: "",
   });
 
   const [formErrors, setFormErrors] = React.useState({
-    email: '',
-    newPassword: '',
-    confirmPassword: '',
+    email: "",
+    newPassword: "",
+    confirmPassword: "",
   });
 
   const { token: resetToken } = useParams();
@@ -30,20 +30,19 @@ export default function ResetPassword({ match }) {
     if (validateForm()) {
       try {
         await resetPassword(formData.email, resetToken, formData.newPassword);
-        alert('Contraseña restablecida con éxito');
-        // Restablecer el formulario
+        alert("Contraseña restablecida con éxito");
         setFormData({
-          email: '',
-          newPassword: '',
-          confirmPassword: '',
+          email: "",
+          newPassword: "",
+          confirmPassword: "",
         });
         setFormErrors({
-          email: '',
-          newPassword: '',
-          confirmPassword: '',
+          email: "",
+          newPassword: "",
+          confirmPassword: "",
         });
       } catch (error) {
-        alert('Error al restablecer la contraseña.');
+        alert("Error al restablecer la contraseña.");
       }
     }
   };
@@ -53,17 +52,17 @@ export default function ResetPassword({ match }) {
     let isValid = true;
 
     if (!formData.email.trim()) {
-      errors.email = 'El correo electrónico es requerido.';
+      errors.email = "El correo electrónico es requerido.";
       isValid = false;
     }
 
     if (formData.newPassword.length < 8) {
-      errors.newPassword = 'La contraseña debe tener al menos 8 caracteres.';
+      errors.newPassword = "La contraseña debe tener al menos 8 caracteres.";
       isValid = false;
     }
 
     if (formData.confirmPassword !== formData.newPassword) {
-      errors.confirmPassword = 'Las contraseñas no coinciden.';
+      errors.confirmPassword = "Las contraseñas no coinciden.";
       isValid = false;
     }
 
@@ -114,9 +113,7 @@ export default function ResetPassword({ match }) {
                   value={formData.email}
                   onChange={handleInputChange}
                   helperText={
-                    <span style={{ color: "#d32f2f" }}>
-                      {formErrors.email}
-                    </span>
+                    <span style={{ color: "#d32f2f" }}>{formErrors.email}</span>
                   }
                 />
               </Grid>

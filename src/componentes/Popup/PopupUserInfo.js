@@ -1,5 +1,5 @@
 import React from "react";
-import "./PopupInfo.css"; // Agrega un archivo CSS para estilos personalizados
+import "./PopupInfo.css";
 
 const PopupUserInfo = ({ user }) => {
   return (

@@ -1,6 +1,6 @@
 import React from "react";
 import RatingStars from "../RatingStars/RatingStars";
-import "./PopupInfo.css"; // Agrega un archivo CSS para estilos personalizados
+import "./PopupInfo.css"; 
 
 const PopupCommentInfo = ({ comment, onClose }) => {
   return (

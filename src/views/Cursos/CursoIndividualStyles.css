@@ -16,10 +16,7 @@
   margin-bottom: 10px;
 }
 
-
-/* Media query para pantallas pequeñas (por ejemplo, teléfonos) */
 @media screen and (max-width: 500px) {
-  /* Alineación de elementos en columnas para contenedores info-square y info-square2 */
   .info-square,
   .info-square2 {
     display: flex;

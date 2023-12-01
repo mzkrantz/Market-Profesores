@@ -9,7 +9,6 @@ function RatingStars({ rating }) {
   const fullStars = Math.floor(rating);
   const hasHalfStar = rating - fullStars >= 0.5;
 
-  /*Se realiza un loop para buscar los iconos de la estrella */
   for (let i = 1; i <= totalStars; i++) {
     if (i <= fullStars) {
       stars.push(<StarIcon key={i} color="warning" />);
@@ -20,7 +19,9 @@ function RatingStars({ rating }) {
     }
   }
 
-  return <div style={{display:'flex', justifyContent:'center'}}>{stars}</div>;
+  return (
+    <div style={{ display: "flex", justifyContent: "center" }}>{stars}</div>
+  );
 }
 
 export default RatingStars;

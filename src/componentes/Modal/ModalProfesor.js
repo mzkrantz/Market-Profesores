@@ -4,7 +4,6 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 
-/* Se colocan los estilos creando una variable */
 const style = {
   position: "absolute",
   top: "50%",

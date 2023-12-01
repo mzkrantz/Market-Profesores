@@ -189,7 +189,7 @@ const CursoIndividual = () => {
                   </Button>
 
                   <CompraForm
-                    open={isDialogOpen} 
+                    open={isDialogOpen}
                     handleClose={handleCloseDialog}
                     curso={curso}
                   />

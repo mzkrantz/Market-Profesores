@@ -54,7 +54,7 @@ const Perfil = () => {
   const [editing, setEditing] = useState(false);
   const [isDialogOpen, setDialogOpen] = useState(false);
   const [teacherData, setTeacherData] = useState(null);
-  const [refresher, setRefresher] = useState(false); // Nuevo estado para el refrescador
+  const [refresher, setRefresher] = useState(false);
 
   useEffect(() => {
     const fetchTeacherData = async () => {
@@ -73,7 +73,6 @@ const Perfil = () => {
           background: response.profesor.data.background,
         });
       } else {
-        // Maneja el error aquí
         console.log(response.mensaje);
       }
     };
@@ -82,7 +81,7 @@ const Perfil = () => {
   }, [refresher]);
 
   if (!teacherData) {
-    return <CircularProgress />; // Muestra el indicador de carga si teacherData es null
+    return <CircularProgress />;
   }
 
   const handleOpenDialog = () => {
@@ -95,8 +94,7 @@ const Perfil = () => {
   };
 
   const handleFormSubmit = (formData) => {
-    // Manejar los nuevos datos del formulario, enviar a backend y actualizar datos del perfil
-    setEditing(false); // Cierra el formulario después de enviar los datos
+    setEditing(false);
   };
   return (
     <>
@@ -106,7 +104,7 @@ const Perfil = () => {
             <Paper elevation={3} style={{ padding: "32px" }}>
               {editing ? (
                 <EditProfileForm
-                  initialData={teacherData} // Pasa los datos del perfil como propiedades
+                  initialData={teacherData}
                   onSubmit={handleFormSubmit}
                 />
               ) : (

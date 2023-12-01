@@ -8,14 +8,13 @@ import {
 } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import { useDropzone } from "react-dropzone";
-import { actualizarImagenCurso } from '../../controller/miApp.controller';
+import { actualizarImagenCurso } from "../../controller/miApp.controller";
 
 const PopupCambiarImagenCurso = ({ open, handleClose, cursoToEdit, title }) => {
   const [image, setImage] = useState(null);
   const [isSnackbarOpen, setSnackbarOpen] = useState(false);
 
   const handleSubmit = async () => {
-    
     if (!image) {
       console.error("No se ha seleccionado ninguna imagen.");
       return;

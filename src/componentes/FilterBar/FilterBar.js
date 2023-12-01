@@ -18,7 +18,6 @@ export default function FilterBar({ onFilter, onSortChange, onClearFilters }) {
   const [type, setType] = useState("");
   const [sortOrder, setSortOrder] = useState("asc");
 
-  //Handlers para los cambios en los filtros
   const handleCategoryChange = (event) => {
     const selectedCategory = event.target.value;
     setCategory(selectedCategory);
@@ -40,10 +39,8 @@ export default function FilterBar({ onFilter, onSortChange, onClearFilters }) {
   };
 
   const toggleSortOrder = () => {
-    // Cambia el orden entre "asc" y "desc" cuando se hace clic en el botón. Si sortOrder es "desc", se cambia a "asc" y viceversa.
     const newOrder = sortOrder === "desc" ? "asc" : "desc";
     setSortOrder(newOrder);
-    // Llama a la función de devolución de llamada para notificar el cambio en el orden
     onSortChange(newOrder);
   };
 
@@ -53,12 +50,10 @@ export default function FilterBar({ onFilter, onSortChange, onClearFilters }) {
     setFrequency("");
     setType("");
     setSortOrder("desc");
-    // Llama a la función de devolución de llamada para notificar la limpieza de filtros
     onClearFilters();
   };
 
   const handleSearch = () => {
-    // Llama a la función de devolución de llamada para enviar los filtros al componente padre
     onFilter({ category, text, frequency, type, sortOrder });
   };
 
@@ -163,7 +158,7 @@ export default function FilterBar({ onFilter, onSortChange, onClearFilters }) {
             <Button
               variant="outlined"
               size="small"
-              onClick={clearFilters} // Llama a la función clearFilters para limpiar los filtros
+              onClick={clearFilters}
               className={"fullWidthButton"}
             >
               Limpiar Filtros
